@@ -38,28 +38,28 @@ const steps = [
     title: "Start with Notes Overview",
     description:
       "Review all notes for the topic to get a full understanding before diving into details.",
-    image: "/study/note-overview.jpg",
+    image: "/note/note-overview.jpg",
   },
   {
     id: 2,
     title: "Highlight Key Points",
     description:
       "Identify and highlight definitions, formulas, and important concepts for quick revision.",
-    image: "/study/note-highlight.jpg",
+    image: "/note/note-highlight.jpg",
   },
   {
     id: 3,
     title: "Use Diagrams & Visuals",
     description:
       "Visual aids help you understand and memorize concepts more efficiently.",
-    image: "/study/note-diagram.jpg",
+    image: "/note/note-diagram.jpg",
   },
   {
     id: 4,
     title: "Review Regularly",
     description:
       "Go through notes periodically to reinforce memory and improve retention.",
-    image: "/study/note-review.jpg",
+    image: "/note/note-review.jpg",
   },
 ];
 

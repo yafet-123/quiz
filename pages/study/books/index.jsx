@@ -62,28 +62,28 @@ const steps = [
     title: "Browse the Collection",
     description:
       "Explore categories such as science, mathematics, history, and literature to find the books you need.",
-    image: "/study/books-browse.jpg",
+    image: "/books/books-browse.jpg",
   },
   {
     id: 2,
     title: "Preview Before Reading",
     description:
       "Check summaries, author details, and chapter lists before diving into a book.",
-    image: "/study/books-preview.jpg",
+    image: "/books/books-preview.jpg",
   },
   {
     id: 3,
     title: "Add to Your Library",
     description:
       "Save books to your personal library for easy access anytime.",
-    image: "/study/books-library.jpg",
+    image: "/books/books-library.jpg",
   },
   {
     id: 4,
     title: "Read & Highlight",
     description:
       "Open your favorite books, read online or offline, and highlight key sections for review.",
-    image: "/study/books-read.jpg",
+    image: "/books/books-read.jpg",
   },
 ];
 
