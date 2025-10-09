@@ -49,28 +49,28 @@ const steps = [
     title: "Choose Your Subject",
     description:
       "Select the subject and topic you want to study with flashcards.",
-    image: "/study/flashcards-select.jpg",
+    image: "/flashcards/flashcards-select.jpg",
   },
   {
     id: 2,
     title: "Review Flashcards",
     description:
       "Go through flashcards one by one. Read the question, recall the answer, and flip to check it.",
-    image: "/study/flashcards-review.jpg",
+    image: "/flashcards/flashcards-review.jpg",
   },
   {
     id: 3,
     title: "Use Study Tips",
     description:
       "Apply the provided tips to memorize difficult topics faster and retain information longer.",
-    image: "/study/flashcards-tips.jpg",
+    image: "/flashcards/flashcards-tips.jpg",
   },
   {
     id: 4,
     title: "Track Progress",
     description:
       "Monitor which cards you’ve mastered and which ones need more review.",
-    image: "/study/flashcards-track.jpg",
+    image: "/flashcards/flashcards-track.jpg",
   },
 ];
 

@@ -38,28 +38,28 @@ const steps = [
     title: "Select a Quiz Topic",
     description:
       "Choose a subject or chapter you want to practice and start testing your knowledge.",
-    image: "/study/quiz-topic.jpg",
+    image: "/quiz/quiz-topic.jpg",
   },
   {
     id: 2,
     title: "Attempt Questions",
     description:
       "Answer multiple-choice or short-answer questions to apply what you've learned.",
-    image: "/study/quiz-attempt.jpg",
+    image: "/quiz/quiz-attempt.jpg",
   },
   {
     id: 3,
     title: "Review Your Answers",
     description:
       "Check correct and incorrect answers with explanations to improve understanding.",
-    image: "/study/quiz-review.jpg",
+    image: "/quiz/quiz-review.jpg",
   },
   {
     id: 4,
     title: "Repeat for Mastery",
     description:
       "Retake quizzes regularly to reinforce memory and achieve mastery of the topic.",
-    image: "/study/quiz-repeat.jpg",
+    image: "/quiz/quiz-repeat.jpg",
   },
 ];
 
