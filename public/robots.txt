@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://undiscoveredethiopia.com
+
+# Sitemaps
+Sitemap: https://undiscoveredethiopia.com/sitemap.xml

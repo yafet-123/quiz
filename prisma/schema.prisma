@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  password    String
+  role        String    @default("student") // student, teacher, admin
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @updatedAt
+  Subjects    Subject[] 
+  Exams       Exam[]    
+  Content     Content[] 
+  Comments    Comment[]
+}
+
+model Subject {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  createdBy   Int
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @updatedAt
+  approved    Boolean   @default(false)
+  User        User      @relation(fields: [createdBy], references: [id])
+  Exams       Exam[]
+  Content     Content[]
+}
+
+model Exam {
+  id          Int       @id @default(autoincrement())
+  title       String
+  year        Int
+  type        String    // PastPaper, Notes, RevisionGuide
+  fileUrl     String?
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @updatedAt
+  approved    Boolean   @default(false)
+  User        User      @relation(fields: [createdBy], references: [id])
+  Subject     Subject   @relation(fields: [subjectId], references: [id])
+  Content     Content[]
+  Tags        Tag[]     @relation("ExamTags")
+}
+
+model Content {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  fileUrl     String?
+  examId      Int
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @updatedAt
+  approved    Boolean   @default(false)
+  User        User      @relation(fields: [createdBy], references: [id])
+  Exam        Exam      @relation(fields: [examId], references: [id])
+  Subject     Subject   @relation(fields: [subjectId], references: [id])
+  Comments    Comment[]
+  Tags        Tag[]     @relation("ContentTags")
+}
+
+model Comment {
+  id          Int       @id @default(autoincrement())
+  text        String
+  userId      Int
+  contentId   Int
+  createdAt   DateTime  @default(now())
+  approved    Boolean   @default(false)
+  User        User      @relation(fields: [userId], references: [id])
+  Content     Content   @relation(fields: [contentId], references: [id])
+}
+
+model Tag {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  Exams       Exam[]    @relation("ExamTags")
+  Content     Content[] @relation("ContentTags")
+}

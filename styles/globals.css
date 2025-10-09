@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin:0;
+  padding:0;
+}
+
+.clip-path-polygon {
+  clip-path: polygon(0% 0%, 100% 0%, 25% 100%, 0% 100%);
+}
+
+.customShadow {
+  box-shadow: 5px 5px 50px 50px rgba(252, 5, 5, 0.699);
+  animation: animateBg 5s linear infinite;
+}
+
+@keyframes animateBg{
+  100%{
+    filter:hue-rotate(360deg);
+  }
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.custom-shadow {
+  box-shadow: 5px 5px 50px 50px rgba(252, 5, 5, 0.699);
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.animate-bg {
+  animation: animate-Bg 5s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(360deg);
+  }
+}
+.animate-bg-gallery {
+  animation: animate 20s linear infinite;
+}
+
+@keyframes animate-Bg {
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+body .react-calendar {
+  width: auto !important;
+  max-width: none !important;
+}
