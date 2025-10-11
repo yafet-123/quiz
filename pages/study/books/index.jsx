@@ -174,7 +174,7 @@ export default function Books() {
           {features.map((feature) => (
             <Link
               key={feature.id}
-              href={}
+              href={feature.path}
               className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
             >
               <a>
