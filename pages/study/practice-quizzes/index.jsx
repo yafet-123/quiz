@@ -1,6 +1,7 @@
 // pages/practice-quizzes.js
 import { FaClipboardList, FaCheckCircle, FaLightbulb } from "react-icons/fa";
 import Image from "next/image";
+import QuizSubject from "../../../components/books/QuizSubject"
 
 const features = [
   {
@@ -135,20 +136,9 @@ export default function PracticeQuizzes() {
       {/* Features Section */}
       <section className="py-16 px-6 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Key Features
+          Browse Practice Quizzes by subject
         </h2>
-        <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
-          {features.map((feature) => (
-            <div
-              key={feature.id}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
-            >
-              <div className="flex justify-center mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">{feature.title}</h3>
-              <p className="text-gray-600 text-center">{feature.description}</p>
-            </div>
-          ))}
-        </div>
+        <QuizSubject />
       </section>
     </div>
   );
