@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import Link from "next/link"
 import { FaFilePdf } from "react-icons/fa6";
 
-export default function GradeSpecifiedBooks({grades}) {
+export default function SubjectSpecifiedBooks({subjects}) {
   return ( 
     <div className="px-5 md:px-10 lg:px-20 py-32">
       <div className="flex flex-col">
-        {grades.map((grade, index) => (
+        {subjects.map((subject, index) => (
           <div
-            key={grade.id}
+            key={subject.id}
             className={`flex justify-between items-center bg-[#f8f8f9] text-[#fff] py-5 px-4 border-lg rounded-2xl 
             hover:bg-[#ededf2] mb-5`}
           >
@@ -19,11 +19,11 @@ export default function GradeSpecifiedBooks({grades}) {
                   <FaFilePdf size={40} color="#df646a" />
                 </h1>
                 <h1 className="pl-4 text-black font-caveat mb-5 text-center font-bold text-md md:text-lg">
-                  {grade.name}
+                  {subject.name}
                 </h1>
             </div>
 
-            <Link href={`/study/books/government/book/${grade.id}`}>
+            <Link href={`/study/books/supplementary/book/${subject.id}`}>
             	<a className="bg-[#3699ff] hover:bg-[#002244] px-3 py-2 border rounded-2xl text-md md:text-lg font-bold">
             		View Detail
             	</a>

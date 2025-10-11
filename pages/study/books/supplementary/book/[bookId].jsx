@@ -1,6 +1,6 @@
-import { MainHeader } from "../../../../components/common/MainHeader";
-import { getAllBooks, getBookById } from "../../../../data/BooksData.jsx";
-import DetailBook from "../../../../components/books/DetailBook";
+import { MainHeader } from "../../../../../components/common/MainHeader";
+import { getAllBooks, getBookById } from "../../../../../data/SupplementaryData.jsx";
+import DetailBook from "../../../../../components/books/DetailBook";
 
 export default function BookDetail({ books, all_grade_books }) {
   books = books[0]
@@ -30,7 +30,7 @@ export const getStaticProps = async (context) => {
   }
 
   return {
-    props: { books: books, all_grade_books: all_grade_books },
+    props: { books, all_grade_books },
     revalidate: 3600,
   };
 };

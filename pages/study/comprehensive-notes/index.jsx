@@ -1,15 +1,12 @@
 // pages/comprehensive-notes.js
 import { FaBook, FaCheckCircle, FaLightbulb } from "react-icons/fa";
 import Image from "next/image";
-
-const features = [
-  {
-    id: 1,
-    icon: <FaBook className="text-green-500 w-10 h-10" />,
-    title: "Comprehensive Notes",
-    description: "Access structured notes for every subject to simplify learning.",
-  },
-];
+import { FaFilePdf } from "react-icons/fa6";
+import Link from "next/link"
+import { getAllNotes } from "../../../data/NotesData.jsx";
+import React, { useState } from "react";
+import { FaAngleDown } from "react-icons/fa";
+import { IoIosArrowUp } from "react-icons/io";
 
 const reasons = [
   {
@@ -63,7 +60,16 @@ const steps = [
   },
 ];
 
-export default function ComprehensiveNotes() {
+export default function ComprehensiveNotes({all_notes}) {
+  const [visibleAnswers, setVisibleAnswers] = useState(
+    Array(all_notes.length).fill(false),
+  );
+
+  const toggleAnswer = (index) => {
+    const updatedVisibility = [...visibleAnswers];
+    updatedVisibility[index] = !updatedVisibility[index];
+    setVisibleAnswers(updatedVisibility);
+  };
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -137,19 +143,55 @@ export default function ComprehensiveNotes() {
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Key Features
         </h2>
-        <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
-          {features.map((feature) => (
-            <div
-              key={feature.id}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
-            >
-              <div className="flex justify-center mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">{feature.title}</h3>
-              <p className="text-gray-600 text-center">{feature.description}</p>
+        <div className="flex flex-col">
+          {all_notes.map((note, index) => (
+            <div key={index} className="border px-4 py-5 rounded-lg shadow-sm">
+              <div className="flex justify-between items-center">
+                <h3 className="flex items-center font-semibold text-md lg:text-lg mb-2">
+                  <h1 className="pr-5">
+                    <FaFilePdf size={40} color="#df646a" />
+                  </h1>
+                  {note.title}
+                </h3>
+                <button
+                  aria-label={`Open menu ${index}`}
+                  onClick={() => toggleAnswer(index)}
+                  className="bg-[#2664eb] text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+                >
+                  {visibleAnswers[index] ? <IoIosArrowUp /> : <FaAngleDown />}
+                </button>
+              </div>
+              {visibleAnswers[index] && (
+                <div className="flex flex-col">
+                  <p className="mt-2 text-lg lg:text-xl text-gray-700 my-5">
+                    {note.description}
+                  </p>
+
+                  <Link href={`/study/comprehensive-notes/${note.id}`}>
+                    <a className="w-32 text-white bg-[#3699ff] hover:bg-[#002244] px-3 py-2 border rounded-2xl text-md md:text-lg font-bold">
+                      View Detail
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
           ))}
         </div>
       </section>
     </div>
   );
+}
+
+export async function getServerSideProps(context){
+  const all_notes = getAllNotes();
+
+  if (!all_notes) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { all_notes }
+  };
 }

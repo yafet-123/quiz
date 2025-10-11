@@ -1,10 +1,10 @@
 import Image from "next/image";
-import Category from "../../../../components/books/Category";
+import Subject from "../../../../components/books/Subject";
 
 export default function Books() {
   return (
     <div className="bg-gray-50 min-h-screen">
-      <Category />
+      <Subject />
     </div>
   );
 }

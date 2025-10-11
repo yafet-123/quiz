@@ -1,13 +1,14 @@
 // pages/books.js
 import { FaBook, FaBookmark, FaSearch, FaCloudDownloadAlt, FaCheckCircle, FaBookOpen, FaUniversity, FaNewspaper } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link"
 
 const features = [
   {
     id: 1,
     icon: <FaBookOpen className="text-green-600 w-10 h-10" />,
     title: "Digital Supplementary Books",
-    path: "/study/books/digital",
+    path: "/study/books/supplementary",
     description:
       "Explore a wide range of supplementary learning materials to enhance your studies and understanding.",
   },
@@ -26,14 +27,6 @@ const features = [
     path: "/study/books/article",
     description:
       "Read insightful educational articles, research papers, and academic write-ups across various subjects.",
-  },
-  {
-    id: 4,
-    icon: <FaSearch className="text-purple-500 w-10 h-10" />,
-    title: "Search Within Books",
-    path: "/study/books/search",
-    description:
-      "Quickly find specific topics, keywords, or chapters inside any book or article with our powerful search tool.",
   },
 ];
 
@@ -170,14 +163,13 @@ export default function Books() {
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Key Book Features
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature) => (
             <Link
               key={feature.id}
               href={feature.path}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
             >
-              <a>
+              <a className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4">
                 <div className="flex justify-center mb-4">{feature.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">
                   {feature.title}

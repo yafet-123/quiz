@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Outer Circle -->
-  <circle cx="12" cy="12" r="10"/>
-  <!-- Centered Text -->
-  <text x="12" y="15" text-anchor="middle" font-size="9" font-weight="bold" font-family="Arial" fill="currentColor">9</text>
-</svg>
