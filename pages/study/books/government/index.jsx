@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Category from "../../../../../../components/books/Category";
+import Category from "../../../../components/books/Category";
 
 export default function Books() {
   return (
