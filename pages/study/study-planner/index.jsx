@@ -101,7 +101,7 @@ export default function StudyPlanner() {
           How to Use the Study Planner Effectively
         </h2>
 
-        <div className="space-y-16 max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <div
               key={step.id}
@@ -110,13 +110,13 @@ export default function StudyPlanner() {
               }`}
             >
               {/* Image */}
-              <div className="relative w-full lg:w-1/2 !h-[20rem] relative">
+              <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
                 <Image
                   src={step.image}
                   alt={step.title}
                   layout="fill"
                   objectFit="cover"
-                  className="rounded-lg"
+                  className=""
                 />
               </div>
 

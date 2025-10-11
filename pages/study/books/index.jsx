@@ -121,11 +121,11 @@ export default function Books() {
       </section>
 
       {/* Steps Section */}
-      <section className="py-16 px-6 bg-gray-50">
+      <section className="px-6 bg-gray-50">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
           How to Use the Book Library
         </h2>
-        <div className="space-y-16 max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <div
               key={step.id}
@@ -134,13 +134,13 @@ export default function Books() {
               }`}
             >
               {/* Image */}
-              <div className="relative w-full lg:w-1/2 !h-[20rem] relative">
+              <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
                 <Image
                   src={step.image}
                   alt={step.title}
                   layout="fill"
                   objectFit="cover"
-                  className="rounded-lg"
+                  className=""
                 />
               </div>
 
