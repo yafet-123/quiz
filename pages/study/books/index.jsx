@@ -7,6 +7,7 @@ const features = [
     id: 1,
     icon: <FaBookOpen className="text-green-600 w-10 h-10" />,
     title: "Digital Supplementary Books",
+    path: "/study/books/digital",
     description:
       "Explore a wide range of supplementary learning materials to enhance your studies and understanding.",
   },
@@ -14,6 +15,7 @@ const features = [
     id: 2,
     icon: <FaUniversity className="text-blue-500 w-10 h-10" />,
     title: "Digital Government Books",
+    path: "/study/books/government",
     description:
       "Access official government-published books and resources easily in one digital platform.",
   },
@@ -21,6 +23,7 @@ const features = [
     id: 3,
     icon: <FaNewspaper className="text-orange-500 w-10 h-10" />,
     title: "Articles",
+    path: "/study/books/article",
     description:
       "Read insightful educational articles, research papers, and academic write-ups across various subjects.",
   },
@@ -28,6 +31,7 @@ const features = [
     id: 4,
     icon: <FaSearch className="text-purple-500 w-10 h-10" />,
     title: "Search Within Books",
+    path: "/study/books/search",
     description:
       "Quickly find specific topics, keywords, or chapters inside any book or article with our powerful search tool.",
   },
@@ -168,16 +172,19 @@ export default function Books() {
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature) => (
-            <div
+            <Link
               key={feature.id}
+              href={}
               className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
             >
-              <div className="flex justify-center mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 text-center">{feature.description}</p>
-            </div>
+              <a>
+                <div className="flex justify-center mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-center">{feature.description}</p>
+              </a>
+            </Link>
           ))}
         </div>
       </section>
