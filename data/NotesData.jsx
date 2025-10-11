@@ -180,7 +180,7 @@ const NotesSummaryArray = [
     page: 18,
   },
   {
-    id: 19,
+    id: "Electric-Circuits-Basics",
     title: "Electric-Circuits-Basics",
     subject: "Physics",
     description:
