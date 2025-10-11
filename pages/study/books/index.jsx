@@ -1,33 +1,38 @@
 // pages/books.js
-import { FaBook, FaBookmark, FaSearch, FaCloudDownloadAlt, FaCheckCircle } from "react-icons/fa";
+import { FaBook, FaBookmark, FaSearch, FaCloudDownloadAlt, FaCheckCircle, FaBookOpen, FaUniversity, FaNewspaper } from "react-icons/fa";
 import Image from "next/image";
 
 const features = [
   {
     id: 1,
-    icon: <FaBook className="text-green-600 w-10 h-10" />,
-    title: "Digital Textbooks",
-    description: "Access digital copies of textbooks and study guides anytime, anywhere.",
+    icon: <FaBookOpen className="text-green-600 w-10 h-10" />,
+    title: "Digital Supplementary Books",
+    description:
+      "Explore a wide range of supplementary learning materials to enhance your studies and understanding.",
   },
   {
     id: 2,
-    icon: <FaCloudDownloadAlt className="text-blue-500 w-10 h-10" />,
-    title: "Download & Read Offline",
-    description: "Download books for offline reading and never lose your place.",
+    icon: <FaUniversity className="text-blue-500 w-10 h-10" />,
+    title: "Digital Government Books",
+    description:
+      "Access official government-published books and resources easily in one digital platform.",
   },
   {
     id: 3,
-    icon: <FaBookmark className="text-yellow-500 w-10 h-10" />,
-    title: "Bookmark Important Pages",
-    description: "Mark important chapters or topics for quick reference later.",
+    icon: <FaNewspaper className="text-orange-500 w-10 h-10" />,
+    title: "Articles",
+    description:
+      "Read insightful educational articles, research papers, and academic write-ups across various subjects.",
   },
   {
     id: 4,
     icon: <FaSearch className="text-purple-500 w-10 h-10" />,
     title: "Search Within Books",
-    description: "Find topics or keywords instantly inside any book or document.",
+    description:
+      "Quickly find specific topics, keywords, or chapters inside any book or article with our powerful search tool.",
   },
 ];
+
 
 const reasons = [
   {
