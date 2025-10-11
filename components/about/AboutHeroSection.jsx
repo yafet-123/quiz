@@ -35,7 +35,7 @@ export default function AboutHeroSection({Tag , Welcome_Message}) {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 text-white">
         {topReason.map((reason, index) => (
-          <div className="p-5 bg-[#072d44] text-justify">
+          <div key={index} className="p-5 bg-[#072d44] text-justify">
             <h1 className="text-xl lg:text-2xl font-bold mb-5 ">{reason.title}</h1>
             <p className="text-md lg:text-lg">{reason.description}</p>
           </div>
