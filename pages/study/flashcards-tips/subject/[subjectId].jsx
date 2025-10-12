@@ -1,55 +1,24 @@
 import { MainHeader } from "../../../../components/common/MainHeader";
-import { getAllRevisionNotes, getRevisionNotesBySubject } from "../../../../data/revisionNote.jsx";
-import { FaFilePdf } from "react-icons/fa6";
+import { getAllFlashcardsBySubject, getFlashcardsForSubject } from "../../../../data/FlashCards.jsx";
 import Link from "next/link"
 import React, { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { IoIosArrowUp } from "react-icons/io";
+import { FaBook } from "react-icons/fa";
 
-export default function BookGradeDetail({ all_notes }) {
-  const [visibleAnswers, setVisibleAnswers] = useState(
-    Array(all_notes.length).fill(false),
-  );
-
-  const toggleAnswer = (index) => {
-    const updatedVisibility = [...visibleAnswers];
-    updatedVisibility[index] = !updatedVisibility[index];
-    setVisibleAnswers(updatedVisibility);
-  };
+export default function BookGradeDetail({ flashcards, subject }) {
+  
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`MatricMate`} />
-      <div className="flex flex-col">
-        {all_notes.map((note, index) => (
-          <div key={index} className="border px-4 py-5 rounded-lg shadow-sm">
-            <div className="flex justify-between items-center">
-              <h3 className="flex items-center font-semibold text-md lg:text-lg mb-2">
-                <h1 className="pr-5">
-                  <FaFilePdf size={40} color="#df646a" />
-                </h1>
-                {note.title}
-              </h3>
-              <button
-                aria-label={`Open menu ${index}`}
-                onClick={() => toggleAnswer(index)}
-                className="bg-[#2664eb] text-white px-3 py-1 rounded hover:bg-blue-700 transition"
-              >
-                {visibleAnswers[index] ? <IoIosArrowUp /> : <FaAngleDown />}
-              </button>
-            </div>
-            {visibleAnswers[index] && (
-              <div className="flex flex-col">
-                <p className="mt-2 text-lg lg:text-xl text-gray-700 my-5">
-                  {note.description}
-                </p>
-                <Link href={`/study/revision-note/${note.id}`}>
-                  <a className="w-32 text-white bg-[#3699ff] hover:bg-[#002244] px-3 py-2 border rounded-2xl text-md md:text-lg font-bold">
-                    View Detail
-                  </a>
-                </Link>
-              </div>
-            )}
-          </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {flashcards.map((flash) => (
+          <Link key={flash.topic} href={`/study/flashcards-tips/${subject}/flashcard/${flash.topic}`}>
+            <a className="flex flex-col items-center gap-3 p-4 rounded-xl bg-[#ededf2] shadow hover:shadow-lg transition text-left">
+              <span className="text-2xl text-indigo-500">
+                <FaBook />
+              </span>
+              <span className="font-medium">{flash.topic}</span>
+            </a>
+          </Link>
         ))}
       </div>
     </div>
@@ -58,22 +27,22 @@ export default function BookGradeDetail({ all_notes }) {
  
 export const getStaticProps = async (context) => {
   const subjectId = context.params.subjectId;
-  const all_notes = getRevisionNotesBySubject(subjectId);
-
-  if (!all_notes) {
+  const flashcards = getFlashcardsForSubject(subjectId);
+  console.log(flashcards)
+  if (!flashcards) {
     return {
       notFound: true,
     };
   }
 
   return {
-    props: { all_notes },
+    props: { flashcards, subject:subjectId },
     revalidate: 3600,
   };
 };
 
 export const getStaticPaths = async (context) => {
-  const subjects = getAllRevisionNotes();
+  const subjects = getAllFlashcardsBySubject();
   //   console.log(context)
 
   // Get the paths we want to pre-render based on grades
