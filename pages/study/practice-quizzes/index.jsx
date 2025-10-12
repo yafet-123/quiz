@@ -134,7 +134,7 @@ export default function PracticeQuizzes() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
+      <section className="py-16 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Browse Practice Quizzes by subject
         </h2>

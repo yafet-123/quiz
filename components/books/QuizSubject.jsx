@@ -107,10 +107,10 @@ export default function QuizSubject() {
   ];
 
   return ( 
-    <div className="bg-gray-100 min-h-screen py-28">
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div className="min-h-screen">
+      <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {subjects.map((subject) => (
-          <Link href={`/study/books/supplementary/${subject.title}`} key={subject.id}>
+          <Link href={`/study/practice-quizzes/subject/${subject.title}`} key={subject.id}>
             <div
               className="group bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl 
               transform hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col items-center text-center p-6"
