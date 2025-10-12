@@ -203,8 +203,12 @@ const NotesSummaryArray = [
 
 export function getAllNotes() {
   return NotesSummaryArray;
-}
+} 
 
 export function getNotesById(id) {
   return NotesSummaryArray.filter((note) => note.id === id);
+}
+
+export function getNotesBySubject(subject) {
+  return NotesSummaryArray.filter((note) => note.subject === subject);
 }

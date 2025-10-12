@@ -1,67 +1,75 @@
-// pages/comprehensive-notes.js
-import { FaBook, FaCheckCircle, FaLightbulb } from "react-icons/fa";
+// pages/revision-notes.js
+import { FaBook, FaHighlighter, FaClipboardList } from "react-icons/fa";
 import Image from "next/image";
-import { FaFilePdf } from "react-icons/fa6";
-import Link from "next/link"
 import { getAllNotes } from "../../../data/NotesData.jsx";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
-import Subject from "../../../components/comprehensive-notes/subject.jsx"
+import { FaFilePdf } from "react-icons/fa6";
+import Link from "next/link"
+import Subject from "../../../components/revision-note/subject.jsx"
+const features = [
+  {
+    id: 1,
+    icon: <FaHighlighter className="text-yellow-500 w-10 h-10" />,
+    title: "Revision Notes",
+    description: "Organize and access your revision notes quickly for efficient learning.",
+  },
+];
 
 const reasons = [
   {
     id: 1,
-    icon: <FaBook className="text-green-500 w-8 h-8" />,
-    title: "Clear Organization",
-    description: "Well-structured notes cover all subjects and key topics for easy studying.",
+    icon: <FaBook className="text-blue-500 w-8 h-8" />,
+    title: "Quick Review",
+    description: "Revisit key topics and important concepts anytime for faster revision.",
   },
   {
     id: 2,
-    icon: <FaCheckCircle className="text-blue-500 w-8 h-8" />,
-    title: "Key Points Highlighted",
-    description: "Important concepts, formulas, and definitions are emphasized.",
+    icon: <FaClipboardList className="text-green-500 w-8 h-8" />,
+    title: "Track Progress",
+    description: "Check which topics you have revised and which need more attention.",
   },
   {
     id: 3,
-    icon: <FaLightbulb className="text-yellow-500 w-8 h-8" />,
-    title: "Learning Tips",
-    description: "Tips and tricks are included to help remember information faster.",
+    icon: <FaHighlighter className="text-purple-500 w-8 h-8" />,
+    title: "Highlight Key Points",
+    description: "Mark essential formulas, definitions, and tips to focus on what matters.",
   },
 ];
 
 const steps = [
   {
     id: 1,
-    title: "Start with Notes Overview",
+    title: "Organize Notes",
     description:
-      "Review all notes for the topic to get a full understanding before diving into details.",
-    image: "/note/note-overview.jpg",
+      "Arrange your revision notes by subject, topic, and importance to make them easy to access.",
+    image: "/revision/organize.jpg",
   },
   {
     id: 2,
-    title: "Highlight Key Points",
+    title: "Summarize Key Points",
     description:
-      "Identify and highlight definitions, formulas, and important concepts for quick revision.",
-    image: "/note/note-highlight.jpg",
+      "Highlight and summarize the most important information for faster review sessions.",
+    image: "/revision/highlight.jpg",
   },
   {
     id: 3,
-    title: "Use Diagrams & Visuals",
+    title: "Review Regularly",
     description:
-      "Visual aids help you understand and memorize concepts more efficiently.",
-    image: "/note/note-diagram.jpg",
+      "Go through your notes periodically to reinforce memory and understanding.",
+    image: "/revision/review.jpg",
   },
   {
     id: 4,
-    title: "Review Regularly",
+    title: "Track Completion",
     description:
-      "Go through notes periodically to reinforce memory and improve retention.",
-    image: "/note/note-review.jpg",
+      "Mark topics as revised and track your overall progress to ensure comprehensive coverage.",
+    image: "/revision/progress.jpg",
   },
 ];
 
-export default function ComprehensiveNotes({all_notes}) {
+export default function RevisionNotes({all_notes}) {
   const [visibleAnswers, setVisibleAnswers] = useState(
     Array(all_notes.length).fill(false),
   );
@@ -74,19 +82,19 @@ export default function ComprehensiveNotes({all_notes}) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-32 text-center px-6">
+      <section className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-32 text-center px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Comprehensive Notes
+          Revision Notes
         </h1>
         <p className="text-lg md:text-xl mb-8">
-          Access structured notes for every subject to make learning simpler and more effective.
+          Access, organize, and review your notes effectively to boost learning and retention.
         </p>
       </section>
 
       {/* Benefits Section */}
       <section className="py-16 px-6 max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Why Use Comprehensive Notes?
+          Why Use Revision Notes?
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {reasons.map((reason) => (
@@ -105,7 +113,7 @@ export default function ComprehensiveNotes({all_notes}) {
       {/* Steps Section */}
       <section className="py-16 px-6 bg-gray-50">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          How to Use Notes Effectively
+          How to Use Revision Notes Effectively
         </h2>
 
         <div className="max-w-6xl mx-auto">
@@ -123,7 +131,6 @@ export default function ComprehensiveNotes({all_notes}) {
                   alt={step.title}
                   layout="fill"
                   objectFit="cover"
-                  className=""
                 />
               </div>
 

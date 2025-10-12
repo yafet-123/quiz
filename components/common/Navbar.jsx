@@ -22,7 +22,7 @@ export const Navbar = () => {
         { path: "/study/books", name: "Books" },
         { path: "/study/comprehensive-notes", name: "Comprehensive Notes" },
         { path: "/study/practice-quizzes", name: "Practice Quizzes" },
-        { path: "/study/study-planner", name:"Study Planner"},
+        { path: "/study/revision-note", name:"Revision Note"},
         { path: "/study/flashcards-tips", name:"Flashcards Tips"},
       ],
     },
