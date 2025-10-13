@@ -157,9 +157,7 @@ export function AddUser() {
 
           {/* Error / Success Messages */}
           {error && <div className="text-red-600 font-semibold text-center">{error}</div>}
-          {success && (
-            <div className="text-green-600 font-semibold text-center">{success}</div>
-          )}
+          {success && <div className="text-green-600 font-semibold text-center">{success}</div>}
 
           {/* Submit Button */}
           <div className="flex justify-center mt-8">
@@ -169,21 +167,4 @@ export function AddUser() {
               className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 ${
                 loading
                   ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"
-              }`}
-            >
-              {loading ? "Submitting..." : "Submit User"}
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <ReactModal
-        isOpen={loadingModalIsOpen}
-        className="flex items-center justify-center w-full h-full"
-      >
-        <Loader />
-      </ReactModal>
-    </div>
-  );
-}
+                  : "bg-[#
