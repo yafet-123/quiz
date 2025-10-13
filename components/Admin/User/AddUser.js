@@ -1,176 +1,169 @@
-import React from "react";
-import { useState,useEffect, useContext} from 'react'
-import axios from 'axios';
-import moment from 'moment';
-import { useRouter } from 'next/router'
-import {FiEye, FiEyeOff} from 'react-icons/fi'
+import React, { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
 export function AddUser() {
+  const { data } = useSession();
+  const UserData = data?.user;
+  const router = useRouter();
 
-    const { status, data } = useSession();
-    const [typepassword, setTypepassword] = useState('password');
-    const [typepasswordconfirm, setTypepasswordconfirm] = useState('password');
-    const router = useRouter();
-    const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [UserName, setUserName] =useState("")
-    const [email, setemail] = useState("")
-    const [password,setpassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [passworderror,setpassworderror] = useState("")
-    const [error,seterror] = useState("")
-    const UserData = data?.user;
+  const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-    async function register(e){
-        e.preventDefault();
-        if(confirmPassword === password){
-            setpassworderror("")
-            seterror("")
-            setLoadingModalIsOpen(true)
-            const data = await axios.post(`../api/user/registerUser`,{
-                'UserName':UserName,
-                'Password':password,
-                'email':email,
-                'role':'admin',
-                "user_id": UserData.user_id,
+  const [UserName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-            }).then(function (response) {
-                console.log(response.data);
-                router.reload()
-            }).catch(function (error) {
-                seterror("Creating user failed due to username is still exist or network error")
-                setLoadingModalIsOpen(false)
-            });
-        }else{
-            seterror("")
-            setpassworderror("Password and confirm password should be same.")
-            setLoadingModalIsOpen(false)
-        }
-                
+  const [typepassword, setTypepassword] = useState("password");
+  const [typepasswordconfirm, setTypepasswordconfirm] = useState("password");
+
+  const [passworderror, setPasswordError] = useState("");
+  const [error, setError] = useState("");
+
+  async function register(e) {
+    e.preventDefault();
+    if (confirmPassword !== password) {
+      setPasswordError("Password and confirm password should match.");
+      return;
     }
+    setPasswordError("");
+    setError("");
+    setLoadingModalIsOpen(true);
 
-    return (
-        <div className="px-0 lg:px-10 pt-20">
-            <form className="max-w-7xl mx-auto mt-10" onSubmit={register} >
-                <h1 className="text-black text-xl lg:text-4xl font-bold text-center italic">Add User</h1>
+    try {
+      await axios.post(`../api/user/registerUser`, {
+        UserName,
+        Password: password,
+        email,
+        role: "admin",
+        user_id: UserData.user_id,
+      });
+      router.reload();
+    } catch (err) {
+      setError(
+        "Creating user failed due to existing username or network error."
+      );
+      setLoadingModalIsOpen(false);
+    }
+  }
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10 mx-2">
-                    <div className="relative">
-                        <input 
-                            id="username" 
-                            type="text" 
-                            value={UserName}
-                            required
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            onChange={(e) => setUserName(e.target.value)}
-                        />
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            UserName
-                        </label>
-                    </div>
+  return (
+    <div className="flex justify-center px-4 lg:px-10 pt-20">
+      <form
+        className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8 lg:p-12"
+        onSubmit={register}
+      >
+        <h1 className="text-3xl lg:text-4xl font-bold text-center text-[#004d40] mb-8">
+          Add New User
+        </h1>
 
-                    <div className="relative">
-                        <input 
-                            id="email" 
-                            type="email" 
-                            required
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={email}
-                            onChange={(e) => setemail(e.target.value)}
-                        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          {/* Username */}
+          <div className="relative">
+            <input
+              type="text"
+              value={UserName}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+              className="peer block w-full px-4 py-4 rounded-xl border-2 border-gray-300 focus:border-[#009688] focus:ring-1 focus:ring-[#009688] text-gray-900 text-lg placeholder-transparent"
+              placeholder="Username"
+            />
+            <label className="absolute left-4 top-4 text-gray-400 text-lg transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-lg peer-focus:-top-3 peer-focus:text-sm peer-focus:text-[#009688]">
+              Username
+            </label>
+          </div>
 
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Email
-                        </label>
-                    </div>
+          {/* Email */}
+          <div className="relative">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="peer block w-full px-4 py-4 rounded-xl border-2 border-gray-300 focus:border-[#009688] focus:ring-1 focus:ring-[#009688] text-gray-900 text-lg placeholder-transparent"
+              placeholder="Email"
+            />
+            <label className="absolute left-4 top-4 text-gray-400 text-lg transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-lg peer-focus:-top-3 peer-focus:text-sm peer-focus:text-[#009688]">
+              Email
+            </label>
+          </div>
 
-                    <div className="relative">
-                        <input 
-                            id="password" 
-                            required
-                            type={typepassword}
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={password}
-                            onChange={(e) => setpassword(e.target.value)}
-                        />
-                        <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
-                            {typepassword==="password"?(
-                                <span className='icon-span' onClick={()=>setTypepassword("text")}>
-                                  <FiEye size={30} />
-                                </span>
-                            ):(
-                                <span className='icon-span' onClick={()=>setTypepassword("password")}>
-                                  <FiEyeOff size={30} />
-                                </span>
-                            )}
-                        </div>
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Password
-                        </label>
-                    </div>
+          {/* Password */}
+          <div className="relative">
+            <input
+              type={typepassword}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="peer block w-full px-4 py-4 rounded-xl border-2 border-gray-300 focus:border-[#009688] focus:ring-1 focus:ring-[#009688] text-gray-900 text-lg placeholder-transparent"
+              placeholder="Password"
+            />
+            <label className="absolute left-4 top-4 text-gray-400 text-lg transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-lg peer-focus:-top-3 peer-focus:text-sm peer-focus:text-[#009688]">
+              Password
+            </label>
+            <span
+              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600 hover:text-gray-900 transition"
+              onClick={() =>
+                setTypepassword(typepassword === "password" ? "text" : "password")
+              }
+            >
+              {typepassword === "password" ? <FiEye size={24} /> : <FiEyeOff size={24} />}
+            </span>
+          </div>
 
-                    <div className="relative">
-                        <input 
-                            id="ConfirmPassword" 
-                            required
-                            type={typepasswordconfirm}
-                            className="block w-full px-3 text-sm lg:text-xl text-black bg-white py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        <div className="absolute right-10 text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-1/2">
-                            {typepasswordconfirm==="password"?(
-                                <span className='icon-span' onClick={()=>setTypepasswordconfirm("text")}>
-                                  <FiEye size={30} />
-                                </span>
-                            ):(
-                                <span className='icon-span' onClick={()=>setTypepasswordconfirm("password")}>
-                                  <FiEyeOff size={30} />
-                                </span>
-                            )}
-                        </div>
-                        <label 
-                            htmlFor="floating_outlined" 
-                            className="absolute text-sm lg:text-xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-                        >
-                            Confirm Password
-                        </label>
-                    </div>
-                </div>
-
-                <div className="mx-2 my-5 lg:my-0 flex flex-col lg:flex-row justify-between">
-                    <h1 className="text-red-600  text-md lg:text-2xl font-bold text-left mb-5 lg:mb-0">
-                        {passworderror || error}
-                    </h1>
-                    <button 
-                        disabled={loading}
-                        className={`float-right text-white font-medium rounded-lg text-xl p-4 text-center inline-flex items-center 
-                            ${loading ? "bg-gray-200" : "bg-[#009688] hover:bg-[#009688] focus:ring-4 focus:ring-[#009688]" }`}
-                    >
-                        Submit
-                    </button>
-                </div>
-
-                <ReactModal
-                    isOpen={LoadingmodalIsOpen}
-                    // onRequestClose={closeModal}
-                    className="flex items-center justify-center w-full h-full"
-                >
-                    <Loader />
-                </ReactModal>
-            </form>
+          {/* Confirm Password */}
+          <div className="relative">
+            <input
+              type={typepasswordconfirm}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className="peer block w-full px-4 py-4 rounded-xl border-2 border-gray-300 focus:border-[#009688] focus:ring-1 focus:ring-[#009688] text-gray-900 text-lg placeholder-transparent"
+              placeholder="Confirm Password"
+            />
+            <label className="absolute left-4 top-4 text-gray-400 text-lg transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-lg peer-focus:-top-3 peer-focus:text-sm peer-focus:text-[#009688]">
+              Confirm Password
+            </label>
+            <span
+              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-600 hover:text-gray-900 transition"
+              onClick={() =>
+                setTypepasswordconfirm(
+                  typepasswordconfirm === "password" ? "text" : "password"
+                )
+              }
+            >
+              {typepasswordconfirm === "password" ? <FiEye size={24} /> : <FiEyeOff size={24} />}
+            </span>
+          </div>
         </div>
-    );
+
+        {/* Error message */}
+        {(passworderror || error) && (
+          <p className="text-red-600 font-semibold mt-6">{passworderror || error}</p>
+        )}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="mt-6 w-full lg:w-auto bg-[#009688] hover:bg-[#00796b] text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 text-lg flex justify-center items-center mx-auto"
+        >
+          Submit
+        </button>
+
+        {/* Loader Modal */}
+        <ReactModal
+          isOpen={LoadingmodalIsOpen}
+          className="flex items-center justify-center w-full h-full bg-black/30"
+        >
+          <Loader />
+        </ReactModal>
+      </form>
+    </div>
+  );
 }
