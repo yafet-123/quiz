@@ -8,9 +8,9 @@ export default async function handleadduser(req, res){
 	console.log(UserName)
 	const data = await prisma.User.create({
 		data:{
-			UserName,
+			name: UserName,
 			email,
-			Password:bcrypt.hashSync(Password, 8),
+			password:bcrypt.hashSync(Password, 8),
 			role
 		},
 	});

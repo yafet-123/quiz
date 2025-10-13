@@ -7,26 +7,26 @@ import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { getSession } from "next-auth/react";
-
+  
 export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();
   const userRole = session?.user?.role;
-  if (userRole !== 'admin') {
-    return {
-      redirect: {
-        destination: '/auth/Admin/Login/signin-user',
-        permanent: false,
-      },
-    };
-  }
+  // if (userRole !== 'admin') {
+  //   return {
+  //     redirect: {
+  //       destination: '/auth/Admin/Login/signin-user',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
   
   const subjectes = await prisma.Subject.findMany({
-    orderBy : {ModifiedDate:'desc'},
+    orderBy : {modifiedAt:'desc'},
     include:{
       User:{
         select:{
-          UserName:true
+          name:true
         }
       }
       
@@ -36,10 +36,10 @@ export async function getServerSideProps(context){
   console.log(subjectes)
   const Allsujectes = subjectes.map((data)=>({
       subject_id:data.subject_id,
-      SubjectName:data.SubjectName,
-      CreatedDate:data.CreatedDate,
-      ModifiedDate:data.ModifiedDate,
-      User:data.User?.UserName,
+      SubjectName:data.name,
+      CreatedDate:data.createdAt,
+      ModifiedDate:data.modifiedAt,
+      User:data.User?.name,
   }))
   
   return{

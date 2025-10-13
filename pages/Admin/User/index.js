@@ -10,25 +10,25 @@ import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context){
   const session = await getSession(context);
-  const serverdate = new Date();    
+  const serverdate = new Date();     
   const userRole = session?.user?.role;
-  if (userRole !== 'admin') {
-    return {
-      redirect: {
-        destination: '/auth/Admin/Login/signin-user',
-        permanent: false,
-      },
-    };
-  }
+  // if (userRole !== 'admin') {
+  //   return {
+  //     redirect: {
+  //       destination: '/auth/Admin/Login/signin-user',
+  //       permanent: false,
+  //     },
+  //   };
+  // }
   
-  const users = await prisma.User.findMany({orderBy : {ModifiedDate:'desc'}});
+  const users = await prisma.User.findMany({orderBy : {modifiedAt:'desc'}});
   const Allusers = users.map((data)=>({
       user_id:data.user_id,
       email:data.email,
       role:data.role,
-      CreatedDate:data.CreatedDate,
-      ModifiedDate:data.ModifiedDate,
-      UserName:data.UserName
+      CreatedDate:data.createdAt,
+      ModifiedDate:data.modifiedAt,
+      UserName:data.name
   }))
 
   return{

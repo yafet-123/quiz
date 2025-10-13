@@ -3,9 +3,9 @@ import Image from 'next/image'
 import { useRouter } from 'next/router';
 import Link from "next/link"
 import { FaFolder } from "react-icons/fa6";
-
+ 
 export default function QuizSubject() {
-  const subjects = [
+  const subjects = [ 
     {
       id: 1,
       title: "Art",
@@ -105,7 +105,7 @@ export default function QuizSubject() {
       svg: "/categories/image--technology.svg",
     },
   ];
-
+  
   return ( 
     <div className="min-h-screen">
       <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

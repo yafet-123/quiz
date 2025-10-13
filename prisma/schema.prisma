@@ -25,6 +25,7 @@ model Subject {
   id          Int       @id @default(autoincrement())
   name        String
   description String?
+  svg         String?   // <-- Add this line
   createdBy   Int
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
@@ -33,6 +34,7 @@ model Subject {
   Exams       Exam[]
   Content     Content[]
 }
+
 
 model Exam {
   id          Int       @id @default(autoincrement())
