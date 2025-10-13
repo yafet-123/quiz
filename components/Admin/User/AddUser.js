@@ -81,7 +81,6 @@ export function AddUser() {
             <input
               type="text"
               required
-              placeholder="Enter username"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688] focus:border-transparent"
@@ -96,7 +95,6 @@ export function AddUser() {
             <input
               type="email"
               required
-              placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688] focus:border-transparent"
@@ -111,7 +109,6 @@ export function AddUser() {
             <input
               type={typePassword}
               required
-              placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688] focus:border-transparent"
@@ -134,7 +131,6 @@ export function AddUser() {
             <input
               type={typePasswordConfirm}
               required
-              placeholder="Confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688] focus:border-transparent"
@@ -147,17 +143,15 @@ export function AddUser() {
                 )
               }
             >
-              {typePasswordConfirm === "password" ? (
-                <FiEye size={24} />
-              ) : (
-                <FiEyeOff size={24} />
-              )}
+              {typePasswordConfirm === "password" ? <FiEye size={24} /> : <FiEyeOff size={24} />}
             </span>
           </div>
 
           {/* Error / Success Messages */}
           {error && <div className="text-red-600 font-semibold text-center">{error}</div>}
-          {success && <div className="text-green-600 font-semibold text-center">{success}</div>}
+          {success && (
+            <div className="text-green-600 font-semibold text-center">{success}</div>
+          )}
 
           {/* Submit Button */}
           <div className="flex justify-center mt-8">
@@ -167,4 +161,21 @@ export function AddUser() {
               className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 ${
                 loading
                   ? "bg-gray-300 cursor-not-allowed"
-                  : "bg-[#
+                  : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"
+              }`}
+            >
+              {loading ? "Submitting..." : "Submit User"}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <ReactModal
+        isOpen={loadingModalIsOpen}
+        className="flex items-center justify-center w-full h-full"
+      >
+        <Loader />
+      </ReactModal>
+    </div>
+  );
+}
