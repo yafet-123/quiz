@@ -21,13 +21,13 @@ export async function getServerSideProps(context) {
   // }
 
   // Fetch all subjects with exams and their questions
-  const subjects = await prisma.subject.findMany({
+  const subjects = await prisma.Subject.findMany({
     include: {
       Exams: {
         include: {
           Questions: {
             include: {
-              Options: true,
+              Options: true, // include options here
             },
           },
         },
@@ -36,23 +36,27 @@ export async function getServerSideProps(context) {
     orderBy: { createdAt: "desc" },
   });
 
-  // Format data for easy rendering
-  const formattedSubjects = subjects.map((sub) => ({
+  // Format data for client-side rendering
+  const formattedSubjects = subjects.map(sub => ({
     id: sub.id,
     name: sub.name,
     description: sub.description,
-    Exams: sub.Exams.map((exam) => ({
+    Exams: sub.Exams.map(exam => ({
       id: exam.id,
       title: exam.title,
-      Questions: exam.Questions.map((q) => ({
+      Questions: exam.Questions.map(q => ({
         id: q.id,
         question: q.question,
         correctOption: q.correctOption,
-        Options: q.Options,
+        Options: q.Options.map(opt => ({
+          id: opt.id,
+          optionText: opt.optionText
+        })), // options included cleanly
       })),
     })),
   }));
 
+  console.log(formattedSubjects)
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),

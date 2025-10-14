@@ -25,14 +25,18 @@ export async function getServerSideProps(context) {
     include: {
       Quizzes: {
         include: {
-          Questions: true
-        }
-      }
+          Questions: {
+            include: {
+              Options: true, // <-- include options here
+            },
+          },
+        },
+      },
     },
-    orderBy: { createdAt: "desc" }
+    orderBy: { createdAt: "desc" },
   });
 
-  // Format data for easier client-side rendering
+  // Format data for client-side rendering
   const formattedSubjects = subjects.map(sub => ({
     id: sub.id,
     name: sub.name,
@@ -44,11 +48,12 @@ export async function getServerSideProps(context) {
         id: q.id,
         question: q.question,
         answer: q.answer,
-        Options: q.Options // optional: include multiple-choice options if you have them
-      }))
-    }))
+        Options: q.Options.map(opt => ({ id: opt.id, optionText: opt.optionText })), // now options are included
+      })),
+    })),
   }));
 
+  console.log(formattedSubjects)
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
@@ -58,7 +63,7 @@ export async function getServerSideProps(context) {
 
 export default function QuizzesPage({ subjects }) {
   const { data } = useSession();
-
+  console.log(subjects)
   return (
     <React.Fragment>
       <MainHeader title="Quizzes Dashboard" />

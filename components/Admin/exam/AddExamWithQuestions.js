@@ -15,21 +15,17 @@ export function AddExamWithQuestions({ subjects }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // ➕ Add new question input
+  // ➕ Add new question
   const addQuestionField = () => {
-    setQuestions([
-      ...questions,
-      { question: "", options: ["", "", "", ""], correctOption: "" },
-    ]);
+    setQuestions([...questions, { question: "", options: ["", "", "", ""], correctOption: "" }]);
   };
 
-  // 🗑️ Remove question input
+  // 🗑️ Remove a question
   const removeQuestionField = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
+    setQuestions(questions.filter((_, i) => i !== index));
   };
 
-  // 📝 Handle input changes (question, options, correct answer)
+  // 📝 Handle input changes
   const handleQuestionChange = (index, field, value, optionIndex = null) => {
     const newQuestions = [...questions];
     if (field === "option") {
@@ -49,10 +45,29 @@ export function AddExamWithQuestions({ subjects }) {
     setLoadingModalIsOpen(true);
 
     try {
+      // Validate questions before sending
+      for (let i = 0; i < questions.length; i++) {
+        if (!questions[i].correctOption) {
+          throw new Error(`Correct answer missing for question: "${questions[i].question}"`);
+        }
+      }
+
+      const formattedQuestions = questions.map((q) => ({
+        question: q.question,
+        createdBy:1,
+        correctOption: q.correctOption, // <-- rename from "answer" to "correctOption"
+        Options: {
+          create: q.options.map((opt) => ({ optionText: opt })),
+        },
+      }));
+
+      console.log("Sending to API:", formattedQuestions);
+
       await axios.post("/api/exam/add-exam-with-questions", {
         subjectId,
-        examTitle,
-        questions,
+        title: examTitle,
+        createdBy: 1, // replace with actual userId
+        questions: formattedQuestions,
       });
 
       setSuccess("Exam and questions added successfully!");
@@ -60,8 +75,8 @@ export function AddExamWithQuestions({ subjects }) {
       setExamTitle("");
       setQuestions([{ question: "", options: ["", "", "", ""], correctOption: "" }]);
     } catch (err) {
-      console.error(err);
-      setError("Failed to add exam and questions. Try again later.");
+      console.log(err);
+      setError(err.message || "Failed to add exam and questions. Try again later.");
     } finally {
       setLoading(false);
       setLoadingModalIsOpen(false);
@@ -112,10 +127,7 @@ export function AddExamWithQuestions({ subjects }) {
           <div>
             <label className="block text-gray-700 font-medium mb-2">Questions</label>
             {questions.map((q, index) => (
-              <div
-                key={index}
-                className="mb-4 p-4 border border-gray-200 rounded-xl relative bg-gray-50"
-              >
+              <div key={index} className="mb-4 p-4 border border-gray-200 rounded-xl relative bg-gray-50">
                 {questions.length > 1 && (
                   <button
                     type="button"
@@ -132,9 +144,7 @@ export function AddExamWithQuestions({ subjects }) {
                   placeholder="Question"
                   required
                   value={q.question}
-                  onChange={(e) =>
-                    handleQuestionChange(index, "question", e.target.value)
-                  }
+                  onChange={(e) => handleQuestionChange(index, "question", e.target.value)}
                   className="w-full mb-3 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
                 />
 
@@ -161,9 +171,7 @@ export function AddExamWithQuestions({ subjects }) {
                   placeholder="Correct Option"
                   required
                   value={q.correctOption}
-                  onChange={(e) =>
-                    handleQuestionChange(index, "correctOption", e.target.value)
-                  }
+                  onChange={(e) => handleQuestionChange(index, "correctOption", e.target.value)}
                   className="w-full mt-3 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
                 />
               </div>
@@ -181,21 +189,16 @@ export function AddExamWithQuestions({ subjects }) {
 
           {/* Error / Success Messages */}
           {error && <div className="text-red-600 font-semibold text-center">{error}</div>}
-          {success && (
-            <div className="text-green-600 font-semibold text-center">{success}</div>
-          )}
+          {success && <div className="text-green-600 font-semibold text-center">{success}</div>}
 
           {/* Submit Button */}
           <div className="flex justify-center mt-8">
             <button
               type="submit"
               disabled={loading}
-              className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 
-                ${
-                  loading
-                    ? "bg-gray-300 cursor-not-allowed"
-                    : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"
-                }`}
+              className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 ${
+                loading ? "bg-gray-300 cursor-not-allowed" : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"
+              }`}
             >
               {loading ? "Submitting..." : "Submit Exam & Questions"}
             </button>

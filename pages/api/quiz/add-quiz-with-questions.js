@@ -1,5 +1,4 @@
 // pages/api/quiz/add-quiz-with-questions.js
-
 import { prisma } from "../../../util/db.server";
 
 export default async function handler(req, res) {
@@ -7,27 +6,35 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { subjectId, quizTitle, questions } = req.body;
+  const { subjectId, title, questions } = req.body;
 
-  if (!subjectId || !quizTitle || !questions || questions.length === 0) {
+  if (!subjectId || !title || !questions || questions.length === 0) {
     return res.status(400).json({ message: "Missing required fields" });
   }
 
   try {
-    // Create the quiz first
+    // Ensure all questions have an answer
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].answer) {
+        return res.status(400).json({
+          message: `Question ${i + 1} is missing the correct answer.`,
+        });
+      }
+    }
+
+    // Create the quiz with questions and options
     const newQuiz = await prisma.quiz.create({
       data: {
         subjectId: parseInt(subjectId),
-        title: quizTitle,
+        title: title,
         Questions: {
-          create: questions.map((q) => ({
-            question: q.question,
-            answer: q.answer,
-          })),
+          create: questions, // directly use what frontend sent
         },
       },
       include: {
-        Questions: true, // optional, returns the created questions
+        Questions: {
+          include: { Options: true },
+        },
       },
     });
 

@@ -8,25 +8,24 @@ export function AddQuizWithQuestions({ subjects }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
-  const [quizTitle, setQuizTitle] = useState("");
+  const [examTitle, setExamTitle] = useState("");
   const [questions, setQuestions] = useState([
     { question: "", options: ["", "", "", ""], correctOption: "" },
   ]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // ➕ Add new question input
+  // ➕ Add new question
   const addQuestionField = () => {
     setQuestions([...questions, { question: "", options: ["", "", "", ""], correctOption: "" }]);
   };
 
-  // 🗑️ Remove question input
+  // 🗑️ Remove a question
   const removeQuestionField = (index) => {
-    const newQuestions = questions.filter((_, i) => i !== index);
-    setQuestions(newQuestions);
+    setQuestions(questions.filter((_, i) => i !== index));
   };
 
-  // 📝 Handle input changes (question, options, correct answer)
+  // 📝 Handle input changes
   const handleQuestionChange = (index, field, value, optionIndex = null) => {
     const newQuestions = [...questions];
     if (field === "option") {
@@ -46,19 +45,38 @@ export function AddQuizWithQuestions({ subjects }) {
     setLoadingModalIsOpen(true);
 
     try {
+      // Validate questions before sending
+      for (let i = 0; i < questions.length; i++) {
+        if (!questions[i].correctOption) {
+          throw new Error(`Correct answer missing for question: "${questions[i].question}"`);
+        }
+      }
+
+      // Format questions for API
+      const formattedQuestions = questions.map((q) => ({
+        question: q.question,
+        answer: q.correctOption, // Prisma requires this
+        Options: {
+          create: q.options.map((opt) => ({ optionText: opt })),
+        },
+      }));
+
+      console.log("Sending to API:", formattedQuestions);
+
       await axios.post("/api/quiz/add-quiz-with-questions", {
         subjectId,
-        quizTitle,
-        questions,
+        title: examTitle,
+        createdBy: 1, // replace with actual userId
+        questions: formattedQuestions,
       });
 
-      setSuccess("Quiz and questions added successfully!");
+      setSuccess("Exam and questions added successfully!");
       setSubjectId("");
-      setQuizTitle("");
+      setExamTitle("");
       setQuestions([{ question: "", options: ["", "", "", ""], correctOption: "" }]);
     } catch (err) {
       console.error(err);
-      setError("Failed to add quiz and questions. Try again later.");
+      setError(err.message || "Failed to add exam and questions. Try again later.");
     } finally {
       setLoading(false);
       setLoadingModalIsOpen(false);
@@ -92,15 +110,15 @@ export function AddQuizWithQuestions({ subjects }) {
             </select>
           </div>
 
-          {/* Quiz Title */}
+          {/* Exam Title */}
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Quiz Title</label>
+            <label className="block text-gray-700 font-medium mb-2">Exam Title</label>
             <input
               type="text"
               required
-              placeholder="Enter quiz title"
-              value={quizTitle}
-              onChange={(e) => setQuizTitle(e.target.value)}
+              placeholder="Enter exam title"
+              value={examTitle}
+              onChange={(e) => setExamTitle(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
             />
           </div>
@@ -153,9 +171,7 @@ export function AddQuizWithQuestions({ subjects }) {
                   placeholder="Correct Option"
                   required
                   value={q.correctOption}
-                  onChange={(e) =>
-                    handleQuestionChange(index, "correctOption", e.target.value)
-                  }
+                  onChange={(e) => handleQuestionChange(index, "correctOption", e.target.value)}
                   className="w-full mt-3 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
                 />
               </div>
@@ -180,10 +196,11 @@ export function AddQuizWithQuestions({ subjects }) {
             <button
               type="submit"
               disabled={loading}
-              className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 
-                ${loading ? "bg-gray-300 cursor-not-allowed" : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"}`}
+              className={`px-8 py-3 text-lg font-semibold rounded-xl transition duration-300 flex items-center justify-center gap-2 ${
+                loading ? "bg-gray-300 cursor-not-allowed" : "bg-[#009688] hover:bg-[#00796b] text-white shadow-md"
+              }`}
             >
-              {loading ? "Submitting..." : "Submit Quiz & Questions"}
+              {loading ? "Submitting..." : "Submit Exam & Questions"}
             </button>
           </div>
         </form>

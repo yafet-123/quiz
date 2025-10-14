@@ -5,18 +5,18 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 export function DisplayExams({ subjects }) {
   return (
     <div className="px-4 lg:px-10 py-10">
-      <h1 className="text-center text-3xl font-bold mb-8 text-gray-800 italic">
+      <h1 className="text-center text-3xl font-bold mb-10 text-gray-800 italic">
         Exams
       </h1>
 
       {subjects.map((subject) => (
-        <div key={subject.id} className="mb-10">
-          <h2 className="text-2xl font-bold mb-4 text-[#009688]">{subject.name}</h2>
+        <div key={subject.id} className="mb-12">
+          <h2 className="text-2xl font-bold mb-6 text-[#009688]">{subject.name}</h2>
 
           {subject.Exams.map((exam) => (
-            <div key={exam.id} className="bg-white shadow-md rounded-2xl p-6 mb-6">
+            <div key={exam.id} className="bg-white shadow-lg rounded-2xl p-6 mb-8">
               {/* Exam Header */}
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-6">
                 <h3 className="text-xl font-semibold">{exam.title}</h3>
                 <div className="space-x-3">
                   <button className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl">
@@ -26,73 +26,42 @@ export function DisplayExams({ subjects }) {
                     <FiTrash2 /> Delete
                   </button>
                 </div>
-              </div>
+              </div> 
 
-              {/* Desktop Table */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="min-w-full bg-gray-50 border border-gray-200">
-                  <thead className="bg-gray-100 text-gray-700 uppercase text-sm">
-                    <tr>
-                      <th className="px-4 py-2 text-left">Question</th>
-                      <th className="px-4 py-2 text-left">Options</th>
-                      <th className="px-4 py-2 text-left">Correct Answer</th>
-                      <th className="px-4 py-2 text-left">Created At</th>
-                      <th className="px-4 py-2 text-left">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {exam.Questions.map((q) => (
-                      <tr key={q.id} className="hover:bg-gray-100 border-t">
-                        <td className="px-4 py-2">{q.question}</td>
-                        <td className="px-4 py-2">
-                          <ul className="list-disc pl-5">
-                            {q.Options?.map((opt) => (
-                              <li key={opt.id}>{opt.optionText}</li>
-                            ))}
-                          </ul>
-                        </td>
-                        <td className="px-4 py-2 text-emerald-600 font-semibold">
-                          {q.correctOption}
-                        </td>
-                        <td className="px-4 py-2 text-sm text-gray-500">
-                          {moment(q.createdAt).format("YYYY-MM-DD")}
-                        </td>
-                        <td className="px-4 py-2 space-x-2">
-                          <button className="bg-emerald-500 text-white px-3 py-1 rounded-md">
-                            <FiEdit2 />
-                          </button>
-                          <button className="bg-red-500 text-white px-3 py-1 rounded-md">
-                            <FiTrash2 />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {/* Questions */}
+              <div className="space-y-4">
+                {exam.Questions.map((q,idx) => (
+                  <div
+                    key={q.id}
+                    className="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-[#009688] transition"
+                  >
 
-              {/* Mobile View */}
-              <div className="md:hidden space-y-3 mt-4">
-                {exam.Questions.map((q) => (
-                  <div key={q.id} className="border-t border-gray-200 pt-2">
-                    <p>
-                      <span className="font-semibold">Question:</span> {q.question}
+                    {/* Question */}
+                    <p className="text-lg font-semibold mb-2">
+                      {idx + 1}. {q.question}
                     </p>
-                    <p>
-                      <span className="font-semibold">Options:</span>
-                    </p>
-                    <ul className="list-disc pl-5 text-gray-700">
-                      {q.Options?.map((opt) => (
-                        <li key={opt.id}>{opt.optionText}</li>
+
+                    {/* Options */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+                      {q.Options?.map((opt, i) => (
+                        <span
+                          key={opt.id}
+                          className={`px-3 py-1 rounded-full border ${
+                            opt.optionText === q.answer
+                              ? "bg-green-100 border-green-500 font-semibold"
+                              : "bg-white border-gray-300"
+                          }`}
+                        >
+                          {String.fromCharCode(65 + i)}. {opt.optionText}
+                        </span>
                       ))}
-                    </ul>
-                    <p>
-                      <span className="font-semibold text-emerald-600">
-                        Correct:
-                      </span>{" "}
-                      {q.correctOption}
+                    </div>
+
+                    <p className="text-emerald-600 font-semibold">
+                      Correct Answer: {q.answer}
                     </p>
-                    <p className="text-sm text-gray-500">
+
+                    <p className="text-sm text-gray-500 mt-2">
                       Created: {moment(q.createdAt).format("YYYY-MM-DD")}
                     </p>
                   </div>
