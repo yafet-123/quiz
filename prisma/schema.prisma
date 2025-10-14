@@ -66,7 +66,7 @@ model Option {
   questionId Int
 
   Question   Question @relation(fields: [questionId], references: [id])
-}
+} 
  
 model Exam {
   id          Int             @id @default(autoincrement())

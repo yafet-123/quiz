@@ -58,7 +58,7 @@ export function DisplayExams({ subjects }) {
                     </div>
 
                     <p className="text-emerald-600 font-semibold">
-                      Correct Answer: {q.answer}
+                      Correct Answer: {q.correctOption}
                     </p>
 
                     <p className="text-sm text-gray-500 mt-2">
