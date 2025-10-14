@@ -20,6 +20,7 @@ export function VerticalNavbar({ data }) {
   const SideBarList = [
     { link: "/Admin", icon: <AiFillDashboard size={24} />, name: "Dashboard" },
     { link: "/Admin/User", icon: <RiAdminFill size={24} />, name: "User" },
+    { link: "/Admin/exam", icon: <SiBookstack size={24} />, name: "Exam" },
     { link: "/Admin/Subject", icon: <SiBookstack size={24} />, name: "Subject" },
     { link: "/Admin/Flashcard", icon: <SiBookstack size={24} />, name: "FlashCard" },
     { link: "/Admin/quiz", icon: <SiBookstack size={24} />, name: "Quiz" },
