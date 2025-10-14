@@ -67,7 +67,7 @@ export default function QuizzesPage({ subjects }) {
   return (
     <React.Fragment>
       <MainHeader title="Quizzes Dashboard" />
-      <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
+      <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-24">
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
