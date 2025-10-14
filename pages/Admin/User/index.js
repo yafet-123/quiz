@@ -23,14 +23,14 @@ export async function getServerSideProps(context){
   
   const users = await prisma.User.findMany({orderBy : {modifiedAt:'desc'}});
   const Allusers = users.map((data)=>({
-      user_id:data.user_id,
+      user_id:data.id,
       email:data.email,
       role:data.role,
       CreatedDate:data.createdAt,
       ModifiedDate:data.modifiedAt,
       UserName:data.name
   }))
-
+  console.log(users)
   return{
     props:{
       users:JSON.parse(JSON.stringify(Allusers)),

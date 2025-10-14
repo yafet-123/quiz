@@ -35,8 +35,9 @@ export async function getServerSideProps(context){
   });
   console.log(subjectes)
   const Allsujectes = subjectes.map((data)=>({
-      subject_id:data.subject_id,
+      subject_id:data.id,
       SubjectName:data.name,
+      description: data.description,
       CreatedDate:data.createdAt,
       ModifiedDate:data.modifiedAt,
       User:data.User?.name,

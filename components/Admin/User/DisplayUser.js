@@ -1,160 +1,147 @@
-import React from "react";
-import { useState,useEffect, useContext} from 'react'
-import moment from 'moment';
-import { useRouter } from 'next/router'
-import {DeleteUser} from './DeleteUser.js'
-import {UpdateUser} from './UpdateUser.js'
+import React, { useState } from "react";
+import moment from "moment";
+import { DeleteUser } from "./DeleteUser.js";
+import { UpdateUser } from "./UpdateUser.js";
 
-export function DisplayUser({users}) {
-    const router = useRouter();
-    const [deletemodalOn, setdeleteModalOn] = useState(false);
-    const [updatemodalOn, setupdateModalOn] = useState(false);
-    const [deleteuserid,setdeleteuserid] = useState()
-    const [updateuserid,setupdateuserid] = useState()
-    const [updateemail, setupdateemail] = useState("")
-    const [updateusername,setupdateusername] = useState("")
-    const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
+export function DisplayUser({ users }) {
+  const [deletemodalOn, setDeleteModalOn] = useState(false);
+  const [updatemodalOn, setUpdateModalOn] = useState(false);
+  const [deleteUserId, setDeleteUserId] = useState();
+  const [updateUserId, setUpdateUserId] = useState();
+  const [updateEmail, setUpdateEmail] = useState("");
+  const [updateUsername, setUpdateUsername] = useState("");
+  
+  const handleDeleteClick = (id) => {
+    setDeleteUserId(id);
+    setDeleteModalOn(true);
+  };
 
-    const clickedFordelete = () => {
-        setdeleteModalOn(true)
-    }
+  const handleUpdateClick = (user) => {
+    setUpdateUserId(user.user_id);
+    setUpdateUsername(user.UserName);
+    setUpdateEmail(user.email);
+    setUpdateModalOn(true);
+  };
 
-    const clickedForupdate = () => {
-        setupdateModalOn(true)
-    }
+  return (
+    <div className="px-4 lg:px-10 py-8">
+      {/* Desktop Table */}
+      <div className="overflow-auto rounded-xl shadow-lg hidden md:block">
+        <table className="w-full text-left border-collapse">
+          <thead className="bg-gray-100">
+            <tr>
+              {["Id", "User Name", "Email", "Created Date", "Modified Date", "Actions"].map(
+                (header, idx) => (
+                  <th
+                    key={idx}
+                    className="p-3 text-gray-800 font-semibold text-lg border-b border-gray-200"
+                  >
+                    {header}
+                  </th>
+                )
+              )}
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr
+                key={index}
+                className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition"
+              >
+                <td className="p-3 text-gray-700 font-medium">{user.user_id}</td>
+                <td className="p-3 text-gray-700">{user.UserName}</td>
+                <td className="p-3 text-gray-700 break-words">
+                  {user.email || (
+                    <span className="text-red-600 font-semibold">No Email Address</span>
+                  )}
+                </td>
+                <td className="p-3 text-gray-700">
+                  {moment(user.createDate).utc().format("YYYY-MM-DD")}
+                </td>
+                <td className="p-3 text-gray-700">
+                  {moment(user.ModifiedDate).utc().format("YYYY-MM-DD")}
+                </td>
+                <td className="p-3 flex gap-2">
+                  <button
+                    onClick={() => handleUpdateClick(user)}
+                    className="bg-[#009688] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#00796b] transition"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClick(user.user_id)}
+                    className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-    return (
-        <div className="px-0 lg:px-10">
-            <div className="p-2 lg:p-5">
-                <div className="overflow-auto rounded-lg shadow hidden md:block">
-                    <table className="w-full">
-                        <thead className="bg-neutral-100 border-b-2 border-gray-200">
-                            <tr>
-                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Id</th>
-                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">User Name</th>
-                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Email</th>
-                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Created Date</th>
-                              <th className="text-black p-3 text-lg font-semibold tracking-wide text-left">Modified Date</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                            {users.map((data,index)=>(
-                                <tr key={index} className="even:bg-neutral-300 odd:bg-neutral-200  w-full">
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        <p className="font-bold text-[#009688] hover:underline">{data.user_id}</p>
-                                    </td>
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        {data.UserName}
-                                    </td>
-
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        <h1 className="text-black flex justify-between my-5 font-bold text-lg md:text-xl">
-                                            <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
-                                                { data.email ? data.email : "No Email Address" }
-                                            </span>
-                                        </h1>
-                                    </td>
-
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        {moment(data.createDate).utc().format('YYYY-MM-DD')}
-                                    </td>
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        {moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}
-                                    </td>
-
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        <button
-                                            onClick={() => {
-                                                clickedForupdate()
-                                                setupdateuserid(data.user_id)
-                                                setupdateusername(data.UserName)
-                                                setupdateemail(data.email)
-                                            }} 
-                                            className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
-                                            Edit
-                                        </button>
-                                    </td>
-
-                                    <td className="p-3 text-lg text-gray-700 whitespace-nowrap">
-                                        <button 
-                                            onClick={() => {
-                                                clickedFordelete()
-                                                setdeleteuserid(data.user_id)
-                                            }}
-                                            className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
-                    {users.map((data,index)=>(
-                        <div key={index} className=" bg-neutral-200 space-y-3 p-2 lg:p-4 rounded-lg shadow overflow-scroll">
-                            <div>
-                                <p className="text-blue-500 font-bold hover:underline">
-                                    <span className="text-lg">Id : </span> 
-                                    <span className="text-sm ">{data.user_id}</span>
-                                </p>
-                            </div>
-                            <div className="text-gray-700 font-bold">
-                                <span className="text-lg">User Name : </span>
-                                <span className="text-md">{data.UserName} </span>
-                            </div>
-
-                            <div className="text-md lg:text-lg text-gray-700 font-bold break-words ">
-                                Email : <span className={ `font-normal font-medium ${data.email ? " " : "text-red-800"}`}>
-                                    { data.email ? data.email : "No Email Address" }
-                                </span>
-                            </div>
-
-                            <div className="text-black font-bold">
-                              <span className="text-lg">createDate : </span>
-                              <span className="text-sm">{moment(data.createDate).utc().format('YYYY-MM-DD')}</span>
-                            </div>
-                            <div className="text-black font-bold">
-                              <span className="text-lg">Modified Date : </span>
-                              <span className="text-sm">{moment(data.ModifiedDate).utc().format('YYYY-MM-DD')}</span>
-                            </div>
-
-                            <div className="flex items-center justify-between text-sm">
-                                <button
-                                    onClick={() => {
-                                        clickedForupdate()
-                                        setupdateuserid(data.user_id)
-                                        setupdateusername(data.UserName)
-                                        setupdateemail(data.email)
-                                    }}  
-                                    className="bg-[#009688] text-white font-bold py-2 px-4 border-b-4 border-[#009688] hover:scale-110 duration-1000 ease-in-out rounded">
-                                    Edit
-                                </button>
-
-                                <button
-                                    onClick={() => {
-                                        clickedFordelete()
-                                        setdeleteuserid(data.user_id)
-                                    }} 
-                                    className="bg-red-500 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:scale-110 duration-1000 ease-in-out rounded"
-                                >
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-    
+      {/* Mobile Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
+        {users.map((user, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-xl shadow-md p-4 space-y-2 hover:shadow-lg transition"
+          >
+            <p className="text-blue-500 font-bold">
+              Id: <span className="text-gray-700 font-medium">{user.user_id}</span>
+            </p>
+            <p className="text-gray-700 font-bold">
+              User Name: <span className="font-medium">{user.UserName}</span>
+            </p>
+            <p className="text-gray-700 font-bold break-words">
+              Email:{" "}
+              <span className={user.email ? "font-medium" : "text-red-600 font-semibold"}>
+                {user.email || "No Email Address"}
+              </span>
+            </p>
+            <p className="text-gray-700 font-bold">
+              Created:{" "}
+              <span className="font-medium">
+                {moment(user.createDate).utc().format("YYYY-MM-DD")}
+              </span>
+            </p>
+            <p className="text-gray-700 font-bold">
+              Modified:{" "}
+              <span className="font-medium">
+                {moment(user.ModifiedDate).utc().format("YYYY-MM-DD")}
+              </span>
+            </p>
+            <div className="flex justify-between mt-2">
+              <button
+                onClick={() => handleUpdateClick(user)}
+                className="bg-[#009688] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#00796b] transition"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeleteClick(user.user_id)}
+                className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition"
+              >
+                Delete
+              </button>
             </div>
+          </div>
+        ))}
+      </div>
 
-            {deletemodalOn && 
-                <DeleteUser setdeleteModalOn={setdeleteModalOn} deleteuserid={deleteuserid}/>
-            }
-
-            {updatemodalOn && 
-                <UpdateUser setupdateModalOn={setupdateModalOn} updateuserid={updateuserid} updateemail={updateemail} updateusername={updateusername} setupdateemail={setupdateemail} setupdateusername={setupdateusername} />
-            }
-        </div>
-    );
+      {/* Modals */}
+      {deletemodalOn && <DeleteUser setdeleteModalOn={setDeleteModalOn} deleteuserid={deleteUserId} />}
+      {updatemodalOn && (
+        <UpdateUser
+          setupdateModalOn={setUpdateModalOn}
+          updateuserid={updateUserId}
+          updateemail={updateEmail}
+          updateusername={updateUsername}
+          setupdateemail={setUpdateEmail}
+          setupdateusername={setUpdateUsername}
+        />
+      )}
+    </div>
+  );
 }

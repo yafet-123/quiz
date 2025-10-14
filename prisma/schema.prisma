@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql" 
+  provider = "postgresql"  
   url      = env("DATABASE_URL")
 }
 
@@ -15,25 +15,86 @@ model User {
   role        String    @default("student") // student, teacher, admin
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
+
   Subjects    Subject[] 
   Exams       Exam[]    
   Content     Content[] 
   Comments    Comment[]
+  Flashcards  Flashcard[]
 }
 
 model Subject {
   id          Int       @id @default(autoincrement())
   name        String
   description String?
-  svg         String?   // <-- Add this line
+  svg         String?
   createdBy   Int
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
   approved    Boolean   @default(false)
+
   User        User      @relation(fields: [createdBy], references: [id])
   Exams       Exam[]
   Content     Content[]
+  Topics      FlashcardTopic[]
+  Quizzes     Quiz[]
 }
+
+model Quiz {
+  id        Int        @id @default(autoincrement())
+  title     String
+  subjectId Int
+  createdAt DateTime   @default(now())
+  modifiedAt DateTime  @updatedAt
+
+  Subject   Subject    @relation(fields: [subjectId], references: [id])
+  Questions Question[]
+}
+
+model Question {
+  id      Int       @id @default(autoincrement())
+  question String
+  answer   String
+  quizId   Int
+  createdAt DateTime @default(now())
+  modifiedAt DateTime @updatedAt
+
+  Quiz     Quiz      @relation(fields: [quizId], references: [id])
+  Options  Option[]
+}
+
+model Option {
+  id         Int      @id @default(autoincrement())
+  optionText String
+  questionId Int
+
+  Question   Question @relation(fields: [questionId], references: [id])
+}
+
+model FlashcardTopic {
+  id          Int         @id @default(autoincrement())
+  subjectId   Int
+  title       String      // e.g., "Elements of Art", "Cell Biology"
+  createdAt   DateTime    @default(now())
+  modifiedAt  DateTime    @updatedAt
+  Flashcards  Flashcard[] // relation to Flashcard
+
+  Subject     Subject     @relation(fields: [subjectId], references: [id])
+}
+
+model Flashcard {
+  id          Int         @id @default(autoincrement())
+  topicId     Int
+  term        String      // e.g., "Line", "Cell Membrane"
+  definition  String      // e.g., "A mark connecting two points..."
+  createdAt   DateTime    @default(now())
+  modifiedAt  DateTime    @updatedAt
+  createdBy   Int?        // optional if you want to track user who created
+
+  Topic       FlashcardTopic @relation(fields: [topicId], references: [id])
+  User        User?          @relation(fields: [createdBy], references: [id])
+}
+
 
 
 model Exam {

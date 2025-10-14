@@ -31,7 +31,8 @@ export function AddSubject() {
         SubjectName: subjectName,
         description,
         svg,
-        user_id: userData.user_id,
+        // user_id: userData.user_id,
+        user_id: 1
       });
       setSuccess("Subject created successfully!");
       setSubjectName("");

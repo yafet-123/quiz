@@ -26,6 +26,7 @@ export function DisplaySubject({ subjectes }) {
             <tr>
               <th className="px-6 py-4 text-left">ID</th>
               <th className="px-6 py-4 text-left">Subject Name</th>
+              <th className="px-6 py-4 text-left">Description</th>
               <th className="px-6 py-4 text-left">Created Date</th>
               <th className="px-6 py-4 text-left">Modified Date</th>
               <th className="px-6 py-4 text-center">Actions</th>
@@ -38,7 +39,8 @@ export function DisplaySubject({ subjectes }) {
                 className="hover:bg-gray-50 transition duration-200"
               >
                 <td className="px-6 py-4 font-semibold">{data.subject_id}</td>
-                <td className="px-6 py-4">{data.SubjectName}</td>
+                <td className="px-6 py-4 font-medium">{data.SubjectName}</td>
+                <td className="px-6 py-4 text-gray-500">{data.description}</td>
                 <td className="px-6 py-4">
                   {moment(data.createDate).utc().format("YYYY-MM-DD")}
                 </td>
@@ -85,6 +87,10 @@ export function DisplaySubject({ subjectes }) {
               </h2>
               <p className="text-sm text-gray-500">ID: {data.subject_id}</p>
             </div>
+
+            <p className="text-gray-700 text-sm mb-2">
+              <span className="font-semibold">Description:</span> {data.description}
+            </p>
 
             <div className="text-gray-700 text-sm space-y-1">
               <p>

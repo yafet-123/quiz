@@ -10,7 +10,8 @@ export default function QuizSubject() {
       id: 1,
       title: "Art",
       description:
-        "Art encourages creativity, self-expression, and visual communication. Students explore drawing, painting, design, and other artistic techniques to express ideas and emotions through visual forms.",
+        `Art encourages creativity, self-expression, and visual communication. Students explore drawing, painting, design, 
+        and other artistic techniques to express ideas and emotions through visual forms.`,
       svg: "/categories/image--art.svg",
     },
     {
