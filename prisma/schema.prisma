@@ -12,13 +12,13 @@ model User {
   name        String
   email       String    @unique
   password    String
-  role        String    @default("student") // student, teacher, admin
+  role        String    @default("student")
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
 
-  Subjects    Subject[] 
-  Exams       Exam[]    
-  Content     Content[] 
+  Subjects    Subject[]
+  Exams       Exam[]
+  Content     Content[]
   Comments    Comment[]
   Flashcards  Flashcard[]
 }
@@ -52,15 +52,15 @@ model Quiz {
 }
 
 model Question {
-  id      Int       @id @default(autoincrement())
-  question String
-  answer   String
-  quizId   Int
+  id        Int       @id @default(autoincrement())
+  question  String
+  answer    String
+  quizId    Int
   createdAt DateTime @default(now())
   modifiedAt DateTime @updatedAt
 
-  Quiz     Quiz      @relation(fields: [quizId], references: [id])
-  Options  Option[]
+  Quiz      Quiz      @relation(fields: [quizId], references: [id])
+  Options   Option[]
 }
 
 model Option {
@@ -70,6 +70,40 @@ model Option {
 
   Question   Question @relation(fields: [questionId], references: [id])
 }
+
+model Exam {
+  id          Int             @id @default(autoincrement())
+  title       String
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime        @default(now())
+  modifiedAt  DateTime        @updatedAt
+
+  Subject     Subject          @relation(fields: [subjectId], references: [id])
+  User        User             @relation(fields: [createdBy], references: [id])
+  Questions   ExamQuestion[]
+}
+
+model ExamQuestion {
+  id          Int          @id @default(autoincrement())
+  question    String
+  correctAnswer String
+  examId      Int
+  createdAt   DateTime     @default(now())
+  modifiedAt  DateTime     @updatedAt
+
+  Exam        Exam         @relation(fields: [examId], references: [id])
+  Options     ExamOption[]
+}
+
+model ExamOption {
+  id           Int          @id @default(autoincrement())
+  optionText   String
+  examQuestionId Int
+
+  ExamQuestion ExamQuestion @relation(fields: [examQuestionId], references: [id])
+}
+
 
 model FlashcardTopic {
   id          Int         @id @default(autoincrement())
