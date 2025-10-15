@@ -2,6 +2,7 @@
 import { FaClipboardList, FaCheckCircle, FaLightbulb } from "react-icons/fa";
 import Image from "next/image";
 import QuizSubject from "../../../components/books/QuizSubject"
+import { prisma } from "../../../util/db.server";
 
 const features = [
   {
@@ -64,7 +65,7 @@ const steps = [
   },
 ];
 
-export default function PracticeQuizzes() {
+export default function PracticeQuizzes({subjects}) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -135,11 +136,37 @@ export default function PracticeQuizzes() {
 
       {/* Features Section */}
       <section className="py-16 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
           Browse Practice Quizzes by subject
         </h2>
-        <QuizSubject />
+        <QuizSubject subjects={subjects} />
       </section>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    // Fetch all subjects with relations
+    const subjects = await prisma.Subject.findMany({
+      
+      orderBy: {
+        id: "asc",
+      },
+    });
+    console.log(subjects)
+    return {
+      props: {
+        subjects: JSON.parse(JSON.stringify(subjects)), // serialize dates
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    return {
+      props: {
+        subjects: [],
+        error: "Failed to load subjects.",
+      },
+    };
+  }
 }

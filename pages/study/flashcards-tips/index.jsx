@@ -2,6 +2,7 @@
 import { FaLightbulb, FaMagic, FaSmile, FaBookOpen } from "react-icons/fa";
 import Image from "next/image";
 import Subject from "../../../components/flashcard/subject.jsx"
+import { prisma } from "../../../util/db.server";
 
 const reasons = [
   {
@@ -64,8 +65,8 @@ const steps = [
     image: "/flashcards/flashcards-track.jpg",
   },
 ];
-
-export default function FlashcardsTips() {
+ 
+export default function FlashcardsTips({subjects}) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -141,7 +142,33 @@ export default function FlashcardsTips() {
       </section>
 
       {/* Features Section */}
-      <Subject />
+      <Subject subjects={subjects} />
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    // Fetch all subjects with relations
+    const subjects = await prisma.Subject.findMany({
+      
+      orderBy: {
+        id: "asc",
+      },
+    });
+    console.log(subjects)
+    return {
+      props: {
+        subjects: JSON.parse(JSON.stringify(subjects)), // serialize dates
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    return {
+      props: {
+        subjects: [],
+        error: "Failed to load subjects.",
+      },
+    };
+  }
 }

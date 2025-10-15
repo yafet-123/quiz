@@ -1,37 +1,43 @@
 import { useState, useEffect } from "react";
-import { getAllQuiz, getQuizBySubjectAndTitle } from "../../../../../data/Quiz.jsx";
+import { prisma } from "../../../../../util/db.server";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   const { subject, questionId } = context.params;
-  const quiz = getQuizBySubjectAndTitle(subject, questionId);
 
-  if (!quiz) {
-    return { notFound: true };
-  }
-
-  return {
-    props: { quiz, subject },
-    revalidate: 3600,
-  };
-}
-
-export async function getStaticPaths() {
-  const allSubjects = getAllQuiz();
-
-  const paths = allSubjects.flatMap((subject) =>
-    subject.quizzes.map((quiz) => ({
-      params: {
-        subject: subject.subject.toString(),
-        questionId: quiz.title,
+  try {
+    const quiz = await prisma.quiz.findUnique({
+      where: { id: Number(questionId) },
+      include: {
+        Subject: { select: { id: true, name: true } },
+        Questions: {
+          include: {
+            Options: true,
+          },
+        },
       },
-    }))
-  );
+    });
+    console.log(quiz)
+    // ✅ Check if quiz exists and matches the subject name
+    if (!quiz || quiz.Subject.name !== decodeURIComponent(subject)) {
+      return { notFound: true };
+    }
 
-  return { paths, fallback: false };
+    return {
+      props: {
+        quiz: JSON.parse(JSON.stringify(quiz)),
+        subject
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching quiz:", error);
+    return {
+      props: { quiz: null, error: "Failed to load quiz.", subject },
+    };
+  }
 }
 
 export default function PracticeQuizPage({ quiz, subject }) {
@@ -43,7 +49,7 @@ export default function PracticeQuizPage({ quiz, subject }) {
   const [finished, setFinished] = useState(false);
   const [showSubmitPrompt, setShowSubmitPrompt] = useState(false);
 
-  const questions = quiz.questions;
+  const questions = quiz.Questions;
 
   // Timer
   useEffect(() => {
@@ -177,17 +183,17 @@ export default function PracticeQuizPage({ quiz, subject }) {
             </h2>
 
             <div className="space-y-3 mb-4">
-              {questions[current].options.map((opt, i) => (
+              {questions[current].Options.map((opt, i) => (
                 <button
                   key={i}
-                  onClick={() => handleSelect(opt)}
+                  onClick={() => handleSelect(opt.optionText)}
                   className={`w-full text-left px-4 py-2 rounded-xl border transition-all ${
-                    selectedAnswers[current] === opt
+                    selectedAnswers[current] === opt.optionText
                       ? "bg-indigo-500 text-white border-indigo-500"
                       : "border-gray-300 hover:bg-gray-100"
                   }`}
                 >
-                  {opt}
+                  {opt.optionText}
                 </button>
               ))}
             </div>
