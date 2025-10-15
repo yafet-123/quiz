@@ -27,7 +27,7 @@ export function AddComprehensiveNotes({ subjects }) {
     setLoadingModalIsOpen(true);
 
     try {
-      await axios.post("/api/notes/add-note", {
+      await axios.post("/api/note/add-note", {
         subjectId,
         title,
         content,
