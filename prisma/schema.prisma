@@ -20,6 +20,7 @@ model User {
   Exams       Exam[]
   Flashcards  Flashcard[]
   Notes       Note[]
+  RevisionNote RevisionNote[]
 }
 
 model Subject {
@@ -37,9 +38,23 @@ model Subject {
   Topics      FlashcardTopic[]
   Quizzes     Quiz[]
   Notes       Note[]
+  RevisionNote RevisionNote[]
 }
 
 model Note {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String    // stores rich-text HTML or Word-like content
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime  @default(now())
+  modifiedAt  DateTime  @updatedAt
+
+  Subject     Subject   @relation(fields: [subjectId], references: [id])
+  User        User      @relation(fields: [createdBy], references: [id])
+}
+
+model RevisionNote {
   id          Int       @id @default(autoincrement())
   title       String
   content     String    // stores rich-text HTML or Word-like content

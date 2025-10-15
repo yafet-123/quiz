@@ -3,8 +3,8 @@ import { useSession, getSession } from "next-auth/react";
 import { prisma } from '../../../util/db.server.js';
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
-import { AddComprehensiveNotes } from "../../../components/Admin/note/AddComprehensiveNotes";
-import { DisplayComprehensiveNotes } from "../../../components/Admin/note/DisplayComprehensiveNotes";
+import { AddRevisionNoteNotes } from "../../../components/Admin/RevisionNote/AddRevisionNoteNotes";
+import { DisplayRevisionNoteNotes } from "../../../components/Admin/RevisionNote/DisplayRevisionNoteNotes";
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
     
 
     // Fetch all notes with related subjects
-    const notes = await prisma.Note.findMany({
+    const notes = await prisma.RevisionNote.findMany({
       include: { Subject: true },
       orderBy: { createdAt: "desc" }
     });
@@ -69,7 +69,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function FlashcardsPage({ subjects, notes }) {
+export default function RevisionNotePage({ subjects, notes }) {
   const { data } = useSession();
   
   return (
@@ -80,10 +80,10 @@ export default function FlashcardsPage({ subjects, notes }) {
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
             {/* Add Topic & Flashcards Form */}
-            <AddComprehensiveNotes subjects={subjects} />
+            <AddRevisionNoteNotes subjects={subjects} />
 
             {/* Display Existing Topics & Flashcards */}
-            <DisplayComprehensiveNotes notes={notes} />
+            <DisplayRevisionNoteNotes notes={notes} />
           </div>
         </div>
       </section>
