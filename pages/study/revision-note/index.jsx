@@ -1,13 +1,14 @@
 // pages/revision-notes.js
 import { FaBook, FaHighlighter, FaClipboardList } from "react-icons/fa";
 import Image from "next/image";
-import { getAllNotes } from "../../../data/NotesData.jsx";
+import { prisma } from "../../../util/db.server";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
 import { FaFilePdf } from "react-icons/fa6";
 import Link from "next/link"
 import Subject from "../../../components/revision-note/subject.jsx"
+
 const features = [
   {
     id: 1,
@@ -69,16 +70,7 @@ const steps = [
   },
 ];
 
-export default function RevisionNotes({all_notes}) {
-  const [visibleAnswers, setVisibleAnswers] = useState(
-    Array(all_notes.length).fill(false),
-  );
-
-  const toggleAnswer = (index) => {
-    const updatedVisibility = [...visibleAnswers];
-    updatedVisibility[index] = !updatedVisibility[index];
-    setVisibleAnswers(updatedVisibility);
-  };
+export default function RevisionNotes({subjects}) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -147,22 +139,34 @@ export default function RevisionNotes({all_notes}) {
       </section>
 
       {/* Features Section */}
-      <Subject />
+      <Subject subjects={subjects} />
 
     </div>
   );
 }
 
-export async function getServerSideProps(context){
-  const all_notes = getAllNotes();
-
-  if (!all_notes) {
+export async function getServerSideProps() {
+  try {
+    // Fetch all subjects with relations
+    const subjects = await prisma.Subject.findMany({
+      
+      orderBy: {
+        id: "asc",
+      },
+    });
+    console.log(subjects)
     return {
-      notFound: true,
+      props: {
+        subjects: JSON.parse(JSON.stringify(subjects)), // serialize dates
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    return {
+      props: {
+        subjects: [],
+        error: "Failed to load subjects.",
+      },
     };
   }
-
-  return {
-    props: { all_notes }
-  };
 }
