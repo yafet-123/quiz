@@ -68,7 +68,7 @@ const steps = [
  
 export default function FlashcardsTips({subjects}) {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen py-20">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-yellow-400 to-pink-500 text-white py-32 text-center px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">

@@ -4,23 +4,9 @@ import { FaBookOpen, FaGraduationCap, FaChartLine, FaArrowRight } from "react-ic
 export default function Home() {
   return (
     <div className="font-sans text-gray-800">
-      {/* Navbar */}
-      <nav className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-purple-600">Save My Exams</h1>
-        <ul className="hidden md:flex gap-8 text-gray-700 font-medium">
-          <li>Home</li>
-          <li>Subjects</li>
-          <li>Resources</li>
-          <li>About</li>
-          <li>Contact</li>
-        </ul>
-        <button className="bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700">
-          Sign In
-        </button>
-      </nav>
 
       {/* Hero Section */}
-      <section className="bg-purple-50 py-20 text-center px-4">
+      <section className="bg-purple-50 py-40 text-center px-4">
         <h2 className="text-4xl md:text-5xl font-bold text-purple-700 mb-4">
           Study Smarter. Not Harder.
         </h2>
@@ -77,20 +63,15 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-purple-600 text-center text-white">
+      <section className="py-20 bg-[#fff] text-center text-black">
         <h3 className="text-4xl font-bold mb-4">Start Acing Your Exams Today</h3>
         <p className="text-lg mb-8">
           Join thousands of students who trust Save My Exams to boost their grades.
         </p>
-        <button className="bg-white text-purple-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100">
+        <button className="bg-[#9333ea] text-[#fff] font-semibold px-8 py-3 rounded-lg hover:bg-gray-100">
           Join Now
         </button>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8 text-center">
-        <p>&copy; {new Date().getFullYear()} Save My Exams. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

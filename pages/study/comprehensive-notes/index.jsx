@@ -3,7 +3,7 @@ import { FaBook, FaCheckCircle, FaLightbulb } from "react-icons/fa";
 import Image from "next/image";
 import { FaFilePdf } from "react-icons/fa6";
 import Link from "next/link"
-import { getAllNotes } from "../../../data/NotesData.jsx";
+import { prisma } from "../../../util/db.server";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
@@ -63,7 +63,7 @@ const steps = [
 
 export default function ComprehensiveNotes({subjects}) {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen py-20">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-32 text-center px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -141,7 +141,7 @@ export async function getServerSideProps() {
   try {
     // Fetch all subjects with relations
     const subjects = await prisma.Subject.findMany({
-      
+       
       orderBy: {
         id: "asc",
       },

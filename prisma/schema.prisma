@@ -40,7 +40,7 @@ model Subject {
   Notes       Note[]
   RevisionNote RevisionNote[]
 }
-
+ 
 model Note {
   id          Int       @id @default(autoincrement())
   title       String

@@ -1,144 +1,95 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import React,{useState} from 'react';
-import logo from '../../public/LOGO_V0.1-01.png';
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import logo from "../../public/LOGO_V0.1-01.png";
 
 import {
-  FaFacebook,
+  FaFacebookF,
   FaInstagram,
-  FaLinkedin,
-  FaPhone,
+  FaLinkedinIn,
   FaYoutube,
-  // FaTwitter,
-  FaTelegram,
-  FaTiktok,
-  FaTripadvisor,
-} from 'react-icons/fa';
-import { ImLocation } from 'react-icons/im';
-import { MdEmail } from 'react-icons/md';
+  FaTelegramPlane,
+} from "react-icons/fa";
+import { ImLocation } from "react-icons/im";
+import { MdEmail } from "react-icons/md";
+import { FaPhoneAlt } from "react-icons/fa";
 
 export const Footer = () => {
-  const socialMediaLinks = [
-    {
-      icon: <FaFacebook size={30} color="white" />,
-      path: '',
-    },
-    // { icon: <FaYoutube size={30} color="white" /> ,  path:""},
-    {
-      icon: <FaYoutube size={30} color="white" />,
-      path: '',
-    },
-    {
-      icon: <FaInstagram size={30} color="white" />,
-      path: '',
-    },
-    {
-      icon: <FaTelegram size={30} color="white" />,
-      path: '',
-    },
+  const socialLinks = [
+    { icon: <FaFacebookF size={22} />, path: "#" },
+    { icon: <FaInstagram size={22} />, path: "#" },
+    { icon: <FaLinkedinIn size={22} />, path: "#" },
+    { icon: <FaYoutube size={22} />, path: "#" },
+    { icon: <FaTelegramPlane size={22} />, path: "#" },
   ];
 
   const quickLinks = [
-    { url: "/", link: "Home" },
-    { url: "/books", link: "Book" },
-    { url: "/practice", link: "Practice" },
-    { url: "/about", link: "About" },
-    { url: "/Team", link: "Team" },
-    { url: "/contact", link: "Contact" },
+    { name: "Home", path: "/" },
+    { name: "Books", path: "/books" },
+    { name: "Practice", path: "/practice" },
+    { name: "Study Tools", path: "/study" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
   ];
 
-  const [loading, setLoading] = useState(false);
-  const [email, setemail] =useState("")
-
   return (
-    <footer className="bg-[#1a3e58] bottom-0 w-full">
-      <div className="flex flex-col lg:flex-row justify-between gap-4 text-white mx-5 md:mx-10 my-5">
-        <div className="flex flex-col gap-8 items-start justify-evemly mb-10 md:mb-0">
-          <div className="">
-            <Link href="/">
-              <Image
-                src={logo}
-                className=""
-                alt="Logo"
-                width={120}
-                height={110}
-              />
-            </Link>
-          </div>
-
-          <p className="font-semibold">
-            FOLLOW US ON SOCIAL MEDIA!
-          </p>
-          <div className="flex justify-center gap-4">
-            {socialMediaLinks.map((paths, index) => {
-              return (
-                <Link key={index} href={paths.path} target="_blank" >
-                  <p className='cursor-pointer hover:scale-105 '>{paths.icon}</p>
-                </Link>
-              );
-            })}
+    <footer className="bg-[#9333ea] text-white pt-12">
+      <div className="max-w-7xl mx-auto px-5 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8 py-5">
+        {/* Logo + Social */}
+        <div className="flex flex-col space-y-6">
+          <Link href="/">
+            <div className="relative cursor-pointer">
+              <h1 className="cursor-pointer text-2xl font-bold text-white">
+                Save My Exams
+              </h1>
+            </div>
+          </Link>
+          <p className="font-semibold">Follow us on social media</p>
+          <div className="flex space-x-4">
+            {socialLinks.map((link, idx) => (
+              <Link key={idx} href={link.path}>
+                <a className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition">
+                  {link.icon}
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <h1 className="text-xl font-bold">Contact Info</h1>
-
-          <Link
-            target="_blank"
-            className="flex flex-row items-center gap-2 hover:text-gray-300"
-            href={`tel:${+251966149422}`}
-          >
-            <span className="flex items-center">
-              <FaPhone /> <p className="ml-2 md:ml-3 cursor-pointer">+251966149422</p>
-            </span>
-          </Link>
-          <div>
-            <Link
-              target="_blank"
-              className="flex flex-row items-center gap-2 hover:text-gray-300"
-              href="mailto:info@undiscoveredethiopia.com"
-            >
-              <span className="flex items-center">
-                <MdEmail /> <p className="ml-2 md:ml-3 cursor-pointer">info@ftiaet</p>
-              </span>
-            </Link>
-          </div>
-
-          <Link
-            target="_blank"
-            className="flex flex-row items-center gap-2 hover:text-gray-300"
-            href={`https://goo.gl/maps/Gc6478sG5ZecmfSj6`}
-          >
-            <span className="flex items-center">
-              <ImLocation />{' '}
-              <p className="ml-3 cursor-pointer">
-                Wollo Sefer Addis Ababa, Ethiopia.
-              </p>
-            </span>
-          </Link>
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+          <ul className="flex flex-col space-y-2">
+            {quickLinks.map((link, idx) => (
+              <li key={idx}>
+                <Link href={link.path}>
+                  <a className="hover:text-white/80 transition">{link.name}</a>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="grid grid-cols-2 gap-2  justify-center">
-          <div className="flex flex-col gap-2">
-            <h1 className="text-xl font-bold">Quick Links</h1>
-            {quickLinks.map((links, index) => {
-              return (
-                <Link
-                  key={index}
-                  href={links.url}
-                  className="hover:text-gray-300"
-                >
-                  {links.link}
-                </Link>
-              );
-            })}
-          </div>
+        {/* Contact Info */}
+        <div>
+          <h3 className="text-xl font-bold mb-4">Contact Us</h3>
+          <ul className="space-y-3">
+            <li className="flex items-center gap-2">
+              <FaPhoneAlt /> <span>+251 966 149 422</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <MdEmail /> <span>info@savemyexams.com</span>
+            </li>
+            <li className="flex items-center gap-2">
+              <ImLocation /> <span>Addis Ababa, Ethiopia</span>
+            </li>
+          </ul>
         </div>
       </div>
-      <div className="flex justify-center items-center md:h-10  px-5 md:px-10 bg-white py-2">
-        <p className="text-sm md:text-md text-[#1A3E58] md:block text-center md:text-left mb-5 md:mb-0 ">
-          © 2025 MatricMate. Built for students by students
-        </p>
+
+      {/* Footer Bottom */}
+      <div className="bg-gray-900 text-gray-400 py-6 text-center">
+        <p>&copy; {new Date().getFullYear()} Save My Exams. All rights reserved.</p>
       </div>
     </footer>
   );

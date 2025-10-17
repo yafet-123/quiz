@@ -1,10 +1,11 @@
-import { MainHeader } from "../../../../components/common/MainHeader";
+import { useRouter } from "next/router";
 import { prisma } from "../../../../util/db.server";
 import { FaFilePdf } from "react-icons/fa6";
 import Link from "next/link"
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
+import { MainHeader } from "../../../../components/common/MainHeader";
 
 export async function getServerSideProps(context) {
   const { subjectId } = context.params; // get subjectId from the URL
@@ -42,30 +43,26 @@ export async function getServerSideProps(context) {
 
 
 export default function BookGradeDetail({ notes }) {
+  const router = useRouter();
+
+  const goToDetail = (noteId) => {
+    router.push(`/study/revision-note/${noteId}`);
+  };
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`MatricMate`} />
-      <div className="flex flex-col">
-        {notes.map((note, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {notes.map((note) => (
           <div
-              key={note.id}
-              className="relative w-full h-48 cursor-pointer perspective"
-              onClick={() => handleFlip(note.id)}
-            >
-              <div
-                className={`relative w-full h-full duration-700 transform-style preserve-3d`}
-              >
-                {/* Front */}
-                <div className="absolute w-full h-full bg-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center backface-hidden">
-                  <span className="font-semibold text-lg md:text-xl text-gray-800">{note.title}</span>
-                </div>
-
-                {/* Back */}
-                <div className="absolute w-full h-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center rotate-y-180 backface-hidden">
-                  <span className="text-base md:text-lg">{note.definition}</span>
-                </div>
-              </div>
-            </div>
+            key={note.id}
+            className="cursor-pointer bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+            onClick={() => goToDetail(note.id)}
+          >
+            <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
+            <p className="mt-2 text-sm md:text-base opacity-80">
+              Click to view full note
+            </p>
+          </div>
         ))}
       </div>
     </div>
