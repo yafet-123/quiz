@@ -61,16 +61,7 @@ const steps = [
   },
 ];
 
-export default function ComprehensiveNotes({all_notes}) {
-  const [visibleAnswers, setVisibleAnswers] = useState(
-    Array(all_notes.length).fill(false),
-  );
-
-  const toggleAnswer = (index) => {
-    const updatedVisibility = [...visibleAnswers];
-    updatedVisibility[index] = !updatedVisibility[index];
-    setVisibleAnswers(updatedVisibility);
-  };
+export default function ComprehensiveNotes({subjects}) {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
@@ -140,22 +131,34 @@ export default function ComprehensiveNotes({all_notes}) {
       </section>
 
       {/* Features Section */}
-      <Subject />
+      <Subject subjects={subjects} />
 
     </div>
   );
 }
 
-export async function getServerSideProps(context){
-  const all_notes = getAllNotes();
-
-  if (!all_notes) {
+export async function getServerSideProps() {
+  try {
+    // Fetch all subjects with relations
+    const subjects = await prisma.Subject.findMany({
+      
+      orderBy: {
+        id: "asc",
+      },
+    });
+    console.log(subjects)
     return {
-      notFound: true,
+      props: {
+        subjects: JSON.parse(JSON.stringify(subjects)), // serialize dates
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching subjects:", error);
+    return {
+      props: {
+        subjects: [],
+        error: "Failed to load subjects.",
+      },
     };
   }
-
-  return {
-    props: { all_notes }
-  };
 }

@@ -6,82 +6,68 @@ import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
 
-export default function BookGradeDetail({ all_notes }) {
-  const [visibleAnswers, setVisibleAnswers] = useState(
-    Array(all_notes.length).fill(false),
-  );
+export async function getServerSideProps(context) {
+  const { subjectId } = context.params; // get subjectId from the URL
 
-  const toggleAnswer = (index) => {
-    const updatedVisibility = [...visibleAnswers];
-    updatedVisibility[index] = !updatedVisibility[index];
-    setVisibleAnswers(updatedVisibility);
-  };
+  try { 
+    const notes = await prisma.RevisionNote.findMany({
+      where: { subjectId: Number(subjectId) },
+      select: {
+        id: true,
+        title: true,
+        modifiedAt: true,
+      },
+      orderBy: {
+        modifiedAt: 'desc', // optional: order by most recently modified
+      },
+    });
+
+    console.log("Fetched notes:", notes);
+
+    return {
+      props: {
+        notes: JSON.parse(JSON.stringify(notes)), // serialize for Next.js
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching notes:", error);
+    return {
+      props: {
+        notes: [],
+        error: "Failed to load notes.",
+      },
+    };
+  }
+}
+
+
+export default function BookGradeDetail({ notes }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`MatricMate`} />
       <div className="flex flex-col">
-        {all_notes.map((note, index) => (
-          <div key={index} className="border px-4 py-5 rounded-lg shadow-sm">
-            <div className="flex justify-between items-center">
-              <h3 className="flex items-center font-semibold text-md lg:text-lg mb-2">
-                <h1 className="pr-5">
-                  <FaFilePdf size={40} color="#df646a" />
-                </h1>
-                {note.title}
-              </h3>
-              <button
-                aria-label={`Open menu ${index}`}
-                onClick={() => toggleAnswer(index)}
-                className="bg-[#2664eb] text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+        {notes.map((note, index) => (
+          <div
+              key={note.id}
+              className="relative w-full h-48 cursor-pointer perspective"
+              onClick={() => handleFlip(note.id)}
+            >
+              <div
+                className={`relative w-full h-full duration-700 transform-style preserve-3d`}
               >
-                {visibleAnswers[index] ? <IoIosArrowUp /> : <FaAngleDown />}
-              </button>
-            </div>
-            {visibleAnswers[index] && (
-              <div className="flex flex-col">
-                <p className="mt-2 text-lg lg:text-xl text-gray-700 my-5">
-                  {note.description}
-                </p>
-                <Link href={`/study/comprehensive-notes/${note.id}`}>
-                  <a className="w-32 text-white bg-[#3699ff] hover:bg-[#002244] px-3 py-2 border rounded-2xl text-md md:text-lg font-bold">
-                    View Detail
-                  </a>
-                </Link>
+                {/* Front */}
+                <div className="absolute w-full h-full bg-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center backface-hidden">
+                  <span className="font-semibold text-lg md:text-xl text-gray-800">{note.title}</span>
+                </div>
+
+                {/* Back */}
+                <div className="absolute w-full h-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center rotate-y-180 backface-hidden">
+                  <span className="text-base md:text-lg">{note.definition}</span>
+                </div>
               </div>
-            )}
-          </div>
+            </div>
         ))}
       </div>
     </div>
   );
 }
- 
-export const getStaticProps = async (context) => {
-  const subjectId = context.params.subjectId;
-  const all_notes = getNotesBySubject(subjectId);
-
-  if (!all_notes) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { all_notes },
-    revalidate: 3600,
-  };
-};
-
-export const getStaticPaths = async (context) => {
-  const subjects = getAllNotes();
-  //   console.log(context)
-
-  // Get the paths we want to pre-render based on grades
-  const paths = subjects.map((book) => ({
-    params: { subjectId: book.subject },
-  }));
-
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths: paths, fallback: false };
-};

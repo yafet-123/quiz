@@ -9,8 +9,8 @@ import { IoIosArrowUp } from "react-icons/io";
 export async function getServerSideProps(context) {
   const { subjectId } = context.params; // get subjectId from the URL
 
-  try {
-    const notes = await prisma.note.findMany({
+  try { 
+    const notes = await prisma.RevisionNote.findMany({
       where: { subjectId: Number(subjectId) },
       select: {
         id: true,

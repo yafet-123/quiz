@@ -54,7 +54,7 @@ model Note {
   User        User      @relation(fields: [createdBy], references: [id])
 }
 
-model RevisionNote {
+model RevisionNote { 
   id          Int       @id @default(autoincrement())
   title       String
   content     String    // stores rich-text HTML or Word-like content
