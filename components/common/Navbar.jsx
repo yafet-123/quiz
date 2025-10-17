@@ -25,7 +25,6 @@ export const Navbar = () => {
         { path: "/study/flashcards-tips", name: "Flashcards Tips" },
       ],
     },
-    { path: "/practice", name: "Practice" },
     { path: "/about", name: "About Us" },
     { path: "/help", name: "Help Center" },
     { path: "/contact", name: "Contact Us" },

@@ -26,7 +26,6 @@ export const Footer = () => {
   const quickLinks = [
     { name: "Home", path: "/" },
     { name: "Books", path: "/books" },
-    { name: "Practice", path: "/practice" },
     { name: "Study Tools", path: "/study" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
