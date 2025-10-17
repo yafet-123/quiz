@@ -46,23 +46,23 @@ export default function BookGradeDetail({ notes }) {
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`MatricMate`} />
       <div className="flex flex-col">
-        {notes.map((card, index) => (
+        {notes.map((note, index) => (
           <div
-              key={card.id}
+              key={note.id}
               className="relative w-full h-48 cursor-pointer perspective"
-              onClick={() => handleFlip(card.id)}
+              onClick={() => handleFlip(note.id)}
             >
               <div
                 className={`relative w-full h-full duration-700 transform-style preserve-3d`}
               >
                 {/* Front */}
                 <div className="absolute w-full h-full bg-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center backface-hidden">
-                  <span className="font-semibold text-lg md:text-xl text-gray-800">{card.title}</span>
+                  <span className="font-semibold text-lg md:text-xl text-gray-800">{note.title}</span>
                 </div>
 
                 {/* Back */}
                 <div className="absolute w-full h-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-2xl shadow-lg flex items-center justify-center p-6 text-center rotate-y-180 backface-hidden">
-                  <span className="text-base md:text-lg">{card.definition}</span>
+                  <span className="text-base md:text-lg">{note.definition}</span>
                 </div>
               </div>
             </div>
