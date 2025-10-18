@@ -43,8 +43,8 @@ export default function AboutPage() {
 ];
 
   const testimonials = [
-    { name: "Amina", quote: "SavedMyExams-style notes simplified the whole syllabus — helped me gain two grades!" },
-    { name: "Daniel", quote: "Practical practice quizzes and clear answers — excellent site." },
+    { name: "Amina", quote: "SavedMyExams style notes simplified the whole syllabus helped me gain two grades!" },
+    { name: "Daniel", quote: "Practical practice quizzes and clear answers excellent site." },
   ];
 
   return (
@@ -55,7 +55,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
               <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-indigo-700">
-                We make exam prep simple — so you can focus on learning.
+                We make exam prep simple so you can focus on learning.
               </h1>
               <p className="mt-6 text-lg text-gray-600 max-w-2xl">
                 Study resources, past papers, and practice quizzes built by teachers and exam experts.
@@ -101,7 +101,8 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold text-gray-900">Our mission</h2>
               <p className="mt-4 text-gray-600">
                 To make high-quality revision materials available to every student.
-                We simplify syllabus content, provide worked answers and realistic practice — so revision feels productive and focused.
+                We simplify syllabus content, provide worked answers and realistic practice so revision feels 
+                productive and focused.
               </p>
             </div>
 
@@ -121,7 +122,7 @@ export default function AboutPage() {
                   <FaBookOpen className="text-indigo-600 text-2xl" />
                   <div>
                     <h3 className="font-semibold">Practise & test</h3>
-                    <p className="text-sm text-gray-600 mt-1">Lots of exam-style questions with full answers.</p>
+                    <p className="text-sm text-gray-600 mt-1">Lots of exam style questions with full answers.</p>
                   </div>
                 </div>
               </div>
@@ -130,7 +131,7 @@ export default function AboutPage() {
                 <div className="flex items-center gap-4">
                   <FaUsers className="text-indigo-600 text-2xl" />
                   <div>
-                    <h3 className="font-semibold">Student-focused</h3>
+                    <h3 className="font-semibold">Student focused</h3>
                     <p className="text-sm text-gray-600 mt-1">Resources shaped by student feedback and performance data.</p>
                   </div>
                 </div>
@@ -194,7 +195,7 @@ export default function AboutPage() {
             {testimonials.map((t, i) => (
               <div key={i} className="bg-white/10 p-6 rounded-lg">
                 <p className="italic">“{t.quote}”</p>
-                <div className="mt-4 font-semibold">— {t.name}</div>
+                <div className="mt-4 font-semibold">{t.name}</div>
               </div>
             ))}
           </div>
