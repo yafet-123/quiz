@@ -20,11 +20,27 @@ export default function AboutPage() {
   ];
 
   const team = [
-    { name: "Emily Roberts", role: "Head of Content", img: "https://via.placeholder.com/200" },
-    { name: "James King", role: "Lead Developer", img: "https://via.placeholder.com/200" },
-    { name: "Sara Lopez", role: "Product & Design", img: "https://via.placeholder.com/200" },
-    { name: "Omar Tekle", role: "Community Lead", img: "https://via.placeholder.com/200" },
-  ];
+  {
+    name: "Emily Roberts",
+    role: "Head of Content",
+    img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    name: "James King",
+    role: "Lead Developer",
+    img: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    name: "Sara Lopez",
+    role: "Product & Design",
+    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    name: "Omar Tekle",
+    role: "Community Lead",
+    img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=500&q=80",
+  },
+];
 
   const testimonials = [
     { name: "Amina", quote: "SavedMyExams-style notes simplified the whole syllabus — helped me gain two grades!" },
