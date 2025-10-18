@@ -18,6 +18,7 @@ model User {
 
   Subjects    Subject[]
   Exams       Exam[]
+  Worksheets  Worksheet[]
   Flashcards  Flashcard[]
   Notes       Note[]
   RevisionNote RevisionNote[]
@@ -35,6 +36,7 @@ model Subject {
 
   User        User      @relation(fields: [createdBy], references: [id])
   Exams       Exam[]
+  Worksheets   Worksheet[]
   Topics      FlashcardTopic[]
   Quizzes     Quiz[]
   Notes       Note[]
@@ -130,6 +132,39 @@ model ExamOption {
   examQuestionId Int
 
   ExamQuestion ExamQuestion @relation(fields: [examQuestionId], references: [id])
+}
+
+model Worksheet {
+  id          Int             @id @default(autoincrement())
+  title       String
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime        @default(now())
+  modifiedAt  DateTime        @updatedAt
+
+  Subject     Subject          @relation(fields: [subjectId], references: [id])
+  User        User             @relation(fields: [createdBy], references: [id])
+  Questions   WorksheetQuestion[]
+}
+
+model WorksheetQuestion {
+  id          Int          @id @default(autoincrement())
+  question    String
+  correctAnswer String
+  worksheetId      Int
+  createdAt   DateTime     @default(now())
+  modifiedAt  DateTime     @updatedAt
+
+  Worksheet   Worksheet         @relation(fields: [worksheetId], references: [id])
+  Options     WorksheetOption[]
+}
+
+model WorksheetOption {
+  id           Int          @id @default(autoincrement())
+  optionText   String
+  worksheetQuestionId Int
+
+  WorksheetQuestion WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id])
 }
 
 model FlashcardTopic {

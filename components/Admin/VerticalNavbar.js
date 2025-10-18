@@ -21,12 +21,14 @@ export function VerticalNavbar({ data }) {
     { link: "/Admin", icon: <AiFillDashboard size={24} />, name: "Dashboard" },
     { link: "/Admin/User", icon: <RiAdminFill size={24} />, name: "User" },
     { link: "/Admin/exam", icon: <SiBookstack size={24} />, name: "Exam" },
+    { link: "/Admin/quiz", icon: <SiBookstack size={24} />, name: "Quiz" },
+    { link: "/Admin/worksheet", icon: <SiBookstack size={24} />, name: "Worksheet" },
     { link: "/Admin/Subject", icon: <SiBookstack size={24} />, name: "Subject" },
     { link: "/Admin/Flashcard", icon: <SiBookstack size={24} />, name: "FlashCard" },
     { link: "/Admin/note", icon: <SiBookstack size={24} />, name: "Comprehensive Notes" },
     { link: "/Admin/revisionnote", icon: <SiBookstack size={24} />, name: "Revision Note" },
     
-    // { link: "/Admin/quiz", icon: <SiBookstack size={24} />, name: "Quiz" },
+
     // { link: "/Admin/Teacher", icon: <GiTeacher size={24} />, name: "Teacher" },
     // { link: "/Admin/Teacher/Assign", icon: <GiTeacher size={24} />, name: "Assign Teacher" },
     // { link: "/Admin/Student", icon: <PiStudent size={24} />, name: "Student" },
