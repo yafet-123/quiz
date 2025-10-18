@@ -67,7 +67,7 @@ export default function AboutPage() {
                   href="/signup"
                   className="inline-flex items-center justify-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition"
                 >
-                  Get started — it's free
+                  {`Get started — it's free`}
                 </a>
                 <a
                   href="/subjects"
@@ -207,7 +207,7 @@ export default function AboutPage() {
           <h3 className="text-2xl font-bold mb-4">Ready to level up your revision?</h3>
           <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
           <a href="/signup" className="inline-flex items-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition">
-            Create an account — it's free
+            {`Create an account — it's free`}
           </a>
         </div>
       </section>
