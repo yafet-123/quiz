@@ -81,14 +81,15 @@ export default function AboutPage() {
             <div className="flex items-center justify-center">
               <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-xl transform hover:scale-102 transition">
                 <Image
-                  src="https://via.placeholder.com/720x480"
-                  alt="Study illustration"
+                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=80"
+                  alt="Students studying together"
                   width={720}
                   height={480}
                   className="object-cover"
                 />
               </div>
             </div>
+
           </div>
         </div>
       </header>
