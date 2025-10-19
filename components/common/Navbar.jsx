@@ -24,6 +24,8 @@ export const Navbar = () => {
         { path: "/study/revision-note", name: "Revision Note" },
         { path: "/study/flashcards-tips", name: "Flashcards Tips" },
         { path: "/study/worksheet", name: "Worksheets" },
+        { path: "/study/formulaSheet", name: "Formula Sheet" },
+        { path: "/study/definitionSheet", name: "Definition Sheet" },
       ],
     },
     { path: "/about", name: "About Us" },

@@ -1,87 +1,82 @@
-// pages/practice-quizzes.js
-import { FaClipboardList, FaCheckCircle, FaLightbulb } from "react-icons/fa";
+// pages/worksheets.js
+import { FaBookOpen, FaPenFancy, FaCheckDouble } from "react-icons/fa";
 import Image from "next/image";
-import WorksheetSubject from "../../../components/books/WorksheetSubject"
+import WorksheetSubject from "../../../components/books/WorksheetSubject";
 import { prisma } from "../../../util/db.server";
-
-const features = [
-  {
-    id: 1,
-    icon: <FaClipboardList className="text-blue-500 w-10 h-10" />,
-    title: "Practice Quizzes",
-    description: "Test your knowledge with quizzes designed to boost retention.",
-  },
-];
 
 const reasons = [
   {
     id: 1,
-    icon: <FaClipboardList className="text-blue-500 w-8 h-8" />,
-    title: "Interactive Learning",
-    description: "Engage with quizzes that provide instant feedback on your answers.",
+    icon: <FaBookOpen className="text-blue-500 w-8 h-8" />,
+    title: "Structured Practice",
+    description:
+      "Access well-organized worksheets by topic to reinforce understanding step by step.",
   },
   {
     id: 2,
-    icon: <FaCheckCircle className="text-green-500 w-8 h-8" />,
-    title: "Identify Weak Areas",
-    description: "Focus on topics you need to improve and track your progress.",
+    icon: <FaPenFancy className="text-green-500 w-8 h-8" />,
+    title: "Master Key Skills",
+    description:
+      "Strengthen core exam techniques and apply knowledge effectively through guided questions.",
   },
   {
     id: 3,
-    icon: <FaLightbulb className="text-yellow-500 w-8 h-8" />,
-    title: "Retention Boost",
-    description: "Reinforce knowledge and remember concepts more effectively.",
+    icon: <FaCheckDouble className="text-yellow-500 w-8 h-8" />,
+    title: "Prepare for Exams",
+    description:
+      "Revise efficiently with targeted worksheets designed by expert teachers to match your syllabus.",
   },
 ];
 
 const steps = [
   {
     id: 1,
-    title: "Select a Quiz Topic",
+    title: "Choose Your Subject",
     description:
-      "Choose a subject or chapter you want to practice and start testing your knowledge.",
-    image: "/quiz/quiz-topic.jpg",
+      "Select a subject that you want to focus on, from Math to Science or Languages.",
+    image: "https://images.unsplash.com/photo-1584697964354-3c22b379fb53?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 2,
-    title: "Attempt Questions",
+    title: "Download or Practice Online",
     description:
-      "Answer multiple-choice or short-answer questions to apply what you've learned.",
-    image: "/quiz/quiz-attempt.jpg",
+      "Access printable or digital worksheets tailored for different exam boards and levels.",
+    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 3,
-    title: "Review Your Answers",
+    title: "Work Through Step-by-Step Questions",
     description:
-      "Check correct and incorrect answers with explanations to improve understanding.",
-    image: "/quiz/quiz-review.jpg",
+      "Follow a gradual difficulty curve that helps you build confidence in each topic.",
+    image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 4,
-    title: "Repeat for Mastery",
+    title: "Check Answers and Learn",
     description:
-      "Retake quizzes regularly to reinforce memory and achieve mastery of the topic.",
-    image: "/quiz/quiz-repeat.jpg",
+      "Use detailed solutions to understand mistakes and learn how to write perfect answers.",
+    image: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1200&q=80",
   },
 ];
 
-export default function PracticeQuizzes({subjects}) {
+export default function Worksheets({ subjects }) {
   return (
     <div className="bg-gray-50 min-h-screen py-20">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-32 text-center px-6">
+      <section className="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-32 text-center px-6">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Practice Quizzes
+          Worksheets for Every Subject
         </h1>
-        <p className="text-lg md:text-xl mb-8">
-          Test your knowledge with interactive quizzes and improve your learning retention.
+        <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+          Practice with structured worksheets that simplify complex topics and
+          help you prepare confidently for exams.
         </p>
       </section>
 
-      {/* Benefits Section */}
+      {/* Why Use Worksheets */}
       <section className="py-16 px-6 max-w-5xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Why Use Practice Quizzes?
+          Why Use Our Worksheets?
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {reasons.map((reason) => (
@@ -90,35 +85,37 @@ export default function PracticeQuizzes({subjects}) {
               className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
             >
               <div>{reason.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-700 text-center">{reason.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-700 text-center">
+                {reason.title}
+              </h3>
               <p className="text-gray-600 text-center">{reason.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Steps Section */}
+      {/* How to Use Worksheets */}
       <section className="py-16 px-6 bg-gray-50">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          How to Use Quizzes Effectively
+          How to Make the Most of Worksheets
         </h2>
 
         <div className="max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <div
               key={step.id}
-              className={`flex flex-col md:flex-row items-center ${
+              className={`flex flex-col md:flex-row items-center mb-16 ${
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
               {/* Image */}
-              <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
+              <div className="relative w-full lg:w-1/2 h-[25rem]">
                 <Image
                   src={step.image}
                   alt={step.title}
                   layout="fill"
                   objectFit="cover"
-                  className=""
+                  className="rounded-2xl shadow-md"
                 />
               </div>
 
@@ -134,10 +131,10 @@ export default function PracticeQuizzes({subjects}) {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Browse Section */}
       <section className="py-16 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
-          Browse Practice Quizzes by subject
+          Browse Worksheets by Subject
         </h2>
         <WorksheetSubject subjects={subjects} />
       </section>
@@ -147,26 +144,19 @@ export default function PracticeQuizzes({subjects}) {
 
 export async function getServerSideProps() {
   try {
-    // Fetch all subjects with relations
     const subjects = await prisma.Subject.findMany({
-      
-      orderBy: {
-        id: "asc",
-      },
+      orderBy: { id: "asc" },
     });
-    console.log(subjects)
+
     return {
       props: {
-        subjects: JSON.parse(JSON.stringify(subjects)), // serialize dates
+        subjects: JSON.parse(JSON.stringify(subjects)),
       },
     };
   } catch (error) {
     console.error("Error fetching subjects:", error);
     return {
-      props: {
-        subjects: [],
-        error: "Failed to load subjects.",
-      },
+      props: { subjects: [], error: "Failed to load subjects." },
     };
   }
 }

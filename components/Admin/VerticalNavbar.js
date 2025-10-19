@@ -23,6 +23,8 @@ export function VerticalNavbar({ data }) {
     { link: "/Admin/exam", icon: <SiBookstack size={24} />, name: "Exam" },
     { link: "/Admin/quiz", icon: <SiBookstack size={24} />, name: "Quiz" },
     { link: "/Admin/worksheet", icon: <SiBookstack size={24} />, name: "Worksheet" },
+    { link: "/Admin/formula", icon: <SiBookstack size={24} />, name: "Formula Sheet" },
+    { link: "/Admin/definition", icon: <SiBookstack size={24} />, name: "Definition Sheet" },
     { link: "/Admin/Subject", icon: <SiBookstack size={24} />, name: "Subject" },
     { link: "/Admin/Flashcard", icon: <SiBookstack size={24} />, name: "FlashCard" },
     { link: "/Admin/note", icon: <SiBookstack size={24} />, name: "Comprehensive Notes" },
@@ -40,8 +42,8 @@ export function VerticalNavbar({ data }) {
   ];
 
   return (
-    <div className={`flex h-screen sticky top-20 ${collapsed ? "w-20" : "w-64"} transition-width duration-300`}>
-      <nav className="flex flex-col justify-between h-full bg-[#f1f5f9] shadow-lg py-6 px-2 lg:px-4">
+    <div className={`flex h-screen sticky top-20 ${collapsed ? "w-20" : "w-96"} bg-white transition-width duration-300 overflow-y-auto`}>
+      <nav className="flex flex-col justify-between h-full py-6 px-2 lg:px-4">
         {/* Header */}
         <div className="flex items-center justify-between px-2 lg:px-0 mb-10">
           {!collapsed && <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>}

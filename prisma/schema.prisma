@@ -22,6 +22,8 @@ model User {
   Flashcards  Flashcard[]
   Notes       Note[]
   RevisionNote RevisionNote[]
+  FormulaSheet FormulaSheet[]
+  DefinitionSheet DefinitionSheet[]
 }
 
 model Subject {
@@ -41,6 +43,58 @@ model Subject {
   Quizzes     Quiz[]
   Notes       Note[]
   RevisionNote RevisionNote[]
+  FormulaSheet FormulaSheet[]
+  Topic       Topic[]
+  DefinitionSheet DefinitionSheet[]
+}
+
+model DefinitionSheet {
+  id          Int          @id @default(autoincrement())
+  title       String
+  description String?       // optional short description
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // Relations
+  Subject     Subject       @relation(fields: [subjectId], references: [id])
+  User        User          @relation(fields: [createdBy], references: [id])
+  Definitions Definition[]  // One sheet has many definitions
+}
+
+model Definition {
+  id          Int             @id @default(autoincrement())
+  term        String
+  meaning     String
+  example     String?
+  sheetId     Int
+
+  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id])
+}
+
+model FormulaSheet {
+  id          Int        @id @default(autoincrement())
+  title       String
+  description String?     // optional explanation of the formula
+  formula     String      // actual formula text or LaTeX (e.g. E = mc^2)
+  topicId     Int
+  subjectId   Int
+  createdBy   Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  Subject     Subject     @relation(fields: [subjectId], references: [id])
+  Topic       Topic       @relation(fields: [topicId], references: [id])
+  User        User        @relation(fields: [createdBy], references: [id])
+}
+
+model Topic {
+  id           Int             @id @default(autoincrement())
+  name         String
+  subjectId    Int
+  FormulaSheet FormulaSheet[]
+  Subject      Subject         @relation(fields: [subjectId], references: [id])
 }
  
 model Note {
@@ -68,7 +122,6 @@ model RevisionNote {
   Subject     Subject   @relation(fields: [subjectId], references: [id])
   User        User      @relation(fields: [createdBy], references: [id])
 }
-
 
 model Quiz {
   id        Int        @id @default(autoincrement())
