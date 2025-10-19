@@ -12,14 +12,14 @@ const features = [
     description:
       "Explore a wide range of supplementary learning materials to enhance your studies and understanding.",
   },
-  {
-    id: 2,
-    icon: <FaUniversity className="text-blue-500 w-10 h-10" />,
-    title: "Digital Government Books",
-    path: "/study/books/government",
-    description:
-      "Access official government-published books and resources easily in one digital platform.",
-  },
+  // {
+  //   id: 2,
+  //   icon: <FaUniversity className="text-blue-500 w-10 h-10" />,
+  //   title: "Digital Government Books",
+  //   path: "/study/books/government",
+  //   description:
+  //     "Access official government-published books and resources easily in one digital platform.",
+  // },
   {
     id: 3,
     icon: <FaNewspaper className="text-orange-500 w-10 h-10" />,
@@ -98,9 +98,12 @@ export default function Books() {
         <p className="text-lg md:text-xl mb-8">
           Access curated digital books, guides, and textbooks to enrich your learning experience.
         </p>
-        <button className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-          Browse Books
-        </button>
+        <Link href="#Book">
+          <button className="bg-white text-green-600 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
+            Browse Books
+          </button>
+        </Link>
+
       </section>
 
       {/* Benefits Section */}
@@ -159,11 +162,11 @@ export default function Books() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-6 max-w-6xl mx-auto">
+      <section className="py-16 px-6 max-w-6xl mx-auto" id="Book">
         <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
           Key Book Features
         </h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
           {features.map((feature) => (
             <Link
               key={feature.id}
