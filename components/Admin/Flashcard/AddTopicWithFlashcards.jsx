@@ -4,7 +4,7 @@ import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 
-export function AddDefinitionSheet({ subjects }) {
+export function AddTopicWithFlashcards({ subjects }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
