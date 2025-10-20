@@ -6,111 +6,111 @@ import Image from 'next/image'
 import { AiOutlineEye } from 'react-icons/ai'
 import { DeleteUser } from './User/DeleteUser'
 import { UpdateUser } from './User/UpdateUser'
-import { DeleteStudent } from './Students/DeleteStudent'
-import { UpdateStudent } from './Students/UpdateStudent'
-import { DeleteTeacher } from './Teacher/DeleteTeacher'
-import { UpdateTeacher } from './Teacher/UpdateTeacher'
+// import { DeleteStudent } from './Students/DeleteStudent'
+// import { UpdateStudent } from './Students/UpdateStudent'
+// import { DeleteTeacher } from './Teacher/DeleteTeacher'
+// import { UpdateTeacher } from './Teacher/UpdateTeacher'
 import Loader from "../common/Loading";
 import ReactModal from "react-modal";
 
 
 export function DashBoard({categories}) { 
-    const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
-    const [getSearchValue,setgetSearchValue] = useState("")
-    const [dataposttojob, setdataposttojob] = useState()
-    const [searchValue,setsearchValue] = useState([])
-    const [error , seterror] = useState("")
-    const [type,settype] = useState()
+    // const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
+    // const [getSearchValue,setgetSearchValue] = useState("")
+    // const [dataposttojob, setdataposttojob] = useState()
+    // const [searchValue,setsearchValue] = useState([])
+    // const [error , seterror] = useState("")
+    // const [type,settype] = useState()
 
 
-    const [deletemodalOnforUser, setdeleteModalOnforUser] = useState(false);
-    const [updatemodalOnforUser, setupdateModalOnforUser] = useState(false);
-    const [deleteUserid,setdeleteUserid] = useState()
-    const [updateUserid,setupdateUserid] = useState()
+    // const [deletemodalOnforUser, setdeleteModalOnforUser] = useState(false);
+    // const [updatemodalOnforUser, setupdateModalOnforUser] = useState(false);
+    // const [deleteUserid,setdeleteUserid] = useState()
+    // const [updateUserid,setupdateUserid] = useState()
 
-    const [deletemodalOnforStudent, setdeleteModalOnforStudent] = useState(false);
-    const [updatemodalOnforStudent, setupdateModalOnforStudent] = useState(false);
-    const [deleteStudentid,setdeleteStudentid] = useState()
-    const [updateStudentid,setupdateStudentid] = useState()
+    // const [deletemodalOnforStudent, setdeleteModalOnforStudent] = useState(false);
+    // const [updatemodalOnforStudent, setupdateModalOnforStudent] = useState(false);
+    // const [deleteStudentid,setdeleteStudentid] = useState()
+    // const [updateStudentid,setupdateStudentid] = useState()
 
-    const [deletemodalOnforTeacher, setdeleteModalOnforTeacher] = useState(false);
-    const [updatemodalOnforTeacher, setupdateModalOnforTeacher] = useState(false);
-    const [deleteTeacherid,setdeleteTeacherid] = useState()
-    const [updateTeacherid,setupdateTeacherid] = useState()
+    // const [deletemodalOnforTeacher, setdeleteModalOnforTeacher] = useState(false);
+    // const [updatemodalOnforTeacher, setupdateModalOnforTeacher] = useState(false);
+    // const [deleteTeacherid,setdeleteTeacherid] = useState()
+    // const [updateTeacherid,setupdateTeacherid] = useState()
 
-    const [updateemail, setupdateemail] = useState("")
-    const [updateusername,setupdateusername] = useState("")
+    // const [updateemail, setupdateemail] = useState("")
+    // const [updateusername,setupdateusername] = useState("")
 
-    const SearchList = [
-        { type: 1, name: "User",},
-        { type: 2, name: "Student",},
-        { type: 3, name: "Teacher",},
-    ];
+    // const SearchList = [
+    //     { type: 1, name: "User",},
+    //     { type: 2, name: "Student",},
+    //     { type: 3, name: "Teacher",},
+    // ];
 
-    // const searchaxios = axios.create({
-    //     baseURL : api,
-    // })
+    // // const searchaxios = axios.create({
+    // //     baseURL : api,
+    // // })
      
-    const clickedForview = () => {
-        setviewModalOnforjob(true)
-    }   
+    // const clickedForview = () => {
+    //     setviewModalOnforjob(true)
+    // }   
 
-    async function handleSearch(e){
-        settype(e)
-        setLoadingModalIsOpen(true)
-        setsearchValue([])
-        if(getSearchValue == ""){
-            seterror("Please Insert a Value")
-            setLoadingModalIsOpen(false)
-        }else{
-            const data = await axios.post(`api/searchAdmin`,{
-                "searchName": getSearchValue,
-                "type": e
-            }).then(function (response) {
-                const objOneData = response.data
-                if(Array.isArray(objOneData)){
-                    setsearchValue(objOneData)
-                }else{
-                    const values = []
-                    values.push(objOneData)
-                    setsearchValue(values)
-                }
-                seterror("")
-                setLoadingModalIsOpen(false)
-            }).catch(function (error) {
-                console.log(error);
-                setLoadingModalIsOpen(false)
-            });
-        }
-    }
+    // async function handleSearch(e){
+    //     settype(e)
+    //     setLoadingModalIsOpen(true)
+    //     setsearchValue([])
+    //     if(getSearchValue == ""){
+    //         seterror("Please Insert a Value")
+    //         setLoadingModalIsOpen(false)
+    //     }else{
+    //         const data = await axios.post(`api/searchAdmin`,{
+    //             "searchName": getSearchValue,
+    //             "type": e
+    //         }).then(function (response) {
+    //             const objOneData = response.data
+    //             if(Array.isArray(objOneData)){
+    //                 setsearchValue(objOneData)
+    //             }else{
+    //                 const values = []
+    //                 values.push(objOneData)
+    //                 setsearchValue(values)
+    //             }
+    //             seterror("")
+    //             setLoadingModalIsOpen(false)
+    //         }).catch(function (error) {
+    //             console.log(error);
+    //             setLoadingModalIsOpen(false)
+    //         });
+    //     }
+    // }
 
-    const clickedFordeleteforuser = () => {
-        setdeleteModalOnforUser(true)
-    }
+    // const clickedFordeleteforuser = () => {
+    //     setdeleteModalOnforUser(true)
+    // }
 
-    const clickedForupdateforuser = () => {
-        setupdateModalOnforUser(true)
-    }
+    // const clickedForupdateforuser = () => {
+    //     setupdateModalOnforUser(true)
+    // }
 
-    const clickedFordeleteForTeacher = () => {
-        setdeleteModalOnforTeacher(true)
-    }
+    // const clickedFordeleteForTeacher = () => {
+    //     setdeleteModalOnforTeacher(true)
+    // }
 
-    const clickedForupdateForTeacher = () => {
-        setupdateModalOnforTeacher(true)
-    }
+    // const clickedForupdateForTeacher = () => {
+    //     setupdateModalOnforTeacher(true)
+    // }
 
-    const clickedFordeleteforStudent = () => {
-        setdeleteModalOnforTeacher(true)
-    }
+    // const clickedFordeleteforStudent = () => {
+    //     setdeleteModalOnforTeacher(true)
+    // }
 
-    const clickedForupdateforStudent = () => {
-        setupdateModalOnforStudent(true)
-    }
+    // const clickedForupdateforStudent = () => {
+    //     setupdateModalOnforStudent(true)
+    // }
 
     return (
         <div className="mt-10 mx-1 lg:mx-3 lg:mx-10 h-full pt-20">
-            <div className="max-w-7xl mx-auto ">
+            {/*<div className="max-w-7xl mx-auto ">
                 <div className="flex flex-col lg:flex-row my-10 w-full">
                     <div className="relative flex-1">
                         <input 
@@ -543,7 +543,7 @@ export function DashBoard({categories}) {
 
             { updatemodalOnforTeacher && 
                 <UpdateTeacher setdeleteModalOn={setupdateModalOnforTeacher} updateuserid={updateTeacherid} updateusername={updateusername} setupdateusername={setupdateusername} updateemail={updateemail} setupdateemail={setupdateemail} setupdateUsername={setupdateusername} />
-            }
+            }*/}
         </div>
   );
 }
