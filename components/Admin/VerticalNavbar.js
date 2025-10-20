@@ -1,56 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-
-import { GiTeacher } from "react-icons/gi";
-import { RiAdminFill } from "react-icons/ri";
-import { PiStudent } from "react-icons/pi";
-import { SiBookstack, SiGoogleclassroom } from "react-icons/si";
-import { FaQuestion } from "react-icons/fa";
 import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
+import { RiAdminFill } from "react-icons/ri";
+import { FaBookOpen, FaStickyNote, FaListAlt, FaGraduationCap, FaLightbulb } from "react-icons/fa";
+import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
+import { BsCardText } from "react-icons/bs";
+import { GiBookmarklet } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
-import { WiMoonFirstQuarter } from "react-icons/wi";
 
 export function VerticalNavbar({ data }) {
   const router = useRouter();
   const path = router.pathname;
   const [collapsed, setCollapsed] = useState(false);
 
+  // Collapse automatically on small screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) setCollapsed(true);
+      else setCollapsed(false);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const SideBarList = [
     { link: "/Admin", icon: <AiFillDashboard size={24} />, name: "Dashboard" },
     { link: "/Admin/User", icon: <RiAdminFill size={24} />, name: "User" },
-    { link: "/Admin/exam", icon: <SiBookstack size={24} />, name: "Exam" },
-    { link: "/Admin/quiz", icon: <SiBookstack size={24} />, name: "Quiz" },
-    { link: "/Admin/worksheet", icon: <SiBookstack size={24} />, name: "Worksheet" },
-    { link: "/Admin/formula", icon: <SiBookstack size={24} />, name: "Formula Sheet" },
-    { link: "/Admin/definition", icon: <SiBookstack size={24} />, name: "Definition Sheet" },
-    { link: "/Admin/article", icon: <SiBookstack size={24} />, name: "Article" },
-    { link: "/Admin/Subject", icon: <SiBookstack size={24} />, name: "Subject" },
-    { link: "/Admin/Flashcard", icon: <SiBookstack size={24} />, name: "FlashCard" },
-    { link: "/Admin/note", icon: <SiBookstack size={24} />, name: "Comprehensive Notes" },
-    { link: "/Admin/revisionnote", icon: <SiBookstack size={24} />, name: "Revision Note" },
-    
-
-    // { link: "/Admin/Teacher", icon: <GiTeacher size={24} />, name: "Teacher" },
-    // { link: "/Admin/Teacher/Assign", icon: <GiTeacher size={24} />, name: "Assign Teacher" },
-    // { link: "/Admin/Student", icon: <PiStudent size={24} />, name: "Student" },
-    // { link: "/Admin/Class", icon: <SiGoogleclassroom size={24} />, name: "Class" },
-    // { link: "/Admin/Class/AssignSubject", icon: <WiMoonFirstQuarter size={24} />, name: "Assign Subject" },
-    // { link: "/Admin/Quarter", icon: <WiMoonFirstQuarter size={24} />, name: "Quarter" },
-    // { link: "/Admin/QuestionCategory", icon: <FaQuestion size={24} />, name: "Question Category" },
-    // { link: "/Admin/Subject/AssignQuestionCategory", icon: <FaQuestion size={24} />, name: "Assign Category" },
+    { link: "/Admin/exam", icon: <FaBookOpen size={24} />, name: "Exam" },
+    { link: "/Admin/quiz", icon: <MdOutlineQuiz size={24} />, name: "Quiz" },
+    { link: "/Admin/worksheet", icon: <FaListAlt size={24} />, name: "Worksheet" },
+    { link: "/Admin/formula", icon: <FaGraduationCap size={24} />, name: "Formula Sheet" },
+    { link: "/Admin/definition", icon: <FaLightbulb size={24} />, name: "Definition Sheet" },
+    { link: "/Admin/article", icon: <MdOutlineArticle size={24} />, name: "Article" },
+    { link: "/Admin/Subject", icon: <MdSubject size={24} />, name: "Subject" },
+    { link: "/Admin/Flashcard", icon: <BsCardText size={24} />, name: "FlashCard" },
+    { link: "/Admin/note", icon: <FaStickyNote size={24} />, name: "Comprehensive Notes" },
+    { link: "/Admin/revisionnote", icon: <GiBookmarklet size={24} />, name: "Revision Note" },
   ];
 
   return (
-    <div className={`flex h-screen sticky top-20 ${collapsed ? "w-20" : "w-96"} bg-white transition-width duration-300 overflow-y-auto`}>
-      <nav className="flex flex-col justify-between h-full py-6 px-2 lg:px-4">
+    <div
+      className={`flex h-screen sticky top-20 bg-white transition-width duration-300 overflow-y-auto
+        ${collapsed ? "w-20" : "w-64"} md:w-64`}
+    >
+      <nav className="flex flex-col justify-between h-full py-6 px-2 lg:px-4 w-full">
         {/* Header */}
         <div className="flex items-center justify-between px-2 lg:px-0 mb-10">
           {!collapsed && <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="text-gray-800 hover:text-gray-600 focus:outline-none"
+            className="text-gray-800 hover:text-gray-600 focus:outline-none md:hidden"
           >
             <AiOutlineMenu size={28} />
           </button>
@@ -78,9 +79,7 @@ export function VerticalNavbar({ data }) {
         {/* Logout */}
         <div className="px-3">
           <button
-            onClick={() =>
-              signOut({ callbackUrl: "/auth/Admin/Login/signin-user" })
-            }
+            onClick={() => signOut({ callbackUrl: "/auth/Admin/Login/signin-user" })}
             className="flex items-center w-full px-3 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
           >
             <FiLogOut size={22} />
