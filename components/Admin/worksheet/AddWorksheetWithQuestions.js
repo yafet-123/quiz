@@ -84,7 +84,7 @@ export function AddWorksheetWithQuestions({ subjects }) {
   }
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-24 px-6 bg-gray-50">
+    <div className="flex flex-col items-center min-h-screen py-24 px-2 lg:px-6 bg-gray-50">
       <div className="w-full max-w-3xl bg-white shadow-lg rounded-2xl p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-10 flex items-center justify-center gap-2">
           <FiPlusCircle className="text-[#009688]" />

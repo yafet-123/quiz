@@ -5,7 +5,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 export function DisplayWorksheets({ subjects }) {
   console.log(subjects)
   return (
-    <div className="px-4 lg:px-10 py-10">
+    <div className="px-2 lg:px-10 py-10">
       <h1 className="text-center text-3xl font-bold mb-10 text-gray-800 italic">
         Exams
       </h1>

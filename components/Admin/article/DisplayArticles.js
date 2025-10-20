@@ -3,7 +3,7 @@ import React from "react";
 export function DisplayArticles({ subjects }) {
   if (!subjects || subjects.length === 0) {
     return (
-      <div className="bg-white shadow-md rounded-2xl p-6 mt-6">
+      <div className="bg-white shadow-md rounded-2xl p-2 lg:p-6 mt-6">
         <p className="text-gray-600">No subjects or articles found.</p>
       </div>
     );

@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 export function DisplayQuizzes({ subjects }) {
   return (
-    <div className="px-4 lg:px-12 py-12 bg-gray-50 min-h-screen">
+    <div className="px-2 lg:px-12 py-12 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800 italic">
         Quizzes
       </h1>

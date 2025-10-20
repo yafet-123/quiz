@@ -84,7 +84,7 @@ export function AddDefinition({ subjects }) {
   };
 
   return (
-    <div className="px-4 lg:px-10 pb-20">
+    <div className="px-2 lg:px-10 pb-20">
       <form
         className="max-w-7xl mx-auto mt-10"
         onSubmit={handleSubmit}

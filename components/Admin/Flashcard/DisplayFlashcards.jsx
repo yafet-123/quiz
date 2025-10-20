@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 export function DisplayFlashcards({ subjects }) {
   return (
-    <div className="px-4 lg:px-10 py-10">
+    <div className="px-2 lg:px-10 py-10">
       <h1 className="text-center text-3xl font-bold mb-8 text-gray-800 italic">
         Flashcards
       </h1>

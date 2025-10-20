@@ -3,7 +3,7 @@ import React from "react";
 
 export function DisplayFormula({ subjects }) {
   return (
-    <div className="bg-gray-50 py-16 px-6">
+    <div className="bg-gray-50 py-16 px-2 lg:px-6">
       <div className="max-w-6xl mx-auto space-y-12">
         {subjects.map((subject) => (
           <div key={subject.id} className="bg-white rounded-2xl shadow-md p-6">

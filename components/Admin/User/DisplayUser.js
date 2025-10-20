@@ -24,7 +24,7 @@ export function DisplayUser({ users }) {
   };
 
   return (
-    <div className="px-4 lg:px-10 py-8">
+    <div className="px-2 lg:px-10 py-8">
       {/* Desktop Table */}
       <div className="overflow-auto rounded-xl shadow-lg hidden md:block">
         <table className="w-full text-left border-collapse">
