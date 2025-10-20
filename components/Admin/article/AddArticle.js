@@ -91,7 +91,7 @@ export function AddArticle({ subjects }) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-2xl p-6 my-6">
+    <div className="bg-white shadow-md rounded-2xl p-2 lg:p-6 my-6">
       <h2 className="text-xl font-semibold mb-4">Add New Article</h2>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
