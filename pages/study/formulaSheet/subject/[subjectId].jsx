@@ -41,10 +41,6 @@ export async function getServerSideProps(context) {
 export default function FormulaSheetPage({ formulaSheets }) {
   const router = useRouter();
 
-  const goToDetail = (sheetId) => {
-    router.push(`/study/formula-sheet/detail/${sheetId}`);
-  };
-
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`Formula Sheets`} />
@@ -58,7 +54,6 @@ export default function FormulaSheetPage({ formulaSheets }) {
           {formulaSheets.map((sheet, index) => (
             <div
               key={sheet.id}
-              onClick={() => goToDetail(sheet.id)}
               className={`cursor-pointer bg-gradient-to-r ${
                 index % 3 === 0
                   ? "from-teal-500 to-cyan-600"
