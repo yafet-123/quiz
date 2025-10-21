@@ -66,7 +66,7 @@ export default function DefinitionPage({ subjects }) {
 
   return (
     <React.Fragment>
-      <MainHeader title="Definition Sheets Dashboard" />
+      <MainHeader title="Definition Sheet Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#f2f2f2] pt-24">
         <div className="w-full h-full flex flex-row">
           <VerticalNavbar data={data} />

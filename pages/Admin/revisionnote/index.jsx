@@ -74,7 +74,7 @@ export default function RevisionNotePage({ subjects, notes }) {
   
   return (
     <React.Fragment>
-      <MainHeader title="Flashcards Dashboard" />
+      <MainHeader title="RevisionNote Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
