@@ -54,17 +54,16 @@ export default function Students({subjectes}) {
     const { status, data } = useSession();
     return (
     	<React.Fragment>
-      		<MainHeader title="Subject Dashboard" />
-      		<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
-				    <div className='w-full h-full flex flex-row'>
-		        	<VerticalNavbar data={data} />
-		        	<div className="w-full">
-            			<AddSubject />
-            			<DisplaySubject subjectes={subjectes} />
-        			</div>
-		        </div> 
-			     </section>
-      	</React.Fragment>
-        
+      	<MainHeader title="Subject Dashboard" />
+      	<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
+          <div className='w-full h-full flex flex-row'>
+		      	<VerticalNavbar data={data} />
+		        <div className="w-full px-6">
+            		<AddSubject />
+          			<DisplaySubject subjectes={subjectes} />
+        		</div>
+		      </div> 
+			  </section>
+      </React.Fragment> 
     );
 }
