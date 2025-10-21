@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
@@ -33,7 +33,7 @@ export function VerticalNavbar() {
   return (
     <>
       {/* Mobile menu button */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
+      <div className="md:hidden sticky top-20 lg:left-4 z-50 h-full">
         <button
           onClick={() => setMobileOpen(true)}
           className="text-gray-800 p-2 bg-white rounded shadow"
@@ -45,13 +45,12 @@ export function VerticalNavbar() {
       {/* Sidebar */}
       <div
         className={`
-          fixed top-0 left-0 h-full bg-white shadow-lg z-40 transform transition-transform duration-300
-          ${collapsed ? "w-20 md:w-64" : "w-64"} 
-          md:translate-x-0
-          ${mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+          sticky top-20 self-start
+          ${collapsed ? "w-20" : "w-96"}
+          bg-white shadow-lg overflow-y-auto
         `}
       >
-        <nav className="flex flex-col justify-between h-full py-6 px-2 lg:px-4 w-full">
+        <nav className="flex flex-col justify-between py-6 px-2 lg:px-4 h-full">
           {/* Header */}
           <div className="flex items-center justify-between px-2 lg:px-0 mb-10">
             {!collapsed && <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>}
@@ -61,13 +60,6 @@ export function VerticalNavbar() {
             >
               <AiOutlineMenu size={28} />
             </button>
-            {/* Close button for mobile */}
-            <button
-              onClick={() => setMobileOpen(false)}
-              className="text-gray-800 hover:text-gray-600 focus:outline-none md:hidden"
-            >
-              ✕
-            </button>
           </div>
 
           {/* Links */}
@@ -75,10 +67,7 @@ export function VerticalNavbar() {
             {SideBarList.map((item, idx) => (
               <li key={idx} className="mb-3">
                 <button
-                  onClick={() => {
-                    router.push(item.link);
-                    setMobileOpen(false); // close mobile menu on click
-                  }}
+                  onClick={() => router.push(item.link)}
                   className={`flex items-center w-full px-3 py-2 rounded-xl transition-colors duration-200 ${
                     path === item.link
                       ? "bg-[#009688] text-white shadow-md"
@@ -104,14 +93,6 @@ export function VerticalNavbar() {
           </div>
         </nav>
       </div>
-
-      {/* Overlay for mobile */}
-      {mobileOpen && (
-        <div
-          className="fixed inset-0 bg-black opacity-40 z-30 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
-      )}
     </>
   );
 }

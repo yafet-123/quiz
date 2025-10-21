@@ -42,17 +42,16 @@ export default function Teacher({users}) {
     const { status, data } = useSession();
     return (
     	<React.Fragment>
-      		<MainHeader title="User Dashboard" />
-      		<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
-				    <div className='w-full h-full flex flex-row'>
-		        	<VerticalNavbar data={data} />
-		        	<div className="w-full">
-            			<AddUser />
-            			<DisplayUser users={users} />
-        			</div>
-		        </div> 
-			     </section>
-      	</React.Fragment>
-        
+      	<MainHeader title="User Dashboard" />
+      	<section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
+          <div className='w-full h-full flex flex-row'>
+		        <VerticalNavbar data={data} />
+		      	<div className="w-full lg:px-6">
+        			<AddUser />
+        			<DisplayUser users={users} />
+        		</div>
+          </div>
+			  </section>
+      </React.Fragment>
     );
 }
