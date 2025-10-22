@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
+import axios from "axios";
+import { useRouter } from "next/router";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { UpdateExam } from "./UpdateExam"; // ✅ import update modal
+import { DeleteExam } from "./DeleteExam"; // ✅ import delete modal
 
 export function DisplayExams({ subjects }) {
+  const router = useRouter();
+
+  const [updateModalOn, setUpdateModalOn] = useState(false);
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
+  const [subject, setSubject] = useState(false);
+  const [selectedExam, setSelectedExam] = useState(null);
+  console.log(subjects)
+  const handleEdit = (subject, exam) => {
+    setSubject(subject)
+    setSelectedExam(exam);
+    setUpdateModalOn(true);
+  };
+
+  const handleDelete = (subject, exam) => {
+    setSubject(subject)
+    setSelectedExam(exam);
+    setDeleteModalOn(true);
+  };
+
   return (
     <div className="px-2 lg:px-10 py-10">
       <h1 className="text-center text-3xl font-bold mb-10 text-gray-800 italic">
@@ -14,28 +37,38 @@ export function DisplayExams({ subjects }) {
           <h2 className="text-2xl font-bold mb-6 text-[#009688]">{subject.name}</h2>
 
           {subject.Exams.map((exam) => (
-            <div key={exam.id} className="bg-white shadow-lg rounded-2xl p-6 mb-8">
+            <div
+              key={exam.id}
+              className="bg-white shadow-lg rounded-2xl p-6 mb-8 transition hover:shadow-xl"
+            >
               {/* Exam Header */}
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-semibold">{exam.title}</h3>
+                <h3 className="text-xl font-semibold text-gray-800">{exam.title}</h3>
+
                 <div className="space-x-3">
-                  <button className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl">
+                  <button
+                    onClick={() => handleEdit(subject, exam)}
+                    className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition"
+                  >
                     <FiEdit2 /> Edit
                   </button>
-                  <button className="inline-flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl">
+
+                  <button
+                    onClick={() => handleDelete(subject, exam)}
+                    className="inline-flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition"
+                  >
                     <FiTrash2 /> Delete
                   </button>
                 </div>
-              </div> 
+              </div>
 
               {/* Questions */}
               <div className="space-y-4">
-                {exam.Questions.map((q,idx) => (
+                {exam.Questions.map((q, idx) => (
                   <div
                     key={q.id}
                     className="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-[#009688] transition"
                   >
-
                     {/* Question */}
                     <p className="text-lg font-semibold mb-2">
                       {idx + 1}. {q.question}
@@ -47,7 +80,7 @@ export function DisplayExams({ subjects }) {
                         <span
                           key={opt.id}
                           className={`px-3 py-1 rounded-full border ${
-                            opt.optionText === q.answer
+                            opt.optionText === q.correctOption
                               ? "bg-green-100 border-green-500 font-semibold"
                               : "bg-white border-gray-300"
                           }`}
@@ -71,6 +104,23 @@ export function DisplayExams({ subjects }) {
           ))}
         </div>
       ))}
+
+      {/* ✅ Modals (conditionally rendered) */}
+      {updateModalOn && selectedExam && (
+        <UpdateExam
+          subject={subject}
+          exam={selectedExam}
+          setUpdateModalOn={setUpdateModalOn}
+          subjects={subjects}
+        />
+      )}
+
+      {deleteModalOn && selectedExam && (
+        <DeleteExam
+          examId={selectedExam.id}
+          setDeleteModalOn={setDeleteModalOn}
+        />
+      )}
     </div>
   );
 }

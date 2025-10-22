@@ -1,143 +1,99 @@
 import React, { useState } from "react";
-import moment from "moment";
-import { DeleteUser } from "./DeleteUser.js";
-import { UpdateUser } from "./UpdateUser.js";
+import axios from "axios";
+import { UpdateUser } from "./UpdateUser";
 
 export function DisplayUser({ users }) {
-  const [deletemodalOn, setDeleteModalOn] = useState(false);
-  const [updatemodalOn, setUpdateModalOn] = useState(false);
-  const [deleteUserId, setDeleteUserId] = useState();
-  const [updateUserId, setUpdateUserId] = useState();
-  const [updateEmail, setUpdateEmail] = useState("");
-  const [updateUsername, setUpdateUsername] = useState("");
-  
-  const handleDeleteClick = (id) => {
-    setDeleteUserId(id);
-    setDeleteModalOn(true);
+  const [updateModalOn, setUpdateModalOn] = useState(false);
+  const [updateuserid, setUpdateUserid] = useState("");
+  const [updateemail, setUpdateEmail] = useState("");
+  const [updateusername, setUpdateUsername] = useState("");
+
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
+  const [deleteUserid, setDeleteUserid] = useState("");
+
+  const handleDelete = async (id) => {
+    if (confirm("Are you sure you want to delete this user?")) {
+      try {
+        await axios.delete(`/api/user/deleteuser/${id}`);
+        alert("User deleted successfully!");
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+        alert("Failed to delete user.");
+      }
+    }
   };
 
   const handleUpdateClick = (user) => {
-    setUpdateUserId(user.user_id);
-    setUpdateUsername(user.UserName);
+    console.log(user.user_id)
+    setUpdateUserid(user.user_id);
     setUpdateEmail(user.email);
+    setUpdateUsername(user.UserName);
     setUpdateModalOn(true);
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-24 px-2 lg:px-6 w-full"> 
-      {/* Desktop Table */}
-      <div className="overflow-auto rounded-xl shadow-lg hidden md:block">
-        <table className="w-full text-left border-collapse">
-          <thead className="bg-gray-100">
+    <div className="w-full mt-10 px-4 pb-10">
+      <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">
+        User Management
+      </h1>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border border-gray-300 rounded-lg bg-white">
+          <thead className="bg-[#009688] text-white">
             <tr>
-              {["Id", "User Name", "Email", "Created Date", "Modified Date", "Actions"].map(
-                (header, idx) => (
-                  <th
-                    key={idx}
-                    className="p-3 text-gray-800 font-semibold text-lg border-b border-gray-200"
-                  >
-                    {header}
-                  </th>
-                )
-              )}
+              <th className="py-3 px-4 text-left">#</th>
+              <th className="py-3 px-4 text-left">Username</th>
+              <th className="py-3 px-4 text-left">Email</th>
+              <th className="py-3 px-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              <tr
-                key={index}
-                className="even:bg-gray-50 odd:bg-white hover:bg-gray-100 transition"
-              >
-                <td className="p-3 text-gray-700 font-medium">{user.user_id}</td>
-                <td className="p-3 text-gray-700">{user.UserName}</td>
-                <td className="p-3 text-gray-700 break-words">
-                  {user.email || (
-                    <span className="text-red-600 font-semibold">No Email Address</span>
-                  )}
-                </td>
-                <td className="p-3 text-gray-700">
-                  {moment(user.createDate).utc().format("YYYY-MM-DD")}
-                </td>
-                <td className="p-3 text-gray-700">
-                  {moment(user.ModifiedDate).utc().format("YYYY-MM-DD")}
-                </td>
-                <td className="p-3 flex gap-2">
-                  <button
-                    onClick={() => handleUpdateClick(user)}
-                    className="bg-[#009688] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#00796b] transition"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDeleteClick(user.user_id)}
-                    className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition"
-                  >
-                    Delete
-                  </button>
+            {users && users.length > 0 ? (
+              users.map((user, index) => (
+                <tr
+                  key={user.id}
+                  className="border-t border-gray-200 hover:bg-gray-100"
+                >
+                  <td className="py-3 px-4">{index + 1}</td>
+                  <td className="py-3 px-4">{user.UserName}</td>
+                  <td className="py-3 px-4">{user.email}</td>
+                  <td className="py-3 px-4 flex justify-center gap-3">
+                    <button
+                      onClick={() => handleUpdateClick(user)}
+                      className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                    >
+                      Update
+                    </button>
+                    <button
+                      onClick={() => handleDelete(user.user_id)}
+                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={4}
+                  className="py-4 text-center text-gray-500 italic"
+                >
+                  No users found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
 
-      {/* Mobile Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:hidden">
-        {users.map((user, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-xl shadow-md p-4 space-y-2 hover:shadow-lg transition"
-          >
-            <p className="text-blue-500 font-bold">
-              Id: <span className="text-gray-700 font-medium">{user.user_id}</span>
-            </p>
-            <p className="text-gray-700 font-bold">
-              User Name: <span className="font-medium">{user.UserName}</span>
-            </p>
-            <p className="text-gray-700 font-bold break-words">
-              Email:{" "}
-              <span className={user.email ? "font-medium" : "text-red-600 font-semibold"}>
-                {user.email || "No Email Address"}
-              </span>
-            </p>
-            <p className="text-gray-700 font-bold">
-              Created:{" "}
-              <span className="font-medium">
-                {moment(user.createDate).utc().format("YYYY-MM-DD")}
-              </span>
-            </p>
-            <p className="text-gray-700 font-bold">
-              Modified:{" "}
-              <span className="font-medium">
-                {moment(user.ModifiedDate).utc().format("YYYY-MM-DD")}
-              </span>
-            </p>
-            <div className="flex justify-between mt-2">
-              <button
-                onClick={() => handleUpdateClick(user)}
-                className="bg-[#009688] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#00796b] transition"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => handleDeleteClick(user.user_id)}
-                className="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 transition"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Modals */}
-      {deletemodalOn && <DeleteUser setdeleteModalOn={setDeleteModalOn} deleteuserid={deleteUserId} />}
-      {updatemodalOn && (
+      {updateModalOn && (
         <UpdateUser
           setupdateModalOn={setUpdateModalOn}
-          updateuserid={updateUserId}
-          updateemail={updateEmail}
-          updateusername={updateUsername}
+          updateuserid={updateuserid}
+          updateemail={updateemail}
+          updateusername={updateusername}
           setupdateemail={setUpdateEmail}
           setupdateusername={setUpdateUsername}
         />

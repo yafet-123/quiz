@@ -45,9 +45,9 @@ export async function getServerSideProps(context) {
       id: exam.id,
       title: exam.title,
       Questions: exam.Questions.map(q => ({
-        id: q.id,
+        id: q.id, 
         question: q.question,
-        correctOption: q.correctOption,
+        correctOption: q.correctAnswer,
         Options: q.Options.map(opt => ({
           id: opt.id,
           optionText: opt.optionText

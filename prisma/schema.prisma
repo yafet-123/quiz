@@ -6,7 +6,7 @@ datasource db {
   provider = "postgresql"  
   url      = env("DATABASE_URL")
 }  
-
+ 
 model User {
   id          Int       @id @default(autoincrement())
   name        String
@@ -160,7 +160,7 @@ model Question {
   createdAt DateTime @default(now())
   modifiedAt DateTime @updatedAt
 
-  Quiz      Quiz      @relation(fields: [quizId], references: [id])
+  Quiz      Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
   Options   Option[]
 }
 
@@ -169,7 +169,7 @@ model Option {
   optionText String
   questionId Int
 
-  Question   Question @relation(fields: [questionId], references: [id])
+  Question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
 } 
  
 model Exam {
@@ -193,7 +193,7 @@ model ExamQuestion {
   createdAt   DateTime     @default(now())
   modifiedAt  DateTime     @updatedAt
 
-  Exam        Exam         @relation(fields: [examId], references: [id])
+  Exam        Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
   Options     ExamOption[]
 }
 
@@ -202,7 +202,7 @@ model ExamOption {
   optionText   String
   examQuestionId Int
 
-  ExamQuestion ExamQuestion @relation(fields: [examQuestionId], references: [id])
+  ExamQuestion    ExamQuestion @relation(fields: [examQuestionId], references: [id], onDelete: Cascade)
 }
 
 model Worksheet {
@@ -226,7 +226,7 @@ model WorksheetQuestion {
   createdAt   DateTime     @default(now())
   modifiedAt  DateTime     @updatedAt
 
-  Worksheet   Worksheet         @relation(fields: [worksheetId], references: [id])
+  Worksheet   Worksheet         @relation(fields: [worksheetId], references: [id], onDelete: Cascade)
   Options     WorksheetOption[]
 }
 
@@ -235,7 +235,7 @@ model WorksheetOption {
   optionText   String
   worksheetQuestionId Int
 
-  WorksheetQuestion WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id])
+  WorksheetQuestion WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id], onDelete: Cascade)
 }
 
 model FlashcardTopic {

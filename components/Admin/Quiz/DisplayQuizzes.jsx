@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { UpdateQuiz } from "./UpdateQuiz"; // create this modal similar to UpdateExam
+import { DeleteQuiz } from "./DeleteQuiz"; // create this modal similar to DeleteExam
 
 export function DisplayQuizzes({ subjects }) {
+  const [updateModalOn, setUpdateModalOn] = useState(false);
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
+  const [subject, setSubject] = useState(null);
+  const [selectedQuiz, setSelectedQuiz] = useState(null);
+
+  const handleEdit = (subject, quiz) => {
+    setSubject(subject);
+    setSelectedQuiz(quiz);
+    setUpdateModalOn(true);
+  };
+
+  const handleDelete = (subject, quiz) => {
+    setSubject(subject);
+    setSelectedQuiz(quiz);
+    setDeleteModalOn(true);
+  };
+
   return (
     <div className="px-2 lg:px-12 py-12 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800 italic">
@@ -16,16 +35,22 @@ export function DisplayQuizzes({ subjects }) {
           {subject.Quizzes.map((quiz) => (
             <div
               key={quiz.id}
-              className="bg-white rounded-2xl shadow-lg p-6 mb-8 hover:shadow-xl transition-shadow duration-300"
+              className="bg-white rounded-2xl shadow-lg p-6 mb-8 hover:shadow-xl transition-shadow"
             >
               {/* Quiz Header */}
               <div className="flex justify-between items-center mb-6 border-b pb-3">
                 <h3 className="text-2xl font-semibold">{quiz.title}</h3>
                 <div className="flex gap-3">
-                  <button className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition">
+                  <button
+                    onClick={() => handleEdit(subject, quiz)}
+                    className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition"
+                  >
                     <FiEdit2 /> Edit
                   </button>
-                  <button className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
+                  <button
+                    onClick={() => handleDelete(subject, quiz)}
+                    className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition"
+                  >
                     <FiTrash2 /> Delete
                   </button>
                 </div>
@@ -38,12 +63,10 @@ export function DisplayQuizzes({ subjects }) {
                     key={q.id}
                     className="p-4 rounded-xl bg-gray-50 border border-gray-200 hover:border-[#009688] transition"
                   >
-                    {/* Question */}
                     <p className="text-lg font-semibold mb-2">
                       {idx + 1}. {q.question}
                     </p>
 
-                    {/* Options */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
                       {q.Options?.map((opt, i) => (
                         <span
@@ -59,12 +82,9 @@ export function DisplayQuizzes({ subjects }) {
                       ))}
                     </div>
 
-                    {/* Correct Answer */}
                     <p className="text-sm text-green-700 font-semibold mt-1">
                       Correct Answer: {q.answer}
                     </p>
-
-                    {/* Created At */}
                     <p className="text-xs text-gray-500 mt-1">
                       Created on: {moment(q.createdAt).format("YYYY-MM-DD")}
                     </p>
@@ -75,6 +95,24 @@ export function DisplayQuizzes({ subjects }) {
           ))}
         </div>
       ))}
+
+      {/* Modals */}
+      {updateModalOn && selectedQuiz && (
+        <UpdateQuiz
+          quizId={selectedQuiz.id}
+          currentQuiz={selectedQuiz}
+          subjects={subjects}
+          subject={subject}
+          setUpdateModalOn={setUpdateModalOn}
+        />
+      )}
+
+      {deleteModalOn && selectedQuiz && (
+        <DeleteQuiz
+          quizId={selectedQuiz.id}
+          setDeleteModalOn={setDeleteModalOn}
+        />
+      )}
     </div>
   );
 }
