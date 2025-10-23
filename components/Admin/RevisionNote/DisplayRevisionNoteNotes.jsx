@@ -1,8 +1,25 @@
-import React from "react";
+// DisplayComprehensiveNotes.js
+import React, { useState } from "react";
 import moment from "moment";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { UpdateNote } from "./UpdateNote"; // Create this component
+import { DeleteNote } from "./DeleteNote"; // Create this component
 
-export function DisplayRevisionNoteNotes({ notes }) {
+export function DisplayRevisionNoteNotes({ notes, subjects }) {
+  const [updateModalOn, setUpdateModalOn] = useState(false);
+  const [deleteModalOn, setDeleteModalOn] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  const handleEdit = (note) => {
+    setSelectedNote(note);
+    setUpdateModalOn(true);
+  };
+
+  const handleDelete = (note) => {
+    setSelectedNote(note);
+    setDeleteModalOn(true);
+  };
+
   return (
     <div className="px-2 lg:px-12 py-12 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800 italic">
@@ -33,10 +50,16 @@ export function DisplayRevisionNoteNotes({ notes }) {
               </div>
 
               <div className="flex gap-3">
-                <button className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition">
+                <button
+                  onClick={() => handleEdit(note)}
+                  className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition"
+                >
                   <FiEdit2 /> Edit
                 </button>
-                <button className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
+                <button
+                  onClick={() => handleDelete(note)}
+                  className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition"
+                >
                   <FiTrash2 /> Delete
                 </button>
               </div>
@@ -49,6 +72,23 @@ export function DisplayRevisionNoteNotes({ notes }) {
             ></div>
           </div>
         ))
+      )}
+
+      {/* Update Modal */}
+      {updateModalOn && selectedNote && (
+        <UpdateNote
+          note={selectedNote}
+          setUpdateModalOn={setUpdateModalOn}
+          subjects={subjects}
+        />
+      )}
+
+      {/* Delete Modal */}
+      {deleteModalOn && selectedNote && (
+        <DeleteNote
+          noteId={selectedNote.id}
+          setDeleteModalOn={setDeleteModalOn}
+        />
       )}
     </div>
   );

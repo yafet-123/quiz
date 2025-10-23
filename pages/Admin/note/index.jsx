@@ -38,9 +38,10 @@ export async function getServerSideProps(context) {
       title: note.title,
       content: note.content,
       subject: note.Subject ? note.Subject.name : "No subject",
+      subjectId: note.subjectId,
       createdAt: note.createdAt
     }));
-
+    console.log(formattedNotes)
     // Format subjects for client
     const formattedSubjects = subjects.map(sub => ({
       id: sub.id,
@@ -83,7 +84,7 @@ export default function FlashcardsPage({ subjects, notes }) {
             <AddComprehensiveNotes subjects={subjects} />
 
             {/* Display Existing Topics & Flashcards */}
-            <DisplayComprehensiveNotes notes={notes} />
+            <DisplayComprehensiveNotes notes={notes} subjects={subjects} />
           </div>
         </div>
       </section>

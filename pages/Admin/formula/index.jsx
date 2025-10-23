@@ -40,6 +40,7 @@ const formattedSubjects = subjects.map((sub) => ({
   FormulaSheet: sub.FormulaSheet.map((sheet) => ({
     id: sheet.id,
     title: sheet.title,
+    description: sheet.description,
     formula: sheet.formula,
     Topic: sheet.Topic ? { id: sheet.Topic.id, name: sheet.Topic.name } : null,
   })),
@@ -63,7 +64,7 @@ export default function QuizzesPage({ subjects }) {
       <MainHeader title="Quizzes Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-24">
         <div className='w-full h-full flex flex-row'>
-          <VerticalNavbar data={data} />
+          <VerticalNavbar data={data} /> 
           <div className="w-full px-6">
             {/* Add Quiz & Questions Form */}
             <AddFormula subjects={subjects} />

@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
 
   try {
     
-
+ 
     // Fetch all notes with related subjects
     const notes = await prisma.RevisionNote.findMany({
       include: { Subject: true },
@@ -38,7 +38,8 @@ export async function getServerSideProps(context) {
       title: note.title,
       content: note.content,
       subject: note.Subject ? note.Subject.name : "No subject",
-      createdAt: note.createdAt
+      subjectId: note.subjectId,
+      createdAt: note.createdAt,
     }));
 
     // Format subjects for client
@@ -83,7 +84,7 @@ export default function RevisionNotePage({ subjects, notes }) {
             <AddRevisionNoteNotes subjects={subjects} />
 
             {/* Display Existing Topics & Flashcards */}
-            <DisplayRevisionNoteNotes notes={notes} />
+            <DisplayRevisionNoteNotes notes={notes} subjects={subjects} />
           </div>
         </div>
       </section>

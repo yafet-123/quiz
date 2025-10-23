@@ -6,7 +6,7 @@ datasource db {
   provider = "postgresql"  
   url      = env("DATABASE_URL")
 }  
- 
+  
 model User {
   id          Int       @id @default(autoincrement())
   name        String
@@ -103,7 +103,7 @@ model FormulaSheet {
   updatedAt   DateTime    @updatedAt
 
   Subject     Subject     @relation(fields: [subjectId], references: [id])
-  Topic       Topic       @relation(fields: [topicId], references: [id])
+  Topic       Topic       @relation(fields: [topicId], references: [id], onDelete: Cascade)
   User        User        @relation(fields: [createdBy], references: [id])
 }
 
