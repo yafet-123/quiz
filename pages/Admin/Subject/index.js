@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { getSession } from "next-auth/react";
-  
+   
 export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();
@@ -35,10 +35,11 @@ export async function getServerSideProps(context){
   });
   console.log(subjectes)
   const Allsujectes = subjectes.map((data)=>({
-      subject_id:data.id,
+      id:data.id,
       SubjectName:data.name,
       description: data.description,
       CreatedDate:data.createdAt,
+      svg:data.svg,
       ModifiedDate:data.modifiedAt,
       User:data.User?.name,
   }))

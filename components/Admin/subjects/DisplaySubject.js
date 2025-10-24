@@ -10,60 +10,62 @@ export function DisplaySubject({ subjectes }) {
   const [deletemodalOn, setdeleteModalOn] = useState(false);
   const [updatemodalOn, setupdateModalOn] = useState(false);
   const [deletesubjectid, setdeletesubjectid] = useState();
-  const [updatesubjectid, setupdatesubjectid] = useState();
-  const [updatesubjectname, setupdatesubjectname] = useState("");
+  const [subject, setsubject] = useState();
 
   return (
-    <div className="px-4 lg:px-10 py-10">
-      <h1 className="text-center text-3xl font-bold mb-8 text-gray-800 italic">
+    <div className="px-4 lg:px-12 py-12 bg-gray-50 min-h-screen">
+      <h1 className="text-4xl font-bold text-center mb-10 text-gray-800 italic">
         Subjects List
       </h1>
 
-      {/* Desktop Table */}
-      <div className="hidden md:block overflow-x-auto shadow-md rounded-2xl">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead className="bg-gray-100 text-gray-700 uppercase text-sm">
+      {/* Desktop View */}
+      <div className="hidden md:block overflow-x-auto rounded-2xl shadow-md border border-gray-200">
+        <table className="min-w-full bg-white">
+          <thead className="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm uppercase tracking-wide">
             <tr>
-              <th className="px-6 py-4 text-left">ID</th>
-              <th className="px-6 py-4 text-left">Subject Name</th>
-              <th className="px-6 py-4 text-left">Description</th>
-              <th className="px-6 py-4 text-left">Created Date</th>
-              <th className="px-6 py-4 text-left">Modified Date</th>
-              <th className="px-6 py-4 text-center">Actions</th>
+              <th className="px-6 py-4 text-left font-semibold">ID</th>
+              <th className="px-6 py-4 text-left font-semibold">Subject Name</th>
+              <th className="px-6 py-4 text-left font-semibold">Description</th>
+              <th className="px-6 py-4 text-left font-semibold">Created</th>
+              <th className="px-6 py-4 text-left font-semibold">Modified</th>
+              <th className="px-6 py-4 text-center font-semibold">Actions</th>
             </tr>
           </thead>
-          <tbody className="text-gray-600 divide-y divide-gray-200">
+          <tbody className="text-gray-700 divide-y divide-gray-200">
             {subjectes.map((data, index) => (
               <tr
                 key={index}
-                className="hover:bg-gray-50 transition duration-200"
+                className="hover:bg-gray-100 transition duration-200 ease-in-out"
               >
-                <td className="px-6 py-4 font-semibold">{data.subject_id}</td>
-                <td className="px-6 py-4 font-medium">{data.SubjectName}</td>
-                <td className="px-6 py-4 text-gray-500">{data.description}</td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-4 font-semibold text-emerald-700">
+                  {data.id}
+                </td>
+                <td className="px-2 py-4 font-medium">{data.SubjectName}</td>
+                <td className="px-2 py-4 text-gray-600">
+                  {data.description || "—"}
+                </td>
+                <td className="px-2 py-4 text-sm text-gray-500">
                   {moment(data.createDate).utc().format("YYYY-MM-DD")}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-2 py-4 text-sm text-gray-500">
                   {moment(data.ModifiedDate).utc().format("YYYY-MM-DD")}
                 </td>
-                <td className="px-6 py-4 text-center space-x-3">
+                <td className="flex px-2 py-4 text-center space-x-2">
                   <button
                     onClick={() => {
                       setupdateModalOn(true);
-                      setupdatesubjectid(data.subject_id);
-                      setupdatesubjectname(data.SubjectName);
+                      setsubject(data)
                     }}
-                    className="inline-flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl transition-transform transform hover:scale-105"
+                    className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-sm"
                   >
                     <FiEdit2 /> Edit
                   </button>
                   <button
                     onClick={() => {
                       setdeleteModalOn(true);
-                      setdeletesubjectid(data.subject_id);
+                      setdeletesubjectid(data.id);
                     }}
-                    className="inline-flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition-transform transform hover:scale-105"
+                    className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all transform hover:scale-105 shadow-sm"
                   >
                     <FiTrash2 /> Delete
                   </button>
@@ -75,24 +77,25 @@ export function DisplaySubject({ subjectes }) {
       </div>
 
       {/* Mobile Cards */}
-      <div className="md:hidden grid grid-cols-1 gap-4">
+      <div className="md:hidden grid grid-cols-1 gap-6">
         {subjectes.map((data, index) => (
           <div
             key={index}
-            className="bg-white shadow-md rounded-xl p-5 border border-gray-200"
+            className="bg-white border border-gray-200 rounded-2xl shadow-md p-5 transition-all hover:shadow-lg"
           >
             <div className="mb-3">
-              <h2 className="text-lg font-semibold text-gray-800">
+              <h2 className="text-xl font-semibold text-emerald-700">
                 {data.SubjectName}
               </h2>
-              <p className="text-sm text-gray-500">ID: {data.subject_id}</p>
+              <p className="text-xs text-gray-500">ID: {data.id}</p>
             </div>
 
             <p className="text-gray-700 text-sm mb-2">
-              <span className="font-semibold">Description:</span> {data.description}
+              <span className="font-semibold">Description:</span>{" "}
+              {data.description || "—"}
             </p>
 
-            <div className="text-gray-700 text-sm space-y-1">
+            <div className="text-gray-600 text-sm space-y-1">
               <p>
                 <span className="font-semibold">Created:</span>{" "}
                 {moment(data.createDate).utc().format("YYYY-MM-DD")}
@@ -103,24 +106,24 @@ export function DisplaySubject({ subjectes }) {
               </p>
             </div>
 
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between items-center">
               <button
                 onClick={() => {
                   setupdateModalOn(true);
-                  setupdatesubjectid(data.subject_id);
-                  setupdatesubjectname(data.SubjectName);
+                  setsubject(data)
                 }}
-                className="flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm transition-transform transform hover:scale-105"
+                className={`flex items-center gap-1 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm 
+                transition-all hover:scale-105 shadow-sm`}
               >
                 <FiEdit2 /> Edit
               </button>
-
               <button
                 onClick={() => {
                   setdeleteModalOn(true);
-                  setdeletesubjectid(data.subject_id);
+                  setdeletesubjectid(data.id);
                 }}
-                className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-transform transform hover:scale-105"
+                className={`flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm 
+                transition-all hover:scale-105 shadow-sm`}
               >
                 <FiTrash2 /> Delete
               </button>
@@ -136,14 +139,10 @@ export function DisplaySubject({ subjectes }) {
           deletesubjectid={deletesubjectid}
         />
       )}
-
       {updatemodalOn && (
         <UpdateSubject
           setupdateModalOn={setupdateModalOn}
-          updatesubjectid={updatesubjectid}
-          updatesubjectname={updatesubjectname}
-          setupdatesubjectname={setupdatesubjectname}
-          setupdatesubjectid={setupdatesubjectid}
+          subject={subject}
         />
       )}
     </div>

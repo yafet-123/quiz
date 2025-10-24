@@ -7,7 +7,7 @@ export default async function handledeletecategory(req, res){
 	const {deletesubjectid} = req.query
 	console.log(req.query)
 	const data = await prisma.Subject.delete({
-		where:{subject_id:Number(deletesubjectid)},
+		where:{id:Number(deletesubjectid)},
 	});
 	res.json(data)
 }

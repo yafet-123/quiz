@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { VerticalNavbar } from "../../../components/Admin/VerticalNavbar";
 import { MainHeader } from '../../../components/common/MainHeader';
 import { getSession } from "next-auth/react";
-
+ 
 export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();

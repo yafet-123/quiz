@@ -4,12 +4,14 @@ import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 
 export default async function handleupdatecategory(req, res){
-	const {updatesubjectid} = req.query
-	const {SubjectName} = req.body
+	const {subjectid} = req.query
+	const {subjectname ,subjectdescreption ,subjectsvg} = req.body
 	const data = await prisma.Subject.update({
-		where:{subject_id:Number(updatesubjectid)},
+		where:{id:Number(subjectid)},
 		data:{
-			SubjectName
+			name:subjectname,
+			description:subjectdescreption,
+			svg:subjectsvg,
 		},
 	});
 	res.json(data)
