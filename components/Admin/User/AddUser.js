@@ -38,13 +38,13 @@ export function AddUser() {
     setLoadingModalIsOpen(true);
 
     try {
-      await axios.post(`../api/user/registerUser`, {
+      await axios.post(`/api/user/registerUser`, {
         UserName: userName,
         Password: password,
         email,
         role: "admin",
         user_id: userData.user_id,
-      });
+      }); 
 
       setSuccess("User created successfully!");
       setUserName("");
