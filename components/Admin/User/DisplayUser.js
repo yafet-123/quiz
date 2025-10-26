@@ -1,28 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { UpdateUser } from "./UpdateUser";
+import { DeleteUser } from "./DeleteUser";
 
 export function DisplayUser({ users }) {
   const [updateModalOn, setUpdateModalOn] = useState(false);
   const [updateuserid, setUpdateUserid] = useState("");
   const [updateemail, setUpdateEmail] = useState("");
   const [updateusername, setUpdateUsername] = useState("");
-
   const [deleteModalOn, setDeleteModalOn] = useState(false);
   const [deleteUserid, setDeleteUserid] = useState("");
-
-  const handleDelete = async (id) => {
-    if (confirm("Are you sure you want to delete this user?")) {
-      try {
-        await axios.delete(`/api/user/deleteuser/${id}`);
-        alert("User deleted successfully!");
-        window.location.reload();
-      } catch (error) {
-        console.error(error);
-        alert("Failed to delete user.");
-      }
-    }
-  };
 
   const handleUpdateClick = (user) => {
     console.log(user.user_id)
@@ -66,7 +53,10 @@ export function DisplayUser({ users }) {
                       Update
                     </button>
                     <button
-                      onClick={() => handleDelete(user.user_id)}
+                      onClick={() => {
+                        setDeleteUserid(user.user_id);
+                        setDeleteModalOn(true);
+                      }}
                       className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
                     >
                       Delete
@@ -98,6 +88,15 @@ export function DisplayUser({ users }) {
           setupdateusername={setUpdateUsername}
         />
       )}
+
+      {/* Delete Modal */}
+      {deleteModalOn && (
+        <DeleteArticle
+          deleteuserid={deleteUserid}
+          setDeleteModalOn={setDeleteModalOn}
+        />
+      )}
+    </div>
     </div>
   );
 }
