@@ -32,7 +32,7 @@ export function DisplayUser({ users }) {
     setUpdateModalOn(true);
   };
 
-  return (
+  return ( 
     <div className="w-full mt-10 px-4 pb-10">
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">
         User Management
@@ -55,7 +55,7 @@ export function DisplayUser({ users }) {
                   key={user.id}
                   className="border-t border-gray-200 hover:bg-gray-100"
                 >
-                  <td className="py-3 px-4">{index + 1}</td>
+                  <td className="py-3 px-4">{user.user_id}</td>
                   <td className="py-3 px-4">{user.UserName}</td>
                   <td className="py-3 px-4">{user.email}</td>
                   <td className="py-3 px-4 flex justify-center gap-3">
