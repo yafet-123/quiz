@@ -89,14 +89,12 @@ export function DisplayUser({ users }) {
         />
       )}
 
-      {/* Delete Modal */}
       {deleteModalOn && (
         <DeleteArticle
           deleteuserid={deleteUserid}
           setDeleteModalOn={setDeleteModalOn}
         />
       )}
-    </div>
     </div>
   );
 }
