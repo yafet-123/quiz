@@ -33,7 +33,7 @@ export function AddUser() {
       setError("Password and Confirm Password must match.");
       return;
     }
-
+ 
     setLoading(true);
     setLoadingModalIsOpen(true);
 
@@ -43,7 +43,7 @@ export function AddUser() {
         Password: password,
         email,
         role: "admin",
-        user_id: userData.user_id,
+        user_id: 1,
       }); 
 
       setSuccess("User created successfully!");
