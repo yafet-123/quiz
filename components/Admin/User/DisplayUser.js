@@ -90,7 +90,7 @@ export function DisplayUser({ users }) {
       )}
 
       {deleteModalOn && (
-        <DeleteArticle
+        <DeleteUser
           deleteuserid={deleteUserid}
           setDeleteModalOn={setDeleteModalOn}
         />
