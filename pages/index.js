@@ -32,7 +32,7 @@ export default function Home() {
       {/* Online Platform Features */}
       <section className="py-20 bg-white px-6">
         <h3 className="text-3xl font-bold text-center text-purple-700 mb-10">
-          All-in-One Online Learning Platform
+          All in One Online Learning Platform
         </h3>
         <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
           Learn, practice, and test yourself with powerful study tools designed
@@ -153,7 +153,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 bg-purple-600 text-center text-white px-6">
+      <section className="py-20 bg-[#faf5ff] text-center text-white px-6">
         <FaEnvelopeOpenText className="text-5xl mx-auto mb-4" />
         <h3 className="text-3xl font-bold mb-4">Stay Updated</h3>
         <p className="text-lg mb-8 max-w-xl mx-auto text-purple-100">
@@ -177,7 +177,7 @@ export default function Home() {
 /* --- Reusable Components --- */
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105">
+    <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex justify-center items-center">
       <div className="text-purple-600 text-5xl mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{description}</p>
@@ -197,7 +197,7 @@ function StepCard({ number, title, description }) {
 
 function ReasonCard({ icon, title, text }) {
   return (
-    <div className="p-4">
+    <div className="p-4 flex justify-center items-center bg-[#f3e8ff]">
       <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{text}</p>
@@ -207,7 +207,7 @@ function ReasonCard({ icon, title, text }) {
 
 function JoinCard({ icon, title, description, buttonText }) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition">
+    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex justify-center items-center">
       <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
       <h4 className="text-2xl font-semibold mb-3">{title}</h4>
       <p className="text-gray-600 mb-6">{description}</p>
