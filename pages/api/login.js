@@ -9,6 +9,8 @@ export default async function handleaddlogin(req, res){
 	if (!username || !password) {
     	throw new Error("Please provide all values");
   	} 
+
+  	console.log(username)
   	const user = await prisma.User.findUnique({
     	where: { 
     		name: username 
