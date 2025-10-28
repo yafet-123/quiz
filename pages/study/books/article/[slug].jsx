@@ -1,7 +1,6 @@
 import { MainHeader } from "../../../../components/common/MainHeader";
 import { prisma } from "../../../../util/db.server";
 import Link from "next/link";
-import { MainHeader } from '../../../../components/common/MainHeader';
 import React from "react";
 
 export default function ArticleDetail({ article }) {
