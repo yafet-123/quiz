@@ -8,10 +8,10 @@ export default async function handleaddlogin(req, res){
 
 	if (!username || !password) {
     	throw new Error("Please provide all values");
-  	}
+  	} 
   	const user = await prisma.User.findUnique({
     	where: { 
-    		UserName: username 
+    		name: username 
     	},
   	});
   	// get the username
@@ -24,7 +24,7 @@ export default async function handleaddlogin(req, res){
   	// if there is no user throw the error
 
   	const comparePassword = async function (candidatePassword) {
-    	const isMatch = await bcrypt.compare(candidatePassword, user.Password);
+    	const isMatch = await bcrypt.compare(candidatePassword, user.password);
     	return isMatch;
   	};
 
@@ -40,7 +40,7 @@ export default async function handleaddlogin(req, res){
 
   	// if the paswors is incorrect please through error
   	const createJWT = jwt.sign(
-    	{ userId: user.user_id, user: user.UserName },
+    	{ userId: user.id, user: user.name },
     	process.env.JWT_SECRET,
     	{
       		expiresIn: process.env.JWT_LIFETIME,
@@ -49,8 +49,8 @@ export default async function handleaddlogin(req, res){
   	const token = createJWT;
 
   	res.status(StatusCodes.OK).json({
-    	userId: user.user_id,
-    	name: user.UserName,
+    	userId: user.id,
+    	name: user.name,
     	role:user.role,
     	email:user.email,
     	token

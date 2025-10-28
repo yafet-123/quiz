@@ -26,7 +26,7 @@ export default function SignIn({ csrfToken }) {
                     validationSchema={Yup.object({
                         username: Yup.string().required('Please enter your username'),
                         password: Yup.string().required('Please enter your password'),
-                    })}
+                    })} 
                     onSubmit={async (values, { setSubmitting }) => {
                         const res = await signIn('user-credentials', {
                             username: values.username,
