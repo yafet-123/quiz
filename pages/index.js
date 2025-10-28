@@ -177,7 +177,7 @@ export default function Home() {
 /* --- Reusable Components --- */
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex justify-center items-center">
+    <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center">
       <div className="text-purple-600 text-5xl mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{description}</p>
@@ -197,7 +197,7 @@ function StepCard({ number, title, description }) {
 
 function ReasonCard({ icon, title, text }) {
   return (
-    <div className="p-4 flex justify-center items-center bg-[#f3e8ff]">
+    <div className="p-4 flex flex-col justify-center items-center bg-[#f3e8ff]">
       <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{text}</p>
@@ -207,7 +207,7 @@ function ReasonCard({ icon, title, text }) {
 
 function JoinCard({ icon, title, description, buttonText }) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex justify-center items-center">
+    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex flex-col justify-center items-center">
       <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
       <h4 className="text-2xl font-semibold mb-3">{title}</h4>
       <p className="text-gray-600 mb-6">{description}</p>
