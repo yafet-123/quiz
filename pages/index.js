@@ -156,7 +156,7 @@ export default function Home() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="py-20 bg-[#faf5ff] text-center text-white px-6">
+        <section className="py-20 bg-[#faf5ff] text-center text-black px-6">
           <FaEnvelopeOpenText className="text-5xl mx-auto mb-4" />
           <h3 className="text-3xl font-bold mb-4">Stay Updated</h3>
           <p className="text-lg mb-8 max-w-xl mx-auto text-purple-100">
@@ -168,7 +168,7 @@ export default function Home() {
               placeholder="Enter your email"
               className="px-4 py-3 rounded-lg w-full sm:w-2/3 text-gray-800"
             />
-            <button className="bg-white text-purple-700 font-semibold px-6 py-3 rounded-lg hover:bg-purple-100">
+            <button className="bg-[#9333ea] text-purple-700 font-semibold px-6 py-3 rounded-lg hover:bg-purple-100">
               Subscribe
             </button>
           </form>
