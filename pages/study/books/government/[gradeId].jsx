@@ -1,12 +1,14 @@
 import { MainHeader } from "../../../../components/common/MainHeader";
 import { getAllBooks, getGradeBook } from "../../../../data/BooksData.jsx";
 import GradeSpecifiedBooks from "../../../../components/books/GradeSpecifiedBooks";
+import { MainHeader } from '../../../../components/common/MainHeader';
+import React from "react";
 
 export default function BookGradeDetail({ grades, all_grade_books }) {
   console.log(grades);
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title={`MatricMate`} />
+      <MainHeader title={`Save My Exam: Government Book`} />
       <GradeSpecifiedBooks grades={grades} />
     </div>
   );

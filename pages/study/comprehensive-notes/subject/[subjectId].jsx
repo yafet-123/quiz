@@ -50,7 +50,7 @@ export default function BookGradeDetail({ notes }) {
   };
   return (
     <div className="py-32 px-5 lg:px-20">
-      <MainHeader title={`MatricMate`} />
+      <MainHeader title="Save My Exam : Comprehensive Note Subject Page" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {notes.map((note) => (
           <div

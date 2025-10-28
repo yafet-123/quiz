@@ -6,7 +6,7 @@ export default function BookDetail({ books, all_grade_books }) {
   books = books[0]
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title={`MatricMate`} />
+      <MainHeader title={`Save My Exam: Government Grade Book`} />
       <DetailBook books={books} />
     </div>
   );

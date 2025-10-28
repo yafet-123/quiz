@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { IoIosArrowUp } from "react-icons/io";
 import Subject from "../../../components/comprehensive-notes/subject.jsx"
+import { MainHeader } from '../../../components/common/MainHeader';
 
 const reasons = [
   {
@@ -63,77 +64,79 @@ const steps = [
 
 export default function ComprehensiveNotes({subjects}) {
   return (
-    <div className="bg-gray-50 min-h-screen py-20">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-32 text-center px-6">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          Comprehensive Notes
-        </h1>
-        <p className="text-lg md:text-xl mb-8">
-          Access structured notes for every subject to make learning simpler and more effective.
-        </p>
-      </section>
+    <React.Fragment>
+      <MainHeader title="Save My Exam : Revision Note Page" />
+      <div className="bg-gray-50 min-h-screen py-20">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-32 text-center px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Comprehensive Notes
+          </h1>
+          <p className="text-lg md:text-xl mb-8">
+            Access structured notes for every subject to make learning simpler and more effective.
+          </p>
+        </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 px-6 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Why Use Comprehensive Notes?
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {reasons.map((reason) => (
-            <div
-              key={reason.id}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
-            >
-              <div>{reason.icon}</div>
-              <h3 className="text-xl font-semibold text-gray-700 text-center">{reason.title}</h3>
-              <p className="text-gray-600 text-center">{reason.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Steps Section */}
-      <section className="py-16 px-6 bg-gray-50">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
-          How to Use Notes Effectively
-        </h2>
-
-        <div className="max-w-6xl mx-auto">
-          {steps.map((step, index) => (
-            <div
-              key={step.id}
-              className={`flex flex-col md:flex-row items-center ${
-                index % 2 !== 0 ? "md:flex-row-reverse" : ""
-              }`}
-            >
-              {/* Image */}
-              <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
-                <Image
-                  src={step.image}
-                  alt={step.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className=""
-                />
+        {/* Benefits Section */}
+        <section className="py-16 px-6 max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Why Use Comprehensive Notes?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {reasons.map((reason) => (
+              <div
+                key={reason.id}
+                className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex flex-col items-center space-y-4"
+              >
+                <div>{reason.icon}</div>
+                <h3 className="text-xl font-semibold text-gray-700 text-center">{reason.title}</h3>
+                <p className="text-gray-600 text-center">{reason.description}</p>
               </div>
+            ))}
+          </div>
+        </section>
 
-              {/* Text */}
-              <div className="lg:w-1/2 w-full md:px-12 mt-6 md:mt-0">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 text-lg">{step.description}</p>
+        {/* Steps Section */}
+        <section className="py-16 px-6 bg-gray-50">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+            How to Use Notes Effectively
+          </h2>
+
+          <div className="max-w-6xl mx-auto">
+            {steps.map((step, index) => (
+              <div
+                key={step.id}
+                className={`flex flex-col md:flex-row items-center ${
+                  index % 2 !== 0 ? "md:flex-row-reverse" : ""
+                }`}
+              >
+                {/* Image */}
+                <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
+                  <Image
+                    src={step.image}
+                    alt={step.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className=""
+                  />
+                </div>
+
+                {/* Text */}
+                <div className="lg:w-1/2 w-full md:px-12 mt-6 md:mt-0">
+                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 text-lg">{step.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      {/* Features Section */}
-      <Subject subjects={subjects} />
-
-    </div>
+        {/* Features Section */}
+        <Subject subjects={subjects} />
+      </div>
+    </React.Fragment>
   );
 }
 

@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function BookDetail({ notes }) {
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title={`MatricMate`} />
+      <MainHeader title="Save My Exam : Comprehensive Note Individual Page" />
       <div className="min-h-screen bg-gray-50 py-24 px-4 md:px-10">
         {/* Breadcrumb / Navigation */}
         <div className="max-w-6xl mx-auto mb-6 flex flex-col md:flex-row md:items-center md:justify-between">

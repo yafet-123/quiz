@@ -44,7 +44,6 @@ export default function FormulaSheetPage({ formulaSheets }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title={`Formula Sheets`} />
-
       {formulaSheets.length === 0 ? (
         <p className="text-center text-gray-600 mt-10">
           No formula sheets found for this subject.

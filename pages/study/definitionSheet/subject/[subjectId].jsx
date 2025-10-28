@@ -45,7 +45,7 @@ export default function SubjectDefinitionSheets({ sheets }) {
 
   return (
     <div className="py-32 px-5 lg:px-20">
-      <MainHeader title={`Definition Sheets`} />
+      <MainHeader title="Save My Exam : Definition Sheet Subject Page" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sheets.map((sheet) => (
           <div

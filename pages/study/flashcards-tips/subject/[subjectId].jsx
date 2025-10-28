@@ -9,7 +9,7 @@ export default function BookGradeDetail({ topics }) {
   
   return (
     <div className="py-32 px-5 lg:px-20">
-      <MainHeader title={`MatricMate`} />
+      <MainHeader title="Save My Exam : Flashcard Subject Page" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {topics.map((flash) => (
           <Link key={flash.title} href={`/study/flashcards-tips/${flash.Subject.name}/flashcard/${flash.id}`}>

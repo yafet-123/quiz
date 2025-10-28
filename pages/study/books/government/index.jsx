@@ -1,10 +1,14 @@
 import Image from "next/image";
 import Category from "../../../../components/books/Category";
-
+import { MainHeader } from '../../../../components/common/MainHeader';
+import React from "react";
 export default function Books() {
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <Category />
-    </div>
+    <React.Fragment>
+      <MainHeader title="Save My Exam : Government Book Page" />
+      <div className="bg-gray-50 min-h-screen">
+        <Category />
+      </div>
+    </React.Fragment>
   );
 }

@@ -2,12 +2,13 @@
 import { MainHeader } from "../../../components/common/MainHeader";
 import { prisma } from "../../../util/db.server";
 import Link from "next/link";
+import React from "react";
 
 export default function DefinitionSheetDetail({ sheet }) {
   if (!sheet) {
     return (
       <div className="py-32 text-center text-gray-600">
-        <MainHeader title="MatricMate" />
+        <MainHeader title="Save My Exam : Definition Sheet Individual Page" />
         <p>Definition sheet not found.</p>
       </div>
     );
