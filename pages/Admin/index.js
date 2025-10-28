@@ -1,5 +1,5 @@
 import { VerticalNavbar } from "../../components/Admin/VerticalNavbar";
-import { DashBoard } from "../../components/Admin/DashBoard";
+import DashBoard from "../../components/Admin/DashBoard";
 import { useSession } from "next-auth/react";
 import { useState,useEffect} from 'react'
 import { useRouter } from 'next/router'
