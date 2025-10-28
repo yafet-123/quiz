@@ -12,20 +12,20 @@ export function DisplayUser({ users }) {
   const [deleteUserid, setDeleteUserid] = useState("");
 
   const handleUpdateClick = (user) => {
-    console.log(user.user_id)
     setUpdateUserid(user.user_id);
     setUpdateEmail(user.email);
     setUpdateUsername(user.UserName);
     setUpdateModalOn(true);
   };
 
-  return ( 
+  return (
     <div className="w-full mt-10 px-4 pb-10">
       <h1 className="text-2xl font-bold mb-6 text-center text-gray-700">
         User Management
       </h1>
 
-      <div className="overflow-x-auto">
+      {/* Desktop Table View */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full border border-gray-300 rounded-lg bg-white">
           <thead className="bg-[#009688] text-white">
             <tr>
@@ -37,9 +37,9 @@ export function DisplayUser({ users }) {
           </thead>
           <tbody>
             {users && users.length > 0 ? (
-              users.map((user, index) => (
+              users.map((user) => (
                 <tr
-                  key={user.id}
+                  key={user.user_id}
                   className="border-t border-gray-200 hover:bg-gray-100"
                 >
                   <td className="py-3 px-4">{user.user_id}</td>
@@ -76,6 +76,48 @@ export function DisplayUser({ users }) {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Card View */}
+      <div className="md:hidden space-y-4">
+        {users && users.length > 0 ? (
+          users.map((user) => (
+            <div
+              key={user.user_id}
+              className="border border-gray-300 rounded-xl bg-white shadow-sm p-4"
+            >
+              <p className="text-gray-800 font-semibold">
+                ID: <span className="font-normal">{user.user_id}</span>
+              </p>
+              <p className="text-gray-800 font-semibold">
+                Username: <span className="font-normal">{user.UserName}</span>
+              </p>
+              <p className="text-gray-800 font-semibold">
+                Email: <span className="font-normal">{user.email}</span>
+              </p>
+
+              <div className="flex justify-end gap-2 mt-4">
+                <button
+                  onClick={() => handleUpdateClick(user)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-lg text-sm"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => {
+                    setDeleteUserid(user.user_id);
+                    setDeleteModalOn(true);
+                  }}
+                  className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500 italic">No users found.</p>
+        )}
       </div>
 
       {updateModalOn && (

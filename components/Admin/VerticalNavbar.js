@@ -8,7 +8,7 @@ import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
 import { BsCardText } from "react-icons/bs";
 import { GiBookmarklet } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
-
+ 
 export function VerticalNavbar() {
   const router = useRouter();
   const path = router.pathname;

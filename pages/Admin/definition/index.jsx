@@ -11,14 +11,14 @@ export async function getServerSideProps(context) {
   const userRole = session?.user?.role;
 
   // Optional admin-only access
-  // if (userRole !== "admin") {
-  //   return {
-  //     redirect: {
-  //       destination: "/auth/Admin/Login/signin-user",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (userRole !== "admin") {
+    return {
+      redirect: {
+        destination: "/auth/Admin/Login/signin-user",
+        permanent: false,
+      },
+    };
+  }
 
   // ✅ Fetch all subjects with their definition sheets & definitions
   const subjects = await prisma.Subject.findMany({

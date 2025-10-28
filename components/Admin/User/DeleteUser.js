@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-export function DeleteUser({setdeleteModalOn,deleteuserid}) {
+export function DeleteUser({setDeleteModalOn,deleteuserid}) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

@@ -11,14 +11,14 @@ export async function getServerSideProps(context) {
   const userRole = session?.user?.role;
 
   // Optional: restrict access to admin/teacher roles
-  // if (userRole !== 'admin') {
-  //   return {
-  //     redirect: {
-  //       destination: '/auth/Admin/Login/signin-user',
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (userRole !== 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user',
+        permanent: false,
+      },
+    };
+  }
 
   // Fetch all subjects with exams and their questions
   const subjects = await prisma.Subject.findMany({

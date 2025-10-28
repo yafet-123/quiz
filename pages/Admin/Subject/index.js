@@ -12,14 +12,14 @@ export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();
   const userRole = session?.user?.role;
-  // if (userRole !== 'admin') {
-  //   return {
-  //     redirect: {
-  //       destination: '/auth/Admin/Login/signin-user',
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (userRole !== 'admin') {
+    return {
+      redirect: {
+        destination: '/auth/Admin/Login/signin-user',
+        permanent: false,
+      },
+    };
+  }
   
   const subjectes = await prisma.Subject.findMany({
     orderBy : {modifiedAt:'desc'},
