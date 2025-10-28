@@ -1,4 +1,3 @@
-import { MainHeader } from "../../../../components/common/MainHeader";
 import { getAllBooks, getSubjectBook } from "../../../../data/SupplementaryData.jsx";
 import SubjectSpecifiedBooks from "../../../../components/books/SubjectSpecifiedBooks";
 import { MainHeader } from '../../../../components/common/MainHeader';
