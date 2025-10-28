@@ -1,4 +1,5 @@
-import { MainHeader } from "../components/common/MainHeader";
+import { MainHeader } from '../components/common/MainHeader';
+import React from 'react'
 import TeamSection from "../components/Team/TeamSection"
 import {useRouter} from 'next/router'
 
@@ -9,11 +10,11 @@ export default function Home() {
     router.push(`/quiz`);
   };
   return (
-    <div className="">
-      <MainHeader title="Matrick Mate : Team" />
+    <React.Fragment>
+      <MainHeader title="Save My Exam : Team Page" />
       <div className="flex flex-col pt-20">
         <TeamSection />
       </div>
-    </div>
+    </React.Fragment>
   );
 }

@@ -1,4 +1,4 @@
-// pages/contact.js
+import { MainHeader } from '../components/common/MainHeader';
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
@@ -30,42 +30,45 @@ const Help = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-32 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold text-gray-800 mb-6 text-center">
-          Help & Quick Answers
-        </h1>
-        <p className="text-gray-600 mb-12 text-center text-lg">
-          Find answers to common questions below. Click on a question to see the answer.
-        </p>
+    <React.Fragment>
+      <MainHeader title="Save My Exam : Help Page" />
+      <div className="bg-gray-50 min-h-screen py-32 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-5xl font-bold text-gray-800 mb-6 text-center">
+            Help & Quick Answers
+          </h1>
+          <p className="text-gray-600 mb-12 text-center text-lg">
+            Find answers to common questions below. Click on a question to see the answer.
+          </p>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow cursor-pointer mb-5"
-              onClick={() => toggleFAQ(index)}
-            >
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                  {faq.question}
-                </h2>
-                <span className="text-purple-600">
-                  {openIndex === index ? (
-                    <AiOutlineMinus size={24} />
-                  ) : (
-                    <AiOutlinePlus size={24} />
-                  )}
-                </span>
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white p-6 rounded-lg shadow cursor-pointer mb-5"
+                onClick={() => toggleFAQ(index)}
+              >
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+                    {faq.question}
+                  </h2>
+                  <span className="text-purple-600">
+                    {openIndex === index ? (
+                      <AiOutlineMinus size={24} />
+                    ) : (
+                      <AiOutlinePlus size={24} />
+                    )}
+                  </span>
+                </div>
+                {openIndex === index && (
+                  <p className="text-gray-600 mt-4 text-lg">{faq.answer}</p>
+                )}
               </div>
-              {openIndex === index && (
-                <p className="text-gray-600 mt-4 text-lg">{faq.answer}</p>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 
