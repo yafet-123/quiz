@@ -5,35 +5,37 @@ import { StatusCodes } from "http-status-codes";
 
 export default async function handleaddlogin(req, res) {
   try {
-    const { username, password } = req.body;
-
+    const { username, password } = req.body; 
+    console.log(req.body)
     if (!username || !password) {
       throw new Error("Please provide all values");
     }
 
-    const user = await prisma.Students.findUnique({
+    const user = await prisma.Student.findUnique({
       where: {
-        UserName: username,
+        name: username,
       },
     });
-    console.log(user)
+
     if (!user) {
       throw new Error(`No ${username} can be found`);
     }
 
     const comparePassword = async function (candidatePassword) {
-      const isMatch = await bcrypt.compare(candidatePassword, user.Password);
+      const isMatch = await bcrypt.compare(candidatePassword, user.password);
       return isMatch;
     };
+
+    
 
     const isPasswordCorrect = await comparePassword(password);
 
     if (!isPasswordCorrect) {
       throw new Error("Invalid");
     }
-
+    console.log(isPasswordCorrect)
     const createJWT = jwt.sign(
-      { userId: user.students_id, user: user.UserName },
+      { userId: user.students_id, user: user.name },
       process.env.JWT_SECRET,
       {
         expiresIn: process.env.JWT_LIFETIME,
@@ -41,10 +43,10 @@ export default async function handleaddlogin(req, res) {
     );
 
     const token = createJWT;
-
+    console.log(user)
     res.status(StatusCodes.OK).json({
       userId: user.students_id,
-      name: user.UserName,
+      name: user.name,
       role: user.role,
       email: user.email,
       class_id: user.class_id,

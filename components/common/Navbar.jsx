@@ -113,7 +113,13 @@ export const Navbar = () => {
 
           {/* Sign Up Button */}
           <Link href="/signup">
-            <a className="ml-4 bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+            <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+              Login
+            </a>
+          </Link>
+
+          <Link href="/signup">
+            <a className="ml-10 bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-[#111827] transition">
               Sign Up
             </a>
           </Link>

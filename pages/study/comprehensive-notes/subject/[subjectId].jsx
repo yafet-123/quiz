@@ -51,20 +51,26 @@ export default function BookGradeDetail({ notes }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title="Save My Exam : Comprehensive Note Subject Page" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {notes.map((note) => (
-          <div
-            key={note.id}
-            className="cursor-pointer bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
-            onClick={() => goToDetail(note.id)}
-          >
-            <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
-            <p className="mt-2 text-sm md:text-base opacity-80">
-              Click to view full note
-            </p>
+        {notes.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {notes.map((note) => (
+              <div
+                key={note.id}
+                className="cursor-pointer bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+                onClick={() => goToDetail(note.id)}
+              >
+                <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
+                <p className="mt-2 text-sm md:text-base opacity-80">
+                  Click to view full note
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        ) : (
+          <p className="text-center text-gray-600 text-lg">
+            There are currently no Comprehensive Note available for this subject. Please check back later.
+          </p>
+        )}
     </div>
   );
 }

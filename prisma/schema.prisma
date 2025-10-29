@@ -12,7 +12,7 @@ model User {
   name        String    @unique
   email       String    @unique
   password    String
-  role        String    @default("student")
+  role        String    @default("admin")
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
 
@@ -25,7 +25,51 @@ model User {
   FormulaSheet FormulaSheet[]
   DefinitionSheet DefinitionSheet[]
   Article  Article[]
+  Announcement Announcement[]
 }
+
+model Announcement {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  // Optional: if you want to target specific subjects or groups
+  // subject   Subject? @relation(fields: [subjectId], references: [id])
+  // subjectId Int?
+
+  // All students can see announcements by default
+}
+
+model Student {
+  id           Int       @id @default(autoincrement())
+  name         String    @unique
+  email        String    @unique
+  password     String
+  gradeLevel   String?
+  schoolName   String?
+  dateOfBirth  DateTime?
+  gender       String?
+  enrolledAt   DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  role         String    @default("student")
+
+  // Only relationship kept
+  Exams        Exam[]
+  Task         Task[]
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  text        String
+  students_id Int
+  completed   Boolean
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime @default(now()) @db.Timestamptz(6)
+  Student     Student  @relation(fields: [students_id], references: [id], onUpdate: NoAction)
+}
+
 
 model Subject {
   id          Int       @id @default(autoincrement())
@@ -177,11 +221,13 @@ model Exam {
   title       String
   subjectId   Int
   createdBy   Int
+  studentId   Int?
   createdAt   DateTime        @default(now())
   modifiedAt  DateTime        @updatedAt
 
   Subject     Subject          @relation(fields: [subjectId], references: [id])
   User        User             @relation(fields: [createdBy], references: [id])
+  Student     Student?         @relation(fields: [studentId], references: [id], onDelete: Cascade)
   Questions   ExamQuestion[]
 }
 

@@ -11,16 +11,24 @@ export default function BookGradeDetail({ topics }) {
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title="Save My Exam : Flashcard Subject Page" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {topics.map((flash) => (
-          <Link key={flash.title} href={`/study/flashcards-tips/${flash.Subject.name}/flashcard/${flash.id}`}>
-            <a className="flex flex-col items-center gap-3 p-4 rounded-xl bg-[#ededf2] shadow hover:shadow-lg transition text-left">
-              <span className="text-2xl text-indigo-500">
-                <FaBook />
-              </span>
-              <span className="font-medium">{flash.title}</span>
-            </a>
-          </Link>
-        ))}
+        {topics.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {topics.map((flash) => (
+              <Link key={flash.title} href={`/study/flashcards-tips/${flash.Subject.name}/flashcard/${flash.id}`}>
+                <a className="flex flex-col items-center gap-3 p-4 rounded-xl bg-[#ededf2] shadow hover:shadow-lg transition text-left">
+                  <span className="text-2xl text-indigo-500">
+                    <FaBook />
+                  </span>
+                  <span className="font-medium">{flash.title}</span>
+                </a>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-600 text-lg">
+            There are currently no Flash Card available for this subject. Please check back later.
+          </p>
+        )}
       </div>
     </div>
   );

@@ -46,19 +46,26 @@ export default function SubjectDefinitionSheets({ sheets }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title="Save My Exam : Definition Sheet Subject Page" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sheets.map((sheet) => (
-          <div
-            key={sheet.id}
-            className="cursor-pointer bg-gradient-to-r from-teal-500 to-green-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
-            onClick={() => goToSheetDetail(sheet.id)}
-          >
-            <h2 className="font-bold text-xl md:text-2xl">{sheet.title}</h2>
-            <p className="mt-2 text-sm md:text-base opacity-80">
-              Click to view full definitions
-            </p>
+        {sheets.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {sheets.map((sheet) => (
+              <div
+                key={sheet.id}
+                className="cursor-pointer bg-gradient-to-r from-teal-500 to-green-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+                onClick={() => goToSheetDetail(sheet.id)}
+              >
+                <h2 className="font-bold text-xl md:text-2xl">{sheet.title}</h2>
+                <p className="mt-2 text-sm md:text-base opacity-80">
+                  Click to view full definitions
+                </p>
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          <p className="text-center text-gray-600 text-lg">
+            There are currently no Definition Sheet available for this subject. Please check back later.
+          </p>
+        )}
       </div>
     </div>
   );
