@@ -60,6 +60,17 @@ model Student {
   Task         Task[]
 }
 
+model StudentExamAnswer {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  examId      Int
+  question    String
+  selectedAnswer String
+  correctAnswer  String
+  createdAt   DateTime @default(now())
+}
+
+
 model Task {
   id          Int      @id @default(autoincrement())
   text        String

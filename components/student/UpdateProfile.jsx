@@ -1,146 +1,125 @@
-
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router'
-import { useState,useEffect, useContext} from 'react'
-import Loader from "../common/Loading";
-import ReactModal from "react-modal";
 
-export function UpdateProfile({updatestudentsid,updatefirstName,updatelastName,updateage,updateUserName,updateemail,setupdateModalOn,setupdatefirstName,setupdatelastName,setupdateage,setupdateUserName,setupdateemail}) {
-    const router = useRouter();
-    const [loading, setLoading] = useState(false);
-    const [LoadingmodalIsOpen, setLoadingModalIsOpen] = useState(false);
-    const handleOKClickForupdate = async() => {
-        setLoadingModalIsOpen(true)
-        const data = await axios.patch(`../api/student/updateProfile/${updatestudentsid}`,{
-            "firstName": updatefirstName,
-            "lastName":updatelastName,
-			"age":updateage,
-			"UserName":updateUserName,
-			"email":updateemail,
-        }).then(function (response) {
-            console.log(response.data);
-            router.reload()
-        }).catch(function (error) {
-            console.log(error);
-            setLoadingModalIsOpen(false)
-        });
-        setupdateModalOn(false)
-       
+export function UpdateProfile({ updateData, setUpdateData, setUpdateModalOn }) {
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setUpdateData({
+      ...updateData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.patch(`/api/student/updateProfile/${updateData.students_id}`, updateData);
+      console.log("Updated response:", response.data);
+      setUpdateModalOn(false);
+      window.location.reload(); // Or update state locally for smoother UX
+    } catch (error) {
+      console.error("Update failed:", error);
+      alert("Failed to update profile.");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    const handleCancelClickForupdate = () => {
-        setupdateModalOn(false)
-    }
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex justify-center items-center z-50">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 w-11/12 max-w-md relative">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Update Profile
+        </h2>
 
-	return(
-		<div className="bg-gray-200 opacity-95 fixed inset-0 z-50   ">
-            <div className="flex h-screen justify-center items-center ">
-                <div className="flex-col justify-center bg-white py-24 px-5 lg:px-10 border-4 border-sky-500 rounded-xl ">
-                    <div className="flex text-center text-xl text-zinc-600 font-bold mb-10" >Update Profile</div>
-                    <div className="flex flex-col justify-between items-center">
-                    	<div className="relative mb-10 w-full">
-	                        <input 
-	                        	id="email" 
-	                        	type="text" 
-	                           	className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-	                           	value={updateUserName}
-	                            onChange={(e) => setupdateusername(e.target.value)}
-	                        />
-		                    <label 
-		                        htmlFor="floating_outlined" 
-		                        className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-		                    >
-		                        UserName
-		                    </label>
-	                    </div>
-                    	<div className="flex flex-col lg:flex-row justify-between items-center mb-5">
-	                        <div className="relative mb-10 lg:px-2">
-	                            <input 
-	                            	id="firstName" 
-	                            	type="text" 
-	                            	className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-	                            	value={updatefirstName}
-	                            	onChange={(e) => setupdatefirstName(e.target.value)}
-	                            />
-	                            <label 
-	                                htmlFor="floating_outlined" 
-	                                className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-	                            >
-	                                First Name
-	                            </label>
-	                        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Full Name */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">Full Name</label>
+            <input
+              type="text"
+              name="name"
+              value={updateData.name}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
 
-	                        <div className="relative mb-10 lg:px-2">
-	                            <input 
-	                            	id="lastName" 
-	                            	type="text" 
-	                               	className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-	                               	value={updatelastName}
-	                               	onChange={(e) => setupdatelastName(e.target.value)}
-	                           	/>
-		                        <label 
-		                            htmlFor="floating_outlined" 
-		                            className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-		                        >
-		                            Last Name
-		                        </label>
-	                        </div>
-	                    </div>
+          {/* School Name */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">School Name</label>
+            <input
+              type="text"
+              name="schoolName"
+              value={updateData.schoolName}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
 
-	                    <div className="flex flex-col lg:flex-row justify-between items-center mb-5">
-	                        <div className="relative mb-10 lg:px-2">
-	                            <input 
-	                            	id="age" 
-	                            	type="text" 
-	                            	className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-	                            	value={updateage}
-	                            	onChange={(e) => setupdateage(e.target.value)}
-	                            />
-	                            <label 
-	                                htmlFor="floating_outlined" 
-	                                className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-	                            >
-	                                Age
-	                            </label>
-	                        </div>
+          {/* Date of Birth */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">Date of Birth</label>
+            <input
+              type="date"
+              name="dateOfBirth"
+              value={updateData.dateOfBirth || ""}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
 
-	                        <div className="relative mb-10 lg:px-2">
-	                            <input 
-	                            	id="email" 
-	                            	type="text" 
-	                               	className="block w-full px-3 text-xl text-black bg-transparent py-4 border-2 border-black rounded-xl appearance-none   focus:outline-none focus:ring-0 focus:border-blue-500 peer" placeholder=" "
-	                               	value={updateemail}
-	                               	onChange={(e) => setupdateemail(e.target.value)}
-	                           	/>
-		                        <label 
-		                            htmlFor="floating_outlined" 
-		                            className="absolute text-2xl text-black duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
-		                        >
-		                            Email
-		                        </label>
-	                        </div>
-	                    </div>
-                    </div>
-                    <div className="flex">
-                        <button 
-                            disabled={loading}
-                            onClick={handleOKClickForupdate} 
-                            className={`rounded px-4 py-4  ${loading ? "text-black bg-gray-200" : "text-white  bg-[#009688] hover:bg-[#009688]"}`}
-                        >
-                            Yes
-                        </button>
-                        <button onClick={handleCancelClickForupdate} className="rounded px-4 py-4 ml-4 text-white bg-blue-400 hover:bg-blue-600">No</button>
-                    </div>
+          {/* Gender */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">Gender</label>
+            <select
+              name="gender"
+              value={updateData.gender}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            >
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
 
-                    <ReactModal
-                        isOpen={LoadingmodalIsOpen}
-                        // onRequestClose={closeModal}
-                        className="flex items-center justify-center w-full h-full"
-                    >
-                        <Loader />
-                    </ReactModal>
-                </div>
-           	</div>
-        </div>
-	)
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={updateData.email}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            />
+          </div>
+
+          {/* Buttons */}
+          <div className="flex justify-end space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={() => setUpdateModalOn(false)}
+              className="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-150"
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={`px-4 py-2 rounded-lg text-white transition duration-150 ${
+                loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+              }`}
+              disabled={loading}
+            >
+              {loading ? 'Saving...' : 'Save Changes'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

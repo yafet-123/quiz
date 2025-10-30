@@ -14,7 +14,7 @@ import Profile from '../../components/student/Profile'
 import Announcements from '../../components/student/Announcements'
 
 export async function getServerSideProps(context){
-  const serverdate = new Date();
+  const serverdate = new Date().toISOString();
   const session = await getSession(context);
   const userRole = session?.user?.role;
    if (userRole !== 'student') {
@@ -25,14 +25,22 @@ export async function getServerSideProps(context){
        },
      };
    }
-   console.log(session)
   const student = await prisma.Student.findUnique({
     where:{ name: session.user.name },
   });
+  console.log(student)
+  const tasks = await prisma.Task.findMany({
+    where: {
+      students_id: Number(student.id),
+    },
+    orderBy: {
+      createdAt: 'desc', // 'asc' for oldest to newest
+    },
+  });
+
 
   const studentId = student.id
 
-  console.log(student)
   if (student === null) {
     return {
       redirect: {
@@ -43,15 +51,21 @@ export async function getServerSideProps(context){
   }
 
   const Allstudents = {
-  students_id: student.id,
-  name: student.name,
-  schoolName: student.schoolName,
-  dateOfBirth: student.dateOfBirth ? student.dateOfBirth.toISOString() : null,
-  gender: student.gender,
-  email: student.email,
-};
+    students_id: student.id,
+    name: student.name,
+    schoolName: student.schoolName,
+    dateOfBirth: student.dateOfBirth ? student.dateOfBirth.toISOString() : null,
+    gender: student.gender,
+    email: student.email,
+  };
 
-
+  const Alltasks = tasks.map((data)=>({
+    id: data.id,
+    text:data.text,
+    completed:data.completed,
+    students_id:data.students_id,
+  }))
+  console.log(Alltasks)
   const announcements = await prisma.Announcement.findMany({
     orderBy:{
       createdAt:'desc'
@@ -74,6 +88,7 @@ export async function getServerSideProps(context){
   }))
   return{
     props:{
+      tasks:Alltasks,
       Allannouncements,
       Allstudents,
       serverdate,
@@ -82,15 +97,15 @@ export async function getServerSideProps(context){
   }
 }
 
-export default function Students({Allannouncements, serverdate, Allstudents, studentId}){
+export default function Students({Allannouncements, tasks, serverdate, Allstudents, studentId}){
   function handleChange(newValue) {
       setselected(newValue);
   }
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="MatricMate : Admin" />
-      <div className="flex bg-[#e6e6e6] pt-10">
+      <MainHeader title="Save My Exam : Students" />
+      <div className="flex bg-[#e6e6e6] pt-24">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full">
           <div className="flex flex-col lg:flex-row justify-between items-center px-0 lg:px-10 mb-5">
@@ -99,7 +114,7 @@ export default function Students({Allannouncements, serverdate, Allstudents, stu
           </div>
           <div className="flex flex-col lg:flex-row justify-between px-2 lg:px-10 mb-5">
             <TodoList tasks={tasks} studentId={studentId} />
-            <Announcements announcements={announcements} />
+            <Announcements announcements={Allannouncements} />
           </div>
         </div>
       </div>

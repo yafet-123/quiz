@@ -10,7 +10,7 @@ const TodoList = ({ tasks, studentId }) => {
   const addTask = async () => {
     if (taskText.trim() === '') return;
       setLoading(true)
-      const data = await axios.post(`../../api/student/addStudent`,{
+      const data = await axios.post(`/api/student/addStudent`,{
         "text": taskText,
         "completed": false,
         "students_id":studentId
@@ -25,7 +25,7 @@ const TodoList = ({ tasks, studentId }) => {
 
   const deleteTask = async(id) => {
     setloadingforerror(true)
-    const data = await axios.delete(`../api/student/deletetask/${id}`,{
+    const data = await axios.delete(`/api/student/deletetask/${id}`,{
     }).then(function (response) {
       console.log(response.data);
       window.location.reload();

@@ -10,12 +10,9 @@ export default async function handleadduser(req, res){
 		data:{
 			text,
 			completed,
-			Students:{
-				connect: {students_id:Number(students_id)}
-			}
-			
+			students_id
 		},
 	});
-
+	console.log(data)
 	res.json("Success")
 }

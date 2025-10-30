@@ -4,12 +4,14 @@ import { Navbar } from '../common/Navbar';
 
 interface LayoutProps {
   children: React.ReactNode;
+  session?: any;
+  pageProps?: any;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, session, pageProps }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      <Navbar session={session} pageProps={pageProps} />
       <main className="flex-grow">{children}</main>
       <Footer />
     </div>
@@ -17,3 +19,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 };
 
 export default Layout;
+
