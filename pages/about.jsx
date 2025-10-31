@@ -1,5 +1,6 @@
 import { MainHeader } from '../components/common/MainHeader';
 import React from "react";
+import Link from "next/link"
 import Image from "next/image";
 import {
   FaUsers,
@@ -65,18 +66,20 @@ export default function AboutPage() {
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href="/signup"
-                    className="inline-flex items-center justify-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition"
-                  >
-                    {`Get started — it's free`}
-                  </a>
-                  <a
-                    href="/subjects"
-                    className="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 rounded-lg text-indigo-700 hover:bg-indigo-50 transition"
-                  >
-                    Browse subjects
-                  </a>
+                  <Link href="/signup">
+                    <a
+                      className="inline-flex items-center justify-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition"
+                    >
+                      {`Get started — it's free`}
+                    </a>
+                  </Link>
+                  <Link href="/subjects">
+                    <a
+                      className="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 rounded-lg text-indigo-700 hover:bg-indigo-50 transition"
+                    >
+                      Browse subjects
+                    </a>
+                  </Link>
                 </div>
               </div>
 
@@ -210,9 +213,11 @@ export default function AboutPage() {
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h3 className="text-2xl font-bold mb-4">Ready to level up your revision?</h3>
             <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
-            <a href="/signup" className="inline-flex items-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition">
-              {`Create an account — it's free`}
-            </a>
+            <Link href="/signup">
+              <a className="inline-flex items-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition">
+                {`Create an account — it's free`}
+              </a>
+            </Link>
           </div>
         </section>
       </div>
