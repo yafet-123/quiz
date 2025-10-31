@@ -112,7 +112,7 @@ export const Navbar = () => {
           ))}
 
           {/* Sign Up Button */}
-          <Link href="/signup">
+          <Link href="//auth/Student/Login/signin-student">
             <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
               Login
             </a>
@@ -185,6 +185,12 @@ export const Navbar = () => {
             ))}
             {/* Mobile Sign Up Button */}
             <li>
+              <Link href="//auth/Student/Login/signin-student">
+                <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+                  Login
+                </a>
+              </Link>
+          
               <Link href="/signup">
                 <a
                   onClick={() => setOpen(false)}
