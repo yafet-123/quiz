@@ -9,7 +9,7 @@ export default async function handlesearchadmin(req, res){
 
             return res.json({ status: "Invalid or expired reset token." });
         }
-        const updatedata = await prisma.Students.update({
+        const updatedata = await prisma.Student.update({
             where: { resetToken: token },
             data: { 
                 Password:bcrypt.hashSync(password, 8),
