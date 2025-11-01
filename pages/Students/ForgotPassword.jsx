@@ -2,6 +2,7 @@ import { MainHeader } from '../../components/common/MainHeader';
 import React, { useState } from "react";
 import axios from 'axios';
 import { HiOutlineLockClosed } from 'react-icons/hi';
+import Link from "next/link"
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -71,7 +72,9 @@ export default function ForgotPassword() {
             </button>
 
             <p className="text-center text-gray-500 text-sm mt-6">
-              Remembered your password? <a href="/auth/Admin/Login/signin-user" className="text-blue-600 hover:underline">Login</a>
+              Remembered your password? <Link href="/auth/Admin/Login/signin-user"> 
+              <a className="text-blue-600 hover:underline">Login</a>
+              </Link>
             </p>
           </div>
         </div>
