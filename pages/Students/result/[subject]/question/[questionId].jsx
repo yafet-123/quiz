@@ -49,9 +49,9 @@ export default function StudentExamResults({ results, student }) {
   return (
     <React.Fragment>
       <MainHeader title="Exam Results" />
-      <div className="flex bg-[#e6e6e6] w-full">
+      <div className="flex bg-[#e6e6e6] w-full pt-10">
         <VerticalNavbar data={data} />
-        <div className="min-h-screen flex flex-col items-center w-full bg-gray-50 py-20 px-6">
+        <div className="min-h-screen flex flex-col items-center w-full bg-gray-50 py-10 px-6">
           <div className="max-w-5xl w-full bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
               {student.name} Exam Results
