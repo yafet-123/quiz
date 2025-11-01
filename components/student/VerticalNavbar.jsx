@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
-import { RiAdminFill } from "react-icons/ri";
-import { FaBookOpen, FaStickyNote, FaListAlt, FaGraduationCap, FaLightbulb } from "react-icons/fa";
-import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
-import { BsCardText } from "react-icons/bs";
-import { GiBookmarklet } from "react-icons/gi";
+import { FaBookOpen, FaChartBar } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
- 
+
 export function VerticalNavbar() {
   const router = useRouter();
   const path = router.pathname;
@@ -17,7 +13,8 @@ export function VerticalNavbar() {
 
   const SideBarList = [
     { link: "/Students", icon: <AiFillDashboard size={24} />, name: "Dashboard" },
-    { link: "/Students/Exam", icon: <AiFillDashboard size={24} />, name: "Exam" },
+    { link: "/Students/Exam", icon: <FaBookOpen size={24} />, name: "Exam" },
+    { link: "/Students/result", icon: <FaChartBar size={24} />, name: "Result" },
   ];
 
   const renderLinks = () =>
@@ -26,7 +23,7 @@ export function VerticalNavbar() {
         <button
           onClick={() => {
             router.push(item.link);
-            setMobileOpen(false); // close mobile menu on mobile click
+            setMobileOpen(false);
           }}
           className={`flex items-center w-full px-3 py-2 rounded-xl transition-colors duration-200 ${
             path === item.link
@@ -35,7 +32,7 @@ export function VerticalNavbar() {
           }`}
         >
           <span>{item.icon}</span>
-          <span className="ml-3 font-medium">{item.name}</span>
+          {!collapsed && <span className="ml-3 font-medium">{item.name}</span>}
         </button>
       </li>
     ));
@@ -62,11 +59,9 @@ export function VerticalNavbar() {
 
       {/* Mobile Sidebar */}
       <div
-        className={`
-          fixed top-0 left-0 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 md:hidden
+        className={`fixed top-0 left-0 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 md:hidden
           ${mobileOpen ? "translate-x-0" : "-translate-x-full"}
-          w-64 overflow-y-auto
-        `}
+          w-64 overflow-y-auto`}
       >
         <nav className="flex flex-col justify-between h-full py-6 px-4">
           <div className="flex items-center justify-between mb-6">
@@ -81,7 +76,9 @@ export function VerticalNavbar() {
           <ul className="flex-1">{renderLinks()}</ul>
           <div className="px-3">
             <button
-              onClick={() => signOut({ callbackUrl: "/auth/Student/Login/signin-student" })}
+              onClick={() =>
+                signOut({ callbackUrl: "/auth/Student/Login/signin-student" })
+              }
               className="flex items-center w-full px-3 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
               <FiLogOut size={22} />
@@ -93,12 +90,15 @@ export function VerticalNavbar() {
 
       {/* Desktop Sidebar */}
       <div
-        className={`hidden md:flex flex-col top-24 sticky self-start h-screen bg-white shadow-lg
+        className={`hidden md:flex flex-col top-24 sticky self-start h-screen bg-white shadow-lg transition-all duration-300
           ${collapsed ? "w-20" : "w-72"} overflow-y-auto`}
       >
         <nav className="flex flex-col justify-between h-full pb-6 pt-16 px-4">
+          {/* Header */}
           <div className="flex items-center justify-between mb-6">
-            {!collapsed && <h1 className="text-2xl font-bold text-gray-800">Student Panel</h1>}
+            {!collapsed && (
+              <h1 className="text-2xl font-bold text-gray-800">Student Panel</h1>
+            )}
             <button
               onClick={() => setCollapsed(!collapsed)}
               className="text-gray-800 hover:text-gray-600 focus:outline-none"
@@ -106,10 +106,16 @@ export function VerticalNavbar() {
               <AiOutlineMenu size={28} />
             </button>
           </div>
+
+          {/* Links */}
           <ul className="flex-1">{renderLinks()}</ul>
+
+          {/* Logout */}
           <div className="px-3">
             <button
-              onClick={() => signOut({ callbackUrl: "/auth/Student/Login/signin-student" })}
+              onClick={() =>
+                signOut({ callbackUrl: "/auth/Student/Login/signin-student" })
+              }
               className="flex items-center w-full px-3 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
               <FiLogOut size={22} />

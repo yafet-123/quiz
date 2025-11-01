@@ -2,9 +2,9 @@ import { useState } from "react";
 import { FaUser, FaEnvelope, FaLock, FaArrowRight, FaSchool, FaCalendarAlt } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MainHeader } from "../components/common/MainHeader";
+import { MainHeader } from "../../../components/common/MainHeader";
 import axios from "axios";
-import { useSession, getSession,getCsrfToken } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 
 export default function SignUp() {
   const router = useRouter();
@@ -42,7 +42,7 @@ export default function SignUp() {
       const res = await axios.post("/api/student/signup", form);
 
       if (res.status === 200) {
-        router.push("/auth/Student/Login/signin-student");
+        router.reload()
       }
     } catch (err) {
       console.error(err);
@@ -55,13 +55,13 @@ export default function SignUp() {
   return ( 
     <>
       <MainHeader title="Save My Exam : Sign Up" />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-white px-4 py-24">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-white px-4 py-16">
         <div className="bg-white shadow-lg rounded-2xl p-8 md:p-10 w-full max-w-md">
           <h2 className="text-3xl font-bold text-center text-purple-700 mb-2">
-            Create Your Account
+            Add new Student
           </h2>
           <p className="text-center text-gray-500 mb-8">
-            Join thousands of students and start learning smarter.
+            Create an account for Student.
           </p>
 
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -91,16 +91,9 @@ export default function SignUp() {
                 loading ? "opacity-50 cursor-not-allowed" : "hover:bg-purple-700"
               }`}
             >
-              {loading ? "Please wait..." : <>Sign Up <FaArrowRight /></>}
+              {loading ? "Please wait..." : <>Add Student <FaArrowRight /></>}
             </button>
           </form>
-
-          <p className="text-center text-gray-600 text-sm mt-6">
-            Already have an account?{" "}
-            <Link href="/auth/Student/Login/signin-student" className="text-purple-600 font-semibold hover:underline">
-              Log in
-            </Link>
-          </p>
         </div>
       </div>
     </>
@@ -117,37 +110,4 @@ function InputField({ icon, label, ...props }) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  const userRole = await session?.user?.role;
-  console.log(userRole)
-  if (userRole === "student") {
-    return {
-      redirect: { destination: "/Students", permanent: false },
-    };
-  }
-  if (userRole === "teacher") {
-    return {
-      redirect: {
-        destination: "/auth/Teacher/Login/signin-teacher",
-        permanent: false,
-      },
-    };
-  }
-  if (userRole === "admin") {
-    return {
-      redirect: {
-        destination: "/auth/Admin/Login/signin-user",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  };
 }

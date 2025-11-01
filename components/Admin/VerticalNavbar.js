@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
-import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
-import { RiAdminFill } from "react-icons/ri";
-import { FaBookOpen, FaStickyNote, FaListAlt, FaGraduationCap, FaLightbulb } from "react-icons/fa";
+
+
+import { AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
+import { RiUser3Fill } from "react-icons/ri";
+import { FaUserGraduate, FaBook, FaListAlt, FaGraduationCap, FaLightbulb, FaStickyNote } from "react-icons/fa";
 import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
 import { BsCardText } from "react-icons/bs";
 import { GiBookmarklet } from "react-icons/gi";
 import { FiLogOut } from "react-icons/fi";
+
  
 export function VerticalNavbar() {
   const router = useRouter();
@@ -17,8 +20,10 @@ export function VerticalNavbar() {
 
   const SideBarList = [
     { link: "/Admin", icon: <AiFillDashboard size={24} />, name: "Dashboard" },
-    { link: "/Admin/User", icon: <RiAdminFill size={24} />, name: "User" },
-    { link: "/Admin/exam", icon: <FaBookOpen size={24} />, name: "Exam" },
+    { link: "/Admin/User", icon: <RiUser3Fill size={24} />, name: "User" },
+    { link: "/Admin/Student", icon: <FaUserGraduate size={24} />, name: "Student" },
+    { link: "/Admin/Announcement", icon: <FaStickyNote size={24} />, name: "Announcement" },
+    { link: "/Admin/exam", icon: <FaBook size={24} />, name: "Exam" },
     { link: "/Admin/quiz", icon: <MdOutlineQuiz size={24} />, name: "Quiz" },
     { link: "/Admin/worksheet", icon: <FaListAlt size={24} />, name: "Worksheet" },
     { link: "/Admin/formula", icon: <FaGraduationCap size={24} />, name: "Formula Sheet" },
@@ -29,7 +34,6 @@ export function VerticalNavbar() {
     { link: "/Admin/note", icon: <FaStickyNote size={24} />, name: "Comprehensive Notes" },
     { link: "/Admin/revisionnote", icon: <GiBookmarklet size={24} />, name: "Revision Note" },
   ];
-
   const renderLinks = () =>
     SideBarList.map((item, idx) => (
       <li key={idx} className="mb-3">

@@ -10,19 +10,19 @@ export default function BookDetail({ exames, subjectId }) {
   }
   const { status, data } = useSession();
   return (
-    <div className="antialiased bg-[#ededf2] min-h-screen">
+    <div className="antialiased bg-[#ededf2] min-h-screen pt-10">
       <MainHeader title="Save My Exam : Exam Subject Page" />
       <div className="flex bg-[#e6e6e6]">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <section className="px-4 py-24 max-w-4xl mx-auto w-full">
-          <h2 className="text-2xl font-bold mb-8 text-center mb-10">Exams</h2>
+        <section className="px-4 py-20 max-w-4xl mx-auto w-full">
+          <h2 className="text-2xl font-bold text-center mb-10">Exams</h2>
 
           {exames.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {exames.map((exam) => (
                 <Link
                   key={exam.id}
-                  href={`/Students/Exam/${exam.Subject.name}/question/${exam.id}`}
+                  href={`/Students/result/${exam.Subject.name}/question/${exam.id}`}
                 >
                   <a className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300">
                     <h3 className="text-lg font-semibold mb-2">{exam.title}</h3>

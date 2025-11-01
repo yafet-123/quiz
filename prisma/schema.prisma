@@ -42,12 +42,12 @@ model Announcement {
   // All students can see announcements by default
 }
 
-model Student {
+model Student { 
   id           Int       @id @default(autoincrement())
   name         String    @unique
   email        String    @unique
   password     String
-  gradeLevel   String?
+  gradeLevel   String? 
   schoolName   String?
   dateOfBirth  DateTime?
   gender       String?

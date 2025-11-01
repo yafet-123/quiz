@@ -6,8 +6,8 @@ import { StatusCodes } from "http-status-codes";
 export default async function handledeleteuser(req, res){
 	const {deleteuserid} = req.query
 	console.log(req.query)
-	const data = await prisma.Students.delete({
-		where:{students_id:Number(deleteuserid)},
+	const data = await prisma.Student.delete({
+		where:{id:Number(deleteuserid)},
 	});
 	res.json(data)
 }

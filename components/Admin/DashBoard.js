@@ -64,8 +64,19 @@ export default function DashBoard() {
       {/* Chart */}
       <div className="bg-white p-6 rounded-2xl shadow">
         <h2 className="text-xl font-semibold text-gray-700 mb-4">Activity Overview</h2>
-        <Bar 
-            data={chartData} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "top" } } }} />
+        <div className="h-96 w-full">  {/* adjust height — try h-64, h-80, h-96 */}
+          <Bar
+            data={chartData}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { position: "top" },
+              },
+            }}
+          />
+        </div>
+
       </div>
     </div>
   );
