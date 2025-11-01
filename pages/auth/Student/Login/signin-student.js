@@ -113,7 +113,7 @@ export default function SignIn({ csrfToken }) {
                   {/* Forgot Password */}
                   <div className="flex justify-end mb-5">
                     <Link
-                      href="/Students/Forgotpassword"
+                      href="/Students/ForgotPassword"
                       className="text-sm text-purple-600 hover:text-purple-800 font-semibold"
                     >
                       Forgot password?

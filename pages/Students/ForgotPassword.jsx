@@ -1,4 +1,4 @@
-import { MainHeader } from '../components/common/MainHeader';
+import { MainHeader } from '../../components/common/MainHeader';
 import React, { useState } from "react";
 import axios from 'axios';
 import { HiOutlineLockClosed } from 'react-icons/hi';
@@ -12,7 +12,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(`/api/forgotPassword`, { email });
+      const response = await axios.post(`/api/student/forgotPassword`, { email });
       setStatus(response.data.status);
     } catch (error) {
       console.log("Password Changing Failed", error);

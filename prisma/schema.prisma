@@ -15,6 +15,7 @@ model User {
   role        String    @default("admin")
   createdAt   DateTime  @default(now())
   modifiedAt  DateTime  @updatedAt
+  resetToken  String?
 
   Subjects    Subject[]
   Exams       Exam[]
@@ -54,7 +55,7 @@ model Student {
   enrolledAt   DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   role         String    @default("student")
-
+  resetToken   String?
   // Only relationship kept
   Exams        Exam[]
   Task         Task[]

@@ -14,7 +14,7 @@ export default function ResetPassword() {
   const { token } = router.query
   async function handleSubmit(e){
         e.preventDefault()
-        const data = await axios.post(`/api/ResetPassword`,{
+        const data = await axios.post(`/api/student/ResetPassword`,{
             "password": password,
             "token": token,
         }).then(function (response) {

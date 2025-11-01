@@ -1,4 +1,4 @@
-import { prisma } from '../../../util/db.server.js'
+import { prisma } from '../../util/db.server.js'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
@@ -6,28 +6,28 @@ import nodemailer from "nodemailer"
 
 export default async function handleforgotpassword(req, res){
 	const {email} = req.body;
-	const oldUser = await prisma.Student.findUnique({ 
+	const oldUser = await prisma.User.findUnique({ 
 		where:{
 			email:email
 		},
 	});
 
 	if (oldUser == null) {
-	  return res.json({ status: "Student does not exit" });
+	  return res.json({ status: "Admin User not exit" });
 	}
 
 	const secret = process.env.JWT_SECRET + oldUser.Password;
 	const token = jwt.sign({ email: oldUser.email, id: oldUser.user_id }, secret, {
 	  expiresIn: "5m",
 	});
-	const ResetToken = await prisma.Student.update({ 
+	const ResetToken = await prisma.User.update({ 
 		where:{
 			email:email
 		},
 		data:{resetToken : token}
 	});
  
-	const link = `${process.env.link}/Students/ResetPassword?token=${token}`;
+	const link = `${process.env.link}/ResetPassword?token=${token}`;
 	console.log(link)
 	var transporter = nodemailer.createTransport({
 	  	service: "gmail",
