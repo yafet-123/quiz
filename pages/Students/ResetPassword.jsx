@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { MainHeader } from '../components/common/MainHeader';
+import { MainHeader } from '../../components/common/MainHeader';
 import React from "react";
 
 export default function ResetPassword() {
