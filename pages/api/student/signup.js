@@ -36,7 +36,7 @@ export default async function handler(req, res) {
         schoolName,
         dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
         gender,
-        role: "",
+        role: "student",
       },
     });
 
