@@ -107,7 +107,7 @@ export function DisplayStudent({ students }) {
               </p>
               <p className="text-gray-800 font-semibold">
                 DOB: <span className="font-normal">
-                  moment(student.dateOfBirth).utc().format("YYYY-MM-DD")
+                  {moment(student.dateOfBirth).utc().format("YYYY-MM-DD")}
                 </span>
               </p>
               <p className="text-gray-800 font-semibold">
