@@ -12,9 +12,9 @@ export default function BookDetail({ exames, subjectId }) {
   return (
     <div className="antialiased bg-[#ededf2] min-h-screen">
       <MainHeader title="Save My Exam : Exam Subject Page" />
-      <div className="flex bg-[#e6e6e6]">
+      <div className="flex bg-[#e6e6e6] pt-10">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <section className="px-4 py-24 max-w-4xl mx-auto w-full">
+        <section className="px-4 py-16 max-w-4xl mx-auto w-full">
           <h2 className="text-2xl font-bold mb-8 text-center mb-10">Exams</h2>
 
           {exames.length > 0 ? (
