@@ -4,15 +4,16 @@ import bcrypt from "bcryptjs";
 export default async function handlesearchadmin(req, res){
     const { password, token } = req.body
     try {
-        const user = await prisma.User.findUnique({ where: { resetToken: token } });
+        const user = await prisma.User.findFirst({ where: { resetToken: token } });
         if (!user) {
 
             return res.json({ status: "Invalid or expired reset token." });
         }
-        const updatedata = await prisma.Teacher.update({
-            where: { resetToken: token },
+        const updatedata = await prisma.User.update({
+            where: { id: user.id },
             data: { 
-                Password:bcrypt.hashSync(password, 8),
+                password:bcrypt.hashSync(password, 8),
+                resetToken: null, // clear token after reset
             },
         });
         return res.json({ status: "Password Reset Success" });
