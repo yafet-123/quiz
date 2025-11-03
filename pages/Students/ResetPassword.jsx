@@ -75,7 +75,10 @@ export default function ResetPassword() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="relative">
+            <div className="relative w-full mb-8">
+              <label className="block text-gray-700 font-medium mb-3">
+                Email
+              </label>
               <input
                 id="password"
                 type="password"
@@ -85,15 +88,6 @@ export default function ResetPassword() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="peer w-full px-4 py-3 border-2 border-gray-300 rounded-xl text-gray-900 text-lg bg-transparent focus:border-blue-600 focus:outline-none transition"
               />
-              <label
-                htmlFor="password"
-                className="absolute text-gray-600 text-lg left-4 top-3.5 bg-white px-1 transition-all 
-                peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 
-                peer-placeholder-shown:text-base 
-                peer-focus:top-[-0.6rem] peer-focus:text-blue-600 peer-focus:text-sm"
-              >
-                New Password
-              </label>
             </div>
 
             {error && (
