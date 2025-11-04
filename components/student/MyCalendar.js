@@ -11,7 +11,7 @@ const MyCalendar = ({serverdate}) => {
 
   return (
     <div className="bg-white rounded-lg lg:p-8 shadow-md mx-5 ">
-      <h1 className="text-center text-2xl font-bold mb-5">Calender</h1>
+      <h1 className="text-center text-2xl font-bold my-5">Calender</h1>
       <Calendar onChange={onChange} value={date} />
     </div>
   );

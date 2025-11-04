@@ -66,7 +66,7 @@ export default function PracticeQuizzes({ subjects }) {
       <MainHeader title="Save My Exam : Exam Page" />
       <div className="flex bg-[#e6e6e6] ">
         <VerticalNavbar onChange={handleChange} data={data} />
-        <div className="bg-gray-50 min-h-screen pt-24 px-5">
+        <div className="bg-gray-50 min-h-screen pt-24 lg:px-5">
           {/* Hero Section */}
           <section className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-32 text-center px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -78,7 +78,7 @@ export default function PracticeQuizzes({ subjects }) {
           </section>
 
           {/* Benefits Section */}
-          <section className="py-16 px-16 max-w-5xl mx-auto">
+          <section className="py-5 lg:py-16 px-5 lg:px-16 max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
               Why Use Practice Exams?
             </h2>
@@ -97,7 +97,7 @@ export default function PracticeQuizzes({ subjects }) {
           </section>
 
           {/* Steps Section */}
-          <section className="py-16 px-6 bg-gray-50">
+          <section className="py-5 lg:py-16 px-5 lg:px-6 bg-gray-50">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
               How to Use Exams Effectively
             </h2>
@@ -133,7 +133,7 @@ export default function PracticeQuizzes({ subjects }) {
           </section>
 
           {/* Features Section */}
-          <section className="py-16 px-10 max-w-6xl mx-auto">
+          <section className="py-5 lg:py-16 px-10 max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
               Browse Practice Exams by Exam
             </h2>
