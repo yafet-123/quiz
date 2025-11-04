@@ -236,7 +236,7 @@ export default function ExamQuestionPage({ exam, subject, student }) {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col-reverse lg:flex-row justify-between items-center mb-4">
               <button
                 onClick={prevQuestion}
                 disabled={current === 0 || finished} // disable after submission
