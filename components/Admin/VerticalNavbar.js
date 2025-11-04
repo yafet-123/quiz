@@ -121,13 +121,13 @@ export function VerticalNavbar() {
             </button>
           </div>
           <ul className="flex-1">{renderLinks()}</ul>
-          <div className="px-3">
+          <div className="px-1">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/Admin/Login/signin-user" })}
-              className="flex items-center w-full px-3 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
+              className="flex items-center w-full px-1 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
               <FiLogOut size={22} />
-              {!collapsed && <span className="ml-3 font-medium">Log Out</span>}
+              {!collapsed && <span className="ml-1 font-medium">Log Out</span>}
             </button>
           </div>
         </nav>
