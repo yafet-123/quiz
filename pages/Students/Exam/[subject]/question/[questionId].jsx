@@ -240,7 +240,7 @@ export default function ExamQuestionPage({ exam, subject, student }) {
               <button
                 onClick={prevQuestion}
                 disabled={current === 0 || finished} // disable after submission
-                className="px-4 py-2 rounded-xl bg-gray-200 text-gray-700 disabled:opacity-50"
+                className="mt-0 lg:mt-5 px-4 py-2 rounded-xl bg-gray-200 text-gray-700 disabled:opacity-50"
               >
                 Previous
               </button>
