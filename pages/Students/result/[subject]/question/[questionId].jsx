@@ -49,16 +49,21 @@ export default function StudentExamResults({ results, student }) {
   return (
     <React.Fragment>
       <MainHeader title="Exam Results" />
-      <div className="flex bg-[#e6e6e6] w-full pt-10">
-        <VerticalNavbar data={data} />
-        <div className="min-h-screen flex flex-col items-center w-full bg-gray-50 py-10 px-6">
-          <div className="max-w-5xl w-full bg-white rounded-2xl shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <div className="flex flex-col lg:flex-row bg-[#e6e6e6] w-full min-h-screen pt-10">
+        {/* Sidebar */}
+        <div className="lg:w-1/4 w-full">
+          <VerticalNavbar data={data} />
+        </div>
+
+        {/* Main content */}
+        <div className="flex-1 flex flex-col items-center bg-gray-50 py-8 px-4 sm:px-6 md:px-8">
+          <div className="w-full max-w-5xl bg-white rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800">
               {student.name} Exam Results
             </h2>
 
             {results.length === 0 ? (
-              <p className="text-center text-gray-500">
+              <p className="text-center text-gray-500 text-sm sm:text-base">
                 No exam results found yet.
               </p>
             ) : (
@@ -74,36 +79,47 @@ export default function StudentExamResults({ results, student }) {
                 return (
                   <div
                     key={examId}
-                    className="mb-10 p-6 border rounded-2xl shadow-sm bg-gray-50"
+                    className="mb-8 sm:mb-10 p-4 sm:p-6 border rounded-2xl shadow-sm bg-gray-50"
                   >
-                    <h3 className="text-xl font-semibold text-indigo-700 mb-3">
+                    <h3 className="text-lg sm:text-xl font-semibold text-indigo-700 mb-2">
                       Exam ID: {examId}
                     </h3>
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 mb-3 text-sm sm:text-base">
                       Score:{" "}
                       <span className="font-semibold text-green-600">
                         {correctCount}/{totalQuestions} ({scorePercent}%)
                       </span>
                     </p>
 
+                    {/* Table wrapper with horizontal scroll on small screens */}
                     <div className="overflow-x-auto">
-                      <table className="w-full border-collapse">
+                      <table className="w-full border-collapse text-sm sm:text-base">
                         <thead>
                           <tr className="bg-indigo-100 text-gray-800">
-                            <th className="p-3 border text-left">#</th>
-                            <th className="p-3 border text-left">Question</th>
-                            <th className="p-3 border text-left">Your Answer</th>
-                            <th className="p-3 border text-left">Correct Answer</th>
-                            <th className="p-3 border text-left">Result</th>
+                            <th className="p-2 sm:p-3 border text-left">#</th>
+                            <th className="p-2 sm:p-3 border text-left min-w-[180px]">
+                              Question
+                            </th>
+                            <th className="p-2 sm:p-3 border text-left min-w-[130px]">
+                              Your Answer
+                            </th>
+                            <th className="p-2 sm:p-3 border text-left min-w-[130px]">
+                              Correct Answer
+                            </th>
+                            <th className="p-2 sm:p-3 border text-center">
+                              Result
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
                           {examResults.map((res, idx) => (
                             <tr key={res.id} className="hover:bg-gray-100">
-                              <td className="p-3 border">{idx + 1}</td>
-                              <td className="p-3 border">{res.question}</td>
+                              <td className="p-2 sm:p-3 border">{idx + 1}</td>
+                              <td className="p-2 sm:p-3 border break-words">
+                                {res.question}
+                              </td>
                               <td
-                                className={`p-3 border ${
+                                className={`p-2 sm:p-3 border ${
                                   res.selectedAnswer === res.correctAnswer
                                     ? "text-green-600 font-semibold"
                                     : "text-red-500 font-semibold"
@@ -111,9 +127,13 @@ export default function StudentExamResults({ results, student }) {
                               >
                                 {res.selectedAnswer || "Not Answered"}
                               </td>
-                              <td className="p-3 border">{res.correctAnswer}</td>
-                              <td className="p-3 border text-center">
-                                {res.selectedAnswer === res.correctAnswer ? "✅" : "❌"}
+                              <td className="p-2 sm:p-3 border">
+                                {res.correctAnswer}
+                              </td>
+                              <td className="p-2 sm:p-3 border text-center">
+                                {res.selectedAnswer === res.correctAnswer
+                                  ? "✅"
+                                  : "❌"}
                               </td>
                             </tr>
                           ))}
