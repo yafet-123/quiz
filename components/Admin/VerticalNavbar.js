@@ -42,14 +42,14 @@ export function VerticalNavbar() {
             router.push(item.link);
             setMobileOpen(false); // close mobile menu on mobile click
           }}
-          className={`flex items-center w-full px-2 py-2 rounded-xl transition-colors duration-200 ${
+          className={`flex items-center w-full px-1 py-2 rounded-xl transition-colors duration-200 ${
             path === item.link
               ? "bg-teal-600 text-white shadow-md"
               : "text-gray-700 hover:bg-teal-500 hover:text-white"
           }`}
         >
           <span>{item.icon}</span>
-          <span className="ml-2 font-medium">{item.name}</span>
+          <span className="ml-1 font-medium">{item.name}</span>
         </button>
       </li>
     ));
