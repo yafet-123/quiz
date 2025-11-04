@@ -7,7 +7,7 @@ import { FaFolder } from "react-icons/fa6";
 export default function ResultSubject({subjects}) {  
   return ( 
     <div className="min-h-screen">
-      <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-10">
         {subjects.map((subject) => (
           <Link href={`/Students/result/subject/${subject.id}`} key={subject.id}>
             <div
