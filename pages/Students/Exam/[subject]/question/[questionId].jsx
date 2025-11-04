@@ -167,7 +167,7 @@ export default function ExamQuestionPage({ exam, subject, student }) {
             </p>
 
             {/* Question Status Legend */}
-            <div className="flex gap-4 mb-4 justify-center text-sm">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-4 text-sm">
               <div className="flex items-center gap-1">
                 <span className="w-4 h-4 bg-gray-200 rounded-full border"></span> Not Answered
               </div>
