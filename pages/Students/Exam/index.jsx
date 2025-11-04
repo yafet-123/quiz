@@ -68,7 +68,7 @@ export default function PracticeQuizzes({ subjects }) {
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="bg-gray-50 min-h-screen pt-24 lg:px-5">
           {/* Hero Section */}
-          <section className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-32 text-center px-6">
+          <section className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-24 lg:py-32 text-center px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Practice Exams
             </h1>
