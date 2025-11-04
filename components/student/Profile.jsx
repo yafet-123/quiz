@@ -23,7 +23,7 @@ const Profile = ({ Allstudents }) => {
 
   return (
     <div className="flex flex-col mb-5">
-      <div className="bg-white rounded-xl p-8 shadow-lg w-full lg:w-80 text-center border border-gray-100">
+      <div className="bg-white rounded-xl p-5 lg:p-8 shadow-lg w-full lg:w-80 text-center border border-gray-100">
         <h1 className="text-center text-2xl font-bold mb-5 text-gray-800">Profile</h1>
         <div className="flex items-center justify-center mb-4">
           <div className="rounded-full overflow-hidden border-4 border-blue-500">
