@@ -20,7 +20,7 @@ export default function PracticeQuizzes({ subjects }) {
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="bg-gray-50 min-h-screen pt-10 w-full">
           {/* Features Section */}
-          <section className="py-16 px-10 max-w-6xl mx-auto">
+          <section className="py-5 lg:py-16 px-5 lg:px-10 max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-5 text-gray-800">
               View Your Practice Exam Results
             </h2>
