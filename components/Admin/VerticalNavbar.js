@@ -124,7 +124,8 @@ export function VerticalNavbar() {
           <div className="px-1">
             <button
               onClick={() => signOut({ callbackUrl: "/auth/Admin/Login/signin-user" })}
-              className="flex items-center w-full px-1 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white transition-colors duration-200"
+              className={`flex items-center w-full px-1 py-2 rounded-xl text-gray-700 hover:bg-red-500 hover:text-white 
+              transition-colors duration-200`}
             >
               <FiLogOut size={22} />
               {!collapsed && <span className="ml-1 font-medium">Log Out</span>}

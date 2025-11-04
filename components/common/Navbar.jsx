@@ -184,9 +184,9 @@ export const Navbar = () => {
               </li>
             ))}
             {/* Mobile Sign Up Button */}
-            <li>
+            <li className="flex flex-col">
               <Link href="//auth/Student/Login/signin-student">
-                <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+                <a className="mb-5 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
                   Login
                 </a>
               </Link>
