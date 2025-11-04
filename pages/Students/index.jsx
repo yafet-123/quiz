@@ -108,7 +108,7 @@ export default function Students({Allannouncements, tasks, serverdate, Allstuden
       <div className="flex bg-[#e6e6e6] pt-24">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full">
-          <div className="flex flex-col lg:flex-row justify-between items-center px-0 lg:px-10 mb-5">
+          <div className="flex flex-col lg:flex-row justify-between px-0 lg:px-10 mb-5">
             <Profile Allstudents={Allstudents} />
             <MyCalendar serverdate={serverdate} />
           </div>
