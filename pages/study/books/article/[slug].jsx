@@ -19,7 +19,7 @@ export default function ArticleDetail({ article }) {
       </div>
     );
   }
-
+  
   return (
     <div>
       <MainHeader title="Save My Exam : Article Slug Page" />
