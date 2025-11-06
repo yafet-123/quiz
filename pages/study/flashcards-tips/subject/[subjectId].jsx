@@ -10,7 +10,7 @@ export default function BookGradeDetail({ topics }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title="Save My Exam : Flashcard Subject Page" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="px-4 py-32 max-w-4xl mx-auto">
         {topics.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {topics.map((flash) => (
