@@ -1,5 +1,6 @@
 import { MainHeader } from '../components/common/MainHeader';
 import React from 'react'
+
 import {
   FaBookOpen,
   FaGraduationCap,
@@ -27,9 +28,12 @@ export default function Home() {
             Trusted by thousands of students to ace their GCSEs, IGCSEs, A Levels,
             and more.
           </p>
-          <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
-            Get Started
-          </button>
+
+          <Link href="/study">
+            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+              Get Started
+            </button>
+          </Link>
         </section>
 
         {/* Online Platform Features */}

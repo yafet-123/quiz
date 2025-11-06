@@ -70,14 +70,7 @@ export default function AboutPage() {
                     <a
                       className="inline-flex items-center justify-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition"
                     >
-                      {`Get started — it's free`}
-                    </a>
-                  </Link>
-                  <Link href="/subjects">
-                    <a
-                      className="inline-flex items-center justify-center px-6 py-3 border border-indigo-200 rounded-lg text-indigo-700 hover:bg-indigo-50 transition"
-                    >
-                      Browse subjects
+                      {`Get started. It's free`}
                     </a>
                   </Link>
                 </div>
