@@ -137,9 +137,6 @@ export default function Study() {
           <p className="text-lg md:text-xl mb-8">
             Explore study tools, practice quizzes, flashcards, and planners to boost your learning.
           </p>
-          <button className="bg-white text-green-500 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition">
-            Start Studying
-          </button>
         </section>
 
         {/* Benefits Section */}
