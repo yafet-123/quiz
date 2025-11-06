@@ -208,7 +208,7 @@ export default function AboutPage() {
             <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
             <Link href="/signup">
               <a className="inline-flex items-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition">
-                {`Create an account — it's free`}
+                {`Create an account. it's free`}
               </a>
             </Link>
           </div>
