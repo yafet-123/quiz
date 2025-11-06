@@ -1,6 +1,6 @@
 import { MainHeader } from '../components/common/MainHeader';
 import React from 'react'
-
+import Link from "next/link"
 import {
   FaBookOpen,
   FaGraduationCap,
