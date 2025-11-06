@@ -208,11 +208,11 @@ export default function Study() {
           </div>
         </section>
 
-        <section className="py-16 px-6 bg-gray-50">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+        <section className="py-16 px-6 bg-gray-200">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
             Why Students Love Our Study Tools
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
             {reasons.map((reason) => (
               <div
                 key={reason.id}
