@@ -8,7 +8,7 @@ export default function QuizSubject({subjects}) {
   return ( 
     <div className="min-h-screen">
       <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-        {subjects.map((subject) => (
+        {subjects.map((subject) => ( 
           <Link href={`/study/practice-quizzes/subject/${subject.id}`} key={subject.id}>
             <div
               className="group bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-lg hover:shadow-2xl 
