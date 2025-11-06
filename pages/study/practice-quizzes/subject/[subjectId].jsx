@@ -9,7 +9,7 @@ export default function BookDetail({ quizzes, subjectId }) {
       <MainHeader title="Save My Exam : Quiz Subject Page" />
       <section className="px-4 py-32 max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4 text-center">Quizzes</h2>
-        <d>
+        <>
         {quizzes.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {quizzes.map((quiz) => (
