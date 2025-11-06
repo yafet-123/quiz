@@ -130,7 +130,7 @@ export default function Study() {
       <MainHeader title="Save My Exam : Study Page" />
       <div className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-64 text-center px-6">
+        <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-40 text-center px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Learn Smarter, Anytime, Anywhere
           </h1>
