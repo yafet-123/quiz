@@ -13,6 +13,7 @@ export default function BookDetail({ worksheetes, subjectId }) {
         <MainHeader title={`MatricMate`} />
         <section className="px-4 py-32 max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-4 text-center">Worksheet</h2>
+          <div>
             {worksheetes.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {worksheetes.map((worksheet) => (
@@ -31,6 +32,7 @@ export default function BookDetail({ worksheetes, subjectId }) {
                 There are currently no worksheet available for this subject. Please check back later.
               </p>
             )}
+          </div>
         </section>
       </div>
     </React.Fragment>
