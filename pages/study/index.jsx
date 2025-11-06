@@ -144,7 +144,7 @@ export default function Study() {
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
             Why Use Our Study Tools?
           </h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-5">
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition flex items-center space-x-4">
               <FaBook className="w-10 h-10 text-green-500" />
               <p className="text-gray-700 font-medium">
@@ -212,7 +212,7 @@ export default function Study() {
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-10">
             Why Students Love Our Study Tools
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {reasons.map((reason) => (
               <div
                 key={reason.id}
