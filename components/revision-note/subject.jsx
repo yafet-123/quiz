@@ -18,7 +18,7 @@ export default function Subject({subjects}) {
               <div className="relative w-full h-64 overflow-hidden rounded-xl">
                 <Image
                   src={subject.svg}
-                  alt={subject.title}
+                  alt={subject.name}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-xl group-hover:scale-110 transition-transform duration-500 ease-in-out"
@@ -28,7 +28,7 @@ export default function Subject({subjects}) {
 
               {/* Text Section */}
               <h2 className="mt-6 text-2xl font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
-                {subject.title}
+                {subject.name}
               </h2>
               <p className="text-gray-600 mt-3 text-base leading-relaxed">
                 {subject.description}
