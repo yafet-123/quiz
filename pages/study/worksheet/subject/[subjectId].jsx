@@ -59,7 +59,7 @@ export async function getServerSideProps(context) {
     if (!worksheetes.length) {
       return {
         notFound: false,
-        props: { topics: [], subjectId },
+        props: { worksheetes: [], subjectId },
       };
     }
     console.log(worksheetes)

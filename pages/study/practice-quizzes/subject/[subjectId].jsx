@@ -54,7 +54,7 @@ export async function getServerSideProps(context) {
     if (!quizzes.length) {
       return {
         notFound: false,
-        props: { topics: [], subjectId },
+        props: { quizzes: [], subjectId },
       };
     }
     console.log(quizzes)
