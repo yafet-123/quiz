@@ -228,22 +228,6 @@ export default function Study() {
             ))}
           </div>
         </section>
-
-        {/* Features Section */}
-        <section className="py-16 px-6 max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Key Study Tools
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature) => (
-              <div key={feature.id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition">
-                <div className="flex justify-center mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2 text-center">{feature.title}</h3>
-                <p className="text-gray-600 text-center">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
     </React.Fragment>
   );
