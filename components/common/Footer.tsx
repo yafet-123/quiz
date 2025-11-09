@@ -32,7 +32,7 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#9333ea] text-white pt-12">
+    <footer className="bg-[#417094] text-white pt-12">
       <div className="max-w-7xl mx-auto px-5 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-8 py-5">
         {/* Logo + Social */}
         <div className="flex flex-col space-y-6">

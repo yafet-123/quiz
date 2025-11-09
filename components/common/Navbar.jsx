@@ -65,9 +65,9 @@ export const Navbar = () => {
                 <>
                   <button
                     onClick={() => toggleDropdown(link.name)}
-                    className={`flex items-center space-x-1 hover:text-purple-600 text-xl ${
+                    className={`flex items-center space-x-1 hover:text-[#417094] text-xl ${
                       router.pathname.startsWith(link.path)
-                        ? "text-purple-600 underline text-2xl font-bold"
+                        ? "text-[#417094] underline text-2xl font-bold"
                         : ""
                     }`}
                   >
@@ -83,7 +83,7 @@ export const Navbar = () => {
                             <a
                               className={`block px-4 py-2 hover:bg-gray-100 text-lg ${
                                 router.pathname === sublink.path
-                                  ? "text-purple-600 underline text-2xl font-bold"
+                                  ? "text-[#417094] underline text-2xl font-bold"
                                   : "text-gray-700 text-lg"
                               }`}
                             >
@@ -98,9 +98,9 @@ export const Navbar = () => {
               ) : (
                 <Link href={link.path}>
                   <a
-                    className={`hover:text-purple-800 text-lg ${
+                    className={`hover:text-[#417094] text-lg ${
                       router.pathname === link.path
-                        ? "text-purple-600 underline text-3xl font-bold"
+                        ? "text-[#417094] underline text-3xl font-bold"
                         : ""
                     }`}
                   >
@@ -113,13 +113,13 @@ export const Navbar = () => {
 
           {/* Sign Up Button */}
           <Link href="//auth/Student/Login/signin-student">
-            <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+            <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition">
               Login
             </a>
           </Link>
 
           <Link href="/signup">
-            <a className="ml-10 bg-purple-600 text-white px-5 py-2 rounded-lg hover:bg-[#111827] transition">
+            <a className="ml-10 bg-[#417094] text-white px-5 py-2 rounded-lg hover:bg-[#111827] transition">
               Sign Up
             </a>
           </Link>
@@ -157,7 +157,7 @@ export const Navbar = () => {
                             <Link href={sublink.path}>
                               <a
                                 onClick={() => setOpen(false)}
-                                className="block hover:text-purple-600"
+                                className="block hover:text-[#417094]"
                               >
                                 {sublink.name}
                               </a>
@@ -171,7 +171,7 @@ export const Navbar = () => {
                   <Link href={link.path}>
                     <a
                       onClick={() => setOpen(false)}
-                      className={`block hover:text-purple-800 text-lg ${
+                      className={`block hover:text-[#417094] text-lg ${
                         router.pathname === link.path
                           ? "text-indigo-600 underline text-3xl font-bold"
                           : ""
@@ -186,7 +186,7 @@ export const Navbar = () => {
             {/* Mobile Sign Up Button */}
             <li className="flex flex-col">
               <Link href="//auth/Student/Login/signin-student">
-                <a className="mb-5 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition">
+                <a className="mb-5 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition">
                   Login
                 </a>
               </Link>
@@ -194,7 +194,7 @@ export const Navbar = () => {
               <Link href="/signup">
                 <a
                   onClick={() => setOpen(false)}
-                  className="block text-center bg-purple-700 text-white px-5 py-2 rounded-lg hover:bg-purple-700 transition"
+                  className="block text-center bg-[#417094] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition"
                 >
                   Sign Up
                 </a>
