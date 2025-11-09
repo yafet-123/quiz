@@ -55,9 +55,9 @@ export default function SignUp() {
   return ( 
     <>
       <MainHeader title="Save My Exam : Sign Up" />
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-white px-4 py-24">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#417094] to-white px-4 py-24">
         <div className="bg-white shadow-lg rounded-2xl p-8 md:p-10 w-full max-w-md">
-          <h2 className="text-3xl font-bold text-center text-purple-700 mb-2">
+          <h2 className="text-3xl font-bold text-center text-[#417094] mb-2">
             Create Your Account
           </h2>
           <p className="text-center text-gray-500 mb-8">
@@ -75,7 +75,7 @@ export default function SignUp() {
 
             <div>
               <label className="block text-gray-700 font-medium mb-2">Gender</label>
-              <select name="gender" value={form.gender} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-500 outline-none">
+              <select name="gender" value={form.gender} onChange={handleChange} className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#417094] outline-none">
                 <option value="">Select Gender</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -87,8 +87,8 @@ export default function SignUp() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-purple-600 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 transition ${
-                loading ? "opacity-50 cursor-not-allowed" : "hover:bg-purple-700"
+              className={`w-full bg-[#417094] text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 transition ${
+                loading ? "opacity-50 cursor-not-allowed" : "hover:bg-[#417094]"
               }`}
             >
               {loading ? "Please wait..." : <>Sign Up <FaArrowRight /></>}
@@ -97,7 +97,7 @@ export default function SignUp() {
 
           <p className="text-center text-gray-600 text-sm mt-6">
             Already have an account?{" "}
-            <Link href="/auth/Student/Login/signin-student" className="text-purple-600 font-semibold hover:underline">
+            <Link href="/auth/Student/Login/signin-student" className="text-[#417094] font-semibold hover:underline">
               Log in
             </Link>
           </p>
@@ -111,7 +111,7 @@ function InputField({ icon, label, ...props }) {
   return (
     <div>
       <label className="block text-gray-700 font-medium mb-2">{label}</label>
-      <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500">
+      <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-[#417094]">
         {icon && <span className="text-gray-400 mr-3">{icon}</span>}
         <input className="w-full outline-none" {...props} required />
       </div>

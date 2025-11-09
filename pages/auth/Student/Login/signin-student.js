@@ -22,9 +22,9 @@ export default function SignIn({ csrfToken }) {
     return (
       <React.Fragment>
         <MainHeader title="Login Student" />
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-white to-purple-50 px-4">
-          <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8 border border-purple-100">
-            <h2 className="text-3xl font-bold text-center text-purple-700 mb-2">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#417094] via-white to-[#417094]px-4">
+          <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8 border border-[#417094]">
+            <h2 className="text-3xl font-bold text-center text-[#417094] mb-2">
               Welcome Back 👋
             </h2>
             <p className="text-center text-gray-600 mb-6">
@@ -73,8 +73,8 @@ export default function SignIn({ csrfToken }) {
                     <label className="block text-gray-700 font-medium mb-1">
                       Username
                     </label>
-                    <div className="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500">
-                      <FaUser className="text-purple-600 mr-2" />
+                    <div className="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-[#417094]">
+                      <FaUser className="text-[#417094] mr-2" />
                       <Field
                         name="username"
                         type="text"
@@ -94,8 +94,8 @@ export default function SignIn({ csrfToken }) {
                     <label className="block text-gray-700 font-medium mb-1">
                       Password
                     </label>
-                    <div className="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-purple-500">
-                      <FaLock className="text-purple-600 mr-2" />
+                    <div className="flex items-center border rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-[#417094]">
+                      <FaLock className="text-[#417094] mr-2" />
                       <Field
                         name="password"
                         type="password"
@@ -114,7 +114,7 @@ export default function SignIn({ csrfToken }) {
                   <div className="flex justify-end mb-5">
                     <Link
                       href="/Students/ForgotPassword"
-                      className="text-sm text-purple-600 hover:text-purple-800 font-semibold"
+                      className="text-sm text-[#417094] hover:text-[#417094] font-semibold"
                     >
                       Forgot password?
                     </Link>
@@ -126,8 +126,8 @@ export default function SignIn({ csrfToken }) {
                     disabled={formik.isSubmitting}
                     className={`w-full py-3 rounded-lg font-semibold transition ${
                       formik.isSubmitting
-                        ? "bg-purple-300 text-white cursor-not-allowed"
-                        : "bg-purple-600 text-white hover:bg-purple-700"
+                        ? "bg-[#417094] text-white cursor-not-allowed"
+                        : "bg-[#417094] text-white hover:bg-[#417094]"
                     }`}
                   >
                     {formik.isSubmitting ? "Please wait..." : "Sign In"}
@@ -138,7 +138,7 @@ export default function SignIn({ csrfToken }) {
                     Don’t have an account?{" "}
                     <Link
                       href="/signup"
-                      className="text-purple-700 font-semibold hover:underline"
+                      className="text-[#417094] font-semibold hover:underline"
                     >
                       Sign Up
                     </Link>
