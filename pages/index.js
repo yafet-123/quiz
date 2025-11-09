@@ -21,7 +21,7 @@ export default function Home() {
       <div className="font-sans text-gray-800">
         {/* Hero Section */}
         <section className="bg-purple-50 py-40 text-center px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-purple-700 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#417094] mb-4">
             Study Smarter. Not Harder.
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
@@ -30,7 +30,7 @@ export default function Home() {
           </p>
 
           <Link href="/study">
-            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transition">
+            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#417094] transition">
               Get Started
             </button>
           </Link>
@@ -38,7 +38,7 @@ export default function Home() {
 
         {/* Online Platform Features */}
         <section className="py-20 bg-white px-6">
-          <h3 className="text-3xl font-bold text-center text-purple-700 mb-10">
+          <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             All in One Online Learning Platform
           </h3>
           <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
@@ -119,7 +119,7 @@ export default function Home() {
 
         {/* Join Section */}
         <section className="bg-purple-100 py-20 px-6">
-          <h3 className="text-3xl font-bold text-center text-purple-700 mb-12">
+          <h3 className="text-3xl font-bold text-center text-[#417094] mb-12">
             Join Our Community
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-center">
@@ -140,7 +140,7 @@ export default function Home() {
 
         {/* Testimonials */}
         <section className="bg-white py-20 px-6">
-          <h3 className="text-3xl font-bold text-center text-purple-700 mb-10">
+          <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             What Students Say
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
@@ -160,7 +160,7 @@ export default function Home() {
         </section>
 
         {/* Newsletter CTA */}
-        <section className="py-20 bg-[#faf5ff] text-center text-purple-700 px-6">
+        <section className="py-20 bg-[#faf5ff] text-center text-[#417094] px-6">
           <FaEnvelopeOpenText className="text-5xl mx-auto mb-4" />
           <h3 className="text-3xl font-bold mb-4">Stay Updated</h3>
           <p className="text-lg mb-8 max-w-xl mx-auto text-black">
@@ -172,7 +172,7 @@ export default function Home() {
               placeholder="Enter your email"
               className="px-4 py-3 rounded-lg w-full sm:w-2/3 text-black"
             />
-            <button className="bg-[#9333ea] text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-100">
+            <button className="bg-[#9333ea] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#417094]">
               Subscribe
             </button>
           </form>
