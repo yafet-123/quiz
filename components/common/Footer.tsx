@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/LOGO_V0.1-01.png";
+import logo from "../../public/logo.jpg";
 
 import {
   FaFacebookF,
@@ -37,10 +37,14 @@ export const Footer = () => {
         {/* Logo + Social */}
         <div className="flex flex-col space-y-6">
           <Link href="/">
-            <div className="relative cursor-pointer">
-              <h1 className="cursor-pointer text-2xl font-bold text-white">
-                Save My Exams
-              </h1>
+            <div className="relative w-[150px] lg:w-[220px] h-[65px] lg:h-[70px] overflow-hidden">
+              <Image
+                src={logo}
+                alt="Navbar Logo Image"
+                layout="fill"
+                
+               objectPosition="center"
+              />
             </div>
           </Link>
           <p className="font-semibold">Follow us on social media</p>
