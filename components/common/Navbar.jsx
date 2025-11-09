@@ -1,9 +1,10 @@
-// Navbar.js
+import Image from "next/image"
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/router";
+import logo from "../../public/logo.jpg";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false); // mobile menu
@@ -52,9 +53,15 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 h-20">
         {/* Logo */}
         <Link href="/">
-          <h1 className="cursor-pointer text-2xl font-bold text-purple-600">
-            Save My Exams
-          </h1>
+          <div className="relative w-[150px] lg:w-[220px] h-[65px] lg:h-[70px] overflow-hidden">
+            <Image
+              src={logo}
+              alt="Navbar Logo Image"
+              layout="fill"
+              
+             objectPosition="center"
+            />
+          </div>
         </Link>
 
         {/* Desktop Menu */}
