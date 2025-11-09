@@ -68,7 +68,7 @@ export default function AboutPage() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link href="/signup">
                     <a
-                      className="inline-flex items-center justify-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#417094] transition"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#fff] hover:text-[#417094] transition"
                     >
                       {`Get started. It's free`}
                     </a>
@@ -207,7 +207,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-bold mb-4">Ready to level up your revision?</h3>
             <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
             <Link href="/signup">
-              <a className="inline-flex items-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#417094] transition">
+              <a className="inline-flex items-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#fff] hover:text-[#417094] transition">
                 {`Create an account. it's free`}
               </a>
             </Link>
