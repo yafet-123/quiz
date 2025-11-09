@@ -172,7 +172,7 @@ export default function Home() {
               placeholder="Enter your email"
               className="px-4 py-3 rounded-lg w-full sm:w-2/3 text-black"
             />
-            <button className="bg-[#9333ea] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#417094]">
+            <button className="bg-[#417094] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094]">
               Subscribe
             </button>
           </form>
@@ -219,7 +219,7 @@ function JoinCard({ icon, title, description, buttonText }) {
       <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
       <h4 className="text-2xl font-semibold mb-3">{title}</h4>
       <p className="text-gray-600 mb-6">{description}</p>
-      <button className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#417094] transition">
+      <button className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094] transition">
         {buttonText}
       </button>
     </div>
