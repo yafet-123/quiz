@@ -53,7 +53,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 h-20">
         {/* Logo */}
         <Link href="/">
-          <div className="relative w-[150px] lg:w-[220px] h-[65px] lg:h-[70px] overflow-hidden">
+          <div className="relative w-[150px] lg:w-[180px] h-[55px] lg:h-[60px] overflow-hidden">
             <Image
               src={logo}
               alt="Navbar Logo Image"
