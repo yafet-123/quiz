@@ -112,7 +112,7 @@ const ContactPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition"
+              className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-white hover:text-[#417094] transition"
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
@@ -126,7 +126,7 @@ const ContactPage = () => {
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-700 hover:text-purple-600 transition"
+                className="text-gray-700 hover:text-[#417094] transition"
               >
                 {item.icon}
               </a>

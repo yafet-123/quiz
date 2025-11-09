@@ -57,7 +57,7 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-indigo-700">
+                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#417094]">
                   We make exam prep simple so you can focus on learning.
                 </h1>
                 <p className="mt-6 text-lg text-gray-600 max-w-2xl">
@@ -68,7 +68,7 @@ export default function AboutPage() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link href="/signup">
                     <a
-                      className="inline-flex items-center justify-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition"
+                      className="inline-flex items-center justify-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#417094] transition"
                     >
                       {`Get started. It's free`}
                     </a>
@@ -108,7 +108,7 @@ export default function AboutPage() {
               <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-2xl shadow">
                   <div className="flex items-center gap-4">
-                    <FaRegLightbulb className="text-indigo-600 text-2xl" />
+                    <FaRegLightbulb className="text-[#417094] text-2xl" />
                     <div>
                       <h3 className="font-semibold">Clear explanations</h3>
                       <p className="text-sm text-gray-600 mt-1">Concise notes written by experienced teachers.</p>
@@ -118,7 +118,7 @@ export default function AboutPage() {
 
                 <div className="bg-white p-6 rounded-2xl shadow">
                   <div className="flex items-center gap-4">
-                    <FaBookOpen className="text-indigo-600 text-2xl" />
+                    <FaBookOpen className="text-[#417094] text-2xl" />
                     <div>
                       <h3 className="font-semibold">Practise & test</h3>
                       <p className="text-sm text-gray-600 mt-1">Lots of exam style questions with full answers.</p>
@@ -128,7 +128,7 @@ export default function AboutPage() {
 
                 <div className="bg-white p-6 rounded-2xl shadow">
                   <div className="flex items-center gap-4">
-                    <FaUsers className="text-indigo-600 text-2xl" />
+                    <FaUsers className="text-[#417094] text-2xl" />
                     <div>
                       <h3 className="font-semibold">Student focused</h3>
                       <p className="text-sm text-gray-600 mt-1">Resources shaped by student feedback and performance data.</p>
@@ -138,7 +138,7 @@ export default function AboutPage() {
 
                 <div className="bg-white p-6 rounded-2xl shadow">
                   <div className="flex items-center gap-4">
-                    <FaChartLine className="text-indigo-600 text-2xl" />
+                    <FaChartLine className="text-[#417094] text-2xl" />
                     <div>
                       <h3 className="font-semibold">Track progress</h3>
                       <p className="text-sm text-gray-600 mt-1">See improvements and target weak topics efficiently.</p>
@@ -156,7 +156,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {stats.map((s, i) => (
                 <div key={i} className="bg-white p-6 rounded-lg shadow">
-                  <div className="text-2xl font-bold text-indigo-700">{s.value}</div>
+                  <div className="text-2xl font-bold text-[#417094]">{s.value}</div>
                   <div className="mt-2 text-sm text-gray-600">{s.label}</div>
                 </div>
               ))}
@@ -187,7 +187,7 @@ export default function AboutPage() {
         </section>
 
         {/* TESTIMONIALS */}
-        <section className="bg-indigo-700 text-white py-14">
+        <section className="bg-[#417094] text-white py-14">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold mb-6">What students say</h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -207,7 +207,7 @@ export default function AboutPage() {
             <h3 className="text-2xl font-bold mb-4">Ready to level up your revision?</h3>
             <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
             <Link href="/signup">
-              <a className="inline-flex items-center px-6 py-3 bg-indigo-700 text-white rounded-lg shadow hover:bg-indigo-800 transition">
+              <a className="inline-flex items-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#417094] transition">
                 {`Create an account. it's free`}
               </a>
             </Link>

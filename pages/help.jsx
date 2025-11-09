@@ -52,7 +52,7 @@ const Help = () => {
                   <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
                     {faq.question}
                   </h2>
-                  <span className="text-purple-600">
+                  <span className="text-[#417094]">
                     {openIndex === index ? (
                       <AiOutlineMinus size={24} />
                     ) : (
