@@ -71,7 +71,7 @@ export default function Home() {
 
         {/* How It Works */}
         <section className="bg-purple-50 py-20 px-6">
-          <h3 className="text-3xl font-bold text-center text-purple-700 mb-10">
+          <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             How It Works
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
@@ -95,7 +95,7 @@ export default function Home() {
 
         {/* Why Students Love Us */}
         <section className="bg-white py-20 px-6">
-          <h3 className="text-3xl font-bold text-center text-purple-700 mb-10">
+          <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             Why Students Love Us
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
@@ -219,7 +219,7 @@ function JoinCard({ icon, title, description, buttonText }) {
       <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
       <h4 className="text-2xl font-semibold mb-3">{title}</h4>
       <p className="text-gray-600 mb-6">{description}</p>
-      <button className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">
+      <button className="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-[#417094] transition">
         {buttonText}
       </button>
     </div>
@@ -230,7 +230,7 @@ function TestimonialCard({ name, text }) {
   return (
     <div className="bg-purple-50 p-6 rounded-xl shadow-sm hover:shadow-lg transition">
       <p className="italic text-gray-700 mb-4">“{text}”</p>
-      <h4 className="font-semibold text-purple-700">{name}</h4>
+      <h4 className="font-semibold text-[#417094]">{name}</h4>
     </div>
   );
 }
