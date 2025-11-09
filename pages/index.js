@@ -30,7 +30,7 @@ export default function Home() {
           </p>
 
           <Link href="/study">
-            <button className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#417094] transition">
+            <button className="bg-[#417094] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#fff] hover:text-[#417094] transition">
               Get Started
             </button>
           </Link>
@@ -186,7 +186,7 @@ export default function Home() {
 function FeatureCard({ icon, title, description }) {
   return (
     <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center">
-      <div className="text-purple-600 text-5xl mx-auto mb-4">{icon}</div>
+      <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{description}</p>
     </div>
@@ -196,7 +196,7 @@ function FeatureCard({ icon, title, description }) {
 function StepCard({ number, title, description }) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition">
-      <div className="text-purple-600 text-5xl font-bold mb-4">{number}</div>
+      <div className="text-[#417094] text-5xl font-bold mb-4">{number}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{description}</p>
     </div>
@@ -206,7 +206,7 @@ function StepCard({ number, title, description }) {
 function ReasonCard({ icon, title, text }) {
   return (
     <div className="p-4 flex flex-col justify-center items-center bg-[#f3e8ff]">
-      <div className="text-5xl text-purple-600 mx-auto mb-4">{icon}</div>
+      <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
       <h4 className="text-xl font-semibold mb-2">{title}</h4>
       <p className="text-gray-600">{text}</p>
     </div>
