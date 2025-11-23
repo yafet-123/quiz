@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/router";
-import logo from "../../public/logo.jpg";
+import logo from "../../public/logo.png";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false); // mobile menu
@@ -47,7 +47,7 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
-        shadow ? "shadow-lg bg-white" : "bg-white/80 backdrop-blur-sm"
+        shadow ? "shadow-lg bg-[#417094]" : "bg-[#417094]"
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 h-20">
@@ -72,10 +72,10 @@ export const Navbar = () => {
                 <>
                   <button
                     onClick={() => toggleDropdown(link.name)}
-                    className={`flex items-center space-x-1 hover:text-[#417094] text-xl ${
+                    className={`flex items-center space-x-1 hover:text-[#3cb371] text-xl ${
                       router.pathname.startsWith(link.path)
-                        ? "text-[#417094] underline text-2xl font-bold"
-                        : ""
+                        ? "text-[#3cb371] underline text-2xl font-bold"
+                        : "text-[#FFF]"
                     }`}
                   >
                     <span>{link.name}</span>
@@ -90,7 +90,7 @@ export const Navbar = () => {
                             <a
                               className={`block px-4 py-2 hover:bg-gray-100 text-lg ${
                                 router.pathname === sublink.path
-                                  ? "text-[#417094] underline text-2xl font-bold"
+                                  ? "text-[#3cb371] underline text-2xl font-bold"
                                   : "text-gray-700 text-lg"
                               }`}
                             >
@@ -105,10 +105,10 @@ export const Navbar = () => {
               ) : (
                 <Link href={link.path}>
                   <a
-                    className={`hover:text-[#417094] text-lg ${
+                    className={`hover:text-[#3cb371] text-lg ${
                       router.pathname === link.path
-                        ? "text-[#417094] underline text-3xl font-bold"
-                        : ""
+                        ? "text-[#3cb371] underline text-3xl font-bold"
+                        : "text-[#FFF]"
                     }`}
                   >
                     {link.name}
