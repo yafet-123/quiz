@@ -1,320 +1,210 @@
 generator client {
   provider = "prisma-client-js"
 }
- 
-datasource db {
-  provider = "postgresql"  
-  url      = env("DATABASE_URL")
-}  
-   
-model User {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
-  email       String    @unique
-  password    String
-  role        String    @default("admin")
-  createdAt   DateTime  @default(now())
-  modifiedAt  DateTime  @updatedAt
-  resetToken  String?
 
-  Subjects    Subject[]
-  Exams       Exam[]
-  Worksheets  Worksheet[]
-  Flashcards  Flashcard[]
-  Notes       Note[]
-  RevisionNote RevisionNote[]
-  FormulaSheet FormulaSheet[]
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique(map: "name") @db.VarChar(255)
+  email           String            @unique(map: "email") @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  role            String?           @default("admin") @db.VarChar(50)
+  createdAt       DateTime?         @default(now()) @db.Timestamp(0)
+  modifiedAt      DateTime?         @default(now()) @updatedAt @db.Timestamp(0)
+  resetToken      String?           @db.VarChar(255)
+  Announcement    Announcement[]
+  Article         Article[]
   DefinitionSheet DefinitionSheet[]
-  Article  Article[]
-  Announcement Announcement[]
+  FormulaSheet    FormulaSheet[]
+  Notes           Note[]
+  RevisionNote    RevisionNote[]
+  Subjects        Subject[]
 }
 
 model Announcement {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime @default(now())
-  author    User     @relation(fields: [authorId], references: [id])
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  content   String    @db.Text
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
   authorId  Int
-  // Optional: if you want to target specific subjects or groups
-  // subject   Subject? @relation(fields: [subjectId], references: [id])
-  // subjectId Int?
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Announcement_ibfk_1")
 
-  // All students can see announcements by default
+  @@index([authorId], map: "authorId")
 }
 
-model Student { 
-  id           Int       @id @default(autoincrement())
-  name         String    @unique
-  email        String    @unique
-  password     String
-  gradeLevel   String? 
-  schoolName   String?
-  dateOfBirth  DateTime?
-  gender       String?
-  enrolledAt   DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  role         String    @default("student")
-  resetToken   String?   
-  // Only relationship kept
-  Exams        Exam[]
-  Task         Task[]
+model Student {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique(map: "name") @db.VarChar(255)
+  email       String    @unique(map: "email") @db.VarChar(255)
+  password    String    @db.VarChar(255)
+  gradeLevel  String?   @db.VarChar(50)
+  schoolName  String?   @db.VarChar(255)
+  dateOfBirth DateTime? @db.Date
+  gender      String?   @db.VarChar(20)
+  enrolledAt  DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime? @default(now()) @updatedAt @db.Timestamp(0)
+  role        String?   @default("student") @db.VarChar(50)
+  resetToken  String?   @db.VarChar(255)
 }
-
-model StudentExamAnswer {
-  id          Int      @id @default(autoincrement())
-  studentId   Int
-  examId      Int
-  question    String
-  selectedAnswer String
-  correctAnswer  String
-  createdAt   DateTime @default(now())
-}
-
-model Task {
-  id          Int      @id @default(autoincrement())
-  text        String
-  students_id Int
-  completed   Boolean
-  createdAt   DateTime @default(now()) @db.Timestamptz(6)
-  updatedAt   DateTime @default(now()) @db.Timestamptz(6)
-  Student     Student  @relation(fields: [students_id], references: [id], onUpdate: NoAction)
-}
-
 
 model Subject {
-  id          Int       @id @default(autoincrement())
-  name        String
-  description String?
-  svg         String?
-  createdBy   Int
-  createdAt   DateTime  @default(now())
-  modifiedAt  DateTime  @updatedAt
-  approved    Boolean   @default(false)
-
-  User        User      @relation(fields: [createdBy], references: [id])
-  Exams       Exam[]
-  Worksheets   Worksheet[]
-  Topics      FlashcardTopic[]
-  Quizzes     Quiz[]
-  Notes       Note[]
-  RevisionNote RevisionNote[]
-  FormulaSheet FormulaSheet[]
-  Topic       Topic[]
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  description     String?           @db.Text
+  svg             String?           @db.Text
+  createdBy       Int
+  createdAt       DateTime?         @default(now()) @db.Timestamp(0)
+  modifiedAt      DateTime?         @default(now()) @updatedAt @db.Timestamp(0)
+  approved        Boolean?          @default(false)
+  Article         Article[]
   DefinitionSheet DefinitionSheet[]
-  Article Article[]
+  FormulaSheet    FormulaSheet[]
+  Notes           Note[]
+  Quizzes         Quiz[]
+  RevisionNote    RevisionNote[]
+  User            User              @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Subject_ibfk_1")
+  Topics          Topic[]
+
+  @@index([createdBy], map: "createdBy")
 }
 
 model Article {
-  id          Int       @id @default(autoincrement())
-  title       String
-  slug        String    @unique
-  content     String
-  image       String?   // optional featured image
-  createdBy   Int
-  subjectId   Int       // connect to your existing Subject
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  slug      String    @unique(map: "slug") @db.VarChar(255)
+  content   String    @db.Text
+  image     String?   @db.VarChar(255)
+  createdBy Int
+  subjectId Int
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @default(now()) @updatedAt @db.Timestamp(0)
+  User      User      @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Article_ibfk_1")
+  Subject   Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Article_ibfk_2")
 
-  Subject     Subject   @relation(fields: [subjectId], references: [id])
-  User        User      @relation(fields: [createdBy], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
-
 
 model DefinitionSheet {
   id          Int          @id @default(autoincrement())
-  title       String
-  description String?       // optional short description
+  title       String       @db.VarChar(255)
+  description String?      @db.Text
   subjectId   Int
   createdBy   Int
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime?    @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime?    @default(now()) @updatedAt @db.Timestamp(0)
+  Definitions Definition[]
+  Subject     Subject      @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "DefinitionSheet_ibfk_1")
+  User        User         @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "DefinitionSheet_ibfk_2")
 
-  // Relations
-  Subject     Subject       @relation(fields: [subjectId], references: [id])
-  User        User          @relation(fields: [createdBy], references: [id])
-  Definitions Definition[]  // One sheet has many definitions
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model Definition {
-  id          Int             @id @default(autoincrement())
-  term        String
-  meaning     String
-  example     String?
-  sheetId     Int
+  id              Int             @id @default(autoincrement())
+  term            String          @db.VarChar(255)
+  meaning         String          @db.Text
+  example         String?         @db.Text
+  sheetId         Int
+  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Definition_ibfk_1")
 
-  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id])
+  @@index([sheetId], map: "sheetId")
 }
 
 model FormulaSheet {
-  id          Int        @id @default(autoincrement())
-  title       String
-  description String?     // optional explanation of the formula
-  formula     String      // actual formula text or LaTeX (e.g. E = mc^2)
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String?   @db.Text
+  formula     String    @db.Text
   topicId     Int
   subjectId   Int
   createdBy   Int
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  createdAt   DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime? @default(now()) @updatedAt @db.Timestamp(0)
+  Subject     Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FormulaSheet_ibfk_1")
+  Topic       Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FormulaSheet_ibfk_2")
+  User        User      @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "FormulaSheet_ibfk_3")
 
-  Subject     Subject     @relation(fields: [subjectId], references: [id])
-  Topic       Topic       @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  User        User        @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
+  @@index([topicId], map: "topicId")
 }
 
 model Topic {
-  id           Int             @id @default(autoincrement())
-  name         String
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   subjectId    Int
   FormulaSheet FormulaSheet[]
-  Subject      Subject         @relation(fields: [subjectId], references: [id])
+  Subject      Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Topic_ibfk_1")
+
+  @@index([subjectId], map: "subjectId")
 }
- 
+
 model Note {
-  id          Int       @id @default(autoincrement())
-  title       String
-  content     String    // stores rich-text HTML or Word-like content
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime  @default(now())
-  modifiedAt  DateTime  @updatedAt
+  id         Int       @id @default(autoincrement())
+  title      String    @db.VarChar(255)
+  content    String    @db.Text
+  subjectId  Int
+  createdBy  Int
+  createdAt  DateTime? @default(now()) @db.Timestamp(0)
+  modifiedAt DateTime? @default(now()) @updatedAt @db.Timestamp(0)
+  Subject    Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Note_ibfk_1")
+  User       User      @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Note_ibfk_2")
 
-  Subject     Subject   @relation(fields: [subjectId], references: [id])
-  User        User      @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
-model RevisionNote { 
-  id          Int       @id @default(autoincrement())
-  title       String
-  content     String    // stores rich-text HTML or Word-like content
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime  @default(now())
-  modifiedAt  DateTime  @updatedAt
+model RevisionNote {
+  id         Int       @id @default(autoincrement())
+  title      String    @db.VarChar(255)
+  content    String    @db.Text
+  subjectId  Int
+  createdBy  Int
+  createdAt  DateTime? @default(now()) @db.Timestamp(0)
+  modifiedAt DateTime? @default(now()) @updatedAt @db.Timestamp(0)
+  Subject    Subject   @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "RevisionNote_ibfk_1")
+  User       User      @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "RevisionNote_ibfk_2")
 
-  Subject     Subject   @relation(fields: [subjectId], references: [id])
-  User        User      @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model Quiz {
-  id        Int        @id @default(autoincrement())
-  title     String
-  subjectId Int
-  createdAt DateTime   @default(now())
-  modifiedAt DateTime  @updatedAt
+  id         Int        @id @default(autoincrement())
+  title      String     @db.VarChar(255)
+  subjectId  Int
+  createdAt  DateTime?  @default(now()) @db.Timestamp(0)
+  modifiedAt DateTime?  @default(now()) @updatedAt @db.Timestamp(0)
+  Questions  Question[]
+  Subject    Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Quiz_ibfk_1")
 
-  Subject   Subject    @relation(fields: [subjectId], references: [id])
-  Questions Question[]
+  @@index([subjectId], map: "subjectId")
 }
 
 model Question {
-  id        Int       @id @default(autoincrement())
-  question  String
-  answer    String
-  quizId    Int
-  createdAt DateTime @default(now())
-  modifiedAt DateTime @updatedAt
+  id          Int           @id @default(autoincrement())
+  question    String        @db.Text
+  answer      String        @db.Text
+  quizId      Int
+  createdAt   DateTime?     @default(now()) @db.Timestamp(0)
+  modifiedAt  DateTime?     @default(now()) @updatedAt @db.Timestamp(0)
+  OptionTable OptionTable[]
+  Quiz        Quiz          @relation(fields: [quizId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Question_ibfk_1")
 
-  Quiz      Quiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)
-  Options   Option[]
+  @@index([quizId], map: "quizId")
 }
 
-model Option {
+model OptionTable {
   id         Int      @id @default(autoincrement())
-  optionText String
+  optionText String   @db.Text
   questionId Int
+  Question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "OptionTable_ibfk_1")
 
-  Question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
-} 
- 
-model Exam {
-  id          Int             @id @default(autoincrement())
-  title       String
-  subjectId   Int
-  createdBy   Int
-  studentId   Int?
-  createdAt   DateTime        @default(now())
-  modifiedAt  DateTime        @updatedAt
-
-  Subject     Subject          @relation(fields: [subjectId], references: [id])
-  User        User             @relation(fields: [createdBy], references: [id])
-  Student     Student?         @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  Questions   ExamQuestion[]
-}
-
-model ExamQuestion {
-  id          Int          @id @default(autoincrement())
-  question    String
-  correctAnswer String
-  examId      Int
-  createdAt   DateTime     @default(now())
-  modifiedAt  DateTime     @updatedAt
-
-  Exam        Exam         @relation(fields: [examId], references: [id], onDelete: Cascade)
-  Options     ExamOption[]
-}
-
-model ExamOption {
-  id           Int          @id @default(autoincrement())
-  optionText   String
-  examQuestionId Int
-
-  ExamQuestion    ExamQuestion @relation(fields: [examQuestionId], references: [id], onDelete: Cascade)
-}
-
-model Worksheet {
-  id          Int             @id @default(autoincrement())
-  title       String
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime        @default(now())
-  modifiedAt  DateTime        @updatedAt
-
-  Subject     Subject          @relation(fields: [subjectId], references: [id])
-  User        User             @relation(fields: [createdBy], references: [id])
-  Questions   WorksheetQuestion[]
-}
-
-model WorksheetQuestion {
-  id          Int          @id @default(autoincrement())
-  question    String
-  correctAnswer String
-  worksheetId      Int
-  createdAt   DateTime     @default(now())
-  modifiedAt  DateTime     @updatedAt
-
-  Worksheet   Worksheet         @relation(fields: [worksheetId], references: [id], onDelete: Cascade)
-  Options     WorksheetOption[]
-}
-
-model WorksheetOption {
-  id           Int          @id @default(autoincrement())
-  optionText   String
-  worksheetQuestionId Int
-
-  WorksheetQuestion WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id], onDelete: Cascade)
-}
-
-model FlashcardTopic {
-  id          Int         @id @default(autoincrement())
-  subjectId   Int
-  title       String      // e.g., "Elements of Art", "Cell Biology"
-  createdAt   DateTime    @default(now())
-  modifiedAt  DateTime    @updatedAt
-  Flashcards  Flashcard[] // relation to Flashcard
-
-  Subject     Subject     @relation(fields: [subjectId], references: [id])
-}
-
-model Flashcard {
-  id          Int         @id @default(autoincrement())
-  topicId     Int
-  term        String      // e.g., "Line", "Cell Membrane"
-  definition  String      // e.g., "A mark connecting two points..."
-  createdAt   DateTime    @default(now())
-  modifiedAt  DateTime    @updatedAt
-  createdBy   Int?        // optional if you want to track user who created
-
-  Topic       FlashcardTopic @relation(fields: [topicId], references: [id])
-  User        User?          @relation(fields: [createdBy], references: [id])
+  @@index([questionId], map: "questionId")
 }

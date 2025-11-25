@@ -201,7 +201,7 @@ export const Navbar = () => {
               <Link href="/signup">
                 <a
                   onClick={() => setOpen(false)}
-                  className="block text-center bg-[#417094] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition"
+                  className="block text-center bg-[#fff] text-[#417094] hover:text-[#fff] px-5 py-2 rounded-lg hover:bg-[#417094] transition"
                 >
                   Sign Up
                 </a>
