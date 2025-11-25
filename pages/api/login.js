@@ -16,6 +16,7 @@ export default async function handleaddlogin(req, res){
     		name: username 
     	},
   	});
+	console.log(user)
   	// get the username
   	console.log(user)
 
