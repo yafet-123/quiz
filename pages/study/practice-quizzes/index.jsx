@@ -102,7 +102,7 @@ export default function PracticeQuizzes({subjects}) {
         </section>
 
         {/* Steps Section */}
-        <section className="py-16 px-6 bg-gray-50">
+        {/* <section className="py-16 px-6 bg-gray-50">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
             How to Use Quizzes Effectively
           </h2>
@@ -115,7 +115,7 @@ export default function PracticeQuizzes({subjects}) {
                   index % 2 !== 0 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* Image */}
+             
                 <div className="relative w-full lg:w-1/2 !h-[30rem] relative">
                   <Image
                     src={step.image}
@@ -126,7 +126,7 @@ export default function PracticeQuizzes({subjects}) {
                   />
                 </div>
 
-                {/* Text */}
+         
                 <div className="lg:w-1/2 w-full md:px-12 mt-6 md:mt-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">
                     {step.title}
@@ -136,7 +136,7 @@ export default function PracticeQuizzes({subjects}) {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Features Section */}
         <section className="py-16 max-w-6xl mx-auto">
