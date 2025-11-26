@@ -2,10 +2,10 @@ import { prisma } from '../../util/db.server.js'
 
 export default async function handler(req, res) {
   try {
-    const users = await prisma.User.count()
-    const subjects = await prisma.Subject.count()
-    const notes = await prisma.Note.count()
-    const exams = await prisma.Exam.count()
+    const users = await prisma.user.count()
+    const subjects = await prisma.subject.count()
+    const notes = await prisma.note.count()
+    const exams = await prisma.exam.count()
 
     console.log(subjects)
 
