@@ -99,7 +99,7 @@ export default function Worksheets({ subjects }) {
         </section>
 
         {/* How to Use Worksheets */}
-        <section className="py-16 px-6 bg-gray-50">
+        {/* <section className="py-16 px-6 bg-gray-50">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
             How to Make the Most of Worksheets
           </h2>
@@ -112,7 +112,7 @@ export default function Worksheets({ subjects }) {
                   index % 2 !== 0 ? "md:flex-row-reverse" : ""
                 }`}
               >
-                {/* Image */}
+            
                 <div className="relative w-full lg:w-1/2 h-[25rem]">
                   <Image
                     src={step.image}
@@ -123,7 +123,7 @@ export default function Worksheets({ subjects }) {
                   />
                 </div>
 
-                {/* Text */}
+          
                 <div className="lg:w-1/2 w-full md:px-12 mt-6 md:mt-0">
                   <h3 className="text-2xl font-bold text-gray-800 mb-4">
                     {step.title}
@@ -133,7 +133,7 @@ export default function Worksheets({ subjects }) {
               </div>
             ))}
           </div>
-        </section>
+        </section> */}
 
         {/* Browse Section */}
         <section className="py-16 max-w-6xl mx-auto">
