@@ -248,7 +248,7 @@ model Exam {
   User              User                @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Exam_ibfk_2")
   Student           Student?            @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "Exam_ibfk_3")
   Questions         ExamQuestion[]
-  StudentExamAnswer StudentExamAnswer[]
+  StudentExamAnswer StudentExamAnswer[] 
 
   @@index([createdBy], map: "createdBy")
   @@index([studentId], map: "studentId")

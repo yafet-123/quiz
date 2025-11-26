@@ -51,7 +51,7 @@ export function AddFormula({ subjects }) {
         subjectId,
         topicName,
         formulas,
-        createdBy: UserData.user_id,
+        createdBy: userData.user_id,
       });
 
       setSuccess("Formula sheet added successfully!");
