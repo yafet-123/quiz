@@ -160,7 +160,6 @@ model Topic {
   subjectId    Int
   FormulaSheet FormulaSheet[]
   Subject      Subject       @relation(fields: [subjectId], references: [id])
-  Flashcards   Flashcard[]
 }
 
 model Note {
