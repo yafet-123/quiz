@@ -3,8 +3,11 @@ import axios from "axios";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
+import { useSession } from "next-auth/react";
 
 export function AddExamWithQuestions({ subjects }) {
+  const { data } = useSession();
+  const userData = data?.user;
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
@@ -54,7 +57,7 @@ export function AddExamWithQuestions({ subjects }) {
 
       const formattedQuestions = questions.map((q) => ({
         question: q.question,
-        createdBy:1,
+        createdBy: userData.user_id,
         correctOption: q.correctOption, // <-- rename from "answer" to "correctOption"
         Options: {
           create: q.options.map((opt) => ({ optionText: opt })),

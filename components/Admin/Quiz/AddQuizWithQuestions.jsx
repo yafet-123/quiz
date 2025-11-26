@@ -3,8 +3,11 @@ import axios from "axios";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
+import { useSession } from "next-auth/react";
 
 export function AddQuizWithQuestions({ subjects }) {
+  const { data } = useSession();
+  const userData = data?.user;
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
@@ -66,7 +69,7 @@ export function AddQuizWithQuestions({ subjects }) {
       await axios.post("/api/quiz/add-quiz-with-questions", {
         subjectId,
         title: examTitle,
-        createdBy: 1, // replace with actual userId
+        createdBy: userData.user_id, // replace with actual userId
         questions: formattedQuestions,
       });
 

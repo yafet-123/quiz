@@ -12,6 +12,7 @@ export async function getServerSideProps(context){
   const session = await getSession(context);
   const serverdate = new Date();     
   const userRole = session?.user?.role;
+  console.log(userRole)
   if (userRole !== 'admin') {
     return {
       redirect: {

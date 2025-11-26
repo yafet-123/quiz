@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 export default function AddAnnouncement({ authorId, refresh }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const { data } = useSession();
+  const UserData = data?.user;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

@@ -1,12 +1,15 @@
 import React, { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 // ✅ Dynamically import ReactQuill (for Next.js SSR)
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
 export function AddArticle({ subjects }) {
+  const { data } = useSession();
+  const UserData = data?.user;
   const [subjectId, setSubjectId] = useState("");
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
@@ -77,7 +80,7 @@ export function AddArticle({ subjects }) {
         title,
         slug,
         content,
-        createdBy: 1,
+        createdBy: UserData.user_id,
       });
       setSuccess("✅ Article added successfully!");
       setSubjectId("");

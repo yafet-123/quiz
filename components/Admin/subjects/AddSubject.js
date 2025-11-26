@@ -18,6 +18,9 @@ export function AddSubject() {
   const [success, setSuccess] = useState("");
 
   const userData = data?.user;
+  const user_id = data?.user.user_id
+  
+
   console.log(userData)
   async function register(e) {
     e.preventDefault();
@@ -32,7 +35,7 @@ export function AddSubject() {
         description,
         svg,
         // user_id: userData.user_id,
-        user_id: 1
+        user_id: user_id
       });
       setSuccess("Subject created successfully!");
       setSubjectName("");

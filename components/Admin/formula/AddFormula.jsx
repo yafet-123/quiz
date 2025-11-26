@@ -4,12 +4,15 @@ import ReactModal from "react-modal";
 import Loader from "../../common/Loading";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 
 // Load React Quill dynamically (to avoid SSR issues)
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
 export function AddFormula({ subjects }) {
+  const { data } = useSession();
+  const userData = data?.user;
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [topicName, settopicName] = useState();
@@ -48,7 +51,7 @@ export function AddFormula({ subjects }) {
         subjectId,
         topicName,
         formulas,
-        createdBy: 1,
+        createdBy: UserData.user_id,
       });
 
       setSuccess("Formula sheet added successfully!");

@@ -4,12 +4,14 @@ import ReactModal from "react-modal";
 import Loader from "../../common/Loading";
 import { FiPlusCircle } from "react-icons/fi";
 import dynamic from "next/dynamic";
+import { useSession } from "next-auth/react";
 
 // ✅ Load React Quill dynamically to avoid SSR issues
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
 export function AddComprehensiveNotes({ subjects }) {
+  const { status, data } = useSession();
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
@@ -31,7 +33,7 @@ export function AddComprehensiveNotes({ subjects }) {
         subjectId,
         title,
         content,
-        createdBy: 1,
+        createdBy: UserData.user_id,
       });
 
       setSuccess("Note added successfully!");
