@@ -5,7 +5,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
-export function AddExamWithQuestions({ subjects }) {
+export async function AddExamWithQuestions({ subjects }) {
   const { data } = useSession();
   const userData = data?.user;
   console.log(userData.user_id)

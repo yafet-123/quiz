@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
         include: {
           Questions: {
             include: {
-              Options: true, // <-- include options here
+              OptionTable: true, // <-- include options here
             },
           },
         },
