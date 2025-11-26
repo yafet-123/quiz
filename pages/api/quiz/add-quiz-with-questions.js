@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     }
 
     // Create the quiz with questions and options
-    const newQuiz = await prisma.quiz.create({
+    const newQuiz = await prisma.Quiz.create({
       data: {
         subjectId: parseInt(subjectId),
         title: title,

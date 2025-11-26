@@ -14,14 +14,14 @@ export function AddQuizWithQuestions({ subjects }) {
   const [subjectId, setSubjectId] = useState("");
   const [examTitle, setExamTitle] = useState("");
   const [questions, setQuestions] = useState([
-    { question: "", options: ["", "", "", ""], correctOption: "" },
+    { question: "", OptionTable: ["", "", "", ""], correctOption: "" },
   ]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   // ➕ Add new question
   const addQuestionField = () => {
-    setQuestions([...questions, { question: "", options: ["", "", "", ""], correctOption: "" }]);
+    setQuestions([...questions, { question: "", OptionTable: ["", "", "", ""], correctOption: "" }]);
   };
 
   // 🗑️ Remove a question
@@ -33,7 +33,7 @@ export function AddQuizWithQuestions({ subjects }) {
   const handleQuestionChange = (index, field, value, optionIndex = null) => {
     const newQuestions = [...questions];
     if (field === "option") {
-      newQuestions[index].options[optionIndex] = value;
+      newQuestions[index].OptionTable[optionIndex] = value;
     } else {
       newQuestions[index][field] = value;
     }
@@ -60,8 +60,8 @@ export function AddQuizWithQuestions({ subjects }) {
       const formattedQuestions = questions.map((q) => ({
         question: q.question,
         answer: q.correctOption, // Prisma requires this
-        Options: {
-          create: q.options.map((opt) => ({ optionText: opt })),
+        OptionTable: {
+          create: q.OptionTable.map((opt) => ({ optionText: opt })),
         },
       }));
 
@@ -77,7 +77,7 @@ export function AddQuizWithQuestions({ subjects }) {
       setSuccess("Exam and questions added successfully!");
       setSubjectId("");
       setExamTitle("");
-      setQuestions([{ question: "", options: ["", "", "", ""], correctOption: "" }]);
+      setQuestions([{ question: "", OptionTable: ["", "", "", ""], correctOption: "" }]);
     } catch (err) {
       console.error(err);
       setError(err.message || "Failed to add exam and questions. Try again later.");
@@ -152,9 +152,9 @@ export function AddQuizWithQuestions({ subjects }) {
                   className="w-full mb-3 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
                 />
 
-                {/* Options */}
+                {/* Options */} 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {q.options.map((opt, optIndex) => (
+                  {q.OptionTable.map((opt, optIndex) => (
                     <input
                       key={optIndex}
                       type="text"
