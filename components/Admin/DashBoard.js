@@ -39,7 +39,7 @@ export default function DashBoard() {
         datasets: [
           {
             label: "Activity Count",
-            data: res.data.chartData.map((item) => item.count),
+            data: res.data.chartData.map((item) => item.number),
             backgroundColor: "#009688",
             borderRadius: 6,
           },

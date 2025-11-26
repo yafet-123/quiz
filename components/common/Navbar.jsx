@@ -126,7 +126,7 @@ export const Navbar = () => {
           </Link>
 
           <Link href="/signup">
-            <a className="ml-10 bg-[#417094] text-white px-5 py-2 rounded-lg hover:bg-[#111827] transition">
+            <a className="ml-10 bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg transition">
               Sign Up
             </a>
           </Link>
@@ -201,7 +201,7 @@ export const Navbar = () => {
               <Link href="/signup">
                 <a
                   onClick={() => setOpen(false)}
-                  className="block text-center bg-[#fff] text-[#417094] hover:text-[#fff] px-5 py-2 rounded-lg hover:bg-[#417094] transition"
+                  className="block text-center bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg  transition"
                 >
                   Sign Up
                 </a>

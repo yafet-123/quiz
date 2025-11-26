@@ -8,305 +8,344 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
-  email       String    @unique
-  password    String
-  role        String    @default("admin")
-  createdAt   DateTime  @default(now())
-  modifiedAt  DateTime  @updatedAt
-  resetToken  String?
-
-  Subjects       Subject[]
-  Exams          Exam[]
-  Worksheets     Worksheet[]
-  Flashcards     Flashcard[]
-  Notes          Note[]
-  RevisionNote   RevisionNote[]
-  FormulaSheet   FormulaSheet[]
+  id              Int               @id @default(autoincrement())
+  name            String            @unique(map: "name") @db.VarChar(255)
+  email           String            @unique(map: "email") @db.VarChar(255)
+  password        String            @db.VarChar(255)
+  role            String?           @default("admin") @db.VarChar(255)
+  createdAt       DateTime?         @default(now()) @db.DateTime(0)
+  modifiedAt      DateTime?         @default(now()) @updatedAt @db.DateTime(0)
+  resetToken      String?           @db.VarChar(255)
+  Announcement    Announcement[]
+  Article         Article[]
   DefinitionSheet DefinitionSheet[]
-  Article        Article[]
-  Announcement   Announcement[]
+  Exams           Exam[]
+  Flashcards      Flashcard[]
+  FormulaSheet    FormulaSheet[]
+  Notes           Note[]
+  RevisionNote    RevisionNote[]
+  Subjects        Subject[]
+  Worksheets      Worksheet[]
 }
 
 model Announcement {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  createdAt DateTime @default(now())
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  content   String    @db.Text
+  createdAt DateTime? @default(now()) @db.DateTime(0)
   authorId  Int
-  author    User     @relation(fields: [authorId], references: [id])
+  author    User      @relation(fields: [authorId], references: [id], onUpdate: Restrict, map: "Announcement_ibfk_1")
+
+  @@index([authorId], map: "authorId")
 }
 
 model Student {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
-  email       String    @unique
-  password    String
-  gradeLevel  String? 
-  schoolName  String?
-  dateOfBirth DateTime?
-  gender      String?
-  enrolledAt  DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  role        String    @default("student")
-  resetToken  String?   
-
-  Exams       Exam[]
-  Task        Task[]
+  id                Int                 @id @default(autoincrement())
+  name              String              @unique(map: "name") @db.VarChar(255)
+  email             String              @unique(map: "email") @db.VarChar(255)
+  password          String              @db.VarChar(255)
+  gradeLevel        String?             @db.VarChar(255)
+  schoolName        String?             @db.VarChar(255)
+  dateOfBirth       DateTime?           @db.Date
+  gender            String?             @db.VarChar(50)
+  enrolledAt        DateTime?           @default(now()) @db.DateTime(0)
+  updatedAt         DateTime?           @default(now()) @updatedAt @db.DateTime(0)
+  role              String?             @default("student") @db.VarChar(255)
+  resetToken        String?             @db.VarChar(255)
+  Exams             Exam[]
+  StudentExamAnswer StudentExamAnswer[]
+  Task              Task[]
 }
 
 model StudentExamAnswer {
-  id             Int      @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   studentId      Int
   examId         Int
-  question       String
-  selectedAnswer String
-  correctAnswer  String
-  createdAt      DateTime @default(now())
+  question       String    @db.Text
+  selectedAnswer String    @db.Text
+  correctAnswer  String    @db.Text
+  createdAt      DateTime? @default(now()) @db.DateTime(0)
+  Student        Student   @relation(fields: [studentId], references: [id], onUpdate: Restrict, map: "StudentExamAnswer_ibfk_1")
+  Exam           Exam      @relation(fields: [examId], references: [id], onUpdate: Restrict, map: "StudentExamAnswer_ibfk_2")
+
+  @@index([examId], map: "examId")
+  @@index([studentId], map: "studentId")
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
-  text        String
+  id          Int       @id @default(autoincrement())
+  text        String    @db.Text
   students_id Int
-  completed   Boolean
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
-  Student     Student  @relation(fields: [students_id], references: [id])
+  completed   Boolean?  @default(false)
+  createdAt   DateTime? @default(now()) @db.DateTime(0)
+  updatedAt   DateTime? @default(now()) @db.DateTime(0)
+  Student     Student   @relation(fields: [students_id], references: [id], onUpdate: Restrict, map: "Task_ibfk_1")
+
+  @@index([students_id], map: "students_id")
 }
 
 model Subject {
-  id           Int       @id @default(autoincrement())
-  name         String
-  description  String?
-  svg          String?
-  createdBy    Int
-  createdAt    DateTime  @default(now())
-  modifiedAt   DateTime  @updatedAt
-  approved     Boolean   @default(false)
-
-  User         User      @relation(fields: [createdBy], references: [id])
-  Exams        Exam[]
-  Worksheets   Worksheet[]
-  Topics       FlashcardTopic[]
-  Quizzes      Quiz[]
-  Notes        Note[]
-  RevisionNote RevisionNote[]
-  FormulaSheet FormulaSheet[]
-  Topic        Topic[]
+  id              Int               @id @default(autoincrement())
+  name            String            @db.VarChar(255)
+  description     String?           @db.Text
+  svg             String?           @db.Text
+  createdBy       Int
+  createdAt       DateTime?         @default(now()) @db.DateTime(0)
+  modifiedAt      DateTime?         @default(now()) @updatedAt @db.DateTime(0)
+  approved        Boolean?          @default(false)
+  Article         Article[]
   DefinitionSheet DefinitionSheet[]
-  Article      Article[]
+  Exams           Exam[]
+  Topics          FlashcardTopic[]
+  FormulaSheet    FormulaSheet[]
+  Notes           Note[]
+  Quizzes         Quiz[]
+  RevisionNote    RevisionNote[]
+  User            User              @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
+  Topic           Topic[]
+  Worksheets      Worksheet[]
+
+  @@index([createdBy], map: "createdBy")
 }
 
 model Article {
-  id        Int      @id @default(autoincrement())
-  title     String
-  slug      String   @unique
-  content   String
-  image     String?
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(255)
+  slug      String    @unique(map: "slug") @db.VarChar(255)
+  content   String    @db.Text
+  image     String?   @db.VarChar(255)
   createdBy Int
   subjectId Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime? @default(now()) @db.DateTime(0)
+  updatedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  User      User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Article_ibfk_1")
+  Subject   Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Article_ibfk_2")
 
-  Subject   Subject @relation(fields: [subjectId], references: [id])
-  User      User    @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model DefinitionSheet {
   id          Int          @id @default(autoincrement())
-  title       String
-  description String?
+  title       String       @db.VarChar(255)
+  description String?      @db.Text
   subjectId   Int
   createdBy   Int
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-
-  Subject     Subject       @relation(fields: [subjectId], references: [id])
-  User        User          @relation(fields: [createdBy], references: [id])
+  createdAt   DateTime?    @default(now()) @db.DateTime(0)
+  updatedAt   DateTime?    @default(now()) @updatedAt @db.DateTime(0)
   Definitions Definition[]
+  Subject     Subject      @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "DefinitionSheet_ibfk_1")
+  User        User         @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "DefinitionSheet_ibfk_2")
+
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model Definition {
-  id          Int             @id @default(autoincrement())
-  term        String
-  meaning     String
-  example     String?
-  sheetId     Int
+  id              Int             @id @default(autoincrement())
+  term            String          @db.VarChar(255)
+  meaning         String          @db.Text
+  example         String?         @db.Text
+  sheetId         Int
+  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id], onUpdate: Restrict, map: "Definition_ibfk_1")
 
-  DefinitionSheet DefinitionSheet @relation(fields: [sheetId], references: [id])
+  @@index([sheetId], map: "sheetId")
 }
 
 model FormulaSheet {
-  id          Int        @id @default(autoincrement())
-  title       String
-  description String?
-  formula     String
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String?   @db.Text
+  formula     String    @db.Text
   topicId     Int
   subjectId   Int
   createdBy   Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime? @default(now()) @db.DateTime(0)
+  updatedAt   DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Topic       Topic     @relation(fields: [topicId], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_1")
+  Subject     Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_2")
+  User        User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "FormulaSheet_ibfk_3")
 
-  Subject     Subject @relation(fields: [subjectId], references: [id])
-  Topic       Topic   @relation(fields: [topicId], references: [id])
-  User        User    @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
+  @@index([topicId], map: "topicId")
 }
 
 model Topic {
-  id           Int           @id @default(autoincrement())
-  name         String
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
   subjectId    Int
   FormulaSheet FormulaSheet[]
-  Subject      Subject       @relation(fields: [subjectId], references: [id])
+  Subject      Subject        @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Topic_ibfk_1")
+
+  @@index([subjectId], map: "subjectId")
 }
 
 model Note {
-  id          Int      @id @default(autoincrement())
-  title       String
-  content     String
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime @default(now())
-  modifiedAt  DateTime @updatedAt
+  id         Int       @id @default(autoincrement())
+  title      String    @db.VarChar(255)
+  content    String    @db.Text
+  subjectId  Int
+  createdBy  Int
+  createdAt  DateTime? @default(now()) @db.DateTime(0)
+  modifiedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Subject    Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Note_ibfk_1")
+  User       User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Note_ibfk_2")
 
-  Subject     Subject @relation(fields: [subjectId], references: [id])
-  User        User    @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model RevisionNote {
-  id          Int      @id @default(autoincrement())
-  title       String
-  content     String
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime @default(now())
-  modifiedAt  DateTime @updatedAt
+  id         Int       @id @default(autoincrement())
+  title      String    @db.VarChar(255)
+  content    String    @db.Text
+  subjectId  Int
+  createdBy  Int
+  createdAt  DateTime? @default(now()) @db.DateTime(0)
+  modifiedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
+  Subject    Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_1")
+  User       User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_2")
 
-  Subject     Subject @relation(fields: [subjectId], references: [id])
-  User        User    @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model Quiz {
   id         Int        @id @default(autoincrement())
-  title      String
+  title      String     @db.VarChar(255)
   subjectId  Int
-  createdAt  DateTime   @default(now())
-  modifiedAt DateTime   @updatedAt
-
-  Subject    Subject    @relation(fields: [subjectId], references: [id])
+  createdAt  DateTime?  @default(now()) @db.DateTime(0)
+  modifiedAt DateTime?  @default(now()) @updatedAt @db.DateTime(0)
   Questions  Question[]
+  Subject    Subject    @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Quiz_ibfk_1")
+
+  @@index([subjectId], map: "subjectId")
 }
 
 model Question {
-  id        Int      @id @default(autoincrement())
-  question  String
-  answer    String
-  quizId    Int
-  createdAt DateTime @default(now())
-  modifiedAt DateTime @updatedAt
+  id          Int           @id @default(autoincrement())
+  question    String        @db.Text
+  answer      String        @db.Text
+  quizId      Int
+  createdAt   DateTime?     @default(now()) @db.DateTime(0)
+  modifiedAt  DateTime?     @default(now()) @updatedAt @db.DateTime(0)
+  OptionTable OptionTable[]
+  Quiz        Quiz          @relation(fields: [quizId], references: [id], onUpdate: Restrict, map: "Question_ibfk_1")
 
-  Quiz      Quiz    @relation(fields: [quizId], references: [id])
-  Options   Option[]
-}
-
-model Option {
-  id         Int      @id @default(autoincrement())
-  optionText String
-  questionId Int
-
-  Question   Question @relation(fields: [questionId], references: [id])
+  @@index([quizId], map: "quizId")
 }
 
 model Exam {
-  id          Int          @id @default(autoincrement())
-  title       String
-  subjectId   Int
-  createdBy   Int
-  studentId   Int?
-  createdAt   DateTime @default(now())
-  modifiedAt  DateTime @updatedAt
+  id                Int                 @id @default(autoincrement())
+  title             String              @db.VarChar(255)
+  subjectId         Int
+  createdBy         Int
+  studentId         Int?
+  createdAt         DateTime?           @default(now()) @db.DateTime(0)
+  modifiedAt        DateTime?           @default(now()) @updatedAt @db.DateTime(0)
+  Subject           Subject             @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Exam_ibfk_1")
+  User              User                @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Exam_ibfk_2")
+  Student           Student?            @relation(fields: [studentId], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "Exam_ibfk_3")
+  Questions         ExamQuestion[]
+  StudentExamAnswer StudentExamAnswer[]
 
-  Subject     Subject @relation(fields: [subjectId], references: [id])
-  User        User    @relation(fields: [createdBy], references: [id])
-  Student     Student? @relation(fields: [studentId], references: [id])
-  Questions   ExamQuestion[]
+  @@index([createdBy], map: "createdBy")
+  @@index([studentId], map: "studentId")
+  @@index([subjectId], map: "subjectId")
 }
 
 model ExamQuestion {
-  id           Int          @id @default(autoincrement())
-  question     String
-  correctAnswer String
-  examId       Int
-  createdAt    DateTime     @default(now())
-  modifiedAt   DateTime     @updatedAt
+  id            Int          @id @default(autoincrement())
+  question      String       @db.Text
+  correctAnswer String       @db.Text
+  examId        Int
+  createdAt     DateTime?    @default(now()) @db.DateTime(0)
+  modifiedAt    DateTime?    @default(now()) @updatedAt @db.DateTime(0)
+  Options       ExamOption[]
+  Exam          Exam         @relation(fields: [examId], references: [id], onUpdate: Restrict, map: "ExamQuestion_ibfk_1")
 
-  Exam         Exam         @relation(fields: [examId], references: [id])
-  Options      ExamOption[]
+  @@index([examId], map: "examId")
 }
 
 model ExamOption {
   id             Int          @id @default(autoincrement())
-  optionText     String
+  optionText     String       @db.Text
   examQuestionId Int
+  ExamQuestion   ExamQuestion @relation(fields: [examQuestionId], references: [id], onUpdate: Restrict, map: "ExamOption_ibfk_1")
 
-  ExamQuestion   ExamQuestion @relation(fields: [examQuestionId], references: [id])
+  @@index([examQuestionId], map: "examQuestionId")
 }
 
 model Worksheet {
-  id          Int          @id @default(autoincrement())
-  title       String
-  subjectId   Int
-  createdBy   Int
-  createdAt   DateTime     @default(now())
-  modifiedAt  DateTime     @updatedAt
+  id         Int                 @id @default(autoincrement())
+  title      String              @db.VarChar(255)
+  subjectId  Int
+  createdBy  Int
+  createdAt  DateTime?           @default(now()) @db.DateTime(0)
+  modifiedAt DateTime?           @default(now()) @updatedAt @db.DateTime(0)
+  Subject    Subject             @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Worksheet_ibfk_1")
+  User       User                @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Worksheet_ibfk_2")
+  Questions  WorksheetQuestion[]
 
-  Subject     Subject          @relation(fields: [subjectId], references: [id])
-  User        User             @relation(fields: [createdBy], references: [id])
-  Questions   WorksheetQuestion[]
+  @@index([createdBy], map: "createdBy")
+  @@index([subjectId], map: "subjectId")
 }
 
 model WorksheetQuestion {
-  id          Int          @id @default(autoincrement())
-  question    String
-  correctAnswer String
+  id            Int               @id @default(autoincrement())
+  question      String            @db.Text
+  correctAnswer String            @db.Text
   worksheetId   Int
-  createdAt   DateTime     @default(now())
-  modifiedAt  DateTime     @updatedAt
+  createdAt     DateTime?         @default(now()) @db.DateTime(0)
+  modifiedAt    DateTime?         @default(now()) @updatedAt @db.DateTime(0)
+  Options       WorksheetOption[]
+  Worksheet     Worksheet         @relation(fields: [worksheetId], references: [id], onUpdate: Restrict, map: "WorksheetQuestion_ibfk_1")
 
-  Worksheet   Worksheet         @relation(fields: [worksheetId], references: [id])
-  Options     WorksheetOption[]
+  @@index([worksheetId], map: "worksheetId")
 }
 
 model WorksheetOption {
-  id          Int          @id @default(autoincrement())
-  optionText  String
+  id                  Int               @id @default(autoincrement())
+  optionText          String            @db.Text
   worksheetQuestionId Int
+  WorksheetQuestion   WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id], onUpdate: Restrict, map: "WorksheetOption_ibfk_1")
 
-  WorksheetQuestion WorksheetQuestion @relation(fields: [worksheetQuestionId], references: [id])
+  @@index([worksheetQuestionId], map: "worksheetQuestionId")
 }
 
 model FlashcardTopic {
-  id          Int         @id @default(autoincrement())
-  subjectId   Int
-  title       String
-  createdAt   DateTime    @default(now())
-  modifiedAt  DateTime    @updatedAt
-  Flashcards  Flashcard[]
+  id         Int         @id @default(autoincrement())
+  subjectId  Int
+  title      String      @db.VarChar(255)
+  createdAt  DateTime?   @default(now()) @db.DateTime(0)
+  modifiedAt DateTime?   @default(now()) @updatedAt @db.DateTime(0)
+  Flashcards Flashcard[]
+  Subject    Subject     @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "FlashcardTopic_ibfk_1")
 
-  Subject     Subject     @relation(fields: [subjectId], references: [id])
+  @@index([subjectId], map: "subjectId")
 }
 
 model Flashcard {
-  id         Int         @id @default(autoincrement())
+  id         Int            @id @default(autoincrement())
   topicId    Int
-  term       String
-  definition String
-  createdAt  DateTime    @default(now())
-  modifiedAt DateTime    @updatedAt
+  term       String         @db.VarChar(255)
+  definition String         @db.Text
+  createdAt  DateTime?      @default(now()) @db.DateTime(0)
+  modifiedAt DateTime?      @default(now()) @updatedAt @db.DateTime(0)
   createdBy  Int?
+  Topic      FlashcardTopic @relation(fields: [topicId], references: [id], onUpdate: Restrict, map: "Flashcard_ibfk_1")
+  User       User?          @relation(fields: [createdBy], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "Flashcard_ibfk_2")
 
-  Topic      FlashcardTopic @relation(fields: [topicId], references: [id])
-  User       User?          @relation(fields: [createdBy], references: [id])
+  @@index([createdBy], map: "createdBy")
+  @@index([topicId], map: "topicId")
+}
+
+model OptionTable {
+  id         Int      @id @default(autoincrement())
+  optionText String   @db.Text
+  questionId Int
+  Question   Question @relation(fields: [questionId], references: [id], onUpdate: Restrict, map: "OptionTable_ibfk_1")
+
+  @@index([questionId], map: "questionId")
 }
