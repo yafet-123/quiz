@@ -65,7 +65,6 @@ export function AddDefinition({ subjects }) {
         description,
         subjectId: parseInt(subjectId),
         createdBy: UserData.user_id,
-        createdBy: 1,
         definitions,
       });
 

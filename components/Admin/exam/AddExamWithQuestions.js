@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 export function AddExamWithQuestions({ subjects }) {
   const { data } = useSession();
   const userData = data?.user;
+  console.log(userData.user_id)
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
