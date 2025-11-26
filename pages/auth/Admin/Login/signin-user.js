@@ -22,7 +22,7 @@ export default function SignIn({ csrfToken }) {
       <React.Fragment>
         <MainHeader title="Admin Login" />
 
-        <div className="pt-20 flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-50 via-white to-teal-100 px-4">
+        <div className="py-24 flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-50 via-white to-teal-100 px-4">
           <div className="bg-white shadow-2xl rounded-2xl w-full max-w-md p-8 transform transition-all hover:scale-[1.01]">
             <h1 className="text-3xl font-extrabold text-center mb-6 text-teal-700">
               Admin Login
