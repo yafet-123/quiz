@@ -26,7 +26,7 @@ export default function DashBoard() {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
-  });
+  }); 
 
   useEffect(() => {
     async function fetchStats() {
