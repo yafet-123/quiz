@@ -22,7 +22,7 @@ export default function SignIn({ csrfToken }) {
     return (
       <React.Fragment>
         <MainHeader title="Login Student" />
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#417094] via-white to-[#417094]px-4">
+        <div className="py-24 min-h-screen flex items-center justify-center bg-gradient-to-br from-[#417094] via-white to-[#417094] px-4">
           <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8 border border-[#417094]">
             <h2 className="text-3xl font-bold text-center text-[#417094] mb-2">
               Welcome Back 👋
