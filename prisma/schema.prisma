@@ -175,6 +175,7 @@ model Topic {
   id           Int            @id @default(autoincrement())
   name         String         @db.VarChar(255)
   subjectId    Int
+  FormulaSheet FormulaSheet[]
   Subject      Subject        @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "Topic_ibfk_1")
 
   @@index([subjectId], map: "subjectId")
