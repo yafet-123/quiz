@@ -6,14 +6,16 @@ import ReactModal from "react-modal";
 import Loader from "../../common/Loading";
 import { FiUserPlus } from "react-icons/fi";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { getSession } from "next-auth/react";
 
-export function AddUser() {
+export async function AddUser() {
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { data } = useSession();
-  const userData = data?.user;
-
+  const session = await getSession(context);
+  const userRole = session?.user?.role;
+  console.log(userRole)
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
