@@ -6,9 +6,6 @@ import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
 export function AddQuizWithQuestions({ subjects, userId }) {
-  const { data } = useSession();
-  const userData = data?.user;
-  console.log(userData)
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
@@ -74,7 +71,7 @@ export function AddQuizWithQuestions({ subjects, userId }) {
         questions: formattedQuestions,
       });
 
-      setSuccess("Exam and questions added successfully!");
+      setSuccess("Quiz and questions added successfully!");
       setSubjectId("");
       setExamTitle("");
       setQuestions([{ question: "", OptionTable: ["", "", "", ""], correctOption: "" }]);

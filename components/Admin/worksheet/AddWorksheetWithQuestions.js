@@ -6,8 +6,6 @@ import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
 export function AddWorksheetWithQuestions({ subjects, userId }) {
-  const { data } = useSession();
-  const userData = data?.user;
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");

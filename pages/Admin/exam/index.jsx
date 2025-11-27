@@ -60,7 +60,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
-      userId: session.user.user_id
+      userId: session?.user?.user_id
     },
   };
 }
