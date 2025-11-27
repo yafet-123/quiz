@@ -5,7 +5,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
-export function AddWorksheetWithQuestions({ subjects }) {
+export function AddWorksheetWithQuestions({ subjects, userId }) {
   const { data } = useSession();
   const userData = data?.user;
   const [loading, setLoading] = useState(false);
@@ -57,7 +57,7 @@ export function AddWorksheetWithQuestions({ subjects }) {
 
       const formattedQuestions = questions.map((q) => ({
         question: q.question,
-        createdBy: 2,
+        createdBy: userId,
         correctOption: q.correctOption, // <-- rename from "answer" to "correctOption"
         Options: {
           create: q.options.map((opt) => ({ optionText: opt })),

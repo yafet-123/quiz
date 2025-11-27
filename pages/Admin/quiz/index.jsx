@@ -57,11 +57,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
+      userId: session.user.user_id
     }
   };
 }
 
-export default function QuizzesPage({ subjects }) {
+export default function QuizzesPage({ subjects, userId }) {
   const { data } = useSession();
   console.log(subjects)
   return (
@@ -72,7 +73,7 @@ export default function QuizzesPage({ subjects }) {
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
             {/* Add Quiz & Questions Form */}
-            <AddQuizWithQuestions subjects={subjects} />
+            <AddQuizWithQuestions subjects={subjects} userId={userId} />
 
             {/* Display Existing Quizzes & Questions */}
             <DisplayQuizzes subjects={subjects} />

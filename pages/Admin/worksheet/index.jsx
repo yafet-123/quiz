@@ -60,11 +60,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
+      userId: session.user.user_id
     },
   };
 }
 
-export default function ExamsPage({ subjects }) {
+export default function ExamsPage({ subjects, userId }) {
   const { data } = useSession();
 
   return (
@@ -75,7 +76,7 @@ export default function ExamsPage({ subjects }) {
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
             {/* Add Exam & Questions Form */}
-            <AddWorksheetWithQuestions subjects={subjects} />
+            <AddWorksheetWithQuestions subjects={subjects} userId={userId} />
 
             {/* Display Existing Exams & Questions */}
             <DisplayWorksheets subjects={subjects} />

@@ -5,7 +5,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
-export function AddQuizWithQuestions({ subjects }) {
+export function AddQuizWithQuestions({ subjects, userId }) {
   const { data } = useSession();
   const userData = data?.user;
   console.log(userData)
@@ -70,7 +70,7 @@ export function AddQuizWithQuestions({ subjects }) {
       await axios.post("/api/quiz/add-quiz-with-questions", {
         subjectId,
         title: examTitle,
-        createdBy: userData.user_id, // replace with actual userId
+        createdBy: userId, // replace with actual userId
         questions: formattedQuestions,
       });
 
