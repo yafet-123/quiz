@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
  
-export function DeleteExam({ setDeleteModalOn, examId }) {
+export function DeleteExam({ setDeleteModalOn, examId, userId }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 

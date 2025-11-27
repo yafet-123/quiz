@@ -4,7 +4,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 
-export function UpdateExam({ exam, subject, subjects, setUpdateModalOn }) {
+export function UpdateExam({ exam, subject, subjects, setUpdateModalOn, userId }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   console.log(subject)
@@ -56,7 +56,7 @@ export function UpdateExam({ exam, subject, subjects, setUpdateModalOn }) {
       const formattedQuestions = questions.map((q) => ({
         question: q.question,
         correctOption: q.correctOption,
-        createdBy: 1, // optional
+        createdBy: userId, // optional
         Options: { create: q.options.map((opt) => ({ optionText: opt })) },
       }));
 

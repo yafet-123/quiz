@@ -79,7 +79,7 @@ export default function ExamsPage({ subjects, userId }) {
             <AddExamWithQuestions subjects={subjects} userId={userId} />
 
             {/* Display Existing Exams & Questions */}
-            <DisplayExams subjects={subjects} />
+            <DisplayExams subjects={subjects} userId={userId} />
           </div>
         </div>
       </section>

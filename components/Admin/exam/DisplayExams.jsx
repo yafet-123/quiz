@@ -6,7 +6,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { UpdateExam } from "./UpdateExam"; // ✅ import update modal
 import { DeleteExam } from "./DeleteExam"; // ✅ import delete modal
 
-export function DisplayExams({ subjects }) {
+export function DisplayExams({ subjects, userId }) {
   const router = useRouter();
 
   const [updateModalOn, setUpdateModalOn] = useState(false);
@@ -112,6 +112,7 @@ export function DisplayExams({ subjects }) {
           exam={selectedExam}
           setUpdateModalOn={setUpdateModalOn}
           subjects={subjects}
+          userId={userId}
         />
       )}
 
@@ -119,6 +120,7 @@ export function DisplayExams({ subjects }) {
         <DeleteExam
           examId={selectedExam.id}
           setDeleteModalOn={setDeleteModalOn}
+          userId={userId}
         />
       )}
     </div>
