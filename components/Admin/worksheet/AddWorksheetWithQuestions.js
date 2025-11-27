@@ -67,7 +67,7 @@ export function AddWorksheetWithQuestions({ subjects, userId }) {
       await axios.post("/api/worksheet/add-worksheet-with-questions", {
         subjectId,
         title: examTitle,
-        createdBy: 1, // replace with actual userId
+        createdBy: userId, // replace with actual userId
         questions: formattedQuestions,
       });
 
