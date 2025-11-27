@@ -65,7 +65,7 @@ export function UpdateExam({ exam, subject, subjects, setUpdateModalOn, userId }
         subjectId,
         questions: formattedQuestions,
       });
-
+ 
       setSuccess("Exam updated successfully!");
       setTimeout(() => window.location.reload(), 1000);
     } catch (err) {

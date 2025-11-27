@@ -2,18 +2,28 @@ import { prisma } from "../../../../util/db.server.js";
 
 export default async function handler(req, res) {
   const { id } = req.query;
-
+  console.log(id)
   if (req.method !== "PATCH") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   const { subjectId, title, questions } = req.body;
 
-  try {
-    // ✅ Update exam and replace its questions/options
-    // First manually delete old options and questions
+  try { 
+    const examId = parseInt(id);
+
+    // 1️⃣ Delete ALL existing option rows first
+    await prisma.ExamOption.deleteMany({
+      where: {
+        ExamQuestion: {
+          examId: examId,
+        },
+      },
+    });
+
+    // 2️⃣ Delete ALL existing questions
     await prisma.ExamQuestion.deleteMany({
-      where: { examId: parseInt(id) },
+      where: { examId: examId },
     });
 
     // Then update the exam

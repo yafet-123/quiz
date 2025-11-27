@@ -3,32 +3,70 @@ import { prisma } from "../../../../util/db.server.js";
 export default async function handler(req, res) {
   const { id } = req.query;
 
-  if (req.method !== "PATCH") return res.status(405).json({ error: "Method not allowed" });
+  if (req.method !== "PATCH") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-  const { title, subjectId, questions } = req.body;
-  console.log(req.body)
+  const { subjectId, title, questions } = req.body;
+
+  if (!questions || !Array.isArray(questions)) {
+    return res.status(400).json({ error: "Questions must be an array" });
+  }
+
   try {
-    // Delete old questions and options, then create new ones
+    const quizId = parseInt(id);
+
+    // 1️⃣ DELETE all existing option rows
+    await prisma.optionTable.deleteMany({
+      where: {
+        Question: {
+          quizId: quizId,
+        },
+      },
+    });
+
+    // 2️⃣ DELETE all existing questions
+    await prisma.question.deleteMany({
+      where: { quizId: quizId },
+    });
+
+    // 3️⃣ UPDATE quiz + recreate questions + options
     const updatedQuiz = await prisma.quiz.update({
-      where: { id: parseInt(id) },
+      where: { id: quizId },
       data: {
         title,
         subjectId: parseInt(subjectId),
+
         Questions: {
-          deleteMany: {},
           create: questions.map((q) => ({
             question: q.question,
             answer: q.answer,
-            Options: { create: q.Options.create.map((opt) => ({ optionText: opt.optionText })) },
+
+            OptionTable: {
+              create: q.Options.create.map((opt) => ({
+                optionText: opt.optionText,
+              })),
+            },
           })),
         },
       },
-      include: { Questions: { include: { Options: true } } },
+
+      include: {
+        Questions: {
+          include: {
+            OptionTable: true,
+          },
+        },
+      },
     });
 
-    res.status(200).json({ message: "Quiz updated successfully", updatedQuiz });
-  } catch (err) {
-    console.error(err);
+    res.status(200).json({
+      message: "Quiz updated successfully",
+      updatedQuiz,
+    });
+
+  } catch (error) {
+    console.error("Update error:", error);
     res.status(500).json({ error: "Failed to update quiz" });
   }
 }

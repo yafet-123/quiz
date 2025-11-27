@@ -7,25 +7,36 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { subjectId, title, questions } = req.body;
-  console.log(id)
   try {
-    // ✅ Update exam and replace its questions/options
-    // First manually delete old options and questions
-    await prisma.WorksheetQuestion.deleteMany({
-      where: { worksheetId: parseInt(id) },
+    const worksheetId = parseInt(id);
+    const { title, subjectId, questions } = req.body;
+
+    // 1️⃣ Delete all options
+    await prisma.worksheetOption.deleteMany({
+      where: {
+        WorksheetQuestion: {
+          worksheetId: worksheetId,
+        },
+      },
     });
 
-    // Then update the exam
-    const updatedWorksheet = await prisma.Worksheet.update({
-      where: { id: parseInt(id) },
+    // 2️⃣ Delete all questions
+    await prisma.worksheetQuestion.deleteMany({
+      where: {
+        worksheetId: worksheetId,
+      },
+    });
+
+    // 3️⃣ Update worksheet and recreate questions/options
+    const updatedWorksheet = await prisma.worksheet.update({
+      where: { id: worksheetId },
       data: {
         title,
         subjectId: parseInt(subjectId),
         Questions: {
           create: questions.map((q) => ({
             question: q.question,
-            correctAnswer: q.correctAnswer,
+            correctAnswer: q.correctAnswer,  // from your front-end field
             Options: {
               create: q.Options.create.map((opt) => ({
                 optionText: opt.optionText,
@@ -43,13 +54,12 @@ export default async function handler(req, res) {
       },
     });
 
-
     res.status(200).json({
       message: "Worksheet updated successfully",
       updatedWorksheet,
     });
   } catch (error) {
-    console.error("Error updating exam:", error);
-    res.status(500).json({ error: "Failed to update Worksheet" });
+    console.error("Error updating worksheet:", error);
+    res.status(500).json({ error: "Failed to update worksheet" });
   }
 }

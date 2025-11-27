@@ -6,7 +6,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { UpdateWorksheet } from "./UpdateWorksheet"; // ✅ import update modal
 import { DeleteWorksheet } from "./DeleteWorksheet"; // ✅ import delete modal
 
-export function DisplayWorksheets({ subjectsm, userId }) {
+export function DisplayWorksheets({ subjects, userId }) {
   const router = useRouter();
 
   const [updateModalOn, setUpdateModalOn] = useState(false);

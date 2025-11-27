@@ -71,7 +71,7 @@ export function AddWorksheetWithQuestions({ subjects, userId }) {
         questions: formattedQuestions,
       });
 
-      setSuccess("Exam and questions added successfully!");
+      setSuccess("Worksheet and questions added successfully!");
       setSubjectId("");
       setExamTitle("");
       setQuestions([{ question: "", options: ["", "", "", ""], correctOption: "" }]);

@@ -8,8 +8,29 @@ export default async function handler(req, res) {
   }
 
   try {
+    const examId = parseInt(id);
+
+    // 1️⃣ Delete all options related to this exam
+    await prisma.ExamOption.deleteMany({
+      where: {
+        ExamQuestion: {
+          examId: examId,
+        },
+      },
+    });
+
+    // 2️⃣ Delete all questions for this exam
+    await prisma.ExamQuestion.deleteMany({
+      where: {
+        examId: examId,
+      },
+    });
+
+    // 3️⃣ Delete the exam itself
     await prisma.Exam.delete({
-      where: { id: parseInt(id) },
+      where: {
+        id: examId,
+      },
     });
 
     res.status(200).json({ message: "Exam deleted successfully" });
@@ -18,4 +39,3 @@ export default async function handler(req, res) {
     res.status(500).json({ error: "Failed to delete exam" });
   }
 }
-
