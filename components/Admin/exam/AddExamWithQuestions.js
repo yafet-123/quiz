@@ -5,7 +5,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { useSession } from "next-auth/react";
 
-export async function AddExamWithQuestions({ subjects, userId }) {
+export function AddExamWithQuestions({ subjects, userId }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
