@@ -70,7 +70,7 @@ export default function Home() {
         </section>
 
         {/* How It Works */}
-        <section className="bg-purple-50 py-20 px-6">
+        {/* <section className="bg-purple-50 py-20 px-6">
           <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             How It Works
           </h3>
@@ -91,7 +91,7 @@ export default function Home() {
               description="Track your progress and get ready to ace your exams with confidence."
             />
           </div>
-        </section>
+        </section> */}
 
         {/* Why Students Love Us */}
         <section className="bg-white py-20 px-6">
