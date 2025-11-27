@@ -11,10 +11,9 @@ import ReactModal from "react-modal";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-export function AddDefinition({ subjects }) {
+export function AddDefinition({ subjects, userId }) {
   const router = useRouter();
   const { data } = useSession();
-  const UserData = data?.user;
 
   const [title, setTitle] = useState("");
   const [subjectId, setSubjectId] = useState("");
@@ -64,7 +63,7 @@ export function AddDefinition({ subjects }) {
         title,
         description,
         subjectId: parseInt(subjectId),
-        createdBy: UserData.user_id,
+        createdBy: userId,
         definitions,
       });
 

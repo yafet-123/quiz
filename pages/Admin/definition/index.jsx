@@ -57,11 +57,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
+      userId: session?.user?.user_id
     },
   };
 }
 
-export default function DefinitionPage({ subjects }) {
+export default function DefinitionPage({ subjects, userId }) {
   const { data } = useSession();
 
   return (
@@ -73,7 +74,7 @@ export default function DefinitionPage({ subjects }) {
 
           <div className="w-full px-6">
             {/* ✅ Add New Definition Sheet Form */}
-            <AddDefinition subjects={subjects} />
+            <AddDefinition subjects={subjects} userId={userId} />
 
             {/* ✅ Display Existing Definition Sheets */}
             <DisplayDefinition subjects={subjects} />
