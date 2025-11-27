@@ -67,7 +67,7 @@ export function AddExamWithQuestions({ subjects, userId }) {
       await axios.post("/api/exam/add-exam-with-questions", {
         subjectId,
         title: examTitle,
-        createdBy: userData.user_id, // replace with actual userId
+        createdBy: userId, // replace with actual userId
         questions: formattedQuestions,
       });
 
