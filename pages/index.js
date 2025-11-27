@@ -12,6 +12,9 @@ import {
   FaUserGraduate,
   FaChalkboardTeacher,
   FaEnvelopeOpenText,
+  FaFileAlt,
+  FaBook,
+  FaListAlt
 } from "react-icons/fa";
 
 export default function Home() {
@@ -48,24 +51,40 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
             <FeatureCard
               icon={<FaFileAlt />}
-              title="Worksheets"
+              title="Comprehensive Notes"
               description="Download printable worksheets for every topic and practice anywhere, anytime."
             />
             <FeatureCard
               icon={<FaClipboardList />}
-              title="Quizzes"
+              title="Practice Notes"
               description="Test your understanding with interactive quizzes and get instant feedback."
             />
             <FeatureCard
               icon={<FaBookOpen />}
-              title="Study Notes"
+              title="Revision Notes"
               description="Access concise and easy-to-follow revision notes written by expert teachers."
             />
             <FeatureCard
               icon={<FaLaptopCode />}
-              title="Online Practice"
+              title="Flashcard Tips"
               description="Learn digitally with our interactive online lessons and question banks."
             />
+            <FeatureCard
+              icon={<FaFileAlt />}
+              title="Worksheet"
+              description="Learn digitally with our interactive online lessons and question banks."
+            />
+            <FeatureCard
+              icon={<FaBook />}
+              title="Formula Sheet"
+              description="Learn digitally with our interactive online lessons and question banks."
+            />
+            <FeatureCard
+              icon={<FaListAlt />}
+              title="Definition Sheet"
+              description="Learn digitally with our interactive online lessons and question banks."
+            />
+  
           </div>
         </section>
 
