@@ -4,7 +4,7 @@ import Loader from "../../common/Loading";
 import ReactModal from "react-modal";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 
-export function UpdateWorksheet({ worksheet, subject, subjects, setUpdateModalOn }) {
+export function UpdateWorksheet({ worksheet, subject, subjects, setUpdateModalOn, userId }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   console.log(subject)
@@ -56,7 +56,7 @@ export function UpdateWorksheet({ worksheet, subject, subjects, setUpdateModalOn
       const formattedQuestions = questions.map((q) => ({
         question: q.question,
         correctAnswer: q.correctAnswer,
-        createdBy: 1, // optional
+        createdBy: userId, // optional
         Options: { create: q.options.map((opt) => ({ optionText: opt })) },
       }));
 

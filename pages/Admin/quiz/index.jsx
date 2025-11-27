@@ -76,7 +76,7 @@ export default function QuizzesPage({ subjects, userId }) {
             <AddQuizWithQuestions subjects={subjects} userId={userId} />
 
             {/* Display Existing Quizzes & Questions */}
-            <DisplayQuizzes subjects={subjects} />
+            <DisplayQuizzes subjects={subjects} userId={userId} />
           </div>
         </div>
       </section>

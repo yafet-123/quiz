@@ -3,7 +3,7 @@ import axios from "axios";
 import Loader from "../../common/Loading";
 import { FiPlusCircle, FiTrash2 } from "react-icons/fi";
 
-export function UpdateQuiz({ quizId, subject, currentQuiz, subjects, setUpdateModalOn }) {
+export function UpdateQuiz({ quizId, subject, currentQuiz, subjects, setUpdateModalOn, userId }) {
   console.log(subject)
   const [title, setTitle] = useState(currentQuiz.title || "");
   const [subjectId, setSubjectId] = useState(subject.id || "");

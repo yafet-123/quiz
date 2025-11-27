@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { UpdateQuiz } from "./UpdateQuiz"; // create this modal similar to UpdateExam
 import { DeleteQuiz } from "./DeleteQuiz"; // create this modal similar to DeleteExam
 
-export function DisplayQuizzes({ subjects }) {
+export function DisplayQuizzes({ subjects, userId }) {
   const [updateModalOn, setUpdateModalOn] = useState(false);
   const [deleteModalOn, setDeleteModalOn] = useState(false);
   const [subject, setSubject] = useState(null);
@@ -104,6 +104,7 @@ export function DisplayQuizzes({ subjects }) {
           subjects={subjects}
           subject={subject}
           setUpdateModalOn={setUpdateModalOn}
+          userId={userId}
         />
       )}
 
@@ -111,6 +112,7 @@ export function DisplayQuizzes({ subjects }) {
         <DeleteQuiz
           quizId={selectedQuiz.id}
           setDeleteModalOn={setDeleteModalOn}
+          userId={userId}
         />
       )}
     </div>

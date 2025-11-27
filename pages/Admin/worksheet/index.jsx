@@ -79,7 +79,7 @@ export default function ExamsPage({ subjects, userId }) {
             <AddWorksheetWithQuestions subjects={subjects} userId={userId} />
 
             {/* Display Existing Exams & Questions */}
-            <DisplayWorksheets subjects={subjects} />
+            <DisplayWorksheets subjects={subjects} userId={userId} />
           </div>
         </div>
       </section>
