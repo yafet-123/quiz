@@ -50,7 +50,7 @@ export const Navbar = () => {
         shadow ? "shadow-lg bg-[#417094]" : "bg-[#417094]"
       }`}
     >
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 h-20">
+      <div className="max-w-7xl mx-auto flex justify-between items-center h-20">
         {/* Logo */}
         <Link href="/">
           <div className="relative w-[150px] lg:w-[180px] h-[55px] lg:h-[60px] overflow-hidden">
