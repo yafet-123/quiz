@@ -70,7 +70,7 @@ export default function Home() {
               description="Learn digitally with our interactive online lessons and question banks."
             />
             <FeatureCard
-              icon={<FaFileAlt />}
+              icon={<FaLaptopCode />}
               title="Worksheet"
               description="Learn digitally with our interactive online lessons and question banks."
             />
