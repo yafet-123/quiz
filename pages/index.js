@@ -12,7 +12,6 @@ import {
   FaUserGraduate,
   FaChalkboardTeacher,
   FaEnvelopeOpenText,
-  FaFileAlt,
   FaBook,
   FaListAlt
 } from "react-icons/fa";
