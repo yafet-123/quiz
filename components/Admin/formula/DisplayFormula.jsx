@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import { UpdateFormula } from "./UpdateFormula"; // ✅ import update modal
 import { DeleteFormula } from "./DeleteFormula"; // ✅ import delete modal
 
-export function DisplayFormula({ subjects, currentUserId }) {
+export function DisplayFormula({ subjects, currentUserId, userId }) {
   const [updateModalOn, setUpdateModalOn] = useState(false);
   const [deleteModalOn, setDeleteModalOn] = useState(false);
   const [subject, setSubject] = useState(null);
@@ -95,6 +95,7 @@ export function DisplayFormula({ subjects, currentUserId }) {
           formula={selectedFormula}
           setUpdateModalOn={setUpdateModalOn}
           subjects={subjects}
+          userId={userId}
         />
       )}
 

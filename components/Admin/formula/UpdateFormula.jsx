@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-export function UpdateFormula({ formula, subject, subjects, setUpdateModalOn }) {
+export function UpdateFormula({ formula, subject, subjects, setUpdateModalOn, userId }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [topicName, setTopicName] = useState(formula.Topic?.name || "");
@@ -35,7 +35,7 @@ export function UpdateFormula({ formula, subject, subjects, setUpdateModalOn }) 
 
     try {
       await axios.patch(`/api/formula/update-formula/${formula.id}`, {
-        subjectId, topicName, formulas
+        subjectId, topicName, formulas, userId
       });
       setSuccess("Formula sheet updated successfully!");
       setTimeout(() => window.location.reload(), 1000);

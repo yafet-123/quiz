@@ -3,7 +3,7 @@ import { prisma } from '../../../../util/db.server.js'
 export default async function handler(req, res) {
   const { formulaId } = req.query; // optional if updating multiple formulas at once
   if (req.method === "PATCH") {
-    const { subjectId, topicName, formulas } = req.body;
+    const { subjectId, topicName, formulas, userId } = req.body;
 
     // 1. Find or create topic
     let topic = await prisma.topic.findFirst({ where: { name: topicName, subjectId: Number(subjectId) } });
@@ -25,7 +25,7 @@ export default async function handler(req, res) {
         }));
       } else {
         results.push(await prisma.formulaSheet.create({
-          data: { title: f.title, description: f.description, formula: f.formula, subjectId: Number(subjectId), topicId: topic.id, createdBy: 1 }
+          data: { title: f.title, description: f.description, formula: f.formula, subjectId: Number(subjectId), topicId: topic.id, createdBy: userId }
         }));
       }
     }

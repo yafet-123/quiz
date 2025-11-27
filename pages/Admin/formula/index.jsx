@@ -52,25 +52,28 @@ console.log(JSON.stringify(formattedSubjects, null, 2));
   return {
     props: {
       subjects: JSON.parse(JSON.stringify(formattedSubjects)),
+      userId: session?.user?.user_id
     }
   };
 }
 
-export default function QuizzesPage({ subjects }) {
-  const { data } = useSession();
-  console.log(subjects)
+export default function QuizzesPage({ subjects, userId }) {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <div>Loading...</div>;
+
   return (
     <React.Fragment>
-      <MainHeader title="Quizzes Dashboard" />
+      <MainHeader title="Formulasheet Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-24">
         <div className='w-full h-full flex flex-row'>
-          <VerticalNavbar data={data} /> 
+          {status === "authenticated" && <VerticalNavbar data={session} />}
           <div className="w-full px-6">
             {/* Add Quiz & Questions Form */}
             <AddFormula subjects={subjects} />
 
             {/* Display Existing Quizzes & Questions */}
-            <DisplayFormula subjects={subjects} />
+            <DisplayFormula subjects={subjects} userId={userId} />
           </div>
         </div>
       </section>
