@@ -81,7 +81,7 @@ export const Footer = () => {
               <FaPhoneAlt /> <span>+251 966 149 422</span>
             </li>
             <li className="flex items-center gap-2">
-              <MdEmail /> <span>info@savemyexams.com</span>
+              <MdEmail /> <span>hiyabealaa@gmail.com</span>
             </li>
             <li className="flex items-center gap-2">
               <ImLocation /> <span>Addis Ababa, Ethiopia</span>
@@ -92,7 +92,7 @@ export const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="bg-gray-900 text-gray-400 py-6 text-center">
-        <p>&copy; {new Date().getFullYear()} Aceits. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Aceit. All rights reserved.</p>
       </div>
     </footer>
   );
