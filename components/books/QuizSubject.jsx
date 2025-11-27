@@ -30,9 +30,9 @@ export default function QuizSubject({subjects}) {
               <h2 className="mt-6 text-2xl font-bold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
                 {subject.name}
               </h2>
-              <p className="text-gray-600 mt-3 text-base leading-relaxed">
+              {/* <p className="text-gray-600 mt-3 text-base leading-relaxed">
                 {subject.description}
-              </p>
+              </p> */}
 
               {/* Decorative Line */}
               <div className="mt-4 w-16 h-1 bg-green-500 rounded-full group-hover:w-24 transition-all duration-500"></div>
