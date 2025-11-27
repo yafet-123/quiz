@@ -24,7 +24,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="bg-purple-50 py-40 text-center px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-[#417094] mb-4">
-            Study Smarter. Not Harder.
+            Remission Our Goal
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
             Trusted by thousands of students to ace their GCSEs, IGCSEs, A Levels,
