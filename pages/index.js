@@ -164,7 +164,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <TestimonialCard
               name="Sarah J."
-              text="Save My Exams made revision so much easier! The quizzes and notes helped me go from a C to an A."
+              text="Aceit made revision so much easier! The quizzes and notes helped me go from a C to an A."
             />
             <TestimonialCard
               name="Ethan R."
