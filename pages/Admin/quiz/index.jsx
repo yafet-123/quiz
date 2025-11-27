@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
         id: q.id,
         question: q.question,
         answer: q.answer,
-        Options: q.Options.map(opt => ({ id: opt.id, optionText: opt.optionText })), // now options are included
+        Options: q.OptionTable.map(opt => ({ id: opt.id, optionText: opt.optionText })), // now options are included
       })),
     })),
   }));
