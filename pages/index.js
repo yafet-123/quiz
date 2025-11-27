@@ -113,7 +113,7 @@ export default function Home() {
         </section> */}
 
         {/* Why Students Love Us */}
-        <section className="bg-white py-20 px-6">
+        {/* <section className="bg-white py-20 px-6">
           <h3 className="text-3xl font-bold text-center text-[#417094] mb-10">
             Why Students Love Us
           </h3>
@@ -134,7 +134,7 @@ export default function Home() {
               text="Gain confidence, master topics, and achieve your academic goals."
             />
           </div>
-        </section>
+        </section> */}
 
         {/* Join Section */}
         <section className="bg-purple-100 py-20 px-6">
