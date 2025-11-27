@@ -72,17 +72,17 @@ export default function Home() {
             <FeatureCard
               icon={<FaLaptopCode />}
               title="Worksheet"
-              description="Learn digitally with our interactive online lessons and question banks."
+              description="A collection of practice expercises or activities in a document format"
             />
             <FeatureCard
               icon={<FaBook />}
               title="Formula Sheet"
-              description="Learn digitally with our interactive online lessons and question banks."
+              description="A reference sheet containing essential formulas and equations"
             />
             <FeatureCard
               icon={<FaListAlt />}
               title="Definition Sheet"
-              description="Learn digitally with our interactive online lessons and question banks."
+              description="A concise list of key terms and their definitions"
             />
   
           </div>
