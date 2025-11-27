@@ -57,7 +57,7 @@ const reasons = [
 export default function Articles({subjects}) {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Article Page" />
+      <MainHeader title="Aceit : Article Page" />
       <div className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-32 text-center px-6">

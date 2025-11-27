@@ -7,7 +7,7 @@ export default function ArticleDetail({ article }) {
   if (!article) {
     return (
       <div>
-        <MainHeader title="Save My Exam : Article Slug Page" />
+        <MainHeader title="Aceit : Article Slug Page" />
         <div className="py-32 px-5 lg:px-20 text-center">
           <h2 className="text-2xl font-bold">Article not found</h2>
           <Link href="/study/books/article">
@@ -22,7 +22,7 @@ export default function ArticleDetail({ article }) {
   
   return (
     <div>
-      <MainHeader title="Save My Exam : Article Slug Page" />
+      <MainHeader title="Aceit : Article Slug Page" />
       <div className="antialiased bg-gradient-to-r">
         <MainHeader title="MatricMate" />
         <div className="min-h-screen bg-gray-50 py-24 px-4 md:px-10">

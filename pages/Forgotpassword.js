@@ -23,7 +23,7 @@ export default function ForgotPassword() {
 
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Forgot Password" />
+      <MainHeader title="Aceit : Forgot Password" />
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-tr from-blue-50 via-indigo-50 to-purple-50 px-4 pt-10">
         <div className="flex flex-col items-center w-full max-w-md lg:max-w-lg pt-10">
           

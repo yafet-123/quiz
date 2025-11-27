@@ -104,7 +104,7 @@ export default function Students({Allannouncements, tasks, serverdate, Allstuden
   const { status, data } = useSession();
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Students" />
+      <MainHeader title="Aceit : Students" />
       <div className="flex bg-[#e6e6e6] pt-24">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="w-full">

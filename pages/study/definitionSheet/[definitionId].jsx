@@ -8,7 +8,7 @@ export default function DefinitionSheetDetail({ sheet }) {
   if (!sheet) {
     return (
       <div className="py-32 text-center text-gray-600">
-        <MainHeader title="Save My Exam : Definition Sheet Individual Page" />
+        <MainHeader title="Aceit : Definition Sheet Individual Page" />
         <p>Definition sheet not found.</p>
       </div>
     );

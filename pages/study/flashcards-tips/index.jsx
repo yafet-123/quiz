@@ -72,7 +72,7 @@ const steps = [
 export default function FlashcardsTips({subjects}) {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Flashcard Page" />
+      <MainHeader title="Aceit : Flashcard Page" />
       <div className="bg-gray-50 min-h-screen py-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-yellow-400 to-pink-500 text-white py-32 text-center px-6">

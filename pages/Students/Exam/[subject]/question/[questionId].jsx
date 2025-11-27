@@ -156,7 +156,7 @@ export default function ExamQuestionPage({ exam, subject, student }) {
 
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Exam Question Page" />
+      <MainHeader title="Aceit : Exam Question Page" />
       <div className="flex bg-[#e6e6e6] w-full">
         <VerticalNavbar data={data} />
         <div className="min-h-screen flex flex-col items-center w-full bg-gray-50 py-24 px-4">

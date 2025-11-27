@@ -6,7 +6,7 @@ export default function BookDetail({ quizzes, subjectId }) {
   console.log(quizzes)
   return (
     <div className="antialiased bg-[#ededf2]">
-      <MainHeader title="Save My Exam : Quiz Subject Page" />
+      <MainHeader title="Aceit : Quiz Subject Page" />
       <section className="px-4 py-32 max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-4 text-center">Quizzes</h2>
         <div>

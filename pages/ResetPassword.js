@@ -42,7 +42,7 @@ export default function ResetPassword() {
   if (success) {
     return (
       <>
-        <MainHeader title="Save My Exam : Password Reset" />
+        <MainHeader title="Aceit : Password Reset" />
         <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-5">
           <div className="bg-white shadow-xl rounded-2xl p-10 max-w-md w-full text-center">
             <h1 className="text-2xl font-bold text-blue-700 mb-4">
@@ -68,7 +68,7 @@ export default function ResetPassword() {
   // 🧩 Reset Password Form
   return (
     <>
-      <MainHeader title="Save My Exam : Reset Password" />
+      <MainHeader title="Aceit : Reset Password" />
       <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-gray-100 to-blue-50 px-5">
         <div className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md">
           <h1 className="text-3xl font-bold text-center text-blue-700 mb-8">

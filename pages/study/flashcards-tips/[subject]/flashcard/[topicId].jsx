@@ -40,7 +40,7 @@ export default function FlashCard({ topic }) {
   };
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Flashcard Individual Page" />
+      <MainHeader title="Aceit : Flashcard Individual Page" />
       <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-gray-50 to-gray-100 py-24 px-4">
         <div className="mb-12 w-full max-w-6xl">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12 text-center border-b-2 border-indigo-500 pb-4">

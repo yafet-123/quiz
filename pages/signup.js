@@ -54,7 +54,7 @@ export default function SignUp() {
 
   return ( 
     <>
-      <MainHeader title="Save My Exam : Sign Up" />
+      <MainHeader title="Aceit : Sign Up" />
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#417094] to-white px-4 py-24">
         <div className="bg-white shadow-lg rounded-2xl p-8 md:p-10 w-full max-w-md">
           <h2 className="text-3xl font-bold text-center text-[#417094] mb-2">

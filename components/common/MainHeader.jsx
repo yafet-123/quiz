@@ -8,7 +8,7 @@ export const MainHeader = ({ title }) => {
         <title>{title}</title>
         <meta
           name="description"
-          content="Save My Exam"
+          content="Aceit"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,7 +16,7 @@ export const MainHeader = ({ title }) => {
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
-          content="Ethiopia is entering a new era of digital testing; Save My Exam is here to support every step. Access textbooks, test your knowledge, and get instant answers, all from one platform."
+          content="Ethiopia is entering a new era of digital testing; Aceit is here to support every step. Access textbooks, test your knowledge, and get instant answers, all from one platform."
         />
         <meta property="og:image" content="/public/favicon.ico" />
         <meta property="og:url" content="https://helenzeray.com" />

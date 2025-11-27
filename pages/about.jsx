@@ -50,7 +50,7 @@ export default function AboutPage() {
 
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : About Page" />
+      <MainHeader title="Aceit : About Page" />
       <div className="min-h-screen bg-gray-50 text-gray-900">
         {/* HERO */}
         <header className="bg-white">

@@ -19,7 +19,7 @@ import {
 export default function Home() {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Home Page" />
+      <MainHeader title="Aceit : Home Page" />
       <div className="font-sans text-gray-800">
         {/* Hero Section */}
         <section className="bg-purple-50 py-40 text-center px-4">

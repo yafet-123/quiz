@@ -7,7 +7,7 @@ export default function BookGradeDetail({ subjects, all_subject_books }) {
   console.log(subjects);
   return (
     <div className="antialiased bg-gradient-to-r">
-      <MainHeader title="Save My Exam : Supplementary Book Page" />
+      <MainHeader title="Aceit : Supplementary Book Page" />
       <SubjectSpecifiedBooks subjects={subjects} />
     </div>
   );

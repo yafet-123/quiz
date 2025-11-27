@@ -127,7 +127,7 @@ const steps = [
 export default function Study() {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Study Page" />
+      <MainHeader title="Aceit : Study Page" />
       <div className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-40 text-center px-6">

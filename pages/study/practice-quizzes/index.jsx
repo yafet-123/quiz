@@ -70,7 +70,7 @@ const steps = [
 export default function PracticeQuizzes({subjects}) {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Quiz Page" />
+      <MainHeader title="Aceit : Quiz Page" />
       <div className="bg-gray-50 min-h-screen py-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-400 to-indigo-500 text-white py-32 text-center px-6">

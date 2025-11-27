@@ -11,7 +11,7 @@ export default function BookDetail({ exames, subjectId }) {
   const { status, data } = useSession();
   return (
     <div className="antialiased bg-[#ededf2] min-h-screen pt-10">
-      <MainHeader title="Save My Exam : Exam Subject Page" />
+      <MainHeader title="Aceit : Exam Subject Page" />
       <div className="flex bg-[#e6e6e6]">
         <VerticalNavbar onChange={handleChange} data={data} />
         <section className="px-4 py-20 max-w-4xl mx-auto w-full">

@@ -65,7 +65,7 @@ const steps = [
 export default function ComprehensiveNotes({subjects}) {
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Revision Note Page" />
+      <MainHeader title="Aceit : Revision Note Page" />
       <div className="bg-gray-50 min-h-screen py-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-32 text-center px-6">

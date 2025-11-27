@@ -11,7 +11,7 @@ export default function Home() {
   };
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Team Page" />
+      <MainHeader title="Aceit : Team Page" />
       <div className="flex flex-col pt-20">
         <TeamSection />
       </div>

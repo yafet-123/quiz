@@ -63,7 +63,7 @@ export default function PracticeQuizzes({ subjects }) {
 
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Exam Page" />
+      <MainHeader title="Aceit : Exam Page" />
       <div className="flex bg-[#e6e6e6] ">
         <VerticalNavbar onChange={handleChange} data={data} />
         <div className="bg-gray-50 min-h-screen pt-24 lg:px-5">

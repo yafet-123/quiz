@@ -31,7 +31,7 @@ const Help = () => {
 
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Help Page" />
+      <MainHeader title="Aceit : Help Page" />
       <div className="bg-gray-50 min-h-screen py-32 px-4">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold text-gray-800 mb-6 text-center">

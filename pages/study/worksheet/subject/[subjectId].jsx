@@ -8,7 +8,7 @@ export default function BookDetail({ worksheetes, subjectId }) {
   console.log(worksheetes)
   return (
     <React.Fragment>
-      <MainHeader title="Save My Exam : Worksheet Subject Page" />
+      <MainHeader title="Aceit : Worksheet Subject Page" />
       <div className="antialiased bg-[#ededf2]">
         <MainHeader title={`MatricMate`} />
         <section className="px-4 py-32 max-w-4xl mx-auto">
