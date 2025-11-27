@@ -39,15 +39,15 @@ export function AddTopicWithFlashcards({ subjects }) {
     setLoading(true);
     setLoadingModalIsOpen(true);
 
-    try {
-      await axios.post("/api/definition/add-definition-sheet", {
+    try { 
+      await axios.post("/api/flashcard/add-flash-cards-with-topic", {
         subjectId,
         topicId: topicId || null,
         title: sheetTitle,
         definitions,
       });
 
-      setSuccess("Definition Sheet and Definitions added successfully!");
+      setSuccess("Flashcad added successfully!");
       setSubjectId("");
       setTopicId("");
       setSheetTitle("");
@@ -142,13 +142,6 @@ export function AddTopicWithFlashcards({ subjects }) {
                   value={def.meaning}
                   onChange={(e) => handleDefinitionChange(index, "meaning", e.target.value)}
                   className="w-full mb-2 px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
-                />
-                <input
-                  type="text"
-                  placeholder="Example (optional)"
-                  value={def.example}
-                  onChange={(e) => handleDefinitionChange(index, "example", e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#009688]"
                 />
               </div>
             ))}

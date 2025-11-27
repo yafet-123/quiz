@@ -61,7 +61,7 @@ export default function FlashcardsPage({ subjects }) {
   
   return (
     <React.Fragment>
-      <MainHeader title="Comprehensive Note Dashboard" />
+      <MainHeader title="Flashcard Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
