@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    await prisma.exam.delete({
+    await prisma.Exam.delete({
       where: { id: parseInt(id) },
     });
 
