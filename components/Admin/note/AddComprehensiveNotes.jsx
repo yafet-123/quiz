@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
 
-export function AddComprehensiveNotes({ subjects }) {
+export function AddComprehensiveNotes({ subjects, userId }) {
   const { status, data } = useSession();
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
@@ -33,7 +33,7 @@ export function AddComprehensiveNotes({ subjects }) {
         subjectId,
         title,
         content,
-        createdBy: UserData.user_id,
+        createdBy: userId,
       });
 
       setSuccess("Note added successfully!");

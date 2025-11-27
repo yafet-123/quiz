@@ -23,7 +23,7 @@ export function DisplayRevisionNoteNotes({ notes, subjects }) {
   return (
     <div className="px-2 lg:px-12 py-12 bg-gray-50 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800 italic">
-        Comprehensive Notes
+        Revision Notes
       </h1>
 
       {notes.length === 0 ? (

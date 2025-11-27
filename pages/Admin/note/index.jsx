@@ -55,7 +55,8 @@ export async function getServerSideProps(context) {
     return {
       props: {
         subjects: JSON.parse(JSON.stringify(formattedSubjects)),
-        notes: JSON.parse(JSON.stringify(formattedNotes))
+        notes: JSON.parse(JSON.stringify(formattedNotes)),
+        userId: session?.user?.user_id
       }
     };
   } catch (error) {
@@ -70,18 +71,18 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default function FlashcardsPage({ subjects, notes }) {
+export default function FlashcardsPage({ subjects, notes, userId }) {
   const { data } = useSession();
   
   return (
     <React.Fragment>
-      <MainHeader title="Flashcards Dashboard" />
+      <MainHeader title="Compressive Note Dashboard" />
       <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
             {/* Add Topic & Flashcards Form */}
-            <AddComprehensiveNotes subjects={subjects} />
+            <AddComprehensiveNotes subjects={subjects} userId={userId} />
 
             {/* Display Existing Topics & Flashcards */}
             <DisplayComprehensiveNotes notes={notes} subjects={subjects} />
