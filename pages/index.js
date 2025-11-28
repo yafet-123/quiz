@@ -57,42 +57,42 @@ export default function Home() {
             to help you understand faster and remember longer.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
-          <FeatureCard
-            icon={<FaBookReader />}          // More relevant for notes
-            title="Comprehensive Notes"
-            description="Well-structured notes covering each topic in detail to support thorough understanding."
-          />
-          <FeatureCard
-            icon={<FaTasks />}               // Represents practice & tasks
-            title="Practice Notes"
-            description="Strengthen your knowledge with topic-based practice questions and guided solutions."
-          />
-          <FeatureCard
-            icon={<FaStickyNote />}          // Represents revision summaries
-            title="Revision Notes"
-            description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
-          />
-          <FeatureCard
-            icon={<RiFlashcardLine />}       // Perfect for flashcards
-            title="Flashcard Tips"
-            description="Boost your memory using digital flashcards that highlight key concepts and facts."
-          />
-          <FeatureCard
-            icon={<MdAssignment />}          // Represents worksheets clearly
-            title="Worksheet"
-            description="Downloadable worksheets filled with exercises to apply what you’ve learned."
-          />
-          <FeatureCard
-            icon={<RiFunctionLine />}        // Perfect icon for formulas
-            title="Formula Sheet"
-            description="A compact sheet featuring essential formulas and equations for quick reference."
-          />
-          <FeatureCard
-            icon={<FaListUl />}              // Better icon for definitions list
-            title="Definition Sheet"
-            description="A neatly organized list of important terms and their simplified definitions."
-          />
-        </div>
+            <FeatureCard
+              icon={<FaBookReader />}          // More relevant for notes
+              title="Comprehensive Notes"
+              description="Well-structured notes covering each topic in detail to support thorough understanding."
+            />
+            <FeatureCard
+              icon={<FaTasks />}               // Represents practice & tasks
+              title="Practice Notes"
+              description="Strengthen your knowledge with topic-based practice questions and guided solutions."
+            />
+            <FeatureCard
+              icon={<FaStickyNote />}          // Represents revision summaries
+              title="Revision Notes"
+              description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
+            />
+            <FeatureCard
+              icon={<RiFlashcardLine />}       // Perfect for flashcards
+              title="Flashcard Tips"
+              description="Boost your memory using digital flashcards that highlight key concepts and facts."
+            />
+            <FeatureCard
+              icon={<MdAssignment />}          // Represents worksheets clearly
+              title="Worksheet"
+              description="Downloadable worksheets filled with exercises to apply what you’ve learned."
+            />
+            <FeatureCard
+              icon={<RiFunctionLine />}        // Perfect icon for formulas
+              title="Formula Sheet"
+              description="A compact sheet featuring essential formulas and equations for quick reference."
+            />
+            <FeatureCard
+              icon={<FaListUl />}              // Better icon for definitions list
+              title="Definition Sheet"
+              description="A neatly organized list of important terms and their simplified definitions."
+            />
+          </div>
 
         </section>
 
