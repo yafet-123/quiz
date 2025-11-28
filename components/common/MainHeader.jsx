@@ -11,7 +11,7 @@ export const MainHeader = ({ title }) => {
           content="Aceit"
         />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <meta property="og:title" content={title} />
         <meta

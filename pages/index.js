@@ -17,9 +17,9 @@ import {
   FaTasks
 } from "react-icons/fa";
 import {
-  RiFlashcardLine,
   RiFunctionLine
 } from "react-icons/ri"
+import { IoIosFlash } from "react-icons/io";
 
 import {
   MdAssignment
@@ -61,36 +61,43 @@ export default function Home() {
               icon={<FaBookReader />}          // More relevant for notes
               title="Comprehensive Notes"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
+              href="/study/comprehensive-notes"
             />
             <FeatureCard
               icon={<FaTasks />}               // Represents practice & tasks
-              title="Practice Notes"
+              title="Practice Quizzes"
               description="Strengthen your knowledge with topic-based practice questions and guided solutions."
+              href="/study/practice-quizzes"
             />
             <FeatureCard
               icon={<FaStickyNote />}          // Represents revision summaries
               title="Revision Notes"
               description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
+              href="/study/revision-note"
             />
             <FeatureCard
-              icon={<RiFlashcardLine />}       // Perfect for flashcards
+              icon={<IoIosFlash />}       // Perfect for flashcards
               title="Flashcard Tips"
               description="Boost your memory using digital flashcards that highlight key concepts and facts."
+              href="/study/flashcards-tips"
             />
             <FeatureCard
               icon={<MdAssignment />}          // Represents worksheets clearly
               title="Worksheet"
               description="Downloadable worksheets filled with exercises to apply what you’ve learned."
+              href="/study/worksheet"
             />
             <FeatureCard
               icon={<RiFunctionLine />}        // Perfect icon for formulas
               title="Formula Sheet"
               description="A compact sheet featuring essential formulas and equations for quick reference."
+              href="/study/formulaSheet"
             />
             <FeatureCard
               icon={<FaListUl />}              // Better icon for definitions list
               title="Definition Sheet"
               description="A neatly organized list of important terms and their simplified definitions."
+              href="/study/definitionSheet"
             />
           </div>
 
@@ -210,13 +217,17 @@ export default function Home() {
 }
 
 /* --- Reusable Components --- */
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, title, description, href }) {
   return (
-    <div className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center">
-      <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
-      <h4 className="text-xl font-semibold mb-2">{title}</h4>
-      <p className="text-gray-600">{description}</p>
-    </div>
+    <Link href={href}>
+      <a
+        className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center" 
+      >
+        <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
+        <h4 className="text-xl font-semibold mb-2">{title}</h4>
+        <p className="text-gray-600">{description}</p>
+      </a>
+    </Link>
   );
 }
 
