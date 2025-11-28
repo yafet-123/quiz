@@ -8,13 +8,22 @@ import {
   FaArrowRight,
   FaClipboardList,
   FaFileAlt,
-  FaLaptopCode,
+  FaListUl,
   FaUserGraduate,
   FaChalkboardTeacher,
   FaEnvelopeOpenText,
-  FaBook,
-  FaListAlt
+  FaStickyNote,
+  FaBookReader,
+  FaTasks
 } from "react-icons/fa";
+import {
+  RiFlashcardLine,
+  RiFunctionLine
+} from "react-icons/ri"
+
+import {
+  MdAssignment
+} from "react-icons/md"
 
 export default function Home() {
   return (
@@ -24,7 +33,7 @@ export default function Home() {
         {/* Hero Section */}
         <section className="bg-purple-50 py-40 text-center px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-[#417094] mb-4">
-            Remission Our Goal
+            Your Mission. Our Goal.
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
             Trusted by thousands of students to ace their GCSEs, IGCSEs, A Levels,
@@ -48,43 +57,43 @@ export default function Home() {
             to help you understand faster and remember longer.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
-            <FeatureCard
-              icon={<FaFileAlt />}
-              title="Comprehensive Notes"
-              description="Download printable worksheets for every topic and practice anywhere, anytime."
-            />
-            <FeatureCard
-              icon={<FaClipboardList />}
-              title="Practice Notes"
-              description="Test your understanding with interactive quizzes and get instant feedback."
-            />
-            <FeatureCard
-              icon={<FaBookOpen />}
-              title="Revision Notes"
-              description="Access concise and easy-to-follow revision notes written by expert teachers."
-            />
-            <FeatureCard
-              icon={<FaLaptopCode />}
-              title="Flashcard Tips"
-              description="Learn digitally with our interactive online lessons and question banks."
-            />
-            <FeatureCard
-              icon={<FaLaptopCode />}
-              title="Worksheet"
-              description="A collection of practice expercises or activities in a document format"
-            />
-            <FeatureCard
-              icon={<FaBook />}
-              title="Formula Sheet"
-              description="A reference sheet containing essential formulas and equations"
-            />
-            <FeatureCard
-              icon={<FaListAlt />}
-              title="Definition Sheet"
-              description="A concise list of key terms and their definitions"
-            />
-  
-          </div>
+          <FeatureCard
+            icon={<FaBookReader />}          // More relevant for notes
+            title="Comprehensive Notes"
+            description="Well-structured notes covering each topic in detail to support thorough understanding."
+          />
+          <FeatureCard
+            icon={<FaTasks />}               // Represents practice & tasks
+            title="Practice Notes"
+            description="Strengthen your knowledge with topic-based practice questions and guided solutions."
+          />
+          <FeatureCard
+            icon={<FaStickyNote />}          // Represents revision summaries
+            title="Revision Notes"
+            description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
+          />
+          <FeatureCard
+            icon={<RiFlashcardLine />}       // Perfect for flashcards
+            title="Flashcard Tips"
+            description="Boost your memory using digital flashcards that highlight key concepts and facts."
+          />
+          <FeatureCard
+            icon={<MdAssignment />}          // Represents worksheets clearly
+            title="Worksheet"
+            description="Downloadable worksheets filled with exercises to apply what you’ve learned."
+          />
+          <FeatureCard
+            icon={<RiFunctionLine />}        // Perfect icon for formulas
+            title="Formula Sheet"
+            description="A compact sheet featuring essential formulas and equations for quick reference."
+          />
+          <FeatureCard
+            icon={<FaListUl />}              // Better icon for definitions list
+            title="Definition Sheet"
+            description="A neatly organized list of important terms and their simplified definitions."
+          />
+        </div>
+
         </section>
 
         {/* How It Works */}
