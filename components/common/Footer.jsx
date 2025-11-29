@@ -78,7 +78,7 @@ export const Footer = () => {
           <h3 className="text-xl font-bold mb-4">Contact Us</h3>
           <ul className="space-y-3">
             <li className="flex items-center gap-2">
-              <FaPhoneAlt /> <span>+251 966 149 422</span>
+              <FaPhoneAlt /> <span>+2519 04 95 49 86</span>
             </li>
             <li className="flex items-center gap-2">
               <MdEmail /> <span>hiyabealaa@gmail.com</span>
