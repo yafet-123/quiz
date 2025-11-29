@@ -10,13 +10,13 @@ export async function getServerSideProps(context) {
   const { subject, questionId } = context.params;
 
   try {
-    const quiz = await prisma.quiz.findUnique({
+    const quiz = await prisma.Quiz.findUnique({
       where: { id: Number(questionId) },
       include: {
         Subject: { select: { id: true, name: true } },
         Questions: {
           include: {
-            Options: true,
+            OptionTable: true,
           },
         },
       },
@@ -49,7 +49,7 @@ export default function PracticeQuizPage({ quiz, subject }) {
   const [timeLeft, setTimeLeft] = useState(120); // 2 minutes
   const [finished, setFinished] = useState(false);
   const [showSubmitPrompt, setShowSubmitPrompt] = useState(false);
-
+  
   const questions = quiz.Questions;
 
   // Timer
@@ -186,7 +186,7 @@ export default function PracticeQuizPage({ quiz, subject }) {
               </h2>
 
               <div className="space-y-3 mb-4">
-                {questions[current].Options.map((opt, i) => (
+                {questions[current].OptionTable.map((opt, i) => (
                   <button
                     key={i}
                     onClick={() => handleSelect(opt.optionText)}
