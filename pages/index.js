@@ -168,6 +168,7 @@ export default function Home() {
               title="Students"
               description="Get instant access to quizzes, notes, and progress tracking tools to help you study smarter."
               buttonText="Join as Student"
+              href="https://t.me/+8ymQzNdhkTExM2E0"
             />
             {/* <JoinCard
               icon={<FaChalkboardTeacher />}
@@ -257,16 +258,18 @@ function ReasonCard({ icon, title, text }) {
   );
 }
 
-function JoinCard({ icon, title, description, buttonText }) {
+function JoinCard({ icon, title, description, buttonText, href }) {
   return (
-    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex flex-col justify-center items-center">
-      <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
-      <h4 className="text-2xl font-semibold mb-3">{title}</h4>
-      <p className="text-gray-600 mb-6">{description}</p>
-      <button className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094] transition">
-        {buttonText}
-      </button>
-    </div>
+    <Link href={href}>
+      <a className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex flex-col justify-center items-center">
+        <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
+        <h4 className="text-2xl font-semibold mb-3">{title}</h4>
+        <p className="text-gray-600 mb-6">{description}</p>
+        <button className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094] transition">
+          {buttonText}
+        </button>
+      </a>
+    </Link>
   );
 }
 
