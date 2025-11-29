@@ -59,6 +59,12 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
             <FeatureCard
               icon={<FaBookReader />}          // More relevant for notes
+              title="Exam Preparation"
+              description="Well-structured notes covering each topic in detail to support thorough understanding."
+              href="/study/comprehensive-notes"
+            />
+            <FeatureCard
+              icon={<FaBookReader />}          // More relevant for notes
               title="Comprehensive Notes"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
               href="/study/comprehensive-notes"
