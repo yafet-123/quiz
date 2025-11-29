@@ -35,10 +35,10 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold text-[#417094] mb-4">
             Your Mission. Our Goal.
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+          {/* <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
             Trusted by thousands of students to ace their GCSEs, IGCSEs, A Levels,
             and more.
-          </p>
+          </p> */}
 
           <Link href="/study">
             <button className="bg-[#417094] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[#fff] hover:text-[#417094] transition">
