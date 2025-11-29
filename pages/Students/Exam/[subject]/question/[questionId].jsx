@@ -253,7 +253,7 @@ export default function ExamQuestionPage({ exam, subject, student }) {
                     reviewMarks.includes(current) ? "bg-yellow-400 text-white" : "bg-gray-300 text-gray-700"
                   }`}
                 >
-                  {reviewMarks.includes(current) ? "Unmark Review" : "Mark Review"}
+                  {reviewMarks.includes(current) ? "Unmark For Review" : "Mark For Review"}
                 </button>
 
                 {current < questions.length - 1 ? (
