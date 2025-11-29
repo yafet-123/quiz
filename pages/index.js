@@ -225,7 +225,7 @@ function FeatureCard({ icon, title, description, href }) {
       >
         <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
         <h4 className="text-xl font-semibold mb-2">{title}</h4>
-        <p className="text-gray-600">{description}</p>
+        {/* <p className="text-gray-600">{description}</p> */}
       </a>
     </Link>
   );
