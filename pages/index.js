@@ -6,7 +6,6 @@ import {
   FaGraduationCap,
   FaChartLine,
   FaArrowRight,
-  FaClipboardList,
   FaFileAlt,
   FaListUl,
   FaUserGraduate,
@@ -58,10 +57,10 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-center">
             <FeatureCard
-              icon={<FaBookReader />}          // More relevant for notes
+              icon={<FaFileAlt />}          // More relevant for notes
               title="Exam Preparation"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
-              href="/study/comprehensive-notes"
+              href="/study/exampreparation"
             />
             <FeatureCard
               icon={<FaBookReader />}          // More relevant for notes
