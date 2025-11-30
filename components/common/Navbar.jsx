@@ -119,7 +119,7 @@ export const Navbar = () => {
           ))}
 
           {/* Sign Up Button */}
-          <Link href="//auth/Student/Login/signin-student">
+          <Link href="/auth/Student/Login/signin-student">
             <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition">
               Login
             </a>

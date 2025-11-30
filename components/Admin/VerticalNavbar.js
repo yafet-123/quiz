@@ -23,6 +23,7 @@ export function VerticalNavbar() {
     { link: "/Admin/User", icon: <RiUser3Fill size={20} />, name: "User" },
     { link: "/Admin/Student", icon: <FaUserGraduate size={20} />, name: "Student" },
     { link: "/Admin/Announcement", icon: <FaStickyNote size={20} />, name: "Announcement" },
+    { link: "/Admin/exampreparation", icon: <FaBook size={20} />, name: "Exam Preparation" },
     { link: "/Admin/exam", icon: <FaBook size={20} />, name: "Exam" },
     { link: "/Admin/quiz", icon: <MdOutlineQuiz size={20} />, name: "Quiz" },
     { link: "/Admin/worksheet", icon: <FaListAlt size={20} />, name: "Worksheet" },
