@@ -19,7 +19,7 @@ export const Navbar = () => {
       path: "/study",
       name: "Study Tools",
       dropdown: [
-        { path: "/study/books", name: "Books" },
+        { path: "/study/books/article", name: "Articles" },
         { path: "/study/comprehensive-notes", name: "Comprehensive Notes" },
         { path: "/study/practice-quizzes", name: "Practice Quizzes" },
         { path: "/study/revision-note", name: "Revision Note" },
@@ -27,6 +27,7 @@ export const Navbar = () => {
         { path: "/study/worksheet", name: "Worksheets" },
         { path: "/study/formulaSheet", name: "Formula Sheet" },
         { path: "/study/definitionSheet", name: "Definition Sheet" },
+        { path: "/study/exampreparation", name: "Exam Preparation" },
       ],
     },
     { path: "/about", name: "About Us" },
