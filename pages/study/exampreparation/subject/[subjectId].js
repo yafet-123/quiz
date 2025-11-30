@@ -7,19 +7,30 @@ import { MainHeader } from "../../../../components/common/MainHeader";
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
-  try {
-    const topics = await prisma.examPreparation.findMany({
-      where: { subjectId: Number(subjectId) },
-      select: {
-        id: true,
-        nameOfBook: true,
-        bookFile: true,
-      },
-      orderBy: {
-        id: "desc",
-      },
+    try {
+    const topics = await prisma.ExamPreparationTopic.findMany({
+        where: {
+            examPreparation: {
+            subjectId: Number(subjectId), // filter by the parent ExamPreparation's subjectId
+            },
+        },
+        select: {
+            id: true,
+            title: true,
+            examPrepId: true,
+            examPreparation: {
+            select: {
+                nameOfBook: true,
+                bookFile: true,
+            },
+            },
+        },
+        orderBy: {
+            id: "desc",
+        },
     });
 
+    console.log(topics)
     return {
       props: {
         topics: JSON.parse(JSON.stringify(topics)),
@@ -56,7 +67,7 @@ export default function ExamPreparationBySubject({ topics }) {
                 onClick={() => goToTopicDetail(topic.id)}
               >
                 <h2 className="font-bold text-xl md:text-2xl">
-                  {topic.nameOfBook}
+                  {topic.title}
                 </h2>
                 <p className="mt-2 text-sm md:text-base opacity-80">
                   Click to open study materials
