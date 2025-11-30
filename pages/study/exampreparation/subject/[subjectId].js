@@ -6,7 +6,7 @@ import { MainHeader } from "../../../../components/common/MainHeader";
 
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
-    
+
   try {
     const topics = await prisma.examPreparation.findMany({
       where: { subjectId: Number(subjectId) },
