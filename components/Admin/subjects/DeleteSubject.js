@@ -14,7 +14,7 @@ export function DeleteSubject({ setdeleteModalOn, deletesubjectid }) {
   const handleOKClickFordelete = async () => {
     setLoading(true);
     setLoadingModalIsOpen(true);
-    try {
+    try { 
       await axios.delete(`../api/subject/deleteSubject/${deletesubjectid}`);
       router.reload();
     } catch (error) {
