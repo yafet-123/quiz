@@ -196,7 +196,7 @@ export default function AboutPage() {
         </section> */}
 
         {/* TESTIMONIALS */}
-        <section className="bg-[#417094] text-white py-14">
+        {/* <section className="bg-[#417094] text-white py-14">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 className="text-2xl font-bold mb-6">What students say</h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -208,7 +208,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* CTA */}
         <section className="py-14">
