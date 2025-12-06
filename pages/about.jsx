@@ -21,27 +21,27 @@ export default function AboutPage() {
   ];
 
   const team = [
-  {
-    name: "Emily Roberts",
-    role: "Head of Content",
-    img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    name: "James King",
-    role: "Lead Developer",
-    img: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    name: "Sara Lopez",
-    role: "Product & Design",
-    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    name: "Omar Tekle",
-    role: "Community Lead",
-    img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=500&q=80",
-  },
-];
+    {
+      name: "Emily Roberts",
+      role: "Head of Content",
+      img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=500&q=80",
+    },
+    {
+      name: "James King",
+      role: "Lead Developer",
+      img: "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?auto=format&fit=crop&w=500&q=80",
+    },
+    {
+      name: "Sara Lopez",
+      role: "Product & Design",
+      img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
+    },
+    {
+      name: "Omar Tekle",
+      role: "Community Lead",
+      img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=500&q=80",
+    },
+  ];
 
   const testimonials = [
     { name: "Amina", quote: "SavedMyExams style notes simplified the whole syllabus helped me gain two grades!" },
@@ -61,14 +61,14 @@ export default function AboutPage() {
                   We make exam prep simple so you can focus on learning.
                 </h1>
                 <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-                  My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the 
-                  pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I 
+                  My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the
+                  pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I
                   understand how overwhelming it can feel.
                 </p>
 
                 <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-                  Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed 
-                  to providing clear, reliable, and student-focused guidance. My goal is to make exam 
+                  Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed
+                  to providing clear, reliable, and student-focused guidance. My goal is to make exam
                   preparation more organised, efficient, and confidence-building for every learner.
                 </p>
 
@@ -85,12 +85,14 @@ export default function AboutPage() {
 
               <div className="flex items-center justify-center">
                 <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-xl transform hover:scale-102 transition">
-                  <Image
+                  {/* Using native img tag for external URL - more reliable on Vercel */}
+                  <img
                     src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=80"
                     alt="Students studying together"
                     width={720}
                     height={480}
-                    className="object-cover"
+                    className="object-cover w-full h-auto"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -107,7 +109,7 @@ export default function AboutPage() {
                 <h2 className="text-2xl font-bold text-gray-900">Our mission</h2>
                 <p className="mt-4 text-gray-600">
                   To make high-quality revision materials available to every student.
-                  We simplify syllabus content, provide worked answers and realistic practice so revision feels 
+                  We simplify syllabus content, provide worked answers and realistic practice so revision feels
                   productive and focused.
                 </p>
               </div>
