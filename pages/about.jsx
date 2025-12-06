@@ -61,8 +61,15 @@ export default function AboutPage() {
                   We make exam prep simple so you can focus on learning.
                 </h1>
                 <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-                  Study resources, past papers, and practice quizzes built by teachers and exam experts.
-                  Trusted by students worldwide to revise smarter and achieve better results.
+                  My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the 
+                  pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I 
+                  understand how overwhelming it can feel.
+                </p>
+
+                <p className="mt-6 text-lg text-gray-600 max-w-2xl">
+                  Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed 
+                  to providing clear, reliable, and student-focused guidance. My goal is to make exam 
+                  preparation more organised, efficient, and confidence-building for every learner.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -151,7 +158,7 @@ export default function AboutPage() {
         </section>
 
         {/* STATS */}
-        <section className="bg-indigo-50 py-12">
+        {/* <section className="bg-indigo-50 py-12">
           <div className="max-w-6xl mx-auto px-6">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
               {stats.map((s, i) => (
@@ -162,10 +169,10 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* TEAM */}
-        <section className="py-14">
+        {/* <section className="py-14">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between mb-8">
               <h2 className="text-2xl font-bold">Meet the team</h2>
@@ -184,7 +191,7 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* TESTIMONIALS */}
         <section className="bg-[#417094] text-white py-14">
