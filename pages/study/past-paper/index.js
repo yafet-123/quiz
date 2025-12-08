@@ -3,7 +3,7 @@ import { FaBook, FaFileAlt, FaClipboardCheck } from "react-icons/fa";
 import React from "react";
 import { prisma } from "../../../util/db.server";
 import { MainHeader } from "../../../components/common/MainHeader";
-import Subject from "../../../components/exampreparation/Subject"; // Your display component
+import Subject from "../../../components/pastPaper/Subject"; // Your display component
 
 // Hero Feature
 const features = [
