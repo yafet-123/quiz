@@ -64,13 +64,13 @@ export default function Home() {
             />
             <FeatureCard
               icon={<FaBookReader />}          // More relevant for notes
-              title="Comprehensive Notes"
+              title="Past Papers"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
               href="/study/comprehensive-notes"
             />
             <FeatureCard
               icon={<FaTasks />}               // Represents practice & tasks
-              title="Practice Quizzes"
+              title="Practice Questions"
               description="Strengthen your knowledge with topic-based practice questions and guided solutions."
               href="/study/practice-quizzes"
             />
@@ -88,7 +88,7 @@ export default function Home() {
             />
             <FeatureCard
               icon={<MdAssignment />}          // Represents worksheets clearly
-              title="Worksheet"
+              title="Worksheets / Topical questions"
               description="Downloadable worksheets filled with exercises to apply what you’ve learned."
               href="/study/worksheet"
             />
