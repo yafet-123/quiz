@@ -8,6 +8,7 @@ import {
   FaArrowRight,
   FaFileAlt,
   FaListUl,
+  FaBook,
   FaUserGraduate,
   FaChalkboardTeacher,
   FaEnvelopeOpenText,
@@ -62,6 +63,13 @@ export default function Home() {
               description="Well-structured notes covering each topic in detail to support thorough understanding."
               href="/study/exampreparation"
             />
+            <FeatureCard
+              icon={<FaBook />}          // More relevant for notes
+              title="Book"
+              description="Well-structured notes covering each topic in detail to support thorough understanding."
+              href="/study/book"
+            />
+                
             <FeatureCard
               icon={<FaBookReader />}          // More relevant for notes
               title="Past Papers"
