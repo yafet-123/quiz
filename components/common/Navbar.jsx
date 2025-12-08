@@ -28,6 +28,8 @@ export const Navbar = () => {
         { path: "/study/formulaSheet", name: "Formula Sheet" },
         { path: "/study/definitionSheet", name: "Definition Sheet" },
         { path: "/study/exampreparation", name: "Exam Preparation" },
+        { path: "/book", name: "Books" },
+        { path: "/youtube", name: "Youtube" },
       ],
     },
     { path: "/about", name: "About Us" },
