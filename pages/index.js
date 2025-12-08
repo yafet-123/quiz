@@ -8,6 +8,7 @@ import {
   FaArrowRight,
   FaFileAlt,
   FaListUl,
+  FaYoutube,
   FaBook,
   FaUserGraduate,
   FaChalkboardTeacher,
@@ -109,6 +110,12 @@ export default function Home() {
             <FeatureCard
               icon={<FaListUl />}              // Better icon for definitions list
               title="Definition Sheet"
+              description="A neatly organized list of important terms and their simplified definitions."
+              href="/study/definitionSheet"
+            />
+           <FeatureCard
+              icon={<FaYoutube />}              // Better icon for definitions list
+              title="Youtube"
               description="A neatly organized list of important terms and their simplified definitions."
               href="/study/definitionSheet"
             />
