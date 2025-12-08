@@ -66,7 +66,7 @@ export default function Home() {
               icon={<FaBookReader />}          // More relevant for notes
               title="Past Papers"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
-              href="/study/comprehensive-notes"
+              href="/study/past-paper"
             />
             <FeatureCard
               icon={<FaTasks />}               // Represents practice & tasks
