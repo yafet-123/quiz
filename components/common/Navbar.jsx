@@ -20,7 +20,7 @@ export const Navbar = () => {
       name: "Study Tools",
       dropdown: [
         { path: "/study/books/article", name: "Articles" },
-      //  { path: "/study/comprehensive-notes", name: "Comprehensive Notes" },
+        { path: "/study/past-paper", name: "Past Paper" },
         { path: "/study/practice-quizzes", name: "Practice Questions" },
         { path: "/study/revision-note", name: "Revision Note" },
         { path: "/study/flashcards-tips", name: "Flashcards Tips" },
