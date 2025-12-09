@@ -98,7 +98,7 @@ export async function getServerSideProps() {
     const subjects = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
       include: {
-        ExamPreparation: true, // Keep this unless your model name changed
+        PastPaper: true, // Include past papers for each subject
       },
     });
 

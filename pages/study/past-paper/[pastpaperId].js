@@ -7,64 +7,70 @@ export async function getServerSideProps(context) {
   const { pastpaperId } = context.params;
 
   try {
-    const pastpaper = await prisma.PastPaper.findUnique({
-      where: {
-        id: Number(pastpaperId),
+    // Fetch the PastPaperTopic with its PastPaper
+    const topic = await prisma.PastPaperTopic.findUnique({
+      where: { id: Number(pastpaperId) },
+      include: {
+        PastPaper: true, // include the parent PastPaper
       },
     });
 
-    if (!pastpaper) {
+    if (!topic) {
       return { notFound: true };
     }
 
-    // Split book names and links
-    const bookNames = pastpaper.nameOfBook
-      ? pastpaper.nameOfBook.split(",")
-      : [];
+    // If paperFile contains multiple links separated by comma
+    const pastPaperNames = topic.PastPaper?.title ? topic.PastPaper.title.split(",") : [];
+    const paperLinks = topic.PastPaper?.paperFile ? topic.PastPaper.paperFile.split(",") : [];
 
-    const bookLinks = pastpaper.bookFile
-      ? pastpaper.bookFile.split(",")
-      : [];
-
-    const books = bookNames.map((name, index) => ({
+    const papers = pastPaperNames.map((name, index) => ({
       name: name.trim(),
-      link: bookLinks[index] ? bookLinks[index].trim() : "#",
+      link: paperLinks[index] ? paperLinks[index].trim() : "#",
     }));
 
     return {
       props: {
-        title: `Past Paper`,
-        books,
+        topicTitle: topic.title,
+        pastPaperTitle: topic.PastPaper?.title || "",
+        year: topic.PastPaper?.year || null,
+        papers,
       },
     };
   } catch (error) {
-    console.error("Error fetching past paper:", error);
-
+    console.error("Error fetching past paper topic:", error);
     return {
       props: {
-        title: "",
-        books: [],
+        topicTitle: "",
+        pastPaperTitle: "",
+        year: null,
+        papers: [],
       },
     };
   }
 }
 
-export default function PastPaperPage({ title, books }) {
+export default function PastPaperPage({ topicTitle, pastPaperTitle, year, papers }) {
   return (
     <>
-      <MainHeader title={`Aceit : ${title}`} />
+      <MainHeader title={`Aceit : ${topicTitle}`} />
 
-      <div className="mt-8">
-        <h1 className="text-3xl font-bold mb-8">{title}</h1>
+      <div className="py-32 px-5 lg:px-20">
+        <h1 className="text-3xl font-bold mb-2">{topicTitle}</h1>
+        {pastPaperTitle && (
+          <p className="text-gray-600 text-lg mb-2">Paper: {pastPaperTitle}</p>
+        )}
+        {year && (
+          <p className="text-gray-500 text-md mb-8">Year: {year}</p>
+        )}
 
-        {books.length === 0 && (
+        {papers.length === 0 && (
           <p className="text-gray-600 text-lg">
-            No books available for this past paper.
+            No past papers available for this topic.
           </p>
         )}
 
         <div className="flex flex-col">
-          {books.map((book, index) => (
+          {papers.map((paper, index) => (
             <div
               key={index}
               className="flex justify-between items-center bg-[#f8f8f9] py-5 px-4 rounded-2xl hover:bg-[#ededf2] mb-5"
@@ -72,17 +78,17 @@ export default function PastPaperPage({ title, books }) {
               <div className="flex items-center">
                 <FaFilePdf size={40} color="#df646a" />
                 <h1 className="pl-4 text-black font-bold text-md md:text-lg">
-                  {book.name}
+                  {paper.name}
                 </h1>
               </div>
 
               <a
-                href={book.link}
+                href={paper.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-[#3699ff] hover:bg-[#002244] text-white px-3 py-2 rounded-2xl text-md md:text-lg font-bold"
               >
-                Open Book
+                Open Paper
               </a>
             </div>
           ))}

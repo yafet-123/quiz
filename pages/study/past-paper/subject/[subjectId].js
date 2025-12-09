@@ -50,7 +50,7 @@ export default function PastPapersBySubject({ topics }) {
   const router = useRouter();
 
   const goToTopicDetail = (topicId) => {
-    router.push(`/study/pastpapers/${topicId}`);
+    router.push(`/study/past-paper/${topicId}`);
   };
 
   return (
@@ -70,16 +70,16 @@ export default function PastPapersBySubject({ topics }) {
                 </h2>
 
                 <p className="mt-2 text-sm opacity-90">
-                  {topic.pastPaper?.title ? (
-                    <>Paper: {topic.pastPaper.title}</>
+                  {topic.PastPaper?.title ? (
+                    <>Paper: {topic.PastPaper.title}</>
                   ) : (
                     <>Past Paper</>
                   )}
                 </p>
 
-                {topic.pastPaper?.year && (
+                {topic.PastPaper?.year && (
                   <p className="text-sm opacity-70">
-                    Year: {topic.pastPaper.year}
+                    Year: {topic.PastPaper.year}
                   </p>
                 )}
               </div>
