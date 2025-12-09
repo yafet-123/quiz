@@ -117,7 +117,7 @@ export default function Home() {
               icon={<FaYoutube />}              // Better icon for definitions list
               title="Youtube"
               description="A neatly organized list of important terms and their simplified definitions."
-              href="/study/definitionSheet"
+              href="/study/youtube"
             />
           </div>
 
