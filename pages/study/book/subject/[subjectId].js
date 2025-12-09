@@ -49,7 +49,7 @@ export default function BooksBySubject({ topics }) {
   const router = useRouter();
 
   const openTopic = (topicId) => {
-    router.push(`/study/books/topic/${topicId}`);
+    router.push(`/study/book/${topicId}`);
   };
 
   return (
