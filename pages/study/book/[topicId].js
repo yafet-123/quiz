@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     const topic = await prisma.BookTopic.findUnique({
       where: { id: Number(topicId) },
       include: {
-        book: true, // include the parent Book
+        Book: true, // include the parent Book
       },
     });
 
@@ -20,8 +20,8 @@ export async function getServerSideProps(context) {
     }
 
     // If bookFile contains multiple links separated by comma
-    const bookNames = topic.book.title ? topic.book.title.split(",") : [];
-    const bookLinks = topic.book.bookFile ? topic.book.bookFile.split(",") : [];
+    const bookNames = topic.Book.title ? topic.Book.title.split(",") : [];
+    const bookLinks = topic.Book.bookFile ? topic.Book.bookFile.split(",") : [];
 
     const books = bookNames.map((name, index) => ({
       name: name.trim(),
