@@ -5,11 +5,11 @@ import { signOut } from "next-auth/react";
 
 import { AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
 import { RiUser3Fill } from "react-icons/ri";
-import { FaUserGraduate, FaBook, FaListAlt, FaGraduationCap, FaFileAlt, FaLightbulb, FaStickyNote } from "react-icons/fa";
+import { FaUserGraduate, FaBook, FaListAlt, FaGraduationCap, FaFileAlt, FaLightbulb, FaStickyNote, FaYoutube } from "react-icons/fa";
 import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
-import { BsCardText } from "react-icons/bs";
+import { BsCardText, BsFileEarmarkPdf } from "react-icons/bs";
 import { GiBookmarklet } from "react-icons/gi";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiBookOpen } from "react-icons/fi";
 
  
 export function VerticalNavbar() {
@@ -24,6 +24,9 @@ export function VerticalNavbar() {
     { link: "/Admin/Student", icon: <FaUserGraduate size={20} />, name: "Student" },
     { link: "/Admin/Announcement", icon: <FaStickyNote size={20} />, name: "Announcement" },
     { link: "/Admin/exampreparation", icon: <FaFileAlt size={20} />, name: "Exam Preparation" },
+    { link: "/Admin/pastpaper", icon: <BsFileEarmarkPdf size={20} />, name: "Past Paper" },
+    { link: "/Admin/book", icon: <FiBookOpen size={20} />, name: "Book" },
+    { link: "/Admin/youtube", icon: <FaYoutube size={20} />, name: "YouTube" },
     { link: "/Admin/exam", icon: <FaBook size={20} />, name: "Exam" },
     { link: "/Admin/quiz", icon: <MdOutlineQuiz size={20} />, name: "Quiz" },
     { link: "/Admin/worksheet", icon: <FaListAlt size={20} />, name: "Worksheet" },

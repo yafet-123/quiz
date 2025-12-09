@@ -94,17 +94,20 @@ model Subject {
   modifiedAt      DateTime?         @default(now()) @updatedAt @db.DateTime(0)
   approved        Boolean?          @default(false)
   Article         Article[]
+  Book            Book[]
   DefinitionSheet DefinitionSheet[]
   Exams           Exam[]
   ExamPreparation ExamPreparation[]
   Topics          FlashcardTopic[]
   FormulaSheet    FormulaSheet[]
   Notes           Note[]
+  PastPaper       PastPaper[]
   Quizzes         Quiz[]
   RevisionNote    RevisionNote[]
   User            User              @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
   Topic           Topic[]
   Worksheets      Worksheet[]
+  YoutubeLink     YoutubeLink[]
 
   @@index([createdBy], map: "createdBy")
 }
@@ -370,4 +373,68 @@ model ExamPreparationTopic {
   examPreparation ExamPreparation @relation(fields: [examPrepId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "ExamPreparationTopic_ibfk_1")
 
   @@index([examPrepId], map: "idx_examPrepId")
+}
+
+model Book {
+  id        Int         @id @default(autoincrement())
+  title     String      @db.VarChar(255)
+  bookFile  String      @db.Text
+  subjectId Int
+  Subject   Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Book_subject_fkey")
+  BookTopic BookTopic[]
+
+  @@index([subjectId], map: "idx_book_subjectId")
+  @@index([title], map: "idx_book_title")
+}
+
+model BookTopic {
+  id     Int    @id @default(autoincrement())
+  title  String @db.VarChar(255)
+  bookId Int
+  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "BookTopic_book_fkey")
+
+  @@index([bookId], map: "idx_book_topic")
+}
+
+model PastPaper {
+  id             Int              @id @default(autoincrement())
+  title          String           @db.VarChar(255)
+  paperFile      String           @db.Text
+  year           Int?
+  subjectId      Int
+  Subject        Subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "PastPaper_subject_fkey")
+  PastPaperTopic PastPaperTopic[]
+
+  @@index([subjectId], map: "idx_pastpaper_subjectId")
+  @@index([title], map: "idx_pastpaper_title")
+}
+
+model PastPaperTopic {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  pastPaperId Int
+  PastPaper   PastPaper @relation(fields: [pastPaperId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "PastPaperTopic_pastpaper_fkey")
+
+  @@index([pastPaperId], map: "idx_pastpaper_topic")
+}
+
+model YoutubeLink {
+  id               Int                @id @default(autoincrement())
+  title            String             @db.VarChar(255)
+  url              String             @db.Text
+  subjectId        Int
+  Subject          Subject            @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "YoutubeLink_subject_fkey")
+  YoutubeLinkTopic YoutubeLinkTopic[]
+
+  @@index([subjectId], map: "idx_yt_subjectId")
+  @@index([title], map: "idx_yt_title")
+}
+
+model YoutubeLinkTopic {
+  id            Int         @id @default(autoincrement())
+  title         String      @db.VarChar(255)
+  youtubeLinkId Int
+  YoutubeLink   YoutubeLink @relation(fields: [youtubeLinkId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "YoutubeLinkTopic_yt_fkey")
+
+  @@index([youtubeLinkId], map: "idx_yt_topic")
 }

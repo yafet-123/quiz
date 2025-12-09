@@ -26,11 +26,11 @@ const reasons = [
 ];
 
 export default function Books({ subjects }) {
+  console.log(subjects);
   return (
     <React.Fragment>
       <MainHeader title="Aceit: Books" />
       <div className="bg-gray-50 min-h-screen py-20">
-
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-32 text-center px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Books</h1>
@@ -54,7 +54,9 @@ export default function Books({ subjects }) {
                 <h3 className="text-xl font-semibold text-gray-700 text-center">
                   {reason.title}
                 </h3>
-                <p className="text-gray-600 text-center">{reason.description}</p>
+                <p className="text-gray-600 text-center">
+                  {reason.description}
+                </p>
               </div>
             ))}
           </div>

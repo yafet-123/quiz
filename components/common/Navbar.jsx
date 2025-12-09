@@ -1,4 +1,4 @@
-import Image from "next/image"
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -28,8 +28,8 @@ export const Navbar = () => {
         { path: "/study/formulaSheet", name: "Formula Sheet" },
         { path: "/study/definitionSheet", name: "Definition Sheet" },
         { path: "/study/exampreparation", name: "Exam Preparation" },
-        { path: "/book", name: "Books" },
-        { path: "/youtube", name: "Youtube" },
+        { path: "/study/book", name: "Books" },
+        { path: "/study/youtube", name: "Youtube" },
       ],
     },
     { path: "/about", name: "About Us" },
@@ -61,8 +61,7 @@ export const Navbar = () => {
               src={logo}
               alt="Navbar Logo Image"
               layout="fill"
-              
-             objectPosition="center"
+              objectPosition="center"
             />
           </div>
         </Link>
@@ -200,7 +199,7 @@ export const Navbar = () => {
                   Login
                 </a>
               </Link>
-          
+
               <Link href="/signup">
                 <a
                   onClick={() => setOpen(false)}

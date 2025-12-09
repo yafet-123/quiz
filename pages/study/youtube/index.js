@@ -31,7 +31,6 @@ export default function YoutubeLinks({ subjects }) {
     <React.Fragment>
       <MainHeader title="Aceit: YouTube Lessons" />
       <div className="bg-gray-50 min-h-screen py-20">
-
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-red-500 to-pink-600 text-white py-32 text-center px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -58,7 +57,9 @@ export default function YoutubeLinks({ subjects }) {
                 <h3 className="text-xl font-semibold text-gray-700 text-center">
                   {reason.title}
                 </h3>
-                <p className="text-gray-600 text-center">{reason.description}</p>
+                <p className="text-gray-600 text-center">
+                  {reason.description}
+                </p>
               </div>
             ))}
           </div>
@@ -84,7 +85,7 @@ export async function getServerSideProps() {
     const subjects = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
       include: {
-        YoutubeLinks: true, // Requires Prisma model `YoutubeLinks`
+        YoutubeLink: true, // Requires Prisma model `YoutubeLinks`
       },
     });
 
@@ -97,4 +98,4 @@ export async function getServerSideProps() {
       props: { subjects: [], error: "Failed to load YouTube links." },
     };
   }
-      }
+}
