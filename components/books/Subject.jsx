@@ -5,7 +5,7 @@ import Link from "next/link"
 import { FaFolder } from "react-icons/fa6";
  
 export default function QuizSubject({subjects}) {  
-  return ( 
+  return (  
     <div className="min-h-screen">
       <div className="py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {subjects.map((subject) => ( 

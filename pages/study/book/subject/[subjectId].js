@@ -9,7 +9,7 @@ export async function getServerSideProps(context) {
   try {
     const topics = await prisma.BookTopic.findMany({
       where: {
-        book: {
+        Book: {
           subjectId: Number(subjectId),
         },
       },
@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
         id: true,
         title: true,
         bookId: true,
-        book: {
+        Book: {
           select: {
             title: true,
             bookFile: true,

@@ -9,7 +9,7 @@ export async function getServerSideProps(context) {
   try {
     const topics = await prisma.YoutubeLinkTopic.findMany({
       where: {
-        youtubeLink: {
+        YoutubeLink: {
           subjectId: Number(subjectId),
         },
       },
@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
         id: true,
         title: true,
         youtubeLinkId: true,
-        youtubeLink: {
+        YoutubeLink: {
           select: {
             title: true,
             url: true,
