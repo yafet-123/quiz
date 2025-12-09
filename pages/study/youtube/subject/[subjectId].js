@@ -49,7 +49,7 @@ export default function YoutubeBySubject({ topics }) {
   const router = useRouter();
 
   const openTopic = (topicId) => {
-    router.push(`/study/youtube/topic/${topicId}`);
+    router.push(`/study/youtube/${topicId}`);
   };
 
   return (

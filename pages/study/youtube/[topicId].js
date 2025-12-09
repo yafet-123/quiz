@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     const topic = await prisma.YoutubeLinkTopic.findUnique({
       where: { id: Number(topicId) },
       include: {
-        youtubeLink: true, // include the parent YoutubeLink
+        YoutubeLink: true, // include the parent YoutubeLink (capitalized to match Prisma relation)
       },
     });
 
@@ -19,15 +19,20 @@ export async function getServerSideProps(context) {
       return { notFound: true };
     }
 
+    // If url contains multiple links separated by comma
+    const linkNames = topic.YoutubeLink?.title ? topic.YoutubeLink.title.split(",") : [];
+    const linkUrls = topic.YoutubeLink?.url ? topic.YoutubeLink.url.split(",") : [];
+
+    const links = linkNames.map((name, index) => ({
+      name: name.trim(),
+      url: linkUrls[index] ? linkUrls[index].trim() : "#",
+    }));
+
     return {
       props: {
         topicTitle: topic.title,
-        links: [
-          {
-            name: topic.youtubeLink.title,
-            url: topic.youtubeLink.url,
-          },
-        ],
+        youtubeLinkTitle: topic.YoutubeLink?.title || "",
+        links,
       },
     };
   } catch (error) {
@@ -35,18 +40,22 @@ export async function getServerSideProps(context) {
     return {
       props: {
         topicTitle: "",
+        youtubeLinkTitle: "",
         links: [],
       },
     };
   }
 }
 
-export default function YoutubeLinkTopicPage({ topicTitle, links }) {
+export default function YoutubeLinkTopicPage({ topicTitle, youtubeLinkTitle, links }) {
   return (
     <div className="px-5 md:px-10 lg:px-20 py-32">
       <MainHeader title={`Aceit : ${topicTitle} YouTube Lessons`} />
 
-      <h1 className="text-3xl font-bold mb-8">{topicTitle}</h1>
+      <h1 className="text-3xl font-bold mb-2">{topicTitle}</h1>
+      {youtubeLinkTitle && (
+        <p className="text-gray-600 text-lg mb-8">Playlist: {youtubeLinkTitle}</p>
+      )}
 
       {links.length === 0 && (
         <p className="text-gray-600 text-lg">No YouTube links available for this topic.</p>

@@ -2,7 +2,7 @@ import { FaYoutube, FaPlayCircle, FaVideo } from "react-icons/fa";
 import React from "react";
 import { prisma } from "../../../util/db.server";
 import { MainHeader } from "../../../components/common/MainHeader";
-import Subject from "../../../components/exampreparation/Subject";
+import Subject from "../../../components/books/Subject";
 
 const reasons = [
   {
