@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
-import { 
+import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -26,7 +26,7 @@ export default function DashBoard() {
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
-  }); 
+  });
 
   useEffect(() => {
     async function fetchStats() {
