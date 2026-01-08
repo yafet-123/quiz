@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
 
 
-import { AiFillDashboard,AiOutlineMenu } from "react-icons/ai";
+import { AiFillDashboard, AiOutlineMenu } from "react-icons/ai";
 import { RiUser3Fill } from "react-icons/ri";
 import { FaUserGraduate, FaBook, FaListAlt, FaGraduationCap, FaFileAlt, FaLightbulb, FaStickyNote, FaYoutube } from "react-icons/fa";
 import { MdOutlineQuiz, MdOutlineArticle, MdSubject } from "react-icons/md";
@@ -11,7 +11,7 @@ import { BsCardText, BsFileEarmarkPdf } from "react-icons/bs";
 import { GiBookmarklet } from "react-icons/gi";
 import { FiLogOut, FiBookOpen } from "react-icons/fi";
 
- 
+
 export function VerticalNavbar() {
   const router = useRouter();
   const path = router.pathname;
@@ -25,6 +25,7 @@ export function VerticalNavbar() {
     { link: "/Admin/Announcement", icon: <FaStickyNote size={20} />, name: "Announcement" },
     { link: "/Admin/exampreparation", icon: <FaFileAlt size={20} />, name: "Exam Preparation" },
     { link: "/Admin/pastpaper", icon: <BsFileEarmarkPdf size={20} />, name: "Past Paper" },
+    { link: "/Admin/revisionnote", icon: <GiBookmarklet size={20} />, name: "Revision Note" },
     { link: "/Admin/book", icon: <FiBookOpen size={20} />, name: "Book" },
     { link: "/Admin/youtube", icon: <FaYoutube size={20} />, name: "YouTube" },
     { link: "/Admin/exam", icon: <FaBook size={20} />, name: "Exam" },
@@ -36,7 +37,6 @@ export function VerticalNavbar() {
     { link: "/Admin/Subject", icon: <MdSubject size={20} />, name: "Subject" },
     { link: "/Admin/Flashcard", icon: <BsCardText size={20} />, name: "FlashCard" },
     { link: "/Admin/note", icon: <FaStickyNote size={20} />, name: "Comprehensive Notes" },
-    { link: "/Admin/revisionnote", icon: <GiBookmarklet size={20} />, name: "Revision Note" },
   ];
   const renderLinks = () =>
     SideBarList.map((item, idx) => (
@@ -46,11 +46,10 @@ export function VerticalNavbar() {
             router.push(item.link);
             setMobileOpen(false); // close mobile menu on mobile click
           }}
-          className={`flex items-center w-full px-1 py-2 rounded-xl transition-colors duration-200 ${
-            path === item.link
+          className={`flex items-center w-full px-1 py-2 rounded-xl transition-colors duration-200 ${path === item.link
               ? "bg-teal-600 text-white shadow-md"
               : "text-gray-700 hover:bg-teal-500 hover:text-white"
-          }`}
+            }`}
         >
           <span>{item.icon}</span>
           <span className="ml-1 font-medium">{item.name}</span>
