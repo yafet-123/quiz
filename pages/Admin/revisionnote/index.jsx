@@ -9,7 +9,7 @@ import { DisplayRevisionNoteNotes } from "../../../components/Admin/RevisionNote
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const userRole = session?.user?.role;
-
+  const { status, data } = useSession();
   // Optionally redirect non-admins
   if (userRole !== 'admin') {
     return {
@@ -21,8 +21,8 @@ export async function getServerSideProps(context) {
   }
 
   try {
-    
- 
+
+
     // Fetch all notes with related subjects
     const notes = await prisma.RevisionNote.findMany({
       include: { Subject: true },
@@ -72,7 +72,7 @@ export async function getServerSideProps(context) {
 
 export default function RevisionNotePage({ subjects, notes }) {
   const { data } = useSession();
-  
+
   return (
     <React.Fragment>
       <MainHeader title="RevisionNote Dashboard" />
@@ -80,10 +80,7 @@ export default function RevisionNotePage({ subjects, notes }) {
         <div className='w-full h-full flex flex-row'>
           <VerticalNavbar data={data} />
           <div className="w-full px-6">
-            {/* Add Topic & Flashcards Form */}
             <AddRevisionNoteNotes subjects={subjects} />
-
-            {/* Display Existing Topics & Flashcards */}
             <DisplayRevisionNoteNotes notes={notes} subjects={subjects} />
           </div>
         </div>
