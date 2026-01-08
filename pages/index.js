@@ -240,14 +240,13 @@ export default function Home() {
 /* --- Reusable Components --- */
 function FeatureCard({ icon, title, description, href }) {
   return (
-    <Link href={href}>
-      <a
-        className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center" 
-      >
-        <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
-        <h4 className="text-xl font-semibold mb-2">{title}</h4>
-        {/* <p className="text-gray-600">{description}</p> */}
-      </a>
+    <Link 
+      href={href}
+      className="border rounded-xl shadow-sm hover:shadow-lg p-8 transition hover:scale-105 flex flex-col justify-center items-center"
+    >
+      <div className="text-[#417094] text-5xl mx-auto mb-4">{icon}</div>
+      <h4 className="text-xl font-semibold mb-2">{title}</h4>
+      {/* <p className="text-gray-600">{description}</p> */}
     </Link>
   );
 }
@@ -274,18 +273,17 @@ function ReasonCard({ icon, title, text }) {
 
 function JoinCard({ icon, title, description, buttonText, href }) {
   return (
-    
-      <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex flex-col justify-center items-center">
-        <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
-        <h4 className="text-2xl font-semibold mb-3">{title}</h4>
-        <p className="text-gray-600 mb-6">{description}</p>
-        <Link href={href}>
-          <a className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094] transition">
-            {buttonText}
-          </a>
-        </Link>
-      </div>
-  
+    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-xl transition flex flex-col justify-center items-center">
+      <div className="text-5xl text-[#417094] mx-auto mb-4">{icon}</div>
+      <h4 className="text-2xl font-semibold mb-3">{title}</h4>
+      <p className="text-gray-600 mb-6">{description}</p>
+      <Link 
+        href={href}
+        className="bg-[#417094] text-white px-6 py-3 rounded-lg hover:bg-[#fff] hover:text-[#417094] transition"
+      >
+        {buttonText}
+      </Link>
+    </div>
   );
 }
 

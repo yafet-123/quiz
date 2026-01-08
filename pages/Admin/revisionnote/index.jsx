@@ -9,7 +9,6 @@ import { DisplayRevisionNoteNotes } from "../../../components/Admin/RevisionNote
 export async function getServerSideProps(context) {
   const session = await getSession(context);
   const userRole = session?.user?.role;
-  const { status, data } = useSession();
   // Optionally redirect non-admins
   if (userRole !== 'admin') {
     return {

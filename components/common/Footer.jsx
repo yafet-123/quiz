@@ -42,18 +42,20 @@ export const Footer = () => {
                 src={logo}
                 alt="Navbar Logo Image"
                 layout="fill"
-                
-               objectPosition="center"
+
+                objectPosition="center"
               />
             </div>
           </Link>
           <p className="font-semibold">Follow us on social media</p>
           <div className="flex space-x-4">
             {socialLinks.map((link, idx) => (
-              <Link key={idx} href={link.path}>
-                <a className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition">
-                  {link.icon}
-                </a>
+              <Link
+                key={idx}
+                href={link.path}
+                className="p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+              >
+                {link.icon}
               </Link>
             ))}
           </div>
@@ -65,8 +67,8 @@ export const Footer = () => {
           <ul className="flex flex-col space-y-2">
             {quickLinks.map((link, idx) => (
               <li key={idx}>
-                <Link href={link.path}>
-                  <a className="hover:text-white/80 transition">{link.name}</a>
+                <Link href={link.path} className="hover:text-white/80 transition">
+                  {link.name}
                 </Link>
               </li>
             ))}

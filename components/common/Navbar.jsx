@@ -49,21 +49,18 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        shadow ? "shadow-lg bg-[#417094]" : "bg-[#417094]"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${shadow ? "shadow-lg bg-[#417094]" : "bg-[#417094]"
+        }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center h-20">
         {/* Logo */}
-        <Link href="/">
-          <div className="relative w-[150px] lg:w-[180px] h-[55px] lg:h-[60px] overflow-hidden">
-            <Image
-              src={logo}
-              alt="Navbar Logo Image"
-              layout="fill"
-              objectPosition="center"
-            />
-          </div>
+        <Link href="/" className="relative w-[150px] lg:w-[180px] h-[55px] lg:h-[60px] overflow-hidden">
+          <Image
+            src={logo}
+            alt="Navbar Logo Image"
+            layout="fill"
+            objectPosition="center"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -74,11 +71,10 @@ export const Navbar = () => {
                 <>
                   <button
                     onClick={() => toggleDropdown(link.name)}
-                    className={`flex items-center space-x-1 hover:text-[#3cb371] text-xl ${
-                      router.pathname.startsWith(link.path)
+                    className={`flex items-center space-x-1 hover:text-[#3cb371] text-xl ${router.pathname.startsWith(link.path)
                         ? "text-[#3cb371] underline text-2xl font-bold"
                         : "text-[#FFF]"
-                    }`}
+                      }`}
                   >
                     <span>{link.name}</span>
                     <IoIosArrowDown />
@@ -88,16 +84,14 @@ export const Navbar = () => {
                     <ul className="absolute left-0 top-full mt-1 bg-white shadow-lg rounded-md w-96 z-50">
                       {link.dropdown.map((sublink) => (
                         <li key={sublink.name}>
-                          <Link href={sublink.path}>
-                            <a
-                              className={`block px-4 py-2 hover:bg-gray-100 text-lg ${
-                                router.pathname === sublink.path
-                                  ? "text-[#3cb371] underline text-2xl font-bold"
-                                  : "text-gray-700 text-lg"
+                          <Link
+                            href={sublink.path}
+                            className={`block px-4 py-2 hover:bg-gray-100 text-lg ${router.pathname === sublink.path
+                                ? "text-[#3cb371] underline text-2xl font-bold"
+                                : "text-gray-700 text-lg"
                               }`}
-                            >
-                              {sublink.name}
-                            </a>
+                          >
+                            {sublink.name}
                           </Link>
                         </li>
                       ))}
@@ -105,32 +99,32 @@ export const Navbar = () => {
                   )}
                 </>
               ) : (
-                <Link href={link.path}>
-                  <a
-                    className={`hover:text-[#3cb371] text-lg ${
-                      router.pathname === link.path
-                        ? "text-[#3cb371] underline text-3xl font-bold"
-                        : "text-[#FFF]"
+                <Link
+                  href={link.path}
+                  className={`hover:text-[#3cb371] text-lg ${router.pathname === link.path
+                      ? "text-[#3cb371] underline text-3xl font-bold"
+                      : "text-[#FFF]"
                     }`}
-                  >
-                    {link.name}
-                  </a>
+                >
+                  {link.name}
                 </Link>
               )}
             </div>
           ))}
 
           {/* Sign Up Button */}
-          <Link href="/auth/Student/Login/signin-student">
-            <a className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition">
-              Login
-            </a>
+          <Link
+            href="/auth/Student/Login/signin-student"
+            className="ml-4 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition"
+          >
+            Login
           </Link>
 
-          <Link href="/signup">
-            <a className="ml-10 bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg transition">
-              Sign Up
-            </a>
+          <Link
+            href="/signup"
+            className="ml-10 bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg transition"
+          >
+            Sign Up
           </Link>
         </div>
 
@@ -163,13 +157,12 @@ export const Navbar = () => {
                       <ul className="pl-4 mt-2 flex flex-col space-y-2">
                         {link.dropdown.map((sublink) => (
                           <li key={sublink.name}>
-                            <Link href={sublink.path}>
-                              <a
-                                onClick={() => setOpen(false)}
-                                className="block hover:text-[#417094]"
-                              >
-                                {sublink.name}
-                              </a>
+                            <Link
+                              href={sublink.path}
+                              onClick={() => setOpen(false)}
+                              className="block hover:text-[#417094]"
+                            >
+                              {sublink.name}
                             </Link>
                           </li>
                         ))}
@@ -177,36 +170,34 @@ export const Navbar = () => {
                     )}
                   </>
                 ) : (
-                  <Link href={link.path}>
-                    <a
-                      onClick={() => setOpen(false)}
-                      className={`block hover:text-[#417094] text-lg ${
-                        router.pathname === link.path
-                          ? "text-indigo-600 underline text-3xl font-bold"
-                          : ""
+                  <Link
+                    href={link.path}
+                    onClick={() => setOpen(false)}
+                    className={`block hover:text-[#417094] text-lg ${router.pathname === link.path
+                        ? "text-indigo-600 underline text-3xl font-bold"
+                        : ""
                       }`}
-                    >
-                      {link.name}
-                    </a>
+                  >
+                    {link.name}
                   </Link>
                 )}
               </li>
             ))}
             {/* Mobile Sign Up Button */}
             <li className="flex flex-col">
-              <Link href="/auth/Student/Login/signin-student">
-                <a className="mb-5 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition">
-                  Login
-                </a>
+              <Link
+                href="/auth/Student/Login/signin-student"
+                className="mb-5 bg-[#111827] text-white px-5 py-2 rounded-lg hover:bg-[#417094] transition"
+              >
+                Login
               </Link>
 
-              <Link href="/signup">
-                <a
-                  onClick={() => setOpen(false)}
-                  className="block text-center bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg  transition"
-                >
-                  Sign Up
-                </a>
+              <Link
+                href="/signup"
+                onClick={() => setOpen(false)}
+                className="block text-center bg-[#fff] text-[#417094] hover:text-[#fff] hover:bg-[#417094] px-5 py-2 rounded-lg  transition"
+              >
+                Sign Up
               </Link>
             </li>
           </ul>
