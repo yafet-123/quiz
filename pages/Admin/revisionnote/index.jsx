@@ -75,15 +75,13 @@ export default function RevisionNotePage({ subjects, notes }) {
   return (
     <React.Fragment>
       <MainHeader title="RevisionNote Dashboard" />
-      <section className="flex flex-col w-full h-full bg-[#e6e6e6] pt-10">
-        <div className='w-full h-full flex flex-row'>
-          <VerticalNavbar data={data} />
-          <div className="w-full px-6">
-            <AddRevisionNoteNotes subjects={subjects} />
-            <DisplayRevisionNoteNotes notes={notes} subjects={subjects} />
-          </div>
+      <div className="flex bg-[#e6e6e6] pt-20">
+        <VerticalNavbar data={data} />
+        <div className="flex-1 px-6 min-w-0">
+          <AddRevisionNoteNotes subjects={subjects} />
+          <DisplayRevisionNoteNotes notes={notes} subjects={subjects} />
         </div>
-      </section>
+      </div>
     </React.Fragment>
   );
 }

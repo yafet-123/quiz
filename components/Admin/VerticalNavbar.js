@@ -47,12 +47,12 @@ export function VerticalNavbar() {
             setMobileOpen(false); // close mobile menu on mobile click
           }}
           className={`flex items-center w-full px-1 py-2 rounded-xl transition-colors duration-200 ${path === item.link
-              ? "bg-teal-600 text-white shadow-md"
-              : "text-gray-700 hover:bg-teal-500 hover:text-white"
+            ? "bg-teal-600 text-white shadow-md"
+            : "text-gray-700 hover:bg-teal-500 hover:text-white"
             }`}
         >
           <span>{item.icon}</span>
-          <span className="ml-1 font-medium">{item.name}</span>
+          {!collapsed && <span className="ml-1 font-medium">{item.name}</span>}
         </button>
       </li>
     ));
@@ -60,7 +60,7 @@ export function VerticalNavbar() {
   return (
     <>
       {/* Mobile Menu Button */}
-      <div className="md:hidden fixed top-20 left-4 z-50">
+      <div className="md:hidden fixed top-20 left-4 z-[60]">
         <button
           onClick={() => setMobileOpen(true)}
           className="text-white p-2 bg-teal-600 rounded shadow-lg"
@@ -110,7 +110,7 @@ export function VerticalNavbar() {
 
       {/* Desktop Sidebar */}
       <div
-        className={`hidden md:flex flex-col top-20 sticky self-start h-screen bg-white shadow-lg
+        className={`hidden md:flex flex-col top-20 sticky self-start h-screen bg-white shadow-lg z-40 flex-shrink-0
           ${collapsed ? "w-20" : "w-72"} overflow-y-auto`}
       >
         <nav className="flex flex-col justify-between h-full py-6 px-3">

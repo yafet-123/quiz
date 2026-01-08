@@ -67,7 +67,7 @@ export function DisplayRevisionNoteNotes({ notes, subjects }) {
 
             {/* Content (Rich Text HTML) */}
             <div
-              className="prose max-w-none text-gray-700 leading-relaxed"
+              className="prose max-w-none text-gray-700 leading-relaxed overflow-x-auto"
               dangerouslySetInnerHTML={{ __html: note.content }}
             ></div>
           </div>
