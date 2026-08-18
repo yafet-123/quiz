@@ -2,21 +2,394 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-  margin:0;
-  padding:0;
+/* ============================================================
+   Aceit Premium Design System
+   ============================================================ */
+
+:root {
+  --bg: #f6f9fc;
+  --bg-deep: #eef4fb;
+  --c-primary: #00d1bb;
+  --c-ocean: #417094;
+  --c-accent: #5b7cfa;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.75);
+  --radius: 1.25rem;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  .perspective {
-    perspective: 1000px;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 600px at 100% -10%, rgba(91, 124, 250, 0.10), transparent 60%),
+    radial-gradient(1000px 600px at -10% 10%, rgba(0, 209, 187, 0.10), transparent 55%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 209, 187, 0.30);
+}
+
+img {
+  user-select: none;
+}
+
+/* ------------------------------------------------------------------
+   1) Aurora / gradient-mesh backdrop + grain overlay
+   ------------------------------------------------------------------ */
+.aurora-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+.aurora-backdrop .blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+  will-change: transform;
+}
+.blob-1 {
+  width: 46rem; height: 46rem;
+  top: -14rem; left: -8rem;
+  background: radial-gradient(circle at 30% 30%, rgba(0,209,187,0.55), rgba(91,124,250,0.25) 60%, transparent 70%);
+}
+.blob-2 {
+  width: 40rem; height: 40rem;
+  top: 20%; right: -12rem;
+  background: radial-gradient(circle at 60% 40%, rgba(91,124,250,0.5), rgba(168,85,247,0.22) 60%, transparent 72%);
+}
+.blob-3 {
+  width: 36rem; height: 36rem;
+  bottom: -12rem; left: 22%;
+  background: radial-gradient(circle at 40% 60%, rgba(0,209,187,0.42), rgba(65,112,148,0.22) 62%, transparent 74%);
+}
+
+/* Grain / noise overlay for a premium tactile feel */
+.grain::after,
+.grain-overlay {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* Page content sits above the animated backdrop */
+.backdrop-container {
+  position: relative;
+  z-index: 0;
+}
+
+/* ------------------------------------------------------------------
+   2) Glass surfaces
+   ------------------------------------------------------------------ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--glass-border);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+}
+.glass-dark {
+  background: rgba(15, 34, 57, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Glass card with lift, subtle inner highlight and soft shadow */
+.glass-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 40px -12px rgba(31, 45, 90, 0.16), 0 4px 12px -6px rgba(31,45,90,0.08);
+  transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
+  will-change: transform;
+}
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 1rem; right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+  border-radius: 9999px;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px -16px rgba(24, 42, 74, 0.28), 0 10px 24px -10px rgba(24,42,74,0.14);
+  border-color: rgba(0, 209, 187, 0.35);
+}
+
+/* ------------------------------------------------------------------
+   3) Buttons
+   ------------------------------------------------------------------ */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(120deg, #417094 0%, #00d1bb 60%, #00b3a0 100%);
+  background-size: 180% 100%;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.85rem 1.75rem;
+  box-shadow: 0 10px 30px -10px rgba(0,179,160,0.55);
+  transition: background-position .5s ease, transform .2s ease, box-shadow .35s ease;
+  will-change: transform;
+}
+.btn-primary:hover {
+  background-position: 100% 0;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(0,209,187,0.25), 0 18px 44px -10px rgba(0,209,187,0.6);
+}
+.btn-primary:active {
+  transform: translateY(0) scale(0.97);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--ink);
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.85rem 1.75rem;
+  border: 1px solid rgba(65,112,148,0.2);
+  transition: transform .2s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,179,160,0.5);
+  box-shadow: 0 14px 34px -14px rgba(31,45,90,0.3);
+}
+
+/* ------------------------------------------------------------------
+   4) Filter chips
+   ------------------------------------------------------------------ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--muted);
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(65,112,148,0.14);
+  cursor: pointer;
+  transition: all .3s ease;
+  white-space: nowrap;
+}
+.chip:hover {
+  color: var(--ink);
+  border-color: rgba(0,179,160,0.45);
+  transform: translateY(-1px);
+}
+.chip.active {
+  color: #fff;
+  background: linear-gradient(120deg, #417094, #00b3a0);
+  border-color: transparent;
+  box-shadow: 0 10px 24px -10px rgba(0,179,160,0.6);
+}
+
+/* ------------------------------------------------------------------
+   5) Scroll-reveal (IntersectionObserver adds .reveal-visible)
+   ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left { transform: translateX(-30px); }
+.reveal-right { transform: translateX(30px); }
+.reveal-left.reveal-visible,
+.reveal-right.reveal-visible { transform: translateX(0); }
+.reveal-zoom { transform: scale(0.94); }
+.reveal-zoom.reveal-visible { transform: scale(1); }
+
+.stagger-1 { transition-delay: 0.05s; }
+.stagger-2 { transition-delay: 0.12s; }
+.stagger-3 { transition-delay: 0.19s; }
+.stagger-4 { transition-delay: 0.26s; }
+.stagger-5 { transition-delay: 0.33s; }
+
+/* ------------------------------------------------------------------
+   6) 3D flip card (flashcards)
+   ------------------------------------------------------------------ */
+.flip-scene {
+  perspective: 1400px;
+  transform-style: preserve-3d;
+}
+.flip-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .65s cubic-bezier(.24,.58,.28,.99);
+}
+.flip-card.is-flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.flip-face.back {
+  transform: rotateY(180deg);
+}
+
+/* ------------------------------------------------------------------
+   7) Text helpers
+   ------------------------------------------------------------------ */
+.text-gradient {
+  background: linear-gradient(120deg, #417094 0%, #00d1bb 50%, #5b7cfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #008f81;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(0,209,187,0.12);
+  border: 1px solid rgba(0,209,187,0.2);
+}
+.section-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.section-subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* Animated progress bar (quizzes) */
+.progress-track {
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(65,112,148,0.14);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #417094, #00d1bb);
+  background-size: 200% 100%;
+  transition: width .5s cubic-bezier(.36,.07,.19,.97);
+}
+
+/* Form inputs */
+.input-fancy {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 0.9rem;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(65,112,148,0.16);
+  color: var(--ink);
+  outline: none;
+  backdrop-filter: blur(8px);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.input-fancy:focus {
+  border-color: rgba(0,179,160,0.6);
+  box-shadow: 0 0 0 4px rgba(0,209,187,0.14);
+}
+
+/* Legacy 3D helpers kept for compatibility */
+.perspective { perspective: 1000px; }
+.transform-style { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotate-y-180 { transform: rotateY(180deg); }
+
+/* ------------------------------------------------------------------
+   8) Accessibility: reduce motion
+   ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
-  .transform-style {
-    transform-style: preserve-3d;
+  .aurora-backdrop .blob {
+    animation: none !important;
   }
-  .backface-hidden {
-    backface-visibility: hidden;
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
-  .rotate-y-180 {
-    transform: rotateY(180deg);
-  }
+  .reveal-left, .reveal-right, .reveal-zoom { transform: none !important; }
+}
+
+@media (max-width: 640px) {
+  .aurora-backdrop .blob-1 { width: 30rem; height: 30rem; }
+  .aurora-backdrop .blob-2 { width: 28rem; height: 28rem; }
+  .aurora-backdrop .blob-3 { width: 26rem; height: 26rem; }
+}
+
+/* Custom scrollbar for a polished feel */
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(65,112,148,0.5), rgba(0,209,187,0.5));
+  border-radius: 9999px;
+  border: 3px solid var(--bg);
+}
+
