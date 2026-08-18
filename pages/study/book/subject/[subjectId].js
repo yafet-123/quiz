@@ -7,22 +7,12 @@ export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
   try {
-    const topics = await prisma.BookTopic.findMany({
+    const categories = await prisma.BookCategory.findMany({
       where: {
-        Book: {
-          subjectId: Number(subjectId),
-        },
+        subjectId: Number(subjectId),
       },
-      select: {
-        id: true,
-        title: true,
-        bookId: true,
-        Book: {
-          select: {
-            title: true,
-            bookFile: true,
-          },
-        },
+      include: {
+        Books: true,
       },
       orderBy: {
         id: "desc",
@@ -31,50 +21,50 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        topics: JSON.parse(JSON.stringify(topics)),
+        categories: JSON.parse(JSON.stringify(categories)),
       },
     };
   } catch (error) {
-    console.error("Error loading book topics:", error);
+    console.error("Error loading book categories:", error);
     return {
       props: {
-        topics: [],
-        error: "Failed to load book topics.",
+        categories: [],
+        error: "Failed to load book categories.",
       },
     };
   }
 }
 
-export default function BooksBySubject({ topics }) {
+export default function BooksBySubject({ categories }) {
   const router = useRouter();
 
-  const openTopic = (topicId) => {
-    router.push(`/study/book/${topicId}`);
+  const openCategory = (categoryId) => {
+    router.push(`/study/book/${categoryId}`);
   };
 
   return (
     <div className="py-32 px-5 lg:px-20">
-      <MainHeader title="Aceit : Book Topics" />
+      <MainHeader title="Aceit : Book Categories" />
       <div>
-        {topics.length > 0 ? (
+        {categories.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {topics.map((topic) => (
+            {categories.map((category) => (
               <div
-                key={topic.id}
-                onClick={() => openTopic(topic.id)}
+                key={category.id}
+                onClick={() => openCategory(category.id)}
                 className="cursor-pointer bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
               >
-                <h2 className="font-bold text-xl md:text-2xl">{topic.title}</h2>
-                <p className="mt-2 opacity-80">Click to open book section</p>
+                <h2 className="font-bold text-xl md:text-2xl">{category.title}</h2>
+                <p className="mt-2 opacity-80">{category.Books?.length || 0} book(s) available</p>
               </div>
             ))}
           </div>
         ) : (
           <p className="text-center text-gray-600 text-lg">
-            No book topics available for this subject.
+            No book categories available for this subject.
           </p>
         )}
       </div>
     </div>
   );
-            }
+}

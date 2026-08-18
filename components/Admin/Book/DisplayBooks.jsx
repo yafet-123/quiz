@@ -49,15 +49,11 @@ export function DisplayBooks({ subjects, onRefresh }) {
                   )}
                 </div>
 
-                {/* Topics List */}
-                {book.BookTopic?.length > 0 && (
-                  <ul className="mb-4 list-disc ml-6">
-                    {book.BookTopic.map((topic) => (
-                      <li key={topic.id} className="text-gray-700 mb-1">
-                        {topic.title}
-                      </li>
-                    ))}
-                  </ul>
+                                {/* Category */}
+                {book.Category && (
+                  <p className="mb-4 text-gray-700">
+                    <span className="font-semibold">Category:</span> {book.Category.title}
+                  </p>
                 )}
 
                 {/* Action Buttons */}

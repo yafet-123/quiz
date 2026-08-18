@@ -94,7 +94,8 @@ model Subject {
   modifiedAt      DateTime?         @default(now()) @updatedAt @db.DateTime(0)
   approved        Boolean?          @default(false)
   Article         Article[]
-  Book            Book[]
+    Book            Book[]
+  BookCategory    BookCategory[]
   DefinitionSheet DefinitionSheet[]
   Exams           Exam[]
   ExamPreparation ExamPreparation[]
@@ -376,24 +377,26 @@ model ExamPreparationTopic {
 }
 
 model Book {
-  id        Int         @id @default(autoincrement())
-  title     String      @db.VarChar(255)
-  bookFile  String      @db.Text
-  subjectId Int
-  Subject   Subject     @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Book_subject_fkey")
-  BookTopic BookTopic[]
+  id         Int           @id @default(autoincrement())
+  title      String        @db.VarChar(255)
+  bookFile   String        @db.Text
+  subjectId  Int
+  Subject    Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "Book_subject_fkey")
+  categoryId Int?
+  Category   BookCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Restrict, map: "Book_category_fkey")
 
   @@index([subjectId], map: "idx_book_subjectId")
   @@index([title], map: "idx_book_title")
 }
 
-model BookTopic {
-  id     Int    @id @default(autoincrement())
-  title  String @db.VarChar(255)
-  bookId Int
-  Book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "BookTopic_book_fkey")
+model BookCategory {
+  id        Int     @id @default(autoincrement())
+  title     String  @db.VarChar(255)
+  subjectId Int
+  Subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "BookCategory_subject_fkey")
+  Books     Book[]
 
-  @@index([bookId], map: "idx_book_topic")
+  @@index([subjectId], map: "idx_bookcategory_subjectId")
 }
 
 model PastPaper {

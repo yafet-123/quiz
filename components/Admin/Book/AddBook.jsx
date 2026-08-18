@@ -8,7 +8,7 @@ export function AddBook({ subjects }) {
   const [loading, setLoading] = useState(false);
   const [loadingModalIsOpen, setLoadingModalIsOpen] = useState(false);
   const [subjectId, setSubjectId] = useState("");
-  const [topicTitle, setTopicTitle] = useState("");
+    const [categoryTitle, setCategoryTitle] = useState("");
 
   // books list
   const [books, setBooks] = useState([]);
@@ -44,7 +44,7 @@ export function AddBook({ subjects }) {
         ? [...books, currentBook]
         : books;
 
-    if (!subjectId || !topicTitle || allBooks.length === 0) {
+        if (!subjectId || !categoryTitle || allBooks.length === 0) {
       setError("Please fill all fields and add at least one book.");
       return;
     }
@@ -55,13 +55,13 @@ export function AddBook({ subjects }) {
     try {
       const res = await axios.post("/api/book/add", {
         subjectId,
-        topicTitle,
+                categoryTitle,
         books: allBooks,
       });
 
       setSuccess("Books added successfully!");
       setSubjectId("");
-      setTopicTitle("");
+            setCategoryTitle("");
       setBooks([]);
       setCurrentBook({ name: "", link: "" });
     } catch (err) {
@@ -100,15 +100,15 @@ export function AddBook({ subjects }) {
             </select>
           </div>
 
-          {/* Topic */}
+                    {/* Category */}
           <div>
-            <label className="block text-gray-700 font-medium mb-2">Topic Title</label>
+            <label className="block text-gray-700 font-medium mb-2">Category Title</label>
             <input
               type="text"
-              value={topicTitle}
-              onChange={(e) => setTopicTitle(e.target.value)}
+              value={categoryTitle}
+              onChange={(e) => setCategoryTitle(e.target.value)}
               required
-              placeholder="Enter topic title"
+              placeholder="Enter category title"
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#673ab7]"
             />
           </div>

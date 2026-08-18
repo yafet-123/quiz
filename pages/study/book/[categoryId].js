@@ -4,56 +4,53 @@ import { FaBook } from "react-icons/fa";
 import { MainHeader } from "../../../components/common/MainHeader";
 
 export async function getServerSideProps(context) {
-  const { topicId } = context.params;
+  const { categoryId } = context.params;
 
   try {
-    // Fetch the topic with its Book
-    const topic = await prisma.BookTopic.findUnique({
-      where: { id: Number(topicId) },
+    // Fetch the category with its Books
+    const category = await prisma.BookCategory.findUnique({
+      where: { id: Number(categoryId) },
       include: {
-        Book: true, // include the parent Book
+        Books: true, // include all books under this category
       },
     });
 
-    if (!topic) {
+    if (!category) {
       return { notFound: true };
     }
 
-    // If bookFile contains multiple links separated by comma
-    const bookNames = topic.Book.title ? topic.Book.title.split(",") : [];
-    const bookLinks = topic.Book.bookFile ? topic.Book.bookFile.split(",") : [];
-
-    const books = bookNames.map((name, index) => ({
-      name: name.trim(),
-      link: bookLinks[index] ? bookLinks[index].trim() : "#",
+    // Build book list from category's books
+    const books = (category.Books || []).map((book) => ({
+      name: book.title,
+      link: book.bookFile,
     }));
 
     return {
       props: {
-        topicTitle: topic.title,
+        categoryTitle: category.title,
         books,
       },
     };
   } catch (error) {
-    console.error("Error fetching book topic:", error);
+    console.error("Error fetching book category:", error);
     return {
       props: {
-        topicTitle: "",
+        categoryTitle: "",
         books: [],
       },
     };
   }
 }
 
-export default function BookTopicPage({ topicTitle, books }) {
+export default function BookCategoryPage({ categoryTitle, books }) {
   return (
     <div className="px-5 md:px-10 lg:px-20 py-32">
-      <MainHeader title={`Aceit : ${topicTitle} Books`} />
+      <MainHeader title={`Aceit : ${categoryTitle} Books`} />
 
-      <h1 className="text-3xl font-bold mb-8">{topicTitle}</h1>
+      <h1 className="text-3xl font-bold mb-8">{categoryTitle}</h1>
 
       {books.length === 0 && (
-        <p className="text-gray-600 text-lg">No books available for this topic.</p>
+        <p className="text-gray-600 text-lg">No books available for this category.</p>
       )}
 
       <div className="flex flex-col">

@@ -20,12 +20,12 @@ export async function getServerSideProps(context) {
     };
   }
 
-  // Fetch all subjects with books and topics
+  // Fetch all subjects with books and categories
   const subjects = await prisma.Subject.findMany({
     include: {
-      Book: {
+             Book: {
         include: {
-          BookTopic: true,
+          Category: true,
         },
       },
     },
@@ -41,10 +41,9 @@ export async function getServerSideProps(context) {
       id: book.id,
       title: book.title,
       bookFile: book.bookFile,
-      BookTopic: book.BookTopic.map(topic => ({
-        id: topic.id,
-        title: topic.title,
-      })),
+            Category: book.Category
+        ? { id: book.Category.id, title: book.Category.title }
+        : null,
     })),
   }));
 
