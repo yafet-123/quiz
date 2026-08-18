@@ -3,7 +3,7 @@
 export const FlashcardsBySubject = [
   {
     subject: "Art",
-    title: "Art Flashcards",
+    title: "Art Flashcard",
     topics: [
       {
         topic: "Elements of Art",
@@ -469,7 +469,7 @@ export const FlashcardsBySubject = [
       },
     ],
   },
-  { 
+  {
     subject: "Technology",
     title: "Technology Flashcards",
     topics: [
@@ -506,7 +506,7 @@ export const FlashcardsBySubject = [
     ],
   },
 ];
- 
+
 // Helper functions
 export function getAllFlashcardsBySubject() {
   return FlashcardsBySubject;
