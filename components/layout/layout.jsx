@@ -4,13 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Footer } from '../common/Footer';
 import { Navbar } from '../common/Navbar';
 
-interface LayoutProps {
-  children: React.ReactNode;
-  session?: any;
-  pageProps?: any;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children, session, pageProps }) => {
+const Layout = ({ children, session, pageProps }) => {
   const router = useRouter();
   const reduceMotion = useReducedMotion();
 
