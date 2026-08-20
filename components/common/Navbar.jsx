@@ -5,7 +5,7 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import { useRouter } from "next/router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import logo from "../../public/logo.png";
+import logo from "../../public/logo.jpg";
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false); // mobile menu
@@ -29,8 +29,9 @@ export const Navbar = () => {
         { path: "/study/flashcards-tips", name: "Flashcards Tips" },
         { path: "/study/past-paper", name: "Past Paper" },
         { path: "/study/practice-quizzes", name: "Practice Questions" },
-        { path: "/study/revision-note", name: "Revision Note" },
-        { path: "/study/worksheet", name: "Worksheets / Topical questions" },
+        { path: "/study/note", name: "Note" },
+        { path: "/study/syllablus", name: "Syllablus" },
+        { path: "/study/worksheet", name: "Worksheets" },
         { path: "/study/youtube", name: "Youtube" },
       ],
     },
@@ -71,12 +72,12 @@ export const Navbar = () => {
       }`}
     >
       <nav className={`max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8 transition-all duration-300 ${scrolled ? "h-16" : "h-20"}`}>
-        <Link href="/" aria-label="Aceit home" className="block h-[52px] lg:h-[58px]">
-          <div className="relative h-full aspect-[2.6/1] overflow-hidden rounded-xl bg-white/70 ring-1 ring-white shadow-soft">
+        <Link href="/" className="block w-[180px] h-[58px] relative">
+          <div className="relative w-full h-full overflow-hidden bg-white/85 shadow-soft">
             <Image src={logo} alt="Aceit Logo" layout="fill" objectFit="contain" />
           </div>
         </Link>
-<div className="hidden lg:flex items-center gap-6 font-semibold">
+        <div className="hidden lg:flex items-center gap-6 font-semibold">
           {NavLinks.map((link) => (
             <div key={link.name} className="relative group">
               {link.dropdown ? (

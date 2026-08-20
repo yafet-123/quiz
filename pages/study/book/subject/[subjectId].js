@@ -1,17 +1,45 @@
 import { prisma } from "../../../../util/db.server";
 import React from "react";
 import Link from "next/link";
-import { FaBook, FaArrowLeft } from "react-icons/fa";
+import { FaBook, FaArrowLeft, FaCloudArrowDown } from "react-icons/fa6";
 import { MainHeader } from "../../../../components/common/MainHeader";
+import { Reveal } from "../../../../components/common/Reveal";
 
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
   try {
-    // Directly fetch all books for the subject (across every category)
+    const id = Number(subjectId);
+
+    // Validate subject ID
+    if (isNaN(id)) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Get the subject
+    const subject = await prisma.Subject.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    // Subject doesn't exist
+    if (!subject) {
+      return {
+        notFound: true,
+      };
+    }
+
+    // Get all books belonging to this subject
     const books = await prisma.Book.findMany({
       where: {
-        subjectId: Number(subjectId),
+        subjectId: id,
       },
       include: {
         BookCategory: true,
@@ -21,72 +49,249 @@ export async function getServerSideProps(context) {
       },
     });
 
+    // Number of categories used by this subject
+    const categoryCount = await prisma.BookCategory.count({
+      where: {
+        subjectId: id,
+      },
+    });
+
     return {
       props: {
+        subject: JSON.parse(JSON.stringify(subject)),
         books: JSON.parse(JSON.stringify(books)),
+        categoryCount,
       },
     };
   } catch (error) {
     console.error("Error loading books by subject:", error);
+
     return {
-      props: {
-        books: [],
-        error: "Failed to load books.",
-      },
+      notFound: true,
     };
   }
 }
 
-export default function BooksBySubject({ books }) {
+export default function BooksBySubject({
+  subject,
+  books,
+  categoryCount,
+}) {
+  if (!subject) {
+    return <MainHeader title="Aceit : Books" />;
+  }
+
   return (
-    <div className="py-32 px-5 lg:px-20 min-h-screen">
-      <MainHeader title="Aceit : Books" />
+    <>
+      <MainHeader title={`Aceit : ${subject.name} Books`} />
 
-      <Link
-        href="/study/book"
-        className="inline-flex items-center text-blue-600 font-semibold mb-6 hover:text-blue-800 transition"
-      >
-        <FaArrowLeft className="mr-2" /> Back to Subjects
-      </Link>
+      <div className="min-h-screen py-24 px-6">
+        <div className="max-w-5xl mx-auto">
 
-      <h1 className="text-3xl font-bold mb-2">Books</h1>
-      <p className="text-gray-500 text-md mb-8">
-        All books for this subject are listed below.
-      </p>
+          {/* =========================
+              BREADCRUMB
+          ========================== */}
+          <nav className="flex flex-wrap items-center gap-2 text-ink-600 mb-4">
 
-      {books.length === 0 ? (
-        <p className="text-center text-gray-600 text-lg">
-          There are currently no books available for this subject. Please check back later.
-        </p>
-      ) : (
-        <div className="flex flex-col">
-          {books.map((book) => (
-            <div
-              key={book.id}
-              className="flex justify-between items-center bg-[#f8f8f9] py-5 px-4 rounded-2xl hover:bg-[#ededf2] mb-5"
+            <Link
+              href="/study"
+              className="hover:text-primary-700 transition-colors font-semibold"
             >
-              <div className="flex items-center">
-                <FaBook size={40} color="#3699ff" />
-                <div className="pl-4">
-                  <h1 className="text-black font-bold text-md md:text-lg">{book.title}</h1>
-                  {book.BookCategory && (
-                    <p className="text-sm text-gray-500">{book.BookCategory.title}</p>
-                  )}
+              Study
+            </Link>
+
+            <span className="text-ink-400">/</span>
+
+            <Link
+              href="/study/books"
+              className="hover:text-primary-700 transition-colors font-semibold"
+            >
+              Books
+            </Link>
+
+            <span className="text-ink-400">/</span>
+
+            <span className="text-ink-800 font-semibold">
+              {subject.name}
+            </span>
+
+          </nav>
+
+          {/* =========================
+              BACK BUTTON
+          ========================== */}
+          <div className="mb-10">
+
+            <Link
+              href="/study/books"
+              className="inline-flex items-center gap-2 text-ocean-600 font-semibold hover:text-primary-700 transition-colors"
+            >
+              <FaArrowLeft />
+
+              Back to Books
+            </Link>
+
+          </div>
+
+          {/* =========================
+              PAGE HEADER
+          ========================== */}
+          <span className="section-eyebrow block mb-4">
+            {books.length} books available
+          </span>
+
+          <h1 className="section-title text-4xl md:text-5xl leading-tight">
+            {subject.name} Books
+          </h1>
+
+          <p className="section-subtitle mt-4 max-w-3xl">
+            Browse books organized by category for {subject.name}.
+          </p>
+
+          {/* =========================
+              STATISTICS
+          ========================== */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-10">
+
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-4">
+
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-ocean-100 text-ocean-600 text-2xl">
+                  <FaBook />
                 </div>
+
+                <div>
+                  <p className="section-title text-3xl">
+                    {books.length}
+                  </p>
+
+                  <p className="text-ink-500 font-semibold">
+                    Books
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            <div className="glass-card p-6">
+              <div className="flex items-center gap-4">
+
+                <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-100 to-ocean-100 text-ocean-600 text-2xl">
+                  📁
+                </div>
+
+                <div>
+                  <p className="section-title text-3xl">
+                    {categoryCount}
+                  </p>
+
+                  <p className="text-ink-500 font-semibold">
+                    Book Categories
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          {/* =========================
+              BOOK LIST
+          ========================== */}
+          <div className="mt-12 flex flex-col">
+
+            {books.length === 0 ? (
+
+              <div className="glass-card p-12 text-center max-w-xl mx-auto">
+
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary-100 to-ocean-100 text-ocean-600 text-4xl">
+                  <FaBook />
+                </div>
+
+                <h3 className="section-title text-xl mb-2">
+                  Nothing here yet
+                </h3>
+
+                <p className="text-ink-500">
+                  No books are available for this subject yet.
+                  Please check back later.
+                </p>
+
               </div>
 
-              <a
-                href={book.bookFile}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-[#3699ff] hover:bg-[#002244] text-white px-3 py-2 rounded-2xl text-md md:text-lg font-bold"
-              >
-                Open Book
-              </a>
-            </div>
-          ))}
+            ) : (
+
+              books.map((book, index) => (
+
+                <Reveal
+                  key={book.id}
+                  delay={(index % 5) * 70}
+                  className="mb-5"
+                >
+
+                  <div className="glass-card group flex items-center justify-between gap-4 p-5">
+
+                    {/* LEFT SIDE */}
+                    <div className="flex items-center gap-4 min-w-0">
+
+                      {/* BOOK ICON */}
+                      <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-ocean-500 text-white text-3xl shadow-soft">
+                        <FaBook />
+                      </div>
+
+                      {/* BOOK INFORMATION */}
+                      <div className="min-w-0">
+
+                        <h3 className="section-title text-lg md:text-xl break-words group-hover:text-primary-700 transition-colors">
+                          {book.title}
+                        </h3>
+
+                        {/* CATEGORY */}
+                        {book.BookCategory ? (
+
+                          <p className="text-ink-500 text-sm mt-1">
+                            Category:{" "}
+                            <span className="font-semibold text-ocean-600">
+                              {book.BookCategory.title}
+                            </span>
+                          </p>
+
+                        ) : (
+
+                          <p className="text-ink-500 text-sm mt-1">
+                            Uncategorized
+                          </p>
+
+                        )}
+
+                      </div>
+
+                    </div>
+
+                    {/* OPEN BUTTON */}
+                    <a
+                      href={book.bookFile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary shrink-0 px-4 py-2.5 text-sm md:px-5 inline-flex items-center gap-2"
+                    >
+                      <FaCloudArrowDown />
+
+                      Open
+                    </a>
+
+                  </div>
+
+                </Reveal>
+
+              ))
+
+            )}
+
+          </div>
+
         </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 }

@@ -1,9 +1,8 @@
-// pages/study/formulaSheets/index.js
-
 import {
   FaBookOpen,
   FaFolderOpen,
   FaLayerGroup,
+  FaFilePdf,
   FaArrowRight,
   FaFlask,
 } from "react-icons/fa6";
@@ -16,47 +15,37 @@ import {
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-
 import { prisma } from "../../../util/db.server";
 import { MainHeader } from "../../../components/common/MainHeader";
 import { Reveal } from "../../../components/common/Reveal";
-
-/*
-|--------------------------------------------------------------------------
-| WHY USE FORMULA SHEETS
-|--------------------------------------------------------------------------
-*/
 
 const reasons = [
   {
     id: 1,
     icon: <FaBook className="text-blue-500 w-8 h-8" />,
-    title: "Quick Reference",
+    title: "Official Syllabus",
     description:
-      "Access formulas instantly for fast problem-solving and revision.",
+      "Access official course syllablus organized clearly by subject.",
   },
-
   {
     id: 2,
     icon: <FaFolderOpen className="text-green-500 w-8 h-8" />,
-    title: "Organized Learning",
+    title: "Structured Learning",
     description:
-      "Keep formulas grouped by subject for easier learning and revision.",
+      "Explore course requirements, topics, and learning areas in one place.",
   },
-
   {
     id: 3,
     icon: <FaStar className="text-yellow-500 w-8 h-8" />,
-    title: "Exam Preparation",
+    title: "Exam Alignment",
     description:
-      "Review important formulas quickly when preparing for exams and assignments.",
+      "Review syllabus information and keep your preparation aligned with the curriculum.",
   },
 ];
 
-
 /*
 |--------------------------------------------------------------------------
-| FALLBACK SUBJECT ICONS
+| Fallback icons for subjects without an image
 |--------------------------------------------------------------------------
 */
 
@@ -68,48 +57,37 @@ const SUBJECT_ICONS = [
   FaFolderOpen,
 ];
 
-
-export default function FormulaSheetsIndex({ subjects }) {
-
+export default function SyllablusIndex({ subjects }) {
   /*
   |--------------------------------------------------------------------------
-  | TOTAL FORMULA SHEETS
+  | Total syllabus topics
   |--------------------------------------------------------------------------
+  |
+  | Each subject has:
+  |
+  | subject.Syllablus[]
+  |
+  | Therefore we add all syllabus items together.
+  |
   */
 
-  const totalFormulaSheets = subjects.reduce(
+  const totalTopics = subjects.reduce(
     (total, subject) => total + subject.itemCount,
     0
   );
 
-
-  /*
-  |--------------------------------------------------------------------------
-  | SUBJECTS WITH FORMULA SHEETS
-  |--------------------------------------------------------------------------
-  */
-
-  const subjectsWithFormulaSheets = subjects.filter(
-    (subject) => subject.itemCount > 0
-  ).length;
-
-
   return (
     <React.Fragment>
 
-      <MainHeader title="Aceit: Formula Sheets" />
-
+      <MainHeader title="Aceit: Syllabus" />
 
       <div className="min-h-screen py-20">
-
 
         {/* =========================================================
             HERO
         ========================================================== */}
 
         <section className="relative overflow-hidden px-6 pt-36 pb-16 text-center">
-
-          {/* Background decoration */}
 
           <div
             aria-hidden
@@ -121,11 +99,7 @@ export default function FormulaSheetsIndex({ subjects }) {
             className="pointer-events-none absolute -bottom-36 -right-40 h-[32rem] w-[32rem] rounded-full bg-gradient-to-br from-accent-200 to-primary-200 opacity-40 blur-3xl"
           />
 
-
           <div className="relative max-w-5xl mx-auto">
-
-
-            {/* Icon */}
 
             <div className="mx-auto mb-10 hover:scale-105 transition-transform duration-300">
 
@@ -137,43 +111,27 @@ export default function FormulaSheetsIndex({ subjects }) {
 
             </div>
 
-
-            {/* Eyebrow */}
-
             <span className="section-eyebrow block mb-6">
-
-              Aceit · Study Resources
-
+              Aceit · Course Resources
             </span>
-
-
-            {/* Title */}
 
             <h1 className="section-title text-5xl md:text-6xl leading-tight">
 
-              Formula Sheets,{" "}
+              Course Syllablus,{" "}
 
               <span className="text-gradient">
-
                 Perfectly Organized
-
               </span>
 
             </h1>
 
-
-            {/* Description */}
-
             <p className="section-subtitle text-lg md:text-xl mt-6 max-w-3xl mx-auto leading-relaxed">
 
-              Explore important formulas organized by subject.
-              Quickly find the formulas you need for learning,
-              revision, assignments, and exam preparation.
+              Explore course syllabi organized by subject and topic.
+              Understand what you need to learn and follow your curriculum
+              with confidence.
 
             </p>
-
-
-            {/* Buttons */}
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
 
@@ -181,21 +139,17 @@ export default function FormulaSheetsIndex({ subjects }) {
                 href="#browse"
                 className="btn-primary text-lg"
               >
-
                 Browse Subjects
 
                 <FaArrowRight className="mt-1" />
 
               </a>
 
-
               <a
                 href="#why"
                 className="btn-ghost text-lg"
               >
-
-                Why Formula Sheets?
-
+                Why Syllabus?
               </a>
 
             </div>
@@ -205,9 +159,8 @@ export default function FormulaSheetsIndex({ subjects }) {
         </section>
 
 
-
         {/* =========================================================
-            STATISTICS
+            STATS
         ========================================================== */}
 
         <section
@@ -216,7 +169,6 @@ export default function FormulaSheetsIndex({ subjects }) {
         >
 
           <div className="grid md:grid-cols-3 gap-6">
-
 
             {/* Subjects */}
 
@@ -233,20 +185,15 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                 </div>
 
-
                 <p className="section-title text-4xl mt-3">
 
                   {subjects.length.toLocaleString()}
 
                 </p>
 
-
                 <p className="text-ink-500 font-semibold mt-2">
-
                   Subjects
-
                 </p>
-
 
                 <div className="mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-primary-400 to-ocean-400" />
 
@@ -255,8 +202,7 @@ export default function FormulaSheetsIndex({ subjects }) {
             </Reveal>
 
 
-
-            {/* Total Formula Sheets */}
+            {/* Total syllabus topics */}
 
             <Reveal
               delay={90}
@@ -271,20 +217,15 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                 </div>
 
-
                 <p className="section-title text-4xl mt-3">
 
-                  {totalFormulaSheets.toLocaleString()}
+                  {totalTopics.toLocaleString()}
 
                 </p>
-
 
                 <p className="text-ink-500 font-semibold mt-2">
-
-                  Formula Sheets
-
+                  Syllabus Topics
                 </p>
-
 
                 <div className="mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-primary-400 to-ocean-400" />
 
@@ -293,8 +234,7 @@ export default function FormulaSheetsIndex({ subjects }) {
             </Reveal>
 
 
-
-            {/* Subjects With Formula Sheets */}
+            {/* Subjects with syllabus */}
 
             <Reveal
               delay={180}
@@ -309,20 +249,19 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                 </div>
 
-
                 <p className="section-title text-4xl mt-3">
 
-                  {subjectsWithFormulaSheets}
+                  {
+                    subjects.filter(
+                      (subject) => subject.itemCount > 0
+                    ).length
+                  }
 
                 </p>
-
 
                 <p className="text-ink-500 font-semibold mt-2">
-
-                  Subjects With Formula Sheets
-
+                  Subjects With Syllabus
                 </p>
-
 
                 <div className="mt-4 h-1 w-16 rounded-full bg-gradient-to-r from-primary-400 to-ocean-400" />
 
@@ -335,39 +274,30 @@ export default function FormulaSheetsIndex({ subjects }) {
         </section>
 
 
-
         {/* =========================================================
-            WHY USE FORMULA SHEETS
+            WHY USE SYLLABUS
         ========================================================== */}
 
         <section className="px-6 py-16 max-w-6xl mx-auto">
 
-
           <div className="max-w-2xl mx-auto mb-12 text-center">
 
             <span className="section-eyebrow block mb-6">
-
-              Study smarter
-
+              Plan your learning
             </span>
 
-
             <h2 className="section-title text-4xl">
-
-              Why Use Formula Sheets?
-
+              Why Review the Syllabus?
             </h2>
-
 
             <p className="section-subtitle mt-3">
 
-              Keep important formulas organized and easy to
-              access whenever you need them.
+              Understand your course structure and organize your
+              study around the topics you need to learn.
 
             </p>
 
           </div>
-
 
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -382,20 +312,17 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                 <div className="glass-card h-full p-8">
 
-
                   <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary-50 to-ocean-50 text-ocean-600">
 
                     {reason.icon}
 
                   </div>
 
-
                   <h3 className="section-title text-2xl mb-3">
 
                     {reason.title}
 
                   </h3>
-
 
                   <p className="text-ink-600 leading-relaxed">
 
@@ -414,7 +341,6 @@ export default function FormulaSheetsIndex({ subjects }) {
         </section>
 
 
-
         {/* =========================================================
             SUBJECT GRID
         ========================================================== */}
@@ -424,40 +350,29 @@ export default function FormulaSheetsIndex({ subjects }) {
           className="px-6 py-16 max-w-7xl mx-auto"
         >
 
-
           <div className="max-w-2xl mx-auto mb-12 text-center">
 
             <span className="section-eyebrow block mb-6">
-
               Choose your subject
-
             </span>
 
-
             <h2 className="section-title text-4xl">
-
-              All Formula Sheets by Subject
-
+              All Syllabi by Subject
             </h2>
-
 
             <p className="section-subtitle mt-3">
 
-              Select a subject to explore its available
-              formula sheets.
+              Select a subject to explore its syllabus topics
+              and course content.
 
             </p>
 
           </div>
 
 
-
-          {/* No subjects */}
-
           {subjects.length === 0 ? (
 
             <div className="glass-card p-12 text-center max-w-xl mx-auto">
-
 
               <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary-100 to-ocean-100 text-ocean-600 text-4xl">
 
@@ -465,17 +380,13 @@ export default function FormulaSheetsIndex({ subjects }) {
 
               </div>
 
-
               <h3 className="section-title text-xl mb-2">
-
                 Nothing here yet
-
               </h3>
-
 
               <p className="text-ink-500">
 
-                No subjects with formula sheets have been
+                No subjects with syllabus information have been
                 added yet. Please check back soon.
 
               </p>
@@ -484,9 +395,7 @@ export default function FormulaSheetsIndex({ subjects }) {
 
           ) : (
 
-
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
 
               {subjects.map((subject, idx) => (
 
@@ -496,17 +405,14 @@ export default function FormulaSheetsIndex({ subjects }) {
                   delay={(idx % 3) * 90}
                 >
 
-
                   <Link
-                    href={`/study/formulaSheet/subject/${subject.id}`}
+                    href={`/study/syllablus/subject/${subject.id}`}
                     className="glass-card group block h-full overflow-hidden"
                   >
-
 
                     {/* Image */}
 
                     <div className="relative w-full h-52 overflow-hidden">
-
 
                       {subject.svg ? (
 
@@ -539,13 +445,10 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                       )}
 
-
-                      {/* Hover overlay */}
-
                       <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
 
-                      {/* Formula count */}
+                      {/* Count */}
 
                       <div className="absolute top-4 right-4 flex h-10 min-w-10 px-3 items-center justify-center rounded-full bg-white/90 text-ocean-600 font-bold shadow-soft">
 
@@ -556,11 +459,9 @@ export default function FormulaSheetsIndex({ subjects }) {
                     </div>
 
 
-
                     {/* Card content */}
 
                     <div className="p-6">
-
 
                       <div className="flex items-center justify-between mb-3">
 
@@ -570,7 +471,6 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                         </h3>
 
-
                         <FaArrowRight className="text-ocean-500 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition" />
 
                       </div>
@@ -578,7 +478,7 @@ export default function FormulaSheetsIndex({ subjects }) {
 
                       <p className="text-ink-500 text-sm mb-4">
 
-                        {subject.itemCount} formula sheet
+                        {subject.itemCount} syllabus item
                         {subject.itemCount !== 1 ? "s" : ""}
 
                       </p>
@@ -601,7 +501,6 @@ export default function FormulaSheetsIndex({ subjects }) {
         </section>
 
 
-
         {/* =========================================================
             BOTTOM CTA
         ========================================================== */}
@@ -610,9 +509,7 @@ export default function FormulaSheetsIndex({ subjects }) {
 
           <div className="max-w-6xl mx-auto">
 
-
             <div className="glass-card p-10 md:p-14 text-center">
-
 
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-primary-500 to-ocean-500 text-white text-4xl shadow-glow">
 
@@ -620,21 +517,18 @@ export default function FormulaSheetsIndex({ subjects }) {
 
               </div>
 
-
               <h2 className="section-title text-3xl md:text-4xl">
 
-                Start Reviewing Your Formulas
+                Start Exploring Your Syllabus
 
               </h2>
 
-
               <p className="section-subtitle max-w-2xl mx-auto mt-4">
 
-                Choose a subject above and explore the formula
-                sheets available for your course.
+                Choose a subject above and explore the syllabus
+                topics available for your course.
 
               </p>
-
 
               <a
                 href="#browse"
@@ -653,7 +547,6 @@ export default function FormulaSheetsIndex({ subjects }) {
 
         </section>
 
-
       </div>
 
     </React.Fragment>
@@ -661,51 +554,42 @@ export default function FormulaSheetsIndex({ subjects }) {
 }
 
 
-/*
-|--------------------------------------------------------------------------
-| SERVER SIDE DATA
-|--------------------------------------------------------------------------
-|
-| FormulaSheet belongs directly to Subject.
-|
-| We are NOT using Syllablus here.
-| We are NOT using Book here.
-| We are NOT using BookCategory here.
-|
-|--------------------------------------------------------------------------
-*/
+/* =========================================================
+   SERVER SIDE DATA
+   Syllabus only
+========================================================= */
 
 export async function getServerSideProps() {
 
   try {
 
-    const subjects = await prisma.Subject.findMany({
+    const subjects = await prisma.subject.findMany({
 
       orderBy: {
         id: "asc",
       },
 
       include: {
-        FormulaSheet: true,
+        Syllablus: true,
       },
 
     });
 
 
-    const formatted = subjects.map((subject) => ({
+    const formatted = subjects.map((sub) => ({
 
-      id: subject.id,
+      id: sub.id,
 
-      name: subject.name,
+      name: sub.name,
 
-      svg: subject.svg || null,
+      svg: sub.svg || null,
 
       /*
-       * Number of FormulaSheet records
-       * belonging to this subject.
+       * Number of syllabus records belonging
+       * to this subject.
        */
 
-      itemCount: subject.FormulaSheet?.length || 0,
+      itemCount: sub.Syllablus?.length || 0,
 
     }));
 
@@ -725,21 +609,19 @@ export async function getServerSideProps() {
   } catch (error) {
 
     console.error(
-      "Error loading formula sheet subjects:",
+      "Error loading syllabus subjects:",
       error
     );
 
 
     /*
-     |--------------------------------------------------------------------------
-     | FALLBACK
-     |--------------------------------------------------------------------------
+     * Fallback query
      */
 
     try {
 
       const subjects =
-        await prisma.Subject.findMany({
+        await prisma.subject.findMany({
 
           orderBy: {
             id: "asc",
@@ -758,13 +640,13 @@ export async function getServerSideProps() {
         });
 
 
-      const formatted = subjects.map((subject) => ({
+      const formatted = subjects.map((sub) => ({
 
-        id: subject.id,
+        id: sub.id,
 
-        name: subject.name,
+        name: sub.name,
 
-        svg: subject.svg || null,
+        svg: sub.svg || null,
 
         itemCount: 0,
 
@@ -783,20 +665,12 @@ export async function getServerSideProps() {
 
       };
 
-    } catch (fallbackError) {
-
-      console.error(
-        "Formula sheet fallback error:",
-        fallbackError
-      );
-
+    } catch (e) {
 
       return {
 
         props: {
-
           subjects: [],
-
         },
 
       };

@@ -177,11 +177,11 @@ export default function Home() {
               description="Strengthen your knowledge with topic-based practice questions and guided solutions."
               href="/study/practice-quizzes"
             />
-            <FeatureCard
+                        <FeatureCard
               icon={<FaStickyNote />}          // Represents revision summaries
-              title="Revision Notes"
+              title="Notes"
               description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
-              href="/study/revision-note"
+              href="/study/note"
             />
             <FeatureCard
               icon={<IoIosFlash />}       // Perfect for flashcards

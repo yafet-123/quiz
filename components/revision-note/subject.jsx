@@ -6,8 +6,8 @@ export default function Subject({subjects}) {
     <div className="max-w-6xl mx-auto px-5 py-10">
       <SubjectGrid
         items={subjects}
-        hrefPrefix="/study/revision-note/subject"
-        emptyMessage="No revision notes are available for this subject yet."
+                hrefPrefix="/study/note/subject"
+        emptyMessage="No notes are available for this subject yet."
       />
     </div>
   );

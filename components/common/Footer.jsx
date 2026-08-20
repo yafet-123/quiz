@@ -35,7 +35,7 @@ export const Footer = () => {
     { name: "Past Papers", path: "/study/past-paper" },
     { name: "Practice Questions", path: "/study/practice-quizzes" },
     { name: "Flashcards", path: "/study/flashcards-tips" },
-    { name: "Revision Notes", path: "/study/revision-note" },
+    { name: "Notes", path: "/study/note" },
     { name: "Worksheets", path: "/study/worksheet" },
   ];
 
@@ -49,7 +49,7 @@ export const Footer = () => {
           <Reveal>
             <div className="flex flex-col gap-5">
               <Link href="/" className="block w-[180px] h-[58px] relative">
-                <div className="relative w-full h-full overflow-hidden rounded-xl bg-white/85 ring-1 ring-white shadow-soft">
+                <div className="relative w-full h-full overflow-hidden bg-white/85 shadow-soft">
                   <Image src={logo} alt="Aceit Logo" layout="fill" objectFit="contain" />
                 </div>
               </Link>
