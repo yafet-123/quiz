@@ -1,76 +1,60 @@
-import { useRouter } from "next/router";
 import { prisma } from "../../../../util/db.server";
-import { FaFilePdf } from "react-icons/fa6";
-import Link from "next/link"
-import React, { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { IoIosArrowUp } from "react-icons/io";
+import React from "react";
+import Link from "next/link";
 import { MainHeader } from "../../../../components/common/MainHeader";
 
 export async function getServerSideProps(context) {
-  const { subjectId } = context.params; // get subjectId from the URL
+  const { subjectId } = context.params;
 
-  try { 
-    const notes = await prisma.Note.findMany({
+  try {
+    const categories = await prisma.NoteCategory.findMany({
       where: { subjectId: Number(subjectId) },
-      select: {
-        id: true,
-        title: true,
-        modifiedAt: true,
+      include: {
+        _count: { select: { Note: true } },
       },
-      orderBy: {
-        modifiedAt: 'desc', // optional: order by most recently modified
-      },
+      orderBy: { id: "asc" },
     });
-
-    console.log("Fetched notes:", notes);
 
     return {
       props: {
-        notes: JSON.parse(JSON.stringify(notes)), // serialize for Next.js
+        categories: JSON.parse(JSON.stringify(categories)),
       },
     };
   } catch (error) {
-    console.error("Error fetching notes:", error);
+    console.error("Error fetching note categories:", error);
     return {
-      props: {
-        notes: [],
-        error: "Failed to load notes.",
-      },
+      props: { categories: [], error: "Failed to load note categories." },
     };
   }
 }
 
-
-export default function BookGradeDetail({ notes }) {
-  const router = useRouter();
-
-  const goToDetail = (noteId) => {
-    router.push(`/study/comprehensive-notes/${noteId}`);
-  };
+export default function NoteCategoriesPage({ categories }) {
   return (
     <div className="py-32 px-5 lg:px-20">
-      <MainHeader title="Aceit : Comprehensive Note Subject Page" />
-        {notes.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {notes.map((note) => (
-              <div
-                key={note.id}
-                className="cursor-pointer bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
-                onClick={() => goToDetail(note.id)}
-              >
-                <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
-                <p className="mt-2 text-sm md:text-base opacity-80">
-                  Click to view full note
-                </p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-gray-600 text-lg">
-            There are currently no Comprehensive Note available for this subject. Please check back later.
-          </p>
-        )}
+      <MainHeader title="Aceit : Comprehensive Note Topics" />
+      <h1 className="text-3xl font-bold mb-2">Comprehensive Notes</h1>
+      <p className="text-gray-500 text-md mb-8">Choose a topic to view its notes.</p>
+
+      {categories.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {categories.map((category) => (
+            <Link
+              key={category.id}
+              href={`/study/comprehensive-notes/category/${category.id}`}
+              className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+            >
+              <h2 className="font-bold text-xl md:text-2xl">{category.title}</h2>
+              <p className="mt-2 opacity-80">
+                {category._count?.Note || 0} note(s) available
+              </p>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="text-center text-gray-600 text-lg">
+          There are currently no note topics available for this subject. Please check back later.
+        </p>
+      )}
     </div>
   );
 }

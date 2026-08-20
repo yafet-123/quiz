@@ -2,7 +2,7 @@ import { FaBook, FaFolderOpen, FaStar } from "react-icons/fa";
 import React from "react";
 import { prisma } from "../../../util/db.server";
 import { MainHeader } from "../../../components/common/MainHeader";
-import Subject from "../../../components/books/Subject"; // reuse same subject component
+import BookSubject from "../../../components/books/BookSubject";
 
 const reasons = [
   {
@@ -69,7 +69,7 @@ export default function Books({ subjects }) {
           </h2>
 
           <div className="max-w-6xl mx-auto">
-            <Subject subjects={subjects} />
+            <BookSubject subjects={subjects} />
           </div>
         </section>
       </div>

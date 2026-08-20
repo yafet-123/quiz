@@ -14,7 +14,9 @@ export async function getServerSideProps(context) {
     const worksheet = await prisma.Worksheet.findUnique({
       where: { id: Number(questionId) },
       include: {
-        Subject: { select: { id: true, name: true } },
+        WorksheetTopic: {
+          include: { Subject: { select: { id: true, name: true } } },
+        },
         Questions: {
           include: {
             Options: true,
@@ -24,7 +26,7 @@ export async function getServerSideProps(context) {
     });
     console.log(worksheet)
     // ✅ Check if worksheet exists and matches the subject name
-    if (!worksheet || worksheet.Subject.name !== decodeURIComponent(subject)) {
+    if (!worksheet || worksheet.WorksheetTopic?.Subject?.name !== decodeURIComponent(subject)) {
       return { notFound: true };
     }
 

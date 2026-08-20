@@ -1,77 +1,96 @@
-import { useRouter } from "next/router";
 import { prisma } from "../../../../util/db.server";
-import { FaFilePdf } from "react-icons/fa6";
-import Link from "next/link"
-import React, { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { IoIosArrowUp } from "react-icons/io";
+import React from "react";
+import Link from "next/link";
 import { MainHeader } from "../../../../components/common/MainHeader";
 
 export async function getServerSideProps(context) {
-  const { subjectId } = context.params; // get subjectId from the URL
+  const { subjectId } = context.params;
 
-  try { 
-    const notes = await prisma.RevisionNote.findMany({
-      where: { subjectId: Number(subjectId) },
-      select: {
-        id: true,
-        title: true,
-        modifiedAt: true,
-      },
-      orderBy: {
-        modifiedAt: 'desc', // optional: order by most recently modified
-      },
-    });
+  let categories = [];
+  let notes = [];
 
-    console.log("Fetched notes:", notes);
-
-    return {
-      props: {
-        notes: JSON.parse(JSON.stringify(notes)), // serialize for Next.js
-      },
-    };
+  // Prefer subject → category → notes, but fall back to a direct list
+  // if the RevisionNoteCategory table has not been created yet.
+  try {
+    if (typeof prisma.RevisionNoteCategory !== "undefined") {
+      try {
+        categories = await prisma.RevisionNoteCategory.findMany({
+          where: { subjectId: Number(subjectId) },
+          include: { _count: { select: { RevisionNote: true } } },
+          orderBy: { id: "asc" },
+        });
+      } catch (error) {
+        categories = [];
+      }
+    }
   } catch (error) {
-    console.error("Error fetching notes:", error);
-    return {
-      props: {
-        notes: [],
-        error: "Failed to load notes.",
-      },
-    };
+    categories = [];
   }
+
+  if (categories.length === 0) {
+    try {
+      notes = await prisma.RevisionNote.findMany({
+        where: { subjectId: Number(subjectId) },
+        select: { id: true, title: true, modifiedAt: true },
+        orderBy: { modifiedAt: "desc" },
+      });
+    } catch (error) {
+      notes = [];
+    }
+  }
+
+  return {
+    props: {
+      categories: JSON.parse(JSON.stringify(categories)),
+      notes: JSON.parse(JSON.stringify(notes)),
+    },
+  };
 }
 
-
-export default function BookGradeDetail({ notes }) {
-  const router = useRouter();
-
-  const goToDetail = (noteId) => {
-    router.push(`/study/revision-note/${noteId}`);
-  };
+export default function RevisionNoteSubject({ categories, notes }) {
   return (
     <div className="py-32 px-5 lg:px-20">
       <MainHeader title="Aceit : Revision Note Subject Page" />
 
-        {notes.length > 0 ? (
+      {categories.length > 0 ? (
+        <>
+          <h1 className="text-3xl font-bold mb-2">Revision Notes</h1>
+          <p className="text-gray-500 text-md mb-8">Choose a topic to view its notes.</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {notes.map((worksheet) => (
-              <div
-                key={note.id}
-                className="cursor-pointer bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
-                onClick={() => goToDetail(note.id)}
+            {categories.map((category) => (
+              <Link
+                key={category.id}
+                href={`/study/revision-note/category/${category.id}`}
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
               >
-                <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
-                <p className="mt-2 text-sm md:text-base opacity-80">
-                  Click to view full note
+                <h2 className="font-bold text-xl md:text-2xl">{category.title}</h2>
+                <p className="mt-2 opacity-80">
+                  {category._count?.RevisionNote || 0} note(s) available
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
-        ) : (
-          <p className="text-center text-gray-600 text-lg">
-            There are currently no Revision Note available for this subject. Please check back later.
-          </p>
-        )}
+        </>
+      ) : notes.length > 0 ? (
+        <>
+          <h1 className="text-3xl font-bold mb-6">Revision Notes</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {notes.map((note) => (
+              <Link
+                key={note.id}
+                href={`/study/revision-note/${note.id}`}
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+              >
+                <h2 className="font-bold text-xl md:text-2xl">{note.title}</h2>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="text-center text-gray-600 text-lg">
+          There are currently no Revision Notes available for this subject. Please check back later.
+        </p>
+      )}
     </div>
   );
 }

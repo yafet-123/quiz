@@ -105,6 +105,7 @@ model Subject {
   PastPaperTopic          PastPaperTopic[]
   Quizzes                 Quiz[]
   RevisionNote            RevisionNote[]
+  RevisionNoteCategory    RevisionNoteCategory[]
   User                    User                      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "Subject_ibfk_1")
   Syllablus               Syllablus[]
   Topic                   Topic[]
@@ -198,18 +199,32 @@ model Note {
 }
 
 model RevisionNote {
-  id         Int       @id @default(autoincrement())
-  title      String    @db.VarChar(255)
-  content    String    @db.Text
-  subjectId  Int
-  createdBy  Int
-  createdAt  DateTime? @default(now()) @db.DateTime(0)
-  modifiedAt DateTime? @default(now()) @updatedAt @db.DateTime(0)
-  Subject    Subject   @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_1")
-  User       User      @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_2")
+  id                     Int                   @id @default(autoincrement())
+  title                  String                @db.VarChar(255)
+  content                String                @db.Text
+  subjectId              Int
+  revisionNoteCategoryId Int?
+  createdBy              Int
+  createdAt              DateTime?             @default(now()) @db.DateTime(0)
+  modifiedAt             DateTime?             @default(now()) @updatedAt @db.DateTime(0)
+  Subject                Subject               @relation(fields: [subjectId], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_1")
+  RevisionNoteCategory   RevisionNoteCategory? @relation(fields: [revisionNoteCategoryId], references: [id], onUpdate: Restrict, map: "RevisionNoteCategory_ibfk_1")
+  User                   User                  @relation(fields: [createdBy], references: [id], onUpdate: Restrict, map: "RevisionNote_ibfk_2")
 
   @@index([subjectId], map: "RevisionNote_ibfk_1")
   @@index([createdBy], map: "RevisionNote_ibfk_2")
+  @@index([revisionNoteCategoryId], map: "revisionNoteCategoryId")
+}
+
+model RevisionNoteCategory {
+  id           Int            @id @default(autoincrement())
+  title        String         @db.VarChar(255)
+  subjectId    Int
+  RevisionNote RevisionNote[]
+  Subject      Subject        @relation(fields: [subjectId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "RevisionNoteCategory_subject_fkey")
+
+  @@index([subjectId], map: "idx_revisionNoteCategory_subjectId")
+  @@index([title], map: "idx_revisionNoteCategory_title")
 }
 
 model Quiz {

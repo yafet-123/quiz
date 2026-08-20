@@ -1,78 +1,65 @@
-import { MainHeader } from "../../../../components/common/MainHeader";
-import React from "react";
-import Link from "next/link"
 import { prisma } from "../../../../util/db.server";
+import React from "react";
+import Link from "next/link";
+import { MainHeader } from "../../../../components/common/MainHeader";
 
-
-export default function BookDetail({ worksheetes, subjectId }) {
-  console.log(worksheetes)
+export default function WorksheetTopics({ topics, subjectId }) {
   return (
     <React.Fragment>
-      <MainHeader title="Aceit : Worksheet Subject Page" />
-      <div className="antialiased bg-[#ededf2]">
-        <MainHeader title={`MatricMate`} />
-        <section className="px-4 py-32 max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-4 text-center">Worksheet</h2>
-          <div>
-            {worksheetes.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {worksheetes.map((worksheet) => (
-                  <Link
-                    key={worksheet.id}
-                    href={`/study/worksheet/${worksheet.Subject.name}/question/${worksheet.id}`}
-                  >
-                    <a className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition-shadow duration-300">
-                      <h3 className="text-lg font-semibold mb-2">{worksheet.title}</h3>
-                    </a>
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <p className="text-center text-gray-600 text-lg">
-                There are currently no worksheet available for this subject. Please check back later.
-              </p>
-            )}
+      <MainHeader title="Aceit : Worksheet Topics" />
+      <div className="py-32 px-5 lg:px-20">
+        <h1 className="text-3xl font-bold mb-2">Worksheets</h1>
+        <p className="text-gray-500 text-md mb-8">
+          Choose a topic to view its worksheets.
+        </p>
+
+        {topics.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {topics.map((topic) => (
+              <Link
+                key={topic.id}
+                href={`/study/worksheet/topic/${topic.id}`}
+                className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-2xl shadow-lg p-6 hover:scale-105 transition transform"
+              >
+                <h2 className="font-bold text-xl md:text-2xl">{topic.title}</h2>
+                <p className="mt-2 opacity-80">
+                  {topic._count?.Worksheet || 0} worksheet(s) available
+                </p>
+              </Link>
+            ))}
           </div>
-        </section>
+        ) : (
+          <p className="text-center text-gray-600 text-lg">
+            There are currently no worksheet topics available for this subject. Please check back later.
+          </p>
+        )}
       </div>
     </React.Fragment>
   );
 }
- 
+
 export async function getServerSideProps(context) {
   const { subjectId } = context.params;
 
   try {
-    const worksheetes = await prisma.Worksheet.findMany({
-      where: {
-        subjectId: Number(subjectId), // 🔹 Replace with your subjectId
-      },
+    const topics = await prisma.WorksheetTopic.findMany({
+      where: { subjectId: Number(subjectId) },
       include: {
-        Subject: {
-          select: { name: true, id: true },
-        },
-        Questions: true,
+        _count: { select: { Worksheet: true } },
       },
+      orderBy: { id: "asc" },
     });
 
-
-    if (!worksheetes.length) {
-      return {
-        notFound: false,
-        props: { worksheetes: [], subjectId },
-      };
-    }
-    console.log(worksheetes)
     return {
       props: {
-        worksheetes: JSON.parse(JSON.stringify(worksheetes)),
-        subjectId
+        topics: JSON.parse(JSON.stringify(topics)),
+        subjectId,
       },
     };
   } catch (error) {
-    console.error("Error fetching flashcard worksheetes:", error);
+    console.error("Error fetching worksheet topics:", error);
     return {
-      props: { worksheetes: [], error: "Failed to load flashcard worksheetes." },
+      props: { topics: [], subjectId, error: "Failed to load worksheet topics." },
     };
   }
 }
