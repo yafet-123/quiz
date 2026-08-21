@@ -2,11 +2,13 @@ import { MainHeader } from '../components/common/MainHeader';
 import React from "react";
 import Link from "next/link"
 import Image from "next/image";
+import { Reveal } from '../components/common/Reveal';
 import {
   FaUsers,
   FaBookOpen,
   FaChartLine,
   FaRegLightbulb,
+  FaArrowRight,
   FaTwitter,
   FaFacebookF,
   FaInstagram,
@@ -51,109 +53,121 @@ export default function AboutPage() {
   return (
     <React.Fragment>
       <MainHeader title="Aceit : About Page" />
-      <div className="min-h-screen bg-gray-50 text-gray-900">
+      <div className="font-sans text-ink-800 min-h-screen overflow-hidden">
         {/* HERO */}
-        <header className="bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-20 lg:py-32">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <section className="relative pt-28 md:pt-36 pb-16 md:pb-20 px-4 md:px-8 overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#417094]">
-                  We make exam prep simple so you can focus on learning.
+                <span className="section-eyebrow">About Aceit</span>
+                <h1 className="section-title text-4xl md:text-5xl leading-tight mt-4 animate-fadeDown">
+                  We make exam prep simple so you can <span className="text-gradient">focus on learning.</span>
                 </h1>
-                <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-                  My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the
-                  pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I
-                  understand how overwhelming it can feel.
-                </p>
-
-                <p className="mt-6 text-lg text-gray-600 max-w-2xl">
-                  Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed
-                  to providing clear, reliable, and student-focused guidance. My goal is to make exam
-                  preparation more organised, efficient, and confidence-building for every learner.
-                </p>
+                <Reveal delay={120}>
+                  <p className="text-lg text-ink-500 max-w-2xl mt-6 leading-relaxed">
+                    My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the
+                    pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I
+                    understand how overwhelming it can feel.
+                  </p>
+                </Reveal>
+                <Reveal delay={200}>
+                  <p className="text-lg text-ink-500 max-w-2xl mt-6 leading-relaxed">
+                    Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed
+                    to providing clear, reliable, and student-focused guidance. My goal is to make exam
+                    preparation more organised, efficient, and confidence-building for every learner.
+                  </p>
+                </Reveal>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link href="/signup">
-                    <a
-                      className="inline-flex items-center justify-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#fff] hover:text-[#417094] transition"
-                    >
+                    <a className="btn-primary text-lg">
                       {`Get started. It's free`}
+                      <FaArrowRight />
                     </a>
                   </Link>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center">
-                <div className="w-full max-w-md rounded-2xl overflow-hidden shadow-xl transform hover:scale-102 transition">
-                  {/* Using native img tag for external URL - more reliable on Vercel */}
-                  <img
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=80"
-                    alt="Students studying together"
-                    width={720}
-                    height={480}
-                    className="object-cover w-full h-auto"
-                    loading="lazy"
-                  />
+              <Reveal variant="right" delay={160}>
+                <div className="flex items-center justify-center">
+                  <div className="w-full max-w-md rounded-3xl overflow-hidden shadow-card ring-1 ring-white/60">
+                    {/* Using native img tag for external URL - more reliable on Vercel */}
+                    <img
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=720&q=80"
+                      alt="Students studying together"
+                      width={720}
+                      height={480}
+                      className="object-cover w-full h-auto"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-              </div>
-
+              </Reveal>
             </div>
           </div>
-        </header>
+        </section>
 
         {/* MISSION / FEATURES */}
-        <section className="py-14">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-              <div className="md:col-span-1">
-                <h2 className="text-2xl font-bold text-gray-900">Our mission</h2>
-                <p className="mt-4 text-gray-600">
+        <section className="py-20 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+              <Reveal className="md:col-span-1">
+                <h2 className="section-title text-3xl">Our mission</h2>
+                <p className="text-ink-500 mt-4 leading-relaxed">
                   To make high-quality revision materials available to every student.
                   We simplify syllabus content, provide worked answers and realistic practice so revision feels
                   productive and focused.
                 </p>
-              </div>
+              </Reveal>
 
               <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-2xl shadow">
-                  <div className="flex items-center gap-4">
-                    <FaRegLightbulb className="text-[#417094] text-2xl" />
+                <Reveal className="h-full">
+                  <div className="glass-card p-7 h-full flex items-center gap-5">
+                    <span className="p-4 rounded-2xl bg-gradient-to-br from-primary-50 to-ocean-50 text-ocean-500 text-2xl shadow-soft ring-1 ring-white">
+                      <FaRegLightbulb />
+                    </span>
                     <div>
-                      <h3 className="font-semibold">Clear explanations</h3>
-                      <p className="text-sm text-gray-600 mt-1">Concise notes written by experienced teachers.</p>
+                      <h3 className="text-lg font-bold text-ink-800">Clear explanations</h3>
+                      <p className="text-sm text-ink-500 mt-1">Concise notes written by experienced teachers.</p>
                     </div>
                   </div>
-                </div>
+                </Reveal>
 
-                <div className="bg-white p-6 rounded-2xl shadow">
-                  <div className="flex items-center gap-4">
-                    <FaBookOpen className="text-[#417094] text-2xl" />
+                <Reveal className="h-full stagger-1">
+                  <div className="glass-card p-7 h-full flex items-center gap-5">
+                    <span className="p-4 rounded-2xl bg-gradient-to-br from-primary-50 to-ocean-50 text-ocean-500 text-2xl shadow-soft ring-1 ring-white">
+                      <FaBookOpen />
+                    </span>
                     <div>
-                      <h3 className="font-semibold">Practise & test</h3>
-                      <p className="text-sm text-gray-600 mt-1">Lots of exam style questions with full answers.</p>
+                      <h3 className="text-lg font-bold text-ink-800">Practise & test</h3>
+                      <p className="text-sm text-ink-500 mt-1">Lots of exam style questions with full answers.</p>
                     </div>
                   </div>
-                </div>
+                </Reveal>
 
-                <div className="bg-white p-6 rounded-2xl shadow">
-                  <div className="flex items-center gap-4">
-                    <FaUsers className="text-[#417094] text-2xl" />
+                <Reveal className="h-full stagger-2">
+                  <div className="glass-card p-7 h-full flex items-center gap-5">
+                    <span className="p-4 rounded-2xl bg-gradient-to-br from-primary-50 to-ocean-50 text-ocean-500 text-2xl shadow-soft ring-1 ring-white">
+                      <FaUsers />
+                    </span>
                     <div>
-                      <h3 className="font-semibold">Student focused</h3>
-                      <p className="text-sm text-gray-600 mt-1">Resources shaped by student feedback and performance data.</p>
+                      <h3 className="text-lg font-bold text-ink-800">Student focused</h3>
+                      <p className="text-sm text-ink-500 mt-1">Resources shaped by student feedback and performance data.</p>
                     </div>
                   </div>
-                </div>
+                </Reveal>
 
-                <div className="bg-white p-6 rounded-2xl shadow">
-                  <div className="flex items-center gap-4">
-                    <FaChartLine className="text-[#417094] text-2xl" />
+                <Reveal className="h-full stagger-3">
+                  <div className="glass-card p-7 h-full flex items-center gap-5">
+                    <span className="p-4 rounded-2xl bg-gradient-to-br from-primary-50 to-ocean-50 text-ocean-500 text-2xl shadow-soft ring-1 ring-white">
+                      <FaChartLine />
+                    </span>
                     <div>
-                      <h3 className="font-semibold">Track progress</h3>
-                      <p className="text-sm text-gray-600 mt-1">See improvements and target weak topics efficiently.</p>
+                      <h3 className="text-lg font-bold text-ink-800">Track progress</h3>
+                      <p className="text-sm text-ink-500 mt-1">See improvements and target weak topics efficiently.</p>
                     </div>
                   </div>
-                </div>
+                </Reveal>
               </div>
             </div>
           </div>
@@ -211,16 +225,19 @@ export default function AboutPage() {
         </section> */}
 
         {/* CTA */}
-        <section className="py-14">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h3 className="text-2xl font-bold mb-4">Ready to level up your revision?</h3>
-            <p className="text-gray-600 mb-6">Join thousands of students using our resources to boost their grades.</p>
-            <Link href="/signup">
-              <a className="inline-flex items-center px-6 py-3 bg-[#417094] text-white rounded-lg shadow hover:bg-[#fff] hover:text-[#417094] transition">
-                {`Create an account. it's free`}
-              </a>
-            </Link>
-          </div>
+        <section className="py-20 px-6 pb-24">
+          <Reveal>
+            <div className="glass-card max-w-4xl mx-auto p-10 md:p-14 text-center">
+              <FaArrowRight className="text-4xl mx-auto mb-4 text-primary-500" />
+              <h3 className="section-title text-3xl mb-3">Ready to level up your revision?</h3>
+              <p className="text-ink-500 text-lg mb-8 max-w-xl mx-auto">Join thousands of students using our resources to boost their grades.</p>
+              <Link href="/signup">
+                <a className="btn-primary text-lg">
+                  {`Create an account. it's free`}
+                </a>
+              </Link>
+            </div>
+          </Reveal>
         </section>
       </div>
     </React.Fragment>

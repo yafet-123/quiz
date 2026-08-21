@@ -1,4 +1,5 @@
 import { MainHeader } from '../components/common/MainHeader';
+import { Reveal } from '../components/common/Reveal';
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
@@ -32,38 +33,48 @@ const Help = () => {
   return (
     <React.Fragment>
       <MainHeader title="Aceit : Help Page" />
-      <div className="bg-gray-50 min-h-screen py-32 px-4">
+      <div className="font-sans text-ink-800 min-h-screen py-20 md:py-24 px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold text-gray-800 mb-6 text-center">
-            Help & Quick Answers
-          </h1>
-          <p className="text-gray-600 mb-12 text-center text-lg">
-            Find answers to common questions below. Click on a question to see the answer.
-          </p>
+          <Reveal className="text-center mb-12">
+            <span className="section-eyebrow">Support</span>
+            <h1 className="section-title text-4xl md:text-5xl mt-4">
+              Help & <span className="text-gradient">Quick Answers</span>
+            </h1>
+            <p className="section-subtitle max-w-2xl mx-auto mt-4">
+              Find answers to common questions below. Click on a question to see the answer.
+            </p>
+          </Reveal>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white p-6 rounded-lg shadow cursor-pointer mb-5"
-                onClick={() => toggleFAQ(index)}
-              >
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                    {faq.question}
-                  </h2>
-                  <span className="text-[#417094]">
-                    {openIndex === index ? (
-                      <AiOutlineMinus size={24} />
-                    ) : (
-                      <AiOutlinePlus size={24} />
-                    )}
-                  </span>
+              <Reveal key={index} className="stagger-1">
+                <div
+                  className="glass-card p-6 md:p-7 cursor-pointer"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <div className="flex justify-between items-center gap-4">
+                    <h2 className="text-lg md:text-xl font-semibold text-ink-800">
+                      {faq.question}
+                    </h2>
+                    <span
+                      className={`flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300 ${
+                        openIndex === index
+                          ? "bg-gradient-to-br from-primary-500 to-ocean-500 text-white shadow-soft"
+                          : "bg-primary-50 text-ocean-600"
+                      }`}
+                    >
+                      {openIndex === index ? (
+                        <AiOutlineMinus size={20} />
+                      ) : (
+                        <AiOutlinePlus size={20} />
+                      )}
+                    </span>
+                  </div>
+                  {openIndex === index && (
+                    <p className="text-ink-500 mt-4 text-base md:text-lg leading-relaxed">{faq.answer}</p>
+                  )}
                 </div>
-                {openIndex === index && (
-                  <p className="text-gray-600 mt-4 text-lg">{faq.answer}</p>
-                )}
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
