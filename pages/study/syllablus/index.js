@@ -357,7 +357,7 @@ export default function SyllablusIndex({ subjects }) {
             </span>
 
             <h2 className="section-title text-4xl">
-              All Syllabi by Subject
+              All Syllablus by Subject
             </h2>
 
             <p className="section-subtitle mt-3">
