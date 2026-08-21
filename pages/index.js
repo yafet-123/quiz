@@ -151,13 +151,13 @@ export default function Home() {
               to help you understand faster and remember longer.
             </p>
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center max-w-7xl mx-auto">
-            <FeatureCard
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center max-w-7xl mx-auto">
+            {/* <FeatureCard
               icon={<FaFileAlt />}          // More relevant for notes
               title="Exam Preparation"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
               href="/study/exampreparation"
-            />
+            /> */}
             <FeatureCard
               icon={<FaBook />}          // More relevant for notes
               title="Book"
@@ -171,27 +171,27 @@ export default function Home() {
               description="Well-structured notes covering each topic in detail to support thorough understanding."
               href="/study/past-paper"
             />
-            <FeatureCard
+            {/* <FeatureCard
               icon={<FaTasks />}               // Represents practice & tasks
               title="Practice Questions"
               description="Strengthen your knowledge with topic-based practice questions and guided solutions."
               href="/study/practice-quizzes"
-            />
-                        <FeatureCard
+            /> */}
+            <FeatureCard
               icon={<FaStickyNote />}          // Represents revision summaries
               title="Notes"
               description="Quick, easy-to-read revision summaries designed to help you review concepts fast."
               href="/study/note"
             />
-            <FeatureCard
+            {/* <FeatureCard
               icon={<IoIosFlash />}       // Perfect for flashcards
               title="Flashcard Tips"
               description="Boost your memory using digital flashcards that highlight key concepts and facts."
               href="/study/flashcards-tips"
-            />
+            /> */}
             <FeatureCard
               icon={<MdAssignment />}          // Represents worksheets clearly
-              title="Worksheets / Topical questions"
+              title="Worksheets"
               description="Downloadable worksheets filled with exercises to apply what you’ve learned."
               href="/study/worksheet"
             />
@@ -207,12 +207,12 @@ export default function Home() {
               description="A neatly organized list of important terms and their simplified definitions."
               href="/study/definitionSheet"
             />
-           <FeatureCard
+           {/* <FeatureCard
               icon={<FaYoutube />}              // Better icon for definitions list
               title="Youtube"
               description="A neatly organized list of important terms and their simplified definitions."
               href="/study/youtube"
-            />
+            /> */}
           </div>
 
         </section>
