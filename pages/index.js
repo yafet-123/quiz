@@ -152,12 +152,12 @@ export default function Home() {
             </p>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-center max-w-7xl mx-auto">
-            {/* <FeatureCard
+            <FeatureCard
               icon={<FaFileAlt />}          // More relevant for notes
-              title="Exam Preparation"
+              title="Syllabus"
               description="Well-structured notes covering each topic in detail to support thorough understanding."
-              href="/study/exampreparation"
-            /> */}
+              href="/study/syllablus"
+            />
             <FeatureCard
               icon={<FaBook />}          // More relevant for notes
               title="Book"
