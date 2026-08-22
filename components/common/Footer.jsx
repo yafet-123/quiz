@@ -27,6 +27,7 @@ export const Footer = () => {
     { name: "Home", path: "/" },
     { name: "Books", path: "/study/book" },
     { name: "Study Tools", path: "/study" },
+    { name: "Birhan Foundation", path: "/birhan" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];

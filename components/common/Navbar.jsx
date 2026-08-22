@@ -35,6 +35,7 @@ export const Navbar = () => {
         // { path: "/study/youtube", name: "Youtube" },
       ],
     },
+    { path: "/birhan", name: "Birhan Foundation" },
     { path: "/about", name: "About Us" },
     { path: "/help", name: "Help Center" },
     { path: "/contact", name: "Contact Us" },

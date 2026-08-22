@@ -66,13 +66,13 @@ export default function AboutPage() {
                 <Reveal delay={120}>
                   <p className="text-lg text-ink-500 max-w-2xl mt-6 leading-relaxed">
                     My name is Hiyabeal Assefa, a student who was once in your shoes. I’ve experienced the
-                    pressure, the uncertainty, and the challenge of preparing for IGCSE exams, and I
+                    pressure, the uncertainty, and the challenge of preparing for exams, and I
                     understand how overwhelming it can feel.
                   </p>
                 </Reveal>
                 <Reveal delay={200}>
                   <p className="text-lg text-ink-500 max-w-2xl mt-6 leading-relaxed">
-                    Using the knowledge and experience I gained throughout my own IGCSE journey, I’m committed
+                    Using the knowledge and experience I gained throughout my own exam journey, I’m committed
                     to providing clear, reliable, and student-focused guidance. My goal is to make exam
                     preparation more organised, efficient, and confidence-building for every learner.
                   </p>
