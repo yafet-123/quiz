@@ -576,22 +576,24 @@ export async function getServerSideProps() {
     });
 
 
-    const formatted = subjects.map((sub) => ({
+    const formatted = subjects
+      .map((sub) => ({
 
-      id: sub.id,
+        id: sub.id,
 
-      name: sub.name,
+        name: sub.name,
 
-      svg: sub.svg || null,
+        svg: sub.svg || null,
 
-      /*
-       * Number of syllabus records belonging
-       * to this subject.
-       */
+        /*
+         * Number of syllabus records belonging
+         * to this subject.
+         */
 
-      itemCount: sub.Syllablus?.length || 0,
+        itemCount: sub.Syllablus?.length || 0,
 
-    }));
+      }))
+      .filter((sub) => sub.itemCount > 0); // hide subjects with no syllabus items
 
 
     return {
@@ -652,6 +654,9 @@ export async function getServerSideProps() {
 
       }));
 
+      // Fallback has no real counts (itemCount always 0),
+      // so we intentionally don't filter here — filtering
+      // would wipe out every subject. See note below.
 
       return {
 

@@ -200,15 +200,38 @@ function topicCount(subject) {
 
 export async function getServerSideProps() {
   try {
-    const subjects = await prisma.Subject.findMany({
+    const subjectsRaw = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
       select: {
         id: true,
         name: true,
         svg: true,
-        _count: { select: { WorksheetTopic: true } },
+        WorksheetTopic: {
+          select: {
+            _count: {
+              select: { Worksheet: true },
+            },
+          },
+        },
       },
     });
+
+    const subjects = subjectsRaw
+      .map((subject) => {
+        const totalWorksheetsInSubject = subject.WorksheetTopic.reduce(
+          (sum, topic) => sum + topic._count.Worksheet,
+          0
+        );
+
+        return {
+          id: subject.id,
+          name: subject.name,
+          svg: subject.svg,
+          _count: { WorksheetTopic: subject.WorksheetTopic.length },
+          totalWorksheetsInSubject,
+        };
+      })
+      .filter((subject) => subject.totalWorksheetsInSubject > 0); // hide subjects with no actual worksheets
 
     const totalTopics = await prisma.WorksheetTopic.count();
     const totalWorksheets = await prisma.Worksheet.count();

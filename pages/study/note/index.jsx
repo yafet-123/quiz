@@ -177,15 +177,38 @@ export default function Notes({ subjects, totalCategories, totalNotes }) {
 
 export async function getServerSideProps() {
   try {
-    const subjects = await prisma.Subject.findMany({
+    const subjectsRaw = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
       select: {
         id: true,
         name: true,
         svg: true,
-        _count: { select: { NoteCategory: true } },
+        NoteCategory: {
+          select: {
+            _count: {
+              select: { Note: true },
+            },
+          },
+        },
       },
     });
+
+    const subjects = subjectsRaw
+      .map((subject) => {
+        const totalNotesInSubject = subject.NoteCategory.reduce(
+          (sum, cat) => sum + cat._count.Note,
+          0
+        );
+
+        return {
+          id: subject.id,
+          name: subject.name,
+          svg: subject.svg,
+          _count: { NoteCategory: subject.NoteCategory.length },
+          totalNotesInSubject,
+        };
+      })
+      .filter((subject) => subject.totalNotesInSubject > 0); // hide subjects with no actual notes
 
     const totalCategories = await prisma.NoteCategory.count();
     const totalNotes = await prisma.Note.count();

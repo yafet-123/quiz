@@ -202,26 +202,44 @@ function topicCount(subject) {
 
 export async function getServerSideProps() {
   try {
-    const subjects = await prisma.Subject.findMany({
-      orderBy: {
-        id: "asc",
-      },
-
+    const subjectsRaw = await prisma.Subject.findMany({
+      orderBy: { id: "asc" },
       select: {
         id: true,
         name: true,
         svg: true,
-
-        _count: {
+        BookCategory: {
           select: {
-            BookCategory: true,
+            id: true,
+            _count: {
+              select: { Book: true },
+            },
           },
         },
       },
     });
 
-    const totalBooks = await prisma.Book.count();
+    // Keep only subjects that actually contain at least one book
+    const subjects = subjectsRaw
+      .map((subject) => {
+        const bookCategoryCount = subject.BookCategory.length;
+        const totalBooksInSubject = subject.BookCategory.reduce(
+          (sum, cat) => sum + cat._count.Book,
+          0
+        );
 
+        return {
+          id: subject.id,
+          name: subject.name,
+          svg: subject.svg,
+          _count: { BookCategory: bookCategoryCount },
+        };
+      })
+      .filter((subject, idx) => subjectsRaw[idx].BookCategory.reduce(
+        (sum, cat) => sum + cat._count.Book, 0
+      ) > 0);
+
+    const totalBooks = await prisma.Book.count();
     const totalBookCategories = await prisma.BookCategory.count();
 
     return {
@@ -233,13 +251,8 @@ export async function getServerSideProps() {
     };
   } catch (error) {
     console.error("Error loading books:", error);
-
     return {
-      props: {
-        subjects: [],
-        totalBooks: 0,
-        totalBookCategories: 0,
-      },
+      props: { subjects: [], totalBooks: 0, totalBookCategories: 0 },
     };
   }
 }

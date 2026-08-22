@@ -607,12 +607,14 @@ export async function getServerSideProps() {
       },
     });
 
-    const formatted = subjects.map((subject) => ({
-      id: subject.id,
-      name: subject.name,
-      svg: subject.svg || null,
-      itemCount: subject.Definition?.length || 0,
-    }));
+    const formatted = subjects
+      .map((subject) => ({
+        id: subject.id,
+        name: subject.name,
+        svg: subject.svg || null,
+        itemCount: subject.Definition?.length || 0,
+      }))
+      .filter((subject) => subject.itemCount > 0); // hide subjects with no definition sheets
 
     return {
       props: {
@@ -620,10 +622,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error(
-      "Error loading definition subjects:",
-      error
-    );
+    console.error("Error loading definition subjects:", error);
 
     return {
       props: {

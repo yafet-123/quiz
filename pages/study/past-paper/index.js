@@ -201,15 +201,38 @@ function topicCount(subject) {
 
 export async function getServerSideProps() {
   try {
-    const subjects = await prisma.Subject.findMany({
+    const subjectsRaw = await prisma.Subject.findMany({
       orderBy: { id: "asc" },
       select: {
         id: true,
         name: true,
         svg: true,
-        _count: { select: { PastPaperTopic: true } },
+        PastPaperTopic: {
+          select: {
+            _count: {
+              select: { PastPaper: true },
+            },
+          },
+        },
       },
     });
+
+    const subjects = subjectsRaw
+      .map((subject) => {
+        const totalPapersInSubject = subject.PastPaperTopic.reduce(
+          (sum, topic) => sum + topic._count.PastPaper,
+          0
+        );
+
+        return {
+          id: subject.id,
+          name: subject.name,
+          svg: subject.svg,
+          _count: { PastPaperTopic: subject.PastPaperTopic.length },
+          totalPapersInSubject,
+        };
+      })
+      .filter((subject) => subject.totalPapersInSubject > 0); // hide subjects with no actual papers
 
     const totalTopics = await prisma.PastPaperTopic.count();
     const totalPapers = await prisma.PastPaper.count();

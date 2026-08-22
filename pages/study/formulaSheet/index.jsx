@@ -692,22 +692,24 @@ export async function getServerSideProps() {
     });
 
 
-    const formatted = subjects.map((subject) => ({
+    const formatted = subjects
+      .map((subject) => ({
 
-      id: subject.id,
+        id: subject.id,
 
-      name: subject.name,
+        name: subject.name,
 
-      svg: subject.svg || null,
+        svg: subject.svg || null,
 
-      /*
-       * Number of FormulaSheet records
-       * belonging to this subject.
-       */
+        /*
+         * Number of FormulaSheet records
+         * belonging to this subject.
+         */
 
-      itemCount: subject.FormulaSheet?.length || 0,
+        itemCount: subject.FormulaSheet?.length || 0,
 
-    }));
+      }))
+      .filter((subject) => subject.itemCount > 0); // hide subjects with no formula sheets
 
 
     return {
@@ -770,6 +772,9 @@ export async function getServerSideProps() {
 
       }));
 
+      // Note: fallback has no real counts (itemCount is always 0 here),
+      // so filtering would wipe out all subjects. Leaving unfiltered
+      // on purpose — see note below.
 
       return {
 
